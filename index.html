@@ -3,7 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Senate — thesenate.io</title>
+  <title>The Senate — Grant Hansen</title>
+  <meta name="description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="brand_assets/senate-logo-white.png" />
+  <link rel="apple-touch-icon" href="brand_assets/senate-logo-white.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://thesenate.io" />
+  <meta property="og:title"       content="The Senate — Grant Hansen" />
+  <meta property="og:description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
+  <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="The Senate — Grant Hansen" />
+  <meta name="twitter:description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
+  <meta name="twitter:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -1133,20 +1151,6 @@
     }
     .senator-modal-close:hover { border-color: var(--blue); color: var(--text-1); }
 
-    /* ─── CONNECTION LINES ─── */
-    #connection-svg {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 50;
-    }
-    #connection-svg line {
-      stroke: rgba(80,136,255,0.4);
-      stroke-width: 1;
-    }
-
     /* ─── VALHALLA EASTER EGG ─── */
     .valhalla-overlay {
       position: fixed;
@@ -1204,6 +1208,9 @@
     }
 
     @media (max-width: 600px) {
+      .senator-modal { padding: 32px 24px; }
+      .senator-modal-name { font-size: 40px; }
+      .valhalla-overlay { padding: 32px 24px; }
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .nav-drawer { display: flex; }
@@ -1340,7 +1347,7 @@
       <!-- 05 Vintage Sportswear -->
       <div class="senator reveal">
         <div class="senator-num">05 — Senator</div>
-        <i class="ph-bold ph-hanger senator-icon"></i>
+        <i class="ph-bold ph-coat-hanger senator-icon"></i>
         <div class="senator-name">Vintage</div>
         <div class="senator-title">Senator of the Archive</div>
         <p class="senator-desc">
@@ -1650,10 +1657,10 @@
           const mdx = p.x - mouse.x;
           const mdy = p.y - mouse.y;
           const md2 = mdx * mdx + mdy * mdy;
-          const REPEL = 100;
+          const REPEL = 150;
           if (md2 < REPEL * REPEL && md2 > 0) {
             const md = Math.sqrt(md2);
-            const force = (REPEL - md) / REPEL * 0.9;
+            const force = (REPEL - md) / REPEL * 2.0;
             p.x += (mdx / md) * force;
             p.y += (mdy / md) * force;
           }
@@ -1702,13 +1709,10 @@
         });
       }, { passive: true });
 
-      canvas.parentElement.addEventListener('mousemove', e => {
+      document.addEventListener('mousemove', e => {
         const r = canvas.getBoundingClientRect();
         mouse.x = e.clientX - r.left;
         mouse.y = e.clientY - r.top;
-      }, { passive: true });
-      canvas.parentElement.addEventListener('mouseleave', () => {
-        mouse.x = -9999; mouse.y = -9999;
       }, { passive: true });
 
       init();
@@ -1753,43 +1757,6 @@
 
     const senatorCards = Array.from(document.querySelectorAll('.senator'));
 
-    // ─── CONNECTION LINES ───
-    const connSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    connSVG.id = 'connection-svg';
-    document.body.appendChild(connSVG);
-
-    function getCenter(el) {
-      const r = el.getBoundingClientRect();
-      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-    }
-
-    function drawLines(fromIdx) {
-      clearLines();
-      const from = getCenter(senatorCards[fromIdx]);
-      (SENATOR_DATA[fromIdx].connects || []).forEach(toIdx => {
-        const to = getCenter(senatorCards[toIdx]);
-        const len = Math.hypot(to.x - from.x, to.y - from.y);
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', from.x); line.setAttribute('y1', from.y);
-        line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y);
-        line.setAttribute('stroke-dasharray', len);
-        line.setAttribute('stroke-dashoffset', len);
-        connSVG.appendChild(line);
-        requestAnimationFrame(() => {
-          line.style.transition = 'stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1)';
-          line.setAttribute('stroke-dashoffset', '0');
-        });
-      });
-    }
-
-    function clearLines() {
-      while (connSVG.firstChild) connSVG.removeChild(connSVG.firstChild);
-    }
-
-    senatorCards.forEach((card, i) => {
-      card.addEventListener('mouseenter', () => drawLines(i));
-      card.addEventListener('mouseleave', clearLines);
-    });
 
     // ─── SENATOR EXPAND MODAL ───
     const senOverlay = document.createElement('div');
