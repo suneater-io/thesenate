@@ -1036,6 +1036,173 @@
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
 
+    /* ─── SENATOR MODAL ─── */
+    .senator-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5, 7, 15, 0.88);
+      backdrop-filter: blur(24px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      padding: 24px;
+    }
+    .senator-overlay.open { opacity: 1; pointer-events: all; }
+    .senator-modal {
+      background: var(--surface-2);
+      border: 1px solid var(--border-hi);
+      padding: 52px;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .senator-overlay.open .senator-modal { transform: translateY(0); }
+    .senator-modal-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--blue);
+      letter-spacing: 0.18em;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+    .senator-modal-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 56px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+    .senator-modal-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 28px;
+    }
+    .senator-modal-body {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-2);
+      margin-bottom: 32px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+    .senator-modal-connects {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .senator-modal-connects-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .senator-connect-chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+    }
+    .senator-modal-close {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-3);
+      cursor: pointer;
+      font-size: 14px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .senator-modal-close:hover { border-color: var(--blue); color: var(--text-1); }
+
+    /* ─── CONNECTION LINES ─── */
+    #connection-svg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+    #connection-svg line {
+      stroke: rgba(80,136,255,0.4);
+      stroke-width: 1;
+    }
+
+    /* ─── VALHALLA EASTER EGG ─── */
+    .valhalla-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 3, 8, 0.97);
+      backdrop-filter: blur(40px);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+      cursor: pointer;
+      text-align: center;
+      padding: 40px;
+    }
+    .valhalla-overlay.open { opacity: 1; pointer-events: all; }
+    .valhalla-runes {
+      font-size: clamp(36px, 5vw, 64px);
+      letter-spacing: 0.28em;
+      color: var(--blue);
+      opacity: 0.5;
+      margin-bottom: 52px;
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    .valhalla-verse {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(24px, 3.5vw, 44px);
+      font-weight: 700;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+      color: var(--text-1);
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+    .valhalla-source {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 72px;
+    }
+    .valhalla-dismiss {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      opacity: 0.5;
+    }
+
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
@@ -1451,7 +1618,7 @@
       const SPEED = 0.28;
       const COLOR = '80, 136, 255';
 
-      let W, H, particles = [];
+      let W, H, particles = [], mouse = { x: -9999, y: -9999 };
 
       function resize() {
         const hero = canvas.parentElement;
@@ -1478,8 +1645,18 @@
       function tick() {
         ctx.clearRect(0, 0, W, H);
 
-        // Move
+        // Move + mouse repulsion
         for (const p of particles) {
+          const mdx = p.x - mouse.x;
+          const mdy = p.y - mouse.y;
+          const md2 = mdx * mdx + mdy * mdy;
+          const REPEL = 100;
+          if (md2 < REPEL * REPEL && md2 > 0) {
+            const md = Math.sqrt(md2);
+            const force = (REPEL - md) / REPEL * 0.9;
+            p.x += (mdx / md) * force;
+            p.y += (mdy / md) * force;
+          }
           p.x += p.vx;
           p.y += p.vy;
           if (p.x < -10) p.x = W + 10;
@@ -1519,16 +1696,171 @@
 
       window.addEventListener('resize', () => {
         resize();
-        // Reposition particles that are now out of bounds
         particles.forEach(p => {
           if (p.x > W) p.x = Math.random() * W;
           if (p.y > H) p.y = Math.random() * H;
         });
       }, { passive: true });
 
+      canvas.parentElement.addEventListener('mousemove', e => {
+        const r = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - r.left;
+        mouse.y = e.clientY - r.top;
+      }, { passive: true });
+      canvas.parentElement.addEventListener('mouseleave', () => {
+        mouse.x = -9999; mouse.y = -9999;
+      }, { passive: true });
+
       init();
       tick();
     })();
+
+    // ─── SENATOR DATA ───
+    const SENATOR_DATA = [
+      {
+        extended: 'Rhythm is the original system. Drums taught me to hold a framework together under pressure — to keep time when everything else is off. That discipline shows up everywhere: pattern recognition, tempo, the instinct to listen before speaking.',
+        connects: [3, 7], connectNames: ['Counter-Strike', 'Architecture']
+      },
+      {
+        extended: "Bleeding Detroit sports isn't about the wins. It's about showing up when it costs something. Wings fans in the 90s knew they had something. Lions fans know something different. Both teach the same thing: loyalty isn't conditional.",
+        connects: [4, 7], connectNames: ['Vintage', 'Architecture']
+      },
+      {
+        extended: "The Norse didn't fear Ragnarök. They prepared for it, accepted it, and fought anyway. That's not nihilism — that's clarity. Nordic blood runs deep, and so does the mythology. When the outcome isn't guaranteed, you fight for the quality of the fight.",
+        connects: [7, 5], connectNames: ['Architecture', 'Collector']
+      },
+      {
+        extended: 'Economy management, map control, information warfare, composure with one bullet left — all in 90 seconds. The lessons in that game show up in every boardroom, every difficult client conversation, every moment where panic is not an option.',
+        connects: [0, 7], connectNames: ['Music', 'Architecture']
+      },
+      {
+        extended: 'Culture compresses into objects. A 1994 Wings Starter jacket is a primary source document. What you choose to carry says more than what you say. This senator collects, curates, and knows that style is memory made wearable.',
+        connects: [1, 5], connectNames: ['Detroit', 'Collector']
+      },
+      {
+        extended: "The Lego sets get built and displayed. The basketball cards get sleeved the same day they're pulled. Collecting is a discipline — the difference between hoarding and curating is intention. This senator knows what it's keeping and why.",
+        connects: [2, 4], connectNames: ['Norse', 'Vintage']
+      },
+      {
+        extended: "AI isn't a tool. It's the new operating environment. Every industry, every workflow, every assumption about how things get done is being renegotiated. This senator doesn't just watch — it experiments, adapts, and keeps the chamber running at the frontier.",
+        connects: [7, 3], connectNames: ['Architecture', 'Counter-Strike']
+      },
+      {
+        extended: 'The professional seat — the one that listens when the others debate and turns the verdict into something that works. It draws on the timing from Music, loyalty from Detroit, long-game from Norse, composure from Counter-Strike, curation from Vintage and Collector, and frontier awareness from AI.',
+        connects: [0, 1, 2, 3, 4, 5, 6], connectNames: ['Music', 'Detroit', 'Norse', 'Counter-Strike', 'Vintage', 'Collector', 'AI']
+      }
+    ];
+
+    const senatorCards = Array.from(document.querySelectorAll('.senator'));
+
+    // ─── CONNECTION LINES ───
+    const connSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    connSVG.id = 'connection-svg';
+    document.body.appendChild(connSVG);
+
+    function getCenter(el) {
+      const r = el.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    }
+
+    function drawLines(fromIdx) {
+      clearLines();
+      const from = getCenter(senatorCards[fromIdx]);
+      (SENATOR_DATA[fromIdx].connects || []).forEach(toIdx => {
+        const to = getCenter(senatorCards[toIdx]);
+        const len = Math.hypot(to.x - from.x, to.y - from.y);
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', from.x); line.setAttribute('y1', from.y);
+        line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y);
+        line.setAttribute('stroke-dasharray', len);
+        line.setAttribute('stroke-dashoffset', len);
+        connSVG.appendChild(line);
+        requestAnimationFrame(() => {
+          line.style.transition = 'stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1)';
+          line.setAttribute('stroke-dashoffset', '0');
+        });
+      });
+    }
+
+    function clearLines() {
+      while (connSVG.firstChild) connSVG.removeChild(connSVG.firstChild);
+    }
+
+    senatorCards.forEach((card, i) => {
+      card.addEventListener('mouseenter', () => drawLines(i));
+      card.addEventListener('mouseleave', clearLines);
+    });
+
+    // ─── SENATOR EXPAND MODAL ───
+    const senOverlay = document.createElement('div');
+    senOverlay.className = 'senator-overlay';
+    senOverlay.innerHTML = `
+      <div class="senator-modal">
+        <button class="senator-modal-close" aria-label="Close">✕</button>
+        <div class="senator-modal-num" id="modal-num"></div>
+        <div class="senator-modal-name" id="modal-name"></div>
+        <div class="senator-modal-title" id="modal-title"></div>
+        <p class="senator-modal-body" id="modal-body"></p>
+        <div class="senator-modal-connects">
+          <span class="senator-modal-connects-label">Connects to —</span>
+          <div id="modal-connects" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(senOverlay);
+
+    function openSenatorModal(idx) {
+      const card = senatorCards[idx];
+      const data = SENATOR_DATA[idx];
+      document.getElementById('modal-num').textContent   = card.querySelector('.senator-num').textContent;
+      document.getElementById('modal-name').textContent  = card.querySelector('.senator-name').textContent;
+      document.getElementById('modal-title').textContent = card.querySelector('.senator-title').textContent;
+      document.getElementById('modal-body').textContent  = data.extended;
+      document.getElementById('modal-connects').innerHTML = data.connectNames
+        .map(n => `<span class="senator-connect-chip">${n}</span>`).join('');
+      senOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSenatorModal() {
+      senOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    senatorCards.forEach((card, i) => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => openSenatorModal(i));
+    });
+    senOverlay.addEventListener('click', e => { if (e.target === senOverlay) closeSenatorModal(); });
+    senOverlay.querySelector('.senator-modal-close').addEventListener('click', closeSenatorModal);
+
+    // ─── EASTER EGG: 9 CLICKS ON LOGO → HAVAMAL ───
+    const valhalla = document.createElement('div');
+    valhalla.className = 'valhalla-overlay';
+    valhalla.innerHTML = `
+      <div class="valhalla-runes">ᛟᛞᛁᚾ</div>
+      <div class="valhalla-verse">"Cattle die, kinsmen die,<br>the self must also die;<br>but glory never dies<br>for the man who achieves it."</div>
+      <div class="valhalla-source">Hávamál — Verse 77</div>
+      <div class="valhalla-dismiss">Click anywhere to dismiss</div>
+    `;
+    document.body.appendChild(valhalla);
+
+    let logoClicks = 0, logoTimer;
+    document.querySelector('.nav-logo').addEventListener('click', e => {
+      e.preventDefault();
+      logoClicks++;
+      clearTimeout(logoTimer);
+      logoTimer = setTimeout(() => { logoClicks = 0; }, 3000);
+      if (logoClicks >= 9) {
+        logoClicks = 0;
+        valhalla.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+    valhalla.addEventListener('click', () => {
+      valhalla.classList.remove('open');
+      document.body.style.overflow = '';
+    });
 
     // ─── HAMBURGER MENU ───
     const hamburger = document.getElementById('nav-hamburger');
@@ -1550,7 +1882,12 @@
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') toggleMenu(false);
+      if (e.key === 'Escape') {
+        toggleMenu(false);
+        closeSenatorModal();
+        valhalla.classList.remove('open');
+        document.body.style.overflow = '';
+      }
     });
   </script>
 
