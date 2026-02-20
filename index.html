@@ -43,7 +43,7 @@
       inset: 0;
       z-index: 9999;
       pointer-events: none;
-      opacity: 0.045;
+      opacity: 0.08;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 300px 300px;
     }
@@ -253,18 +253,35 @@
       background: radial-gradient(circle, rgba(110,130,255,0.09) 0%, transparent 65%);
       animation: pulseGlow 6s ease-in-out infinite;
     }
+    .orb-4 {
+      width: 42vw; height: 42vw;
+      top: 10%; right: -18%;
+      background: radial-gradient(circle, rgba(196,30,58,0.08) 0%, transparent 65%);
+      animation: pulseGlow 8s ease-in-out 2s infinite;
+    }
 
-    /* Subtle grid lines */
+    /* Angular death-metal grid */
     .hero-grid-overlay {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 1;
       background-image:
-        linear-gradient(rgba(74,130,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74,130,255,0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+        repeating-linear-gradient(
+          -55deg,
+          rgba(196,30,58,0.03) 0px,
+          rgba(196,30,58,0.03) 1px,
+          transparent 1px,
+          transparent 44px
+        ),
+        repeating-linear-gradient(
+          35deg,
+          rgba(80,136,255,0.025) 0px,
+          rgba(80,136,255,0.025) 1px,
+          transparent 1px,
+          transparent 64px
+        );
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 72%);
     }
 
     .hero-eyebrow {
@@ -443,13 +460,13 @@
     .sec-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(44px, 6vw, 84px);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: 0.01em;
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
       color: var(--text-1);
       text-transform: uppercase;
     }
-    .sec-title em { font-style: italic; color: var(--text-2); font-weight: 600; }
+    .sec-title em { font-style: italic; color: var(--text-2); font-weight: 700; }
 
     /* ─── CHAMBER ─── */
     #chamber {
@@ -508,7 +525,7 @@
       background: linear-gradient(to right, var(--blue), transparent);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
     }
     .senator:hover::before { transform: scaleX(1); }
 
@@ -557,7 +574,7 @@
     .senator-glow {
       position: absolute;
       bottom: -40px; right: -40px;
-      width: 160px; height: 160px;
+      width: 180px; height: 180px;
       background: radial-gradient(circle, rgba(74,130,255,0.06) 0%, transparent 70%);
       pointer-events: none;
       opacity: 0;
@@ -722,7 +739,7 @@
     .about-quote {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(22px, 2.4vw, 32px);
-      font-weight: 600;
+      font-weight: 700;
       font-style: italic;
       text-transform: uppercase;
       letter-spacing: 0.03em;
