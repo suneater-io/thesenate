@@ -40,9 +40,9 @@
       --blue-hi:   #9DC6D8;
       --blue-dim:  rgba(100, 160, 200, 0.07);
       --blue-glow: rgba(100, 160, 200, 0.14);
-      --text-1:    #C2D4E0;
-      --text-2:    #486474;
-      --text-3:    #223040;
+      --text-1:    #D8EDF5;
+      --text-2:    #4A6878;
+      --text-3:    #243545;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -235,6 +235,7 @@
       padding: 100px 52px 80px;
       position: relative;
       overflow: hidden;
+      background: url('images/source2.png') center 35% / cover no-repeat;
     }
 
     /* Hero canvas */
@@ -266,11 +267,11 @@
       background: radial-gradient(circle, rgba(110,165,205,0.05) 0%, transparent 65%);
     }
     .orb-3 {
-      width: 45vw; height: 45vw;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(170,210,230,0.04) 0%, transparent 65%);
-      animation: pulseGlow 8s ease-in-out infinite;
+      width: 65vw; height: 65vw;
+      top: -15%; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(220,240,252,0.08) 0%, rgba(180,218,240,0.03) 50%, transparent 70%);
+      animation: pulseGlow 10s ease-in-out infinite;
     }
     .orb-4 {
       width: 55vw; height: 55vw;
@@ -279,16 +280,23 @@
       animation: pulseGlow 11s ease-in-out 3s infinite;
     }
 
-    /* Frost mist overlay */
+    /* Photo treatment + frost overlay */
     .hero-grid-overlay {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 1;
       background:
-        radial-gradient(ellipse 100% 50% at 50% 100%, rgba(100,155,195,0.05) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 30% at 15% 70%, rgba(140,185,215,0.04) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 30% at 85% 40%, rgba(120,170,205,0.03) 0%, transparent 60%);
+        /* Top vignette — darkens trees at top */
+        linear-gradient(to bottom, rgba(5,8,14,0.72) 0%, transparent 28%),
+        /* Bottom fade into the page */
+        linear-gradient(to top, var(--bg) 0%, rgba(5,8,14,0.55) 35%, transparent 55%),
+        /* Left/right edge darkening */
+        linear-gradient(to right, rgba(5,8,14,0.35) 0%, transparent 20%, transparent 80%, rgba(5,8,14,0.35) 100%),
+        /* White sky glow — the bright horizon from the references */
+        radial-gradient(ellipse 85% 55% at 50% 38%, rgba(210,235,250,0.10) 0%, transparent 65%),
+        /* Cold blue photo treatment */
+        linear-gradient(180deg, rgba(6,10,22,0.50) 0%, rgba(6,10,22,0.44) 100%);
     }
 
     .hero-eyebrow {
@@ -322,7 +330,7 @@
       mix-blend-mode: screen;
       margin: 0 auto 48px;
       animation: floatY 7s ease-in-out infinite;
-      filter: brightness(0.95) drop-shadow(0 0 60px rgba(120,175,215,0.20)) drop-shadow(0 0 20px rgba(160,205,230,0.10));
+      filter: brightness(1.1) drop-shadow(0 0 80px rgba(200,232,250,0.30)) drop-shadow(0 0 30px rgba(160,215,240,0.18));
       position: relative;
       z-index: 2;
     }
@@ -802,7 +810,8 @@
       width: 100%;
       aspect-ratio: 3 / 4;
       object-fit: cover;
-      filter: grayscale(30%) brightness(0.85);
+      object-position: center 30%;
+      filter: grayscale(20%) brightness(0.75) saturate(0.7);
     }
     .portrait-border {
       position: absolute;
@@ -815,7 +824,7 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 40%;
-      background: linear-gradient(to top, rgba(74,130,255,0.12), transparent);
+      background: linear-gradient(to top, rgba(6,9,18,0.85), rgba(100,155,195,0.08) 60%, transparent);
       pointer-events: none;
     }
     .portrait-bar {
@@ -1409,7 +1418,7 @@
 
     <div class="work-grid reveal">
       <a href="#" class="wcard">
-        <img src="https://placehold.co/800x600/0D1122/2a3560" alt="Project Meridian" class="wcard-img" />
+        <img src="https://placehold.co/800x600/0C1220/1e3040" alt="Project Meridian" class="wcard-img" />
         <div class="wcard-overlay"></div>
         <div class="wcard-blue-tint"></div>
         <div class="wcard-arrow">
@@ -1422,7 +1431,7 @@
         </div>
       </a>
       <a href="#" class="wcard">
-        <img src="https://placehold.co/800x600/0D1122/2a3560" alt="Toolkit Alpha" class="wcard-img" />
+        <img src="https://placehold.co/800x600/0C1220/1e3040" alt="Toolkit Alpha" class="wcard-img" />
         <div class="wcard-overlay"></div>
         <div class="wcard-blue-tint"></div>
         <div class="wcard-arrow">
@@ -1435,7 +1444,7 @@
         </div>
       </a>
       <a href="#" class="wcard">
-        <img src="https://placehold.co/800x600/0D1122/2a3560" alt="Stratum UI" class="wcard-img" />
+        <img src="https://placehold.co/800x600/0C1220/1e3040" alt="Stratum UI" class="wcard-img" />
         <div class="wcard-overlay"></div>
         <div class="wcard-blue-tint"></div>
         <div class="wcard-arrow">
@@ -1490,7 +1499,7 @@
 
       <div class="about-right reveal">
         <div class="portrait-wrap">
-          <img src="https://placehold.co/480x640/0D1122/2a3560" alt="Portrait" class="portrait" />
+          <img src="images/source3.png" alt="Grant Hansen" class="portrait" />
           <div class="portrait-border"></div>
           <div class="portrait-glow"></div>
           <div class="portrait-bar"></div>
@@ -1622,7 +1631,7 @@
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const COUNT = 130;
+      const COUNT = 180;
 
       let W, H, particles = [], mouse = { x: -9999, y: -9999 }, wind = 0;
 
@@ -1639,8 +1648,8 @@
           y: fromTop ? -Math.random() * H * 0.5 : Math.random() * H,
           vy: 0.18 + layer * 0.55,      // fall speed
           vx: (Math.random() - 0.5) * 0.15,
-          r:  0.3 + layer * 1.6,        // size
-          o:  0.06 + layer * 0.38,      // opacity
+          r:  0.3 + layer * 2.0,        // size
+          o:  0.10 + layer * 0.55,      // opacity
           phase: Math.random() * Math.PI * 2,
           freq:  0.004 + Math.random() * 0.006,
         };
@@ -1687,7 +1696,7 @@
         for (const p of particles) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(195, 220, 235, ${p.o})`;
+          ctx.fillStyle = `rgba(220, 238, 248, ${p.o})`;
           ctx.fill();
         }
 
