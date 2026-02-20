@@ -22,7 +22,15 @@ const MIME = {
 };
 
 http.createServer((req, res) => {
-  let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
+  // Strip query string for file resolution
+  const urlPath = req.url.split('?')[0];
+  let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
+
+  // If path has no extension (or ends with /), try serving index.html from that directory
+  if (!path.extname(filePath)) {
+    filePath = path.join(filePath, 'index.html');
+  }
+
   const ext = path.extname(filePath);
   const mime = MIME[ext] || 'application/octet-stream';
 

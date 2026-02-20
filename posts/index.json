@@ -1,0 +1,11 @@
+{
+  "posts": [
+    {
+      "slug": "hello-senate",
+      "title": "Hello, Senate",
+      "date": "2026-02-20",
+      "tags": ["Meta", "Writing"],
+      "excerpt": "Why I built this site, what the Senate actually means, and why I finally started writing."
+    }
+  ]
+}
