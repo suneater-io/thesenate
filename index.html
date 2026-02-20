@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <style>
     :root {
@@ -539,13 +540,13 @@
       opacity: 0.7;
     }
     .senator-icon {
-      width: 64px;
-      height: 64px;
+      font-size: 40px;
       margin-bottom: 20px;
       display: block;
-      object-fit: cover;
+      color: var(--blue);
       opacity: 0.6;
       transition: opacity 0.3s ease;
+      line-height: 1;
     }
     .senator:hover .senator-icon { opacity: 1; }
     .senator-name {
@@ -1124,7 +1125,7 @@
       <!-- 01 Music -->
       <div class="senator reveal">
         <div class="senator-num">01 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Music" />
+        <i class="ph-bold ph-equalizer senator-icon"></i>
         <div class="senator-name">Music</div>
         <div class="senator-title">Senator of Sound</div>
         <p class="senator-desc">
@@ -1136,7 +1137,7 @@
       <!-- 02 Detroit Sports -->
       <div class="senator reveal">
         <div class="senator-num">02 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Detroit" />
+        <i class="ph-bold ph-basketball senator-icon"></i>
         <div class="senator-name">Detroit</div>
         <div class="senator-title">Senator of the D</div>
         <p class="senator-desc">
@@ -1148,7 +1149,7 @@
       <!-- 03 Norse Mythology -->
       <div class="senator reveal">
         <div class="senator-num">03 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Norse" />
+        <i class="ph-bold ph-lightning senator-icon"></i>
         <div class="senator-name">Norse</div>
         <div class="senator-title">Senator of the Nine Realms</div>
         <p class="senator-desc">
@@ -1160,7 +1161,7 @@
       <!-- 04 Counter-Strike -->
       <div class="senator reveal">
         <div class="senator-num">04 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Counter-Strike" />
+        <i class="ph-bold ph-crosshair senator-icon"></i>
         <div class="senator-name">Counter‑Strike</div>
         <div class="senator-title">Senator of the Clutch</div>
         <p class="senator-desc">
@@ -1172,7 +1173,7 @@
       <!-- 05 Vintage Sportswear -->
       <div class="senator reveal">
         <div class="senator-num">05 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Vintage" />
+        <i class="ph-bold ph-hanger senator-icon"></i>
         <div class="senator-name">Vintage</div>
         <div class="senator-title">Senator of the Archive</div>
         <p class="senator-desc">
@@ -1184,7 +1185,7 @@
       <!-- 06 Collector -->
       <div class="senator reveal">
         <div class="senator-num">06 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Collector" />
+        <i class="ph-bold ph-stack senator-icon"></i>
         <div class="senator-name">Collector</div>
         <div class="senator-title">Senator of the Vault</div>
         <p class="senator-desc">
@@ -1196,7 +1197,7 @@
       <!-- 07 AI & Technology -->
       <div class="senator reveal">
         <div class="senator-num">07 — Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="AI" />
+        <i class="ph-bold ph-cpu senator-icon"></i>
         <div class="senator-name">AI</div>
         <div class="senator-title">Senator of the Future</div>
         <p class="senator-desc">
@@ -1208,7 +1209,7 @@
       <!-- 08 Solution Architecture -->
       <div class="senator reveal">
         <div class="senator-num">08 — Presiding Senator</div>
-        <img class="senator-icon" src="https://placehold.co/64x64" alt="Architecture" />
+        <i class="ph-bold ph-blueprint senator-icon"></i>
         <div class="senator-name">Architecture</div>
         <div class="senator-title">Senator of Structure</div>
         <p class="senator-desc">
