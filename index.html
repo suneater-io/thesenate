@@ -498,9 +498,30 @@
       background: linear-gradient(to right, transparent, var(--blue-glow), transparent);
     }
 
-    .chamber-intro {
-      max-width: 640px;
+    .chamber-intro-wrap {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 80px;
+      align-items: center;
       margin-bottom: 64px;
+    }
+    .chamber-intro {
+      max-width: 540px;
+    }
+    .vegvisir-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .vegvisir {
+      width: 280px;
+      height: 280px;
+      color: var(--blue);
+      animation: rotateSlow 70s linear infinite;
+      filter:
+        drop-shadow(0 0 18px var(--blue-glow))
+        drop-shadow(0 0 60px rgba(100,160,200,0.06));
+      opacity: 0.55;
     }
 
     .chamber-status {
@@ -1050,6 +1071,8 @@
       .nav-links { gap: 24px; }
       .sec { padding: 80px 24px; }
       #hero { padding: 100px 24px 80px; }
+      .chamber-intro-wrap { grid-template-columns: 1fr; gap: 48px; }
+      .vegvisir { width: 200px; height: 200px; }
       .senators-grid { grid-template-columns: 1fr; }
       .senator-featured {
         grid-column: span 1;
@@ -1316,12 +1339,97 @@
 
   <!-- ─── THE CHAMBER ─── -->
   <section id="chamber" class="sec">
-    <div class="chamber-intro reveal">
-      <div class="sec-label">The Chamber</div>
-      <h2 class="sec-title">The <em>Senate</em> of the Mind</h2>
-      <p class="chamber-intro-text">
-        Most people have interests. I have a Senate. Every passion, habit, and obsession occupies a seat in the chamber — and they're always in session, cross-pollinating, debating, building on each other. That's how the mind works when everything is connected.
-      </p>
+    <div class="chamber-intro-wrap">
+      <div class="chamber-intro reveal">
+        <div class="sec-label">The Chamber</div>
+        <h2 class="sec-title">The <em>Senate</em> of the Mind</h2>
+        <p class="chamber-intro-text">
+          Most people have interests. I have a Senate. Every passion, habit, and obsession occupies a seat in the chamber — and they're always in session, cross-pollinating, debating, building on each other. That's how the mind works when everything is connected.
+        </p>
+      </div>
+
+      <div class="vegvisir-wrap reveal">
+        <svg class="vegvisir" viewBox="-160 -160 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <filter id="vglow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" filter="url(#vglow)">
+            <!-- Center -->
+            <circle r="24" stroke-width="1.2" opacity="0.4"/>
+            <circle r="5" fill="currentColor" opacity="0.5"/>
+            <!-- Outer ring -->
+            <circle r="140" stroke-width="0.5" opacity="0.12"/>
+
+            <!-- ARM 1 — N: Triple ascending bars -->
+            <line x1="0" y1="-24" x2="0" y2="-96"/>
+            <line x1="-18" y1="-52" x2="18" y2="-52"/>
+            <line x1="-12" y1="-72" x2="12" y2="-72"/>
+            <line x1="-7"  y1="-90" x2="7"  y2="-90"/>
+            <line x1="-3"  y1="-108" x2="3" y2="-108"/>
+
+            <!-- ARM 2 — NE: Fork with bar -->
+            <g transform="rotate(45)">
+              <line x1="0" y1="-24" x2="0" y2="-88"/>
+              <line x1="-15" y1="-58" x2="15" y2="-58"/>
+              <line x1="0" y1="-88" x2="-20" y2="-116"/>
+              <line x1="0" y1="-88" x2="20" y2="-116"/>
+            </g>
+
+            <!-- ARM 3 — E: Hook curl right -->
+            <g transform="rotate(90)">
+              <line x1="0" y1="-24" x2="0" y2="-90"/>
+              <line x1="-15" y1="-58" x2="15" y2="-58"/>
+              <line x1="0" y1="-90" x2="24" y2="-108"/>
+              <line x1="24" y1="-108" x2="24" y2="-126"/>
+              <line x1="10" y1="-126" x2="24" y2="-126"/>
+            </g>
+
+            <!-- ARM 4 — SE: Cross terminal -->
+            <g transform="rotate(135)">
+              <line x1="0" y1="-24" x2="0" y2="-88"/>
+              <line x1="-15" y1="-58" x2="15" y2="-58"/>
+              <line x1="0" y1="-88" x2="0" y2="-118"/>
+              <line x1="-14" y1="-103" x2="14" y2="-103"/>
+            </g>
+
+            <!-- ARM 5 — S: Double fork down -->
+            <g transform="rotate(180)">
+              <line x1="0" y1="-24" x2="0" y2="-90"/>
+              <line x1="-16" y1="-55" x2="16" y2="-55"/>
+              <line x1="0" y1="-90" x2="-20" y2="-118"/>
+              <line x1="0" y1="-90" x2="20" y2="-118"/>
+            </g>
+
+            <!-- ARM 6 — SW: Hook curl left -->
+            <g transform="rotate(225)">
+              <line x1="0" y1="-24" x2="0" y2="-88"/>
+              <line x1="-15" y1="-58" x2="15" y2="-58"/>
+              <line x1="0" y1="-88" x2="-24" y2="-106"/>
+              <line x1="-24" y1="-106" x2="-24" y2="-124"/>
+              <line x1="-24" y1="-124" x2="-8" y2="-124"/>
+            </g>
+
+            <!-- ARM 7 — W: Hook curl left + bar -->
+            <g transform="rotate(270)">
+              <line x1="0" y1="-24" x2="0" y2="-90"/>
+              <line x1="-15" y1="-58" x2="15" y2="-58"/>
+              <line x1="0" y1="-90" x2="-24" y2="-108"/>
+              <line x1="-24" y1="-108" x2="-24" y2="-126"/>
+              <line x1="-32" y1="-118" x2="-14" y2="-118"/>
+            </g>
+
+            <!-- ARM 8 — NW: Circle (eye) -->
+            <g transform="rotate(315)">
+              <line x1="0" y1="-24" x2="0" y2="-78"/>
+              <circle cx="0" cy="-96" r="18"/>
+              <line x1="0" y1="-114" x2="0" y2="-128"/>
+            </g>
+          </g>
+        </svg>
+      </div>
     </div>
 
     <div class="chamber-status reveal">
