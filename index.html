@@ -30,19 +30,19 @@
 
   <style>
     :root {
-      --bg:        #05070F;
-      --surface:   #080B18;
-      --surface-2: #0D1122;
-      --surface-3: #12162C;
-      --border:    rgba(80, 140, 255, 0.18);
-      --border-hi: rgba(80, 140, 255, 0.38);
-      --blue:      #5088FF;
-      --blue-hi:   #75A4FF;
-      --blue-dim:  rgba(80, 140, 255, 0.09);
-      --blue-glow: rgba(80, 140, 255, 0.22);
-      --text-1:    #E6EAF8;
-      --text-2:    #6878A2;
-      --text-3:    #374060;
+      --bg:        #060810;
+      --surface:   #090D18;
+      --surface-2: #0C1220;
+      --surface-3: #101929;
+      --border:    rgba(120, 175, 210, 0.10);
+      --border-hi: rgba(120, 175, 210, 0.24);
+      --blue:      #7AAEC8;
+      --blue-hi:   #9DC6D8;
+      --blue-dim:  rgba(100, 160, 200, 0.07);
+      --blue-glow: rgba(100, 160, 200, 0.14);
+      --text-1:    #C2D4E0;
+      --text-2:    #486474;
+      --text-3:    #223040;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -62,7 +62,7 @@
       inset: 0;
       z-index: 9999;
       pointer-events: none;
-      opacity: 0.08;
+      opacity: 0.11;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 300px 300px;
     }
@@ -256,51 +256,39 @@
       z-index: 1;
     }
     .orb-1 {
-      width: 70vw; height: 70vw;
-      top: -25%; left: -20%;
-      background: radial-gradient(circle, rgba(80,136,255,0.13) 0%, transparent 65%);
+      width: 80vw; height: 80vw;
+      top: -30%; left: -25%;
+      background: radial-gradient(circle, rgba(100,155,195,0.06) 0%, transparent 65%);
     }
     .orb-2 {
-      width: 50vw; height: 50vw;
-      bottom: -20%; right: -10%;
-      background: radial-gradient(circle, rgba(80,136,255,0.10) 0%, transparent 65%);
+      width: 60vw; height: 60vw;
+      bottom: -25%; right: -15%;
+      background: radial-gradient(circle, rgba(110,165,205,0.05) 0%, transparent 65%);
     }
     .orb-3 {
-      width: 35vw; height: 35vw;
+      width: 45vw; height: 45vw;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(110,130,255,0.09) 0%, transparent 65%);
-      animation: pulseGlow 6s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(170,210,230,0.04) 0%, transparent 65%);
+      animation: pulseGlow 8s ease-in-out infinite;
     }
     .orb-4 {
-      width: 42vw; height: 42vw;
-      top: 10%; right: -18%;
-      background: radial-gradient(circle, rgba(196,30,58,0.08) 0%, transparent 65%);
-      animation: pulseGlow 8s ease-in-out 2s infinite;
+      width: 55vw; height: 55vw;
+      top: 5%; right: -22%;
+      background: radial-gradient(circle, rgba(90,145,185,0.04) 0%, transparent 65%);
+      animation: pulseGlow 11s ease-in-out 3s infinite;
     }
 
-    /* Angular death-metal grid */
+    /* Frost mist overlay */
     .hero-grid-overlay {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 1;
-      background-image:
-        repeating-linear-gradient(
-          -55deg,
-          rgba(196,30,58,0.03) 0px,
-          rgba(196,30,58,0.03) 1px,
-          transparent 1px,
-          transparent 44px
-        ),
-        repeating-linear-gradient(
-          35deg,
-          rgba(80,136,255,0.025) 0px,
-          rgba(80,136,255,0.025) 1px,
-          transparent 1px,
-          transparent 64px
-        );
-      mask-image: radial-gradient(ellipse at center, black 20%, transparent 72%);
+      background:
+        radial-gradient(ellipse 100% 50% at 50% 100%, rgba(100,155,195,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 30% at 15% 70%, rgba(140,185,215,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 30% at 85% 40%, rgba(120,170,205,0.03) 0%, transparent 60%);
     }
 
     .hero-eyebrow {
@@ -334,7 +322,7 @@
       mix-blend-mode: screen;
       margin: 0 auto 48px;
       animation: floatY 7s ease-in-out infinite;
-      filter: brightness(1.05) drop-shadow(0 0 80px rgba(80,136,255,0.35)) drop-shadow(0 0 30px rgba(80,136,255,0.2));
+      filter: brightness(0.95) drop-shadow(0 0 60px rgba(120,175,215,0.20)) drop-shadow(0 0 20px rgba(160,205,230,0.10));
       position: relative;
       z-index: 2;
     }
@@ -1629,17 +1617,14 @@
     const statsRow = document.querySelector('.stats-row');
     if (statsRow) statObs.observe(statsRow);
 
-    // ─── HERO PARTICLE CONSTELLATION ───
+    // ─── HERO SNOW ───
     (function () {
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const PARTICLE_COUNT = 70;
-      const CONNECT_DIST = 160;
-      const SPEED = 0.28;
-      const COLOR = '80, 136, 255';
+      const COUNT = 130;
 
-      let W, H, particles = [], mouse = { x: -9999, y: -9999 };
+      let W, H, particles = [], mouse = { x: -9999, y: -9999 }, wind = 0;
 
       function resize() {
         const hero = canvas.parentElement;
@@ -1647,68 +1632,62 @@
         H = canvas.height = hero.offsetHeight;
       }
 
-      function mkParticle() {
+      function mkFlake(fromTop) {
+        const layer = Math.random(); // 0=far, 1=close — affects size/speed/opacity
         return {
           x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * SPEED,
-          vy: (Math.random() - 0.5) * SPEED,
-          r: Math.random() * 1.4 + 0.4,
-          o: Math.random() * 0.45 + 0.08,
+          y: fromTop ? -Math.random() * H * 0.5 : Math.random() * H,
+          vy: 0.18 + layer * 0.55,      // fall speed
+          vx: (Math.random() - 0.5) * 0.15,
+          r:  0.3 + layer * 1.6,        // size
+          o:  0.06 + layer * 0.38,      // opacity
+          phase: Math.random() * Math.PI * 2,
+          freq:  0.004 + Math.random() * 0.006,
         };
       }
 
       function init() {
         resize();
-        particles = Array.from({ length: PARTICLE_COUNT }, mkParticle);
+        particles = Array.from({ length: COUNT }, () => mkFlake(false));
       }
 
       function tick() {
         ctx.clearRect(0, 0, W, H);
+        wind += 0.0015;
 
-        // Move + mouse repulsion
         for (const p of particles) {
+          // Mouse repulsion
           const mdx = p.x - mouse.x;
           const mdy = p.y - mouse.y;
           const md2 = mdx * mdx + mdy * mdy;
-          const REPEL = 150;
+          const REPEL = 110;
           if (md2 < REPEL * REPEL && md2 > 0) {
             const md = Math.sqrt(md2);
-            const force = (REPEL - md) / REPEL * 2.0;
+            const force = (REPEL - md) / REPEL * 1.4;
             p.x += (mdx / md) * force;
             p.y += (mdy / md) * force;
           }
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < -10) p.x = W + 10;
-          if (p.x > W + 10) p.x = -10;
-          if (p.y < -10) p.y = H + 10;
-          if (p.y > H + 10) p.y = -10;
-        }
 
-        // Connections
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < CONNECT_DIST * CONNECT_DIST) {
-              const alpha = (1 - Math.sqrt(d2) / CONNECT_DIST) * 0.18;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(${COLOR}, ${alpha})`;
-              ctx.lineWidth = 0.6;
-              ctx.stroke();
-            }
+          p.phase += p.freq;
+          p.x += p.vx + Math.sin(p.phase + wind) * 0.28;
+          p.y += p.vy;
+
+          // Wrap horizontal
+          if (p.x < -4) p.x = W + 4;
+          if (p.x > W + 4) p.x = -4;
+
+          // Recycle when off bottom
+          if (p.y > H + 6) {
+            p.x = Math.random() * W;
+            p.y = -6;
           }
         }
 
-        // Dots
+        // Draw
         for (const p of particles) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${COLOR}, ${p.o})`;
+          ctx.fillStyle = `rgba(195, 220, 235, ${p.o})`;
           ctx.fill();
         }
 
@@ -1717,10 +1696,7 @@
 
       window.addEventListener('resize', () => {
         resize();
-        particles.forEach(p => {
-          if (p.x > W) p.x = Math.random() * W;
-          if (p.y > H) p.y = Math.random() * H;
-        });
+        particles.forEach(p => { if (p.x > W) p.x = Math.random() * W; });
       }, { passive: true });
 
       document.addEventListener('mousemove', e => {
