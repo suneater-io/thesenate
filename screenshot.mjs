@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const require = createRequire(import.meta.url);
-const puppeteer = require('C:/Users/senate/AppData/Local/Temp/puppeteer-test/node_modules/puppeteer/lib/cjs/puppeteer/puppeteer.js');
+const puppeteer = require('C:/Usersgrant.hansenAppDataLocalTemppuppeteer-test/node_modules/puppeteer/lib/cjs/puppeteer/puppeteer.js');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const url = process.argv[2] || 'http://localhost:3000';

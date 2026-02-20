@@ -139,6 +139,72 @@
     .nav-links a:hover::after { transform: scaleX(1); }
     .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 6px; border-radius: 2px; }
 
+    /* ─── HAMBURGER ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px;
+      transition: border-color 0.2s ease;
+    }
+    .nav-hamburger:hover { border-color: var(--blue); }
+    .nav-hamburger:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-hamburger span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--text-2);
+      transform-origin: center;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, background 0.2s ease;
+    }
+    .nav-hamburger:hover span { background: var(--text-1); }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 199;
+      background: rgba(5, 7, 15, 0.97);
+      backdrop-filter: blur(24px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+    }
+    .nav-drawer.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .nav-drawer a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      padding: 12px 0;
+      transition: color 0.2s ease;
+      line-height: 1;
+    }
+    .nav-drawer a:hover { color: var(--text-1); }
+    .nav-drawer a:focus-visible { outline: 2px solid var(--blue); outline-offset: 8px; }
+
     /* ─── HERO ─── */
     #hero {
       min-height: 100vh;
@@ -921,6 +987,28 @@
       .sec { padding: 80px 24px; }
       #hero { padding: 100px 24px 80px; }
       .senators-grid { grid-template-columns: 1fr; }
+      .senator-featured {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        column-gap: 0;
+      }
+      .senator-featured .senator-num,
+      .senator-featured .senator-icon,
+      .senator-featured .senator-name,
+      .senator-featured .senator-title { grid-column: 1; }
+      .senator-featured .senator-name { font-size: 36px; }
+      .senator-featured .senator-desc {
+        grid-column: 1;
+        grid-row: auto;
+        border-left: none;
+        padding-left: 0;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        font-size: 13px;
+      }
+      .senator-name { font-size: 26px; }
       .work-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 56px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -928,6 +1016,17 @@
       .stack-grid { grid-template-columns: repeat(2, 1fr); }
       #contact { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-drawer { display: flex; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .stack-grid { grid-template-columns: 1fr 1fr; }
+      .senator { padding: 32px 24px; }
+      .senator-name { font-size: 24px; }
+      .sec-title { letter-spacing: 0; }
     }
   </style>
 </head>
@@ -942,7 +1041,18 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- ─── MOBILE DRAWER ─── -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation">
+    <a href="#chamber" class="drawer-link">Chamber</a>
+    <a href="#work" class="drawer-link">Work</a>
+    <a href="#about" class="drawer-link">About</a>
+    <a href="#contact" class="drawer-link">Contact</a>
+  </div>
 
   <!-- ─── HERO ─── -->
   <section id="hero">
@@ -1388,6 +1498,29 @@
       init();
       tick();
     })();
+
+    // ─── HAMBURGER MENU ───
+    const hamburger = document.getElementById('nav-hamburger');
+    const drawer = document.getElementById('nav-drawer');
+
+    function toggleMenu(open) {
+      hamburger.classList.toggle('open', open);
+      drawer.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      toggleMenu(!drawer.classList.contains('open'));
+    });
+
+    drawer.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') toggleMenu(false);
+    });
   </script>
 
 </body>
