@@ -585,14 +585,16 @@
 
     /* ─── SENATOR SPLIT PANEL ─── */
     .senators-panel {
-      display: grid;
-      grid-template-columns: 240px 1fr;
+      display: flex;
+      flex-direction: row;
       border: 1px solid var(--border);
       overflow: hidden;
       margin-top: 48px;
       min-height: 520px;
     }
     .senators-menu {
+      width: 240px;
+      flex-shrink: 0;
       border-right: 1px solid var(--border);
       background: var(--surface-2);
       display: flex;
@@ -655,6 +657,8 @@
 
     /* Detail panel */
     .senators-detail {
+      flex: 1;
+      min-width: 0;
       background: var(--surface);
       padding: 48px 52px;
       position: relative;
@@ -1229,8 +1233,8 @@
 
     /* ─── SENATOR PANEL MOBILE ─── */
     @media (max-width: 760px) {
-      .senators-panel { grid-template-columns: 1fr; min-height: auto; }
-      .senators-menu { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .senators-panel { flex-direction: column; min-height: auto; }
+      .senators-menu { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
       .sen-menu-item { flex-direction: column; min-width: 72px; text-align: center; gap: 4px; padding: 12px 14px; border-bottom: none; border-right: 1px solid var(--border); }
       .sen-menu-item::before { left: 0; right: 0; bottom: 0; top: auto; height: 2px; width: auto; }
       .sen-menu-num { display: none; }
