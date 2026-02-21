@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional — The Senate</title>
+  <meta name="description" content="Solution Architect. Translating what a business needs into systems that work." />
+
+  <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
+  <link rel="apple-touch-icon" href="/brand_assets/senate-logo-white.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --bg:        #060810;
+      --surface:   #090D18;
+      --surface-2: #0C1220;
+      --surface-3: #101929;
+      --border:    rgba(120, 175, 210, 0.10);
+      --border-hi: rgba(120, 175, 210, 0.24);
+      --blue:      #7AAEC8;
+      --blue-hi:   #9DC6D8;
+      --blue-dim:  rgba(100, 160, 200, 0.07);
+      --blue-glow: rgba(100, 160, 200, 0.14);
+      --text-1:    #D8EDF5;
+      --text-2:    #4A6878;
+      --text-3:    #243545;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: 'Chakra Petch', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.11;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .a1 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+    .a2 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+    .a3 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+    .a4 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(5, 7, 15, 0.88);
+      backdrop-filter: blur(24px) saturate(160%);
+      border-bottom-color: var(--border);
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 160px 52px 80px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 90% 50%, rgba(122,174,200,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Blueprint grid overlay */
+    .page-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(122,174,200,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(122,174,200,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .ph-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+      position: relative; z-index: 1;
+    }
+    .ph-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.88;
+      color: var(--text-1);
+      text-transform: uppercase;
+      position: relative; z-index: 1;
+    }
+    .ph-role {
+      margin-top: 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      position: relative; z-index: 1;
+    }
+    .ph-line {
+      margin-top: 40px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-2);
+      max-width: 560px;
+      position: relative; z-index: 1;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-num-header {
+      padding: 64px 52px 48px;
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: var(--text-1);
+    }
+
+    /* ─── 01: WHAT I DO ─── */
+    .what-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border-bottom: 1px solid var(--border);
+    }
+    .what-card {
+      background: var(--surface);
+      padding: 48px 40px;
+      border-right: 1px solid var(--border);
+      transition: background 0.25s ease;
+    }
+    .what-card:last-child { border-right: none; }
+    .what-card:hover { background: var(--surface-2); }
+    .what-icon {
+      font-size: 28px;
+      color: var(--blue);
+      margin-bottom: 24px;
+      display: block;
+    }
+    .what-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 12px;
+    }
+    .what-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .what-desc {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--text-2);
+    }
+
+    /* ─── 02: THE STACK ─── */
+    .stack-section {
+      padding: 64px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .stack-group {
+      margin-bottom: 48px;
+    }
+    .stack-group:last-child { margin-bottom: 0; }
+    .stack-group-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .stack-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+    .stack-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-2);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .stack-item:hover { border-color: var(--border-hi); color: var(--text-1); }
+
+    /* ─── 03: WORK ─── */
+    .work-section {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .work-card {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 52px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease;
+    }
+    .work-card:last-child { border-bottom: none; }
+    .work-card:hover { background: var(--surface-2); }
+    .work-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--blue);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .work-card:hover::before { transform: scaleY(1); }
+    .work-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--surface-3);
+      line-height: 1;
+      transition: color 0.25s ease;
+    }
+    .work-card:hover .work-num { color: var(--border-hi); }
+    .work-content {}
+    .work-industry {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .work-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+    .work-outcome {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-2);
+    }
+    .work-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ─── CONTACT CTA ─── */
+    .cta-section {
+      padding: 80px 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .cta-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .cta-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: var(--text-1);
+    }
+    .cta-sub {
+      font-size: 13px;
+      color: var(--text-2);
+      max-width: 360px;
+    }
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--blue);
+      padding: 14px 32px;
+      text-decoration: none;
+      transition: background 0.2s ease, gap 0.2s ease;
+      margin-top: 8px;
+    }
+    .cta-link:hover { background: var(--blue-hi); gap: 16px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ft-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+    }
+    .ft-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .ft-mark {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .ft-mark span { color: var(--blue); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 20px 24px; }
+      .page-header { padding: 120px 24px 60px; }
+      .section-num-header { padding: 48px 24px 36px; }
+      .what-grid { grid-template-columns: 1fr; }
+      .what-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .what-card:last-child { border-bottom: none; }
+      .stack-section { padding: 48px 24px; }
+      .work-card { padding: 40px 24px; grid-template-columns: auto 1fr; }
+      .work-year { display: none; }
+      .cta-section { padding: 60px 24px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      .work-num { font-size: 40px; }
+      .what-card { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
+  </nav>
+
+  <!-- ─── HEADER ─── -->
+  <div class="page-header">
+    <div class="ph-label a1">Senator of Structure — 08</div>
+    <h1 class="ph-title a2">Professional</h1>
+    <div class="ph-role a3">Solution Architect</div>
+    <p class="ph-line a4">Translating what a business actually needs into systems that work — and knowing the difference between the two.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 01 / WHAT I DO -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-num-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">What I Do</h2>
+  </div>
+  <div class="what-grid reveal">
+    <div class="what-card">
+      <i class="ph ph-blueprint what-icon"></i>
+      <div class="what-label">Senator of Structure</div>
+      <div class="what-title">System Architecture</div>
+      <p class="what-desc">Designing the blueprint before a single line ships. Translating ambiguous business needs into clear system boundaries, data flows, and integration patterns that scale without surprise.</p>
+    </div>
+    <div class="what-card">
+      <i class="ph ph-cpu what-icon"></i>
+      <div class="what-label">Senator of the Machine</div>
+      <div class="what-title">AI & Automation</div>
+      <p class="what-desc">Finding where human time is being spent on work machines should own, then building the plumbing. The real leverage isn't the model — it's the architecture around it.</p>
+    </div>
+    <div class="what-card">
+      <i class="ph ph-crosshair what-icon"></i>
+      <div class="what-label">Senator of the Clutch</div>
+      <div class="what-title">Strategic Operations</div>
+      <p class="what-desc">Economy management, clear priorities, decisions under pressure. CS taught this: staying composed when the model says you're losing is a skill that migrates directly off-screen.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 02 / THE STACK -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-num-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">The Stack</h2>
+  </div>
+  <div class="stack-section reveal">
+    <div class="stack-group">
+      <div class="stack-group-label">Architecture & Cloud</div>
+      <div class="stack-items">
+        <span class="stack-item">Azure</span>
+        <span class="stack-item">AWS</span>
+        <span class="stack-item">Kubernetes</span>
+        <span class="stack-item">Terraform</span>
+        <span class="stack-item">Docker</span>
+        <span class="stack-item">REST / GraphQL</span>
+        <span class="stack-item">Event-Driven Architecture</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-label">AI & Automation</div>
+      <div class="stack-items">
+        <span class="stack-item">Claude API</span>
+        <span class="stack-item">OpenAI</span>
+        <span class="stack-item">LangChain</span>
+        <span class="stack-item">n8n</span>
+        <span class="stack-item">Power Automate</span>
+        <span class="stack-item">Prompt Engineering</span>
+        <span class="stack-item">RAG Systems</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-label">Platforms & Data</div>
+      <div class="stack-items">
+        <span class="stack-item">Salesforce</span>
+        <span class="stack-item">Dynamics 365</span>
+        <span class="stack-item">SQL / PostgreSQL</span>
+        <span class="stack-item">Cosmos DB</span>
+        <span class="stack-item">Databricks</span>
+        <span class="stack-item">Power BI</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-label">Languages & Tooling</div>
+      <div class="stack-items">
+        <span class="stack-item">Python</span>
+        <span class="stack-item">TypeScript</span>
+        <span class="stack-item">C#</span>
+        <span class="stack-item">Bash</span>
+        <span class="stack-item">Git</span>
+        <span class="stack-item">Figma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 03 / WORK -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-num-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Work</h2>
+  </div>
+  <div class="work-section reveal">
+    <div class="work-card">
+      <div class="work-num">01</div>
+      <div class="work-content">
+        <div class="work-industry">Enterprise / Financial Services</div>
+        <div class="work-title">AI-Driven Document Intelligence</div>
+        <p class="work-outcome">Replaced a 6-person manual review process with an AI pipeline that classifies, extracts, and routes financial documents with 94% accuracy — zero human touchpoints on 80% of volume.</p>
+      </div>
+      <div class="work-year">2025</div>
+    </div>
+    <div class="work-card">
+      <div class="work-num">02</div>
+      <div class="work-content">
+        <div class="work-industry">Healthcare / Operations</div>
+        <div class="work-title">Clinical Scheduling Automation</div>
+        <p class="work-outcome">Redesigned a fragmented scheduling stack across 12 departments into a single event-driven platform. Reduced scheduling conflicts by 67% and cut coordinator time-on-task by half.</p>
+      </div>
+      <div class="work-year">2024</div>
+    </div>
+    <div class="work-card">
+      <div class="work-num">03</div>
+      <div class="work-content">
+        <div class="work-industry">Retail / E-Commerce</div>
+        <div class="work-title">Platform Migration & Re-Architecture</div>
+        <p class="work-outcome">Led end-to-end migration from a legacy monolith to a microservices architecture. Went live with zero downtime. Response times improved 4x. First fully cloud-native deployment for the org.</p>
+      </div>
+      <div class="work-year">2023</div>
+    </div>
+  </div>
+
+  <!-- ─── CONTACT CTA ─── -->
+  <div class="cta-section reveal">
+    <div class="cta-label">The chamber has a seat</div>
+    <h2 class="cta-title">Let's Build<br>Something</h2>
+    <p class="cta-sub">If you have a problem worth solving and you need someone who can architect the solution, start here.</p>
+    <a href="mailto:hello@thesenate.io" class="cta-link">hello@thesenate.io &rarr;</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-name">Grant Hansen</span>
+    <span class="ft-mark">THE<span>SENATE</span>.IO</span>
+  </footer>
+
+  <script>
+    // ─── STICKY NAV ───
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
+
+    // ─── SCROLL REVEAL ───
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('vis');
+        revealObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  </script>
+</body>
+</html>

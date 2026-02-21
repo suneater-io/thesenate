@@ -6,7 +6,6 @@
   <title>Loading... — The Senate</title>
   <meta name="description" content="" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="../brand_assets/senate-logo-white.png" />
   <link rel="apple-touch-icon" href="../brand_assets/senate-logo-white.png" />
 
@@ -14,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- marked.js for Markdown parsing -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
@@ -44,7 +42,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Grain overlay */
     body::after {
       content: '';
       position: fixed;
@@ -60,10 +57,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
     @keyframes skeletonPulse {
       0%, 100% { opacity: 0.4; }
       50% { opacity: 0.8; }
@@ -77,7 +70,6 @@
       padding: 24px 52px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       background: rgba(5, 7, 15, 0.88);
       backdrop-filter: blur(24px) saturate(160%);
       border-bottom: 1px solid var(--border);
@@ -92,93 +84,6 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.2s ease;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px; left: 0; right: 0;
-      height: 1px;
-      background: var(--blue);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .nav-links a:hover { color: var(--text-1); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-    .nav-links a.active { color: var(--blue); }
-    .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 6px; border-radius: 2px; }
-
-    /* ─── HAMBURGER ─── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 36px;
-      height: 36px;
-      cursor: pointer;
-      background: none;
-      border: 1px solid var(--border);
-      padding: 8px;
-      transition: border-color 0.2s ease;
-    }
-    .nav-hamburger:hover { border-color: var(--blue); }
-    .nav-hamburger span {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background: var(--text-2);
-      transform-origin: center;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    .nav-drawer {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 199;
-      background: rgba(5, 7, 15, 0.97);
-      backdrop-filter: blur(24px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
-      pointer-events: none;
-    }
-    .nav-drawer.open { opacity: 1; transform: translateY(0); pointer-events: all; }
-    .nav-drawer a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 52px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      text-decoration: none;
-      padding: 12px 0;
-      transition: color 0.2s ease;
-      line-height: 1;
-    }
-    .nav-drawer a:hover { color: var(--text-1); }
 
     /* ─── POST HEADER ─── */
     .post-header {
@@ -215,11 +120,7 @@
       color: var(--text-3);
       text-transform: uppercase;
     }
-    .post-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .post-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .post-tag {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
@@ -248,7 +149,6 @@
       animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;
     }
 
-    /* Markdown content styles */
     .post-content {
       font-size: 16px;
       line-height: 1.85;
@@ -277,7 +177,7 @@
     }
     .post-content a:hover { color: var(--blue-hi); }
     .post-content strong { color: var(--text-1); font-weight: 600; }
-    .post-content em { font-style: italic; color: var(--text-2); }
+    .post-content em { font-style: italic; }
     .post-content code {
       font-family: 'Space Mono', monospace;
       font-size: 13px;
@@ -294,13 +194,7 @@
       overflow-x: auto;
       margin: 1.8em 0;
     }
-    .post-content pre code {
-      background: none;
-      border: none;
-      padding: 0;
-      font-size: 13px;
-      line-height: 1.6;
-    }
+    .post-content pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
     .post-content blockquote {
       border-left: 3px solid var(--blue);
       padding: 4px 0 4px 24px;
@@ -308,20 +202,29 @@
       color: var(--text-1);
       font-style: italic;
     }
-    .post-content ul, .post-content ol {
-      margin: 1.2em 0 1.5em 1.5em;
-    }
+    .post-content ul, .post-content ol { margin: 1.2em 0 1.5em 1.5em; }
     .post-content li { margin-bottom: 0.5em; }
-    .post-content hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 3em 0;
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 3em 0; }
+    .post-content img { max-width: 100%; height: auto; display: block; margin: 2em auto; }
+
+    /* Post end marker */
+    .post-end {
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
-    .post-content img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 2em auto;
+    .post-end-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .post-end-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-3);
     }
 
     /* ─── SKELETON ─── */
@@ -344,7 +247,7 @@
       margin-bottom: 12px;
     }
 
-    /* ─── ERROR STATE ─── */
+    /* ─── ERROR ─── */
     .post-error {
       max-width: 680px;
       margin: 0 auto;
@@ -396,9 +299,18 @@
       letter-spacing: 0.08em;
       color: var(--text-3);
     }
+    .ft-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
     .ft-mark {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-3);
@@ -408,7 +320,6 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
       nav { padding: 20px 24px; }
-      .nav-links { gap: 24px; }
       .post-header { padding: 120px 24px 48px; }
       .post-body { padding: 48px 24px 80px; }
       .skeleton-header { padding: 120px 24px 48px; }
@@ -417,9 +328,6 @@
     }
 
     @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .nav-drawer { display: flex; }
       .post-content { font-size: 15px; }
     }
   </style>
@@ -428,30 +336,10 @@
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
-    <ul class="nav-links">
-      <li><a href="/#chamber">Chamber</a></li>
-      <li><a href="/#work">Work</a></li>
-      <li><a href="/blog/" class="active">Thoughts</a></li>
-      <li><a href="/#about">About</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </nav>
-
-  <!-- ─── MOBILE DRAWER ─── -->
-  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation">
-    <a href="/#chamber" class="drawer-link">Chamber</a>
-    <a href="/#work" class="drawer-link">Work</a>
-    <a href="/blog/" class="drawer-link">Thoughts</a>
-    <a href="/#about" class="drawer-link">About</a>
-    <a href="/#contact" class="drawer-link">Contact</a>
-  </div>
 
   <!-- ─── CONTENT ─── -->
   <div id="app">
-    <!-- Skeleton -->
     <div class="skeleton-header">
       <div class="sk-line" style="width:12%;height:10px;margin-bottom:40px"></div>
       <div class="sk-line" style="width:20%;height:10px;margin-bottom:20px"></div>
@@ -471,43 +359,26 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-name">Grant Hansen</span>
     <span class="ft-mark">THE<span>SENATE</span>.IO</span>
   </footer>
 
   <script>
-    // ─── NAV HAMBURGER ───
-    const hamburger = document.getElementById('nav-hamburger');
-    const drawer    = document.getElementById('nav-drawer');
-    function toggleMenu(open) {
-      hamburger.classList.toggle('open', open);
-      hamburger.setAttribute('aria-expanded', open);
-      drawer.classList.toggle('open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    }
-    hamburger.addEventListener('click', () => toggleMenu(!hamburger.classList.contains('open')));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
-    drawer.querySelectorAll('.drawer-link').forEach(link => {
-      link.addEventListener('click', () => toggleMenu(false));
-    });
-
     // ─── FRONTMATTER PARSER ───
     function parseFrontmatter(raw) {
       const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
       if (!match) return { meta: {}, content: raw };
-
       const meta = {};
       match[1].split('\n').forEach(line => {
         const colon = line.indexOf(':');
         if (colon === -1) return;
         const key = line.slice(0, colon).trim();
         let val = line.slice(colon + 1).trim();
-        // Parse arrays like [Tag1, Tag2]
         if (val.startsWith('[') && val.endsWith(']')) {
           val = val.slice(1, -1).split(',').map(s => s.trim().replace(/^['"]|['"]$/g, ''));
         }
         meta[key] = val;
       });
-
       return { meta, content: match[2].trim() };
     }
 
@@ -521,10 +392,7 @@
       const app = document.getElementById('app');
       const slug = new URLSearchParams(window.location.search).get('slug');
 
-      if (!slug) {
-        showError(app, '404', 'No post specified');
-        return;
-      }
+      if (!slug) { showError(app, '404', 'No post specified'); return; }
 
       try {
         const res = await fetch(`/posts/${slug}.md`);
@@ -532,15 +400,9 @@
         const raw = await res.text();
         const { meta, content } = parseFrontmatter(raw);
 
-        // Update page title
-        if (meta.title) {
-          document.title = `${meta.title} — The Senate`;
-        }
+        if (meta.title) document.title = `${meta.title} — The Senate`;
 
-        // Render markdown
         const htmlContent = marked.parse(content);
-
-        // Build post tags
         const tags = Array.isArray(meta.tags) ? meta.tags : (meta.tags ? [meta.tags] : []);
         const tagsHtml = tags.map(t => `<span class="post-tag">${t}</span>`).join('');
 
@@ -555,6 +417,11 @@
           </div>
           <div class="post-body">
             <div class="post-content">${htmlContent}</div>
+            <div class="post-end">
+              <div class="post-end-line"></div>
+              <span class="post-end-text">— End —</span>
+              <div class="post-end-line"></div>
+            </div>
           </div>
         `;
       } catch (err) {
@@ -568,8 +435,7 @@
           <div class="post-error-code">${code}</div>
           <div class="post-error-msg">${message}</div>
           <a href="/blog/" class="post-error-back">&larr; Back to Thoughts</a>
-        </div>
-      `;
+        </div>`;
     }
 
     loadPost();

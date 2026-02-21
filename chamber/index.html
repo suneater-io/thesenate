@@ -95,93 +95,6 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.2s ease;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px; left: 0; right: 0;
-      height: 1px;
-      background: var(--blue);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .nav-links a:hover { color: var(--text-1); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-    .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 6px; border-radius: 2px; }
-
-    /* ─── HAMBURGER ─── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 36px;
-      height: 36px;
-      cursor: pointer;
-      background: none;
-      border: 1px solid var(--border);
-      padding: 8px;
-      transition: border-color 0.2s ease;
-    }
-    .nav-hamburger:hover { border-color: var(--blue); }
-    .nav-hamburger span {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background: var(--text-2);
-      transform-origin: center;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, background 0.2s ease;
-    }
-    .nav-hamburger:hover span { background: var(--text-1); }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    .nav-drawer {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 199;
-      background: rgba(5, 7, 15, 0.97);
-      backdrop-filter: blur(24px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
-      pointer-events: none;
-    }
-    .nav-drawer.open { opacity: 1; transform: translateY(0); pointer-events: all; }
-    .nav-drawer a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 52px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      text-decoration: none;
-      padding: 12px 0;
-      transition: color 0.2s ease;
-      line-height: 1;
-    }
-    .nav-drawer a:hover { color: var(--text-1); }
 
     /* ─── CHAMBER PAGE ─── */
     .chamber-page {
@@ -461,6 +374,14 @@
       color: var(--text-3);
     }
     .ft-mark span { color: var(--blue); }
+    .ft-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
 
     /* ─── VALHALLA EASTER EGG ─── */
     .valhalla-overlay {
@@ -540,9 +461,6 @@
     }
 
     @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .nav-drawer { display: flex; }
     }
   </style>
 </head>
@@ -551,18 +469,7 @@
   <!-- ─── NAV ─── -->
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
-    <ul class="nav-links">
-      <li><a href="/blog/">Writing</a></li>
-    </ul>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </nav>
-
-  <!-- ─── MOBILE DRAWER ─── -->
-  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation">
-    <a href="/blog/" class="drawer-link">Writing</a>
-  </div>
 
   <!-- ─── CHAMBER PAGE ─── -->
   <div class="chamber-page">
@@ -588,6 +495,7 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-name">Grant Hansen</span>
     <span class="ft-mark">THE<span>SENATE</span>.IO</span>
   </footer>
 
@@ -783,27 +691,10 @@
       document.body.style.overflow = '';
     });
 
-    // ─── HAMBURGER MENU ───
-    const hamburger = document.getElementById('nav-hamburger');
-    const drawer    = document.getElementById('nav-drawer');
-
-    function toggleMenu(open) {
-      hamburger.classList.toggle('open', open);
-      drawer.classList.toggle('open', open);
-      hamburger.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    }
-
-    hamburger.addEventListener('click', () => toggleMenu(!drawer.classList.contains('open')));
-    drawer.querySelectorAll('.drawer-link').forEach(link => {
-      link.addEventListener('click', () => toggleMenu(false));
-    });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        toggleMenu(false);
         valhalla.classList.remove('open');
         document.body.style.overflow = '';
-      }
     });
   </script>
 

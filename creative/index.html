@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative — The Senate</title>
+  <meta name="description" content="Sound, style, collected, designed. The creative chamber." />
+
+  <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
+  <link rel="apple-touch-icon" href="/brand_assets/senate-logo-white.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --bg:        #060810;
+      --surface:   #090D18;
+      --surface-2: #0C1220;
+      --surface-3: #101929;
+      --border:    rgba(120, 175, 210, 0.10);
+      --border-hi: rgba(120, 175, 210, 0.24);
+      --blue:      #7AAEC8;
+      --blue-hi:   #9DC6D8;
+      --blue-dim:  rgba(100, 160, 200, 0.07);
+      --blue-glow: rgba(100, 160, 200, 0.14);
+      --text-1:    #D8EDF5;
+      --text-2:    #4A6878;
+      --text-3:    #243545;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: 'Chakra Petch', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.11;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .a1 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+    .a2 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+    .a3 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(5, 7, 15, 0.88);
+      backdrop-filter: blur(24px) saturate(160%);
+      border-bottom-color: var(--border);
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 160px 52px 80px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 80% 50%, rgba(122,174,200,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ph-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .ph-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.88;
+      color: var(--text-1);
+      text-transform: uppercase;
+    }
+    .ph-sub {
+      margin-top: 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    /* ─── SECTION DIVIDER ─── */
+    .sec-divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 52px;
+      margin: 64px 0 48px;
+    }
+    .sec-divider-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--blue);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .sec-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .sec-divider-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    /* ─── SECTION CONTAINER ─── */
+    .section-wrap {
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── SOUND SECTION ─── */
+    .sound-section {
+      padding: 80px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .sound-img-wrap {
+      position: relative;
+    }
+    .sound-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.3) brightness(0.8);
+      transition: filter 0.4s ease;
+    }
+    .sound-img-wrap:hover .sound-img { filter: saturate(0.5) brightness(0.9); }
+    .sound-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(122,174,200,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .sound-text { padding-top: 8px; }
+    .sec-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .sec-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: var(--text-1);
+      margin-bottom: 24px;
+    }
+    .sec-body {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-2);
+      margin-bottom: 16px;
+    }
+    .records-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .record-card {
+      aspect-ratio: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+    .record-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.2) brightness(0.6);
+      transition: filter 0.4s ease;
+    }
+    .record-card:hover img { filter: saturate(0.5) brightness(0.8); }
+    .record-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 8px 10px;
+      background: linear-gradient(to top, rgba(5,7,15,0.9), transparent);
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    /* ─── STYLE SECTION ─── */
+    .style-section {
+      background: var(--surface);
+      padding: 80px 52px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .style-header {
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .style-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.25s ease;
+    }
+    .style-card:hover { border-color: var(--border-hi); }
+    .style-card-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.25) brightness(0.65);
+      transition: filter 0.4s ease;
+    }
+    .style-card:hover .style-card-img { filter: saturate(0.4) brightness(0.8); }
+    .style-card-info {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .style-card-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .style-card-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--text-1);
+    }
+    .style-card-desc {
+      font-size: 11px;
+      color: var(--text-2);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* ─── COLLECTED SECTION ─── */
+    .collected-section {
+      padding: 80px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .collected-text {}
+    .collected-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-1);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-top: 6px;
+    }
+    .collected-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .collect-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.25s ease;
+    }
+    .collect-card:hover { border-color: var(--border-hi); }
+    .collect-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.2) brightness(0.6);
+      transition: filter 0.4s ease;
+    }
+    .collect-card:hover img { filter: saturate(0.45) brightness(0.8); }
+    .collect-card-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 10px 12px;
+      background: linear-gradient(to top, rgba(5,7,15,0.92), transparent);
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    /* ─── DESIGN SECTION ─── */
+    .design-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 80px 52px;
+    }
+    .design-header {
+      max-width: 560px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+    .design-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .design-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .design-card:hover { border-color: var(--border-hi); }
+    .design-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.3) brightness(0.7);
+      transition: filter 0.4s ease;
+    }
+    .design-card:hover .design-card-img { filter: saturate(0.55) brightness(0.85); }
+    .design-card-body {
+      padding: 20px 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .design-card-cat {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .design-card-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--text-1);
+      margin-bottom: 6px;
+    }
+    .design-card-desc {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-2);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ft-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+    }
+    .ft-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .ft-mark {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .ft-mark span { color: var(--blue); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 20px 24px; }
+      .page-header { padding: 120px 24px 60px; }
+      .sound-section { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+      .style-section { padding: 60px 24px; }
+      .style-grid { grid-template-columns: 1fr 1fr; }
+      .collected-section { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+      .design-section { padding: 60px 24px; }
+      .design-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      .page-header { padding: 100px 24px 48px; }
+      .style-grid { grid-template-columns: 1fr; }
+      .design-grid { grid-template-columns: 1fr; }
+      .collected-grid { grid-template-columns: 1fr 1fr; }
+      .records-row { grid-template-columns: repeat(3, 1fr); }
+      .collected-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
+  </nav>
+
+  <!-- ─── HEADER ─── -->
+  <div class="page-header">
+    <div class="ph-label a1">The Creative Chamber</div>
+    <h1 class="ph-title a2">Creative</h1>
+    <p class="ph-sub a3">Sound &nbsp;·&nbsp; Style &nbsp;·&nbsp; Collected &nbsp;·&nbsp; Designed</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SOUND -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-wrap">
+    <div class="sound-section reveal">
+      <div class="sound-img-wrap">
+        <img class="sound-img" src="https://placehold.co/800x600/090D18/243545?text=drums" alt="Drum kit" />
+        <div class="records-row">
+          <div class="record-card">
+            <img src="https://placehold.co/300x300/090D18/243545?text=01" alt="Record" />
+            <div class="record-label">John Coltrane — A Love Supreme</div>
+          </div>
+          <div class="record-card">
+            <img src="https://placehold.co/300x300/0C1220/243545?text=02" alt="Record" />
+            <div class="record-label">Madlib — Shades of Blue</div>
+          </div>
+          <div class="record-card">
+            <img src="https://placehold.co/300x300/101929/243545?text=03" alt="Record" />
+            <div class="record-label">J Dilla — Donuts</div>
+          </div>
+        </div>
+      </div>
+      <div class="sound-text">
+        <div class="sec-label">Senator of Sound — 01</div>
+        <h2 class="sec-title">Drums Before<br>Everything Else</h2>
+        <p class="sec-body">Rhythm is the framework that holds everything together. Before architecture, before strategy — the drum kit. Precision, timing, and the discipline to hold a structure while everything around you moves.</p>
+        <p class="sec-body">Record digging brought something different: patience, specificity, the hunt for something nobody else is playing. You don't find the right record by browsing — you find it by showing up to the crate every time. That persistence migrates everywhere.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- STYLE -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="style-section reveal">
+    <div class="style-header">
+      <div class="sec-label">Senator of the Archive — 05</div>
+      <h2 class="sec-title">The Vintage<br>Archive</h2>
+      <p class="sec-body">A 1994 Wings Starter jacket is a primary source document. Vintage is archaeology in fabric form — the things you choose to carry tell a story that biography can't.</p>
+    </div>
+    <div class="style-grid">
+      <div class="style-card">
+        <img class="style-card-img" src="https://placehold.co/600x800/090D18/243545?text=jacket" alt="1994 Wings Starter" />
+        <div class="style-card-info">
+          <div class="style-card-year">1994</div>
+          <div class="style-card-name">Wings Starter Jacket</div>
+          <div class="style-card-desc">Wool + leather. Found in a Detroit shop, 2019.</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <img class="style-card-img" src="https://placehold.co/600x800/0C1220/243545?text=tee" alt="Bad Boys Pistons" />
+        <div class="style-card-info">
+          <div class="style-card-year">1990</div>
+          <div class="style-card-name">Bad Boys Pistons</div>
+          <div class="style-card-desc">Champion tee. The dynasty era, full stop.</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <img class="style-card-img" src="https://placehold.co/600x800/101929/243545?text=cap" alt="Detroit snapback" />
+        <div class="style-card-info">
+          <div class="style-card-year">2003</div>
+          <div class="style-card-name">Detroit Tigers Snapback</div>
+          <div class="style-card-desc">Old English D. Never not relevant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- COLLECTED -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-wrap">
+    <div class="collected-section reveal">
+      <div class="collected-text">
+        <div class="sec-label">Senator of the Vault — 06</div>
+        <h2 class="sec-title">The<br>Collection</h2>
+        <p class="sec-body">The line between collecting and hoarding is a system — one has a thesis, one doesn't. Every collection here is built around documentation and ritual.</p>
+        <p class="sec-body">Star Wars Lego sets built and displayed with intent. Basketball cards sleeved the same day they're pulled. The process matters as much as the artifact.</p>
+        <div class="collected-stats">
+          <div class="stat-item">
+            <div class="stat-num">200+</div>
+            <div class="stat-label">Cards sleeved</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">12</div>
+            <div class="stat-label">Sets built</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">1</div>
+            <div class="stat-label">Rule: everything earns its place</div>
+          </div>
+        </div>
+      </div>
+      <div class="collected-grid">
+        <div class="collect-card">
+          <img src="https://placehold.co/400x400/090D18/243545?text=lego" alt="Lego set" />
+          <div class="collect-card-label">Millennium Falcon — UCS</div>
+        </div>
+        <div class="collect-card">
+          <img src="https://placehold.co/400x400/0C1220/243545?text=cards" alt="Basketball cards" />
+          <div class="collect-card-label">Giannis RC — PSA 9</div>
+        </div>
+        <div class="collect-card">
+          <img src="https://placehold.co/400x400/101929/243545?text=lego" alt="Lego set" />
+          <div class="collect-card-label">Death Star — UCS</div>
+        </div>
+        <div class="collect-card">
+          <img src="https://placehold.co/400x400/090D18/243545?text=cards" alt="Basketball cards" />
+          <div class="collect-card-label">Steph Curry RC — Gem Mint</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- DESIGN -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="design-section reveal">
+    <div class="design-header">
+      <div class="sec-label">Visual Work</div>
+      <h2 class="sec-title">Designed</h2>
+      <p class="sec-body" style="text-align:center;max-width:400px;margin:16px auto 0;">Interfaces, identities, and systems. The aesthetic discipline that runs through everything the chamber produces.</p>
+    </div>
+    <div class="design-grid">
+      <div class="design-card">
+        <img class="design-card-img" src="https://placehold.co/800x450/090D18/243545?text=project+01" alt="Project" />
+        <div class="design-card-body">
+          <div class="design-card-cat">UI Design</div>
+          <div class="design-card-name">thesenate.io</div>
+          <div class="design-card-desc">Identity and interface for the senate. Dark editorial, grain-forward, full senate metaphor.</div>
+        </div>
+      </div>
+      <div class="design-card">
+        <img class="design-card-img" src="https://placehold.co/800x450/0C1220/243545?text=project+02" alt="Project" />
+        <div class="design-card-body">
+          <div class="design-card-cat">Brand Identity</div>
+          <div class="design-card-name">Coming Soon</div>
+          <div class="design-card-desc">Next project in the archive. The vault is still deliberating.</div>
+        </div>
+      </div>
+      <div class="design-card">
+        <img class="design-card-img" src="https://placehold.co/800x450/101929/243545?text=project+03" alt="Project" />
+        <div class="design-card-body">
+          <div class="design-card-cat">System Design</div>
+          <div class="design-card-name">Coming Soon</div>
+          <div class="design-card-desc">Information architecture that ships. Blueprint first, pixels second.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-name">Grant Hansen</span>
+    <span class="ft-mark">THE<span>SENATE</span>.IO</span>
+  </footer>
+
+  <script>
+    // ─── STICKY NAV ───
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
+
+    // ─── SCROLL REVEAL ───
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('vis');
+        revealObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  </script>
+</body>
+</html>
