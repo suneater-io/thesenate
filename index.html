@@ -583,113 +583,162 @@
       font-weight: 400;
     }
 
-    .senators-grid {
+    /* ─── SENATOR SPLIT PANEL ─── */
+    .senators-panel {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .senator {
-      background: var(--surface-2);
-      padding: 44px 36px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s ease;
-      cursor: default;
+      grid-template-columns: 240px 1fr;
       border: 1px solid var(--border);
+      overflow: hidden;
+      margin-top: 48px;
+      min-height: 520px;
     }
-    .senator:hover { background: var(--surface-3); }
-    .senator::before {
+    .senators-menu {
+      border-right: 1px solid var(--border);
+      background: var(--surface-2);
+      display: flex;
+      flex-direction: column;
+    }
+    .sen-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 20px;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: none;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      position: relative;
+      transition: background 0.15s;
+    }
+    .sen-menu-item::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--blue), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity 0.2s;
     }
-    .senator:hover::before { transform: scaleX(1); }
+    .sen-menu-item.active,
+    .sen-menu-item:hover { background: var(--surface-3); }
+    .sen-menu-item.active::before { opacity: 1; }
+    .sen-menu-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--text-3);
+      letter-spacing: 0.1em;
+      width: 18px;
+      flex-shrink: 0;
+    }
+    .sen-menu-icon {
+      font-size: 15px;
+      color: var(--blue);
+      opacity: 0.5;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .sen-menu-item.active .sen-menu-icon,
+    .sen-menu-item:hover .sen-menu-icon { opacity: 1; }
+    .sen-menu-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .sen-menu-item.active .sen-menu-name,
+    .sen-menu-item:hover .sen-menu-name { color: var(--text-1); }
 
-    .senator-num {
+    /* Detail panel */
+    .senators-detail {
+      background: var(--surface);
+      padding: 48px 52px;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.18s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .senators-detail.fading {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    .sd-num {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
-      font-weight: 400;
+      color: var(--blue);
       letter-spacing: 0.18em;
-      color: var(--blue);
-      margin-bottom: 28px;
       opacity: 0.7;
-    }
-    .senator-icon {
-      font-size: 40px;
       margin-bottom: 20px;
-      display: block;
+    }
+    .sd-icon {
+      font-size: 44px;
       color: var(--blue);
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 16px;
       line-height: 1;
     }
-    .senator:hover .senator-icon { opacity: 1; }
-    .senator-name {
+    .sd-name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 34px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      font-size: 60px;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
       color: var(--text-1);
-      margin-bottom: 14px;
-      line-height: 1;
+      margin-bottom: 10px;
     }
-    .senator-title {
+    .sd-title {
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--blue);
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
-    .senator-desc {
-      font-size: 13px;
-      line-height: 1.75;
-      color: var(--text-2);
-    }
-    .senator-glow {
-      position: absolute;
-      bottom: -40px; right: -40px;
-      width: 180px; height: 180px;
-      background: radial-gradient(circle, rgba(74,130,255,0.06) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .senator:hover .senator-glow { opacity: 1; }
-
-    /* Featured (full-width) senator */
-    .senator-featured {
-      grid-column: span 3;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto auto auto;
-      column-gap: 64px;
-      align-items: start;
-    }
-    .senator-featured .senator-num { grid-column: 1; }
-    .senator-featured .senator-icon { grid-column: 1; width: 80px; height: 80px; }
-    .senator-featured .senator-name { grid-column: 1; font-size: 48px; }
-    .senator-featured .senator-title { grid-column: 1; }
-    .senator-featured .senator-desc {
-      grid-column: 2;
-      grid-row: 1 / span 4;
-      align-self: center;
-      font-size: 15px;
+    .sd-desc {
+      font-size: 14px;
       line-height: 1.8;
       color: var(--text-2);
-      border-left: 1px solid var(--border);
-      padding-left: 40px;
+      max-width: 520px;
+      margin-bottom: 24px;
     }
-    .senator-featured .senator-glow {
-      width: 300px; height: 300px;
-      bottom: -80px; right: -80px;
+    .sd-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 24px;
+    }
+    .sd-extended {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-2);
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+    .sd-connects {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .sd-connects-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .sd-chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
     }
 
     /* ─── WORK ─── */
@@ -1169,29 +1218,6 @@
       .nav-links { gap: 24px; }
       .sec { padding: 80px 24px; }
       #hero { padding: 100px 24px 80px; }
-      .senators-grid { grid-template-columns: repeat(2, 1fr); }
-      .senator-featured {
-        grid-column: span 1;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        column-gap: 0;
-      }
-      .senator-featured .senator-num,
-      .senator-featured .senator-icon,
-      .senator-featured .senator-name,
-      .senator-featured .senator-title { grid-column: 1; }
-      .senator-featured .senator-name { font-size: 36px; }
-      .senator-featured .senator-desc {
-        grid-column: 1;
-        grid-row: auto;
-        border-left: none;
-        padding-left: 0;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid var(--border);
-        font-size: 13px;
-      }
-      .senator-name { font-size: 26px; }
       .work-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 56px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -1201,102 +1227,16 @@
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
 
-    /* ─── SENATOR MODAL ─── */
-    .senator-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(5, 7, 15, 0.88);
-      backdrop-filter: blur(24px);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      padding: 24px;
+    /* ─── SENATOR PANEL MOBILE ─── */
+    @media (max-width: 760px) {
+      .senators-panel { grid-template-columns: 1fr; min-height: auto; }
+      .senators-menu { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .sen-menu-item { flex-direction: column; min-width: 72px; text-align: center; gap: 4px; padding: 12px 14px; border-bottom: none; border-right: 1px solid var(--border); }
+      .sen-menu-item::before { left: 0; right: 0; bottom: 0; top: auto; height: 2px; width: auto; }
+      .sen-menu-num { display: none; }
+      .senators-detail { padding: 32px 24px; }
+      .sd-name { font-size: 40px; }
     }
-    .senator-overlay.open { opacity: 1; pointer-events: all; }
-    .senator-modal {
-      background: var(--surface-2);
-      border: 1px solid var(--border-hi);
-      padding: 52px;
-      max-width: 600px;
-      width: 100%;
-      position: relative;
-      transform: translateY(20px);
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .senator-overlay.open .senator-modal { transform: translateY(0); }
-    .senator-modal-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: var(--blue);
-      letter-spacing: 0.18em;
-      opacity: 0.7;
-      margin-bottom: 16px;
-    }
-    .senator-modal-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 56px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 0.92;
-      color: var(--text-1);
-      margin-bottom: 8px;
-    }
-    .senator-modal-title {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 28px;
-    }
-    .senator-modal-body {
-      font-size: 14px;
-      line-height: 1.85;
-      color: var(--text-2);
-      margin-bottom: 32px;
-      border-top: 1px solid var(--border);
-      padding-top: 28px;
-    }
-    .senator-modal-connects {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-    .senator-modal-connects-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-3);
-    }
-    .senator-connect-chip {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--blue);
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-    }
-    .senator-modal-close {
-      position: absolute;
-      top: 18px; right: 18px;
-      width: 30px; height: 30px;
-      display: flex; align-items: center; justify-content: center;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--text-3);
-      cursor: pointer;
-      font-size: 14px;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-    .senator-modal-close:hover { border-color: var(--blue); color: var(--text-1); }
 
     /* ─── VALHALLA EASTER EGG ─── */
     .valhalla-overlay {
@@ -1363,9 +1303,6 @@
       .nav-drawer { display: flex; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       .stack-grid { grid-template-columns: 1fr 1fr; }
-      .senators-grid { grid-template-columns: 1fr; }
-      .senator { padding: 32px 24px; }
-      .senator-name { font-size: 24px; }
       .sec-title { letter-spacing: 0; }
     }
   </style>
@@ -1456,104 +1393,9 @@
       <span class="chamber-status-text"><strong>09 Senators</strong> — Always in session</span>
     </div>
 
-    <div class="senators-grid">
-
-      <!-- 01 Music -->
-      <div class="senator reveal">
-        <div class="senator-num">01 — Senator</div>
-        <i class="ph-bold ph-equalizer senator-icon"></i>
-        <div class="senator-name">Music</div>
-        <div class="senator-title">Senator of Sound</div>
-        <p class="senator-desc">
-          Playing drums, hunting records, standing in the crowd. Rhythm isn't just sound — it's a system. This senator sets the tempo for everything else.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 02 Detroit Sports -->
-      <div class="senator reveal">
-        <div class="senator-num">02 — Senator</div>
-        <i class="ph-bold ph-basketball senator-icon"></i>
-        <div class="senator-name">Detroit</div>
-        <div class="senator-title">Senator of the D</div>
-        <p class="senator-desc">
-          Wings. Lions. Tigers. Pistons. Detroit sports aren't just teams — they're identity. This senator votes for loyalty, grit, and patience. Always.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 03 Norse Mythology -->
-      <div class="senator reveal">
-        <div class="senator-num">03 — Senator</div>
-        <i class="ph-bold ph-lightning senator-icon"></i>
-        <div class="senator-name">Norse</div>
-        <div class="senator-title">Senator of the Nine Realms</div>
-        <p class="senator-desc">
-          Odin gave an eye. Hung from Yggdrasil for nine days. The Norse gods are flawed, doomed, and still show up — treating struggle and fate as truths to live with, not problems to solve.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 04 Counter-Strike -->
-      <div class="senator reveal">
-        <div class="senator-num">04 — Senator</div>
-        <i class="ph-bold ph-crosshair senator-icon"></i>
-        <div class="senator-name">Counter‑Strike</div>
-        <div class="senator-title">Senator of the Clutch</div>
-        <p class="senator-desc">
-          Economy management, map control, holding a corner alone with one bullet left. What CS teaches about composure under pressure carries into every high-stakes room.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 05 Vintage Sportswear -->
-      <div class="senator reveal">
-        <div class="senator-num">05 — Senator</div>
-        <i class="ph-bold ph-coat-hanger senator-icon"></i>
-        <div class="senator-name">Vintage</div>
-        <div class="senator-title">Senator of the Archive</div>
-        <p class="senator-desc">
-          Culture compressed into fabric. A 1994 Wings Starter jacket isn't just clothing — it's a primary source. This senator collects, curates, and understands that style is memory made wearable.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 06 Collector -->
-      <div class="senator reveal">
-        <div class="senator-num">06 — Senator</div>
-        <i class="ph-bold ph-stack senator-icon"></i>
-        <div class="senator-name">Collector</div>
-        <div class="senator-title">Senator of the Vault</div>
-        <p class="senator-desc">
-          Star Wars Lego sets built with intent, basketball cards pulled and sleeved the same day. Collecting isn't hoarding — it's curation. This senator knows the difference.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 07 AI & Technology -->
-      <div class="senator reveal">
-        <div class="senator-num">07 — Senator</div>
-        <i class="ph-bold ph-cpu senator-icon"></i>
-        <div class="senator-name">AI</div>
-        <div class="senator-title">Senator of the Future</div>
-        <p class="senator-desc">
-          The thing that changes everything — again. AI isn't just a tool; it's the new operating environment. This senator watches closely, experiments constantly, and keeps the chamber ahead of the curve.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
-      <!-- 08 Solution Architecture -->
-      <div class="senator reveal">
-        <div class="senator-num">08 — Presiding Senator</div>
-        <i class="ph-bold ph-blueprint senator-icon"></i>
-        <div class="senator-name">Architecture</div>
-        <div class="senator-title">Senator of Structure</div>
-        <p class="senator-desc">
-          The professional seat — the one that brings every other senator to order. Translating what a business actually needs into systems that work. When the chamber reaches a verdict, this senator turns it into a blueprint.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
+    <div class="senators-panel reveal">
+      <nav class="senators-menu" id="senators-menu" aria-label="Senators"></nav>
+      <div class="senators-detail" id="senators-detail"></div>
     </div>
   </section>
 
@@ -1951,51 +1793,65 @@
       }
     ];
 
-    const senatorCards = Array.from(document.querySelectorAll('.senator'));
+    // ─── SENATOR SPLIT PANEL ───
+    const SENATORS = [
+      { num:'01', label:'01 — Senator',           icon:'ph-equalizer',  name:'Music',          title:'Senator of Sound',           desc:'Playing drums, hunting records, standing in the crowd. Rhythm isn\'t just sound — it\'s a system. This senator sets the tempo for everything else.',                                                                                                              extended:'Rhythm is the original system. Drums taught me to hold a framework together under pressure — to keep time when everything else is off. That discipline shows up everywhere: pattern recognition, tempo, the instinct to listen before speaking.',                                                                                                       connects:['Counter-Strike','Architecture'] },
+      { num:'02', label:'02 — Senator',           icon:'ph-basketball', name:'Detroit',         title:'Senator of the D',           desc:'Wings. Lions. Tigers. Pistons. Detroit sports aren\'t just teams — they\'re identity. This senator votes for loyalty, grit, and patience. Always.',                                                                                                          extended:"Bleeding Detroit sports isn't about the wins. It's about showing up when it costs something. Wings fans in the 90s knew they had something. Lions fans know something different. Both teach the same thing: loyalty isn't conditional.",                                                                                                            connects:['Vintage','Architecture'] },
+      { num:'03', label:'03 — Senator',           icon:'ph-lightning',  name:'Norse',           title:'Senator of the Nine Realms', desc:'Odin gave an eye. Hung from Yggdrasil for nine days. The Norse gods are flawed, doomed, and still show up — treating struggle and fate as truths to live with, not problems to solve.',                                                                   extended:"The Norse didn't fear Ragnarök. They prepared for it, accepted it, and fought anyway. That's not nihilism — that's clarity. Nordic blood runs deep, and so does the mythology. When the outcome isn't guaranteed, you fight for the quality of the fight.",                                                                                        connects:['Architecture','Collector'] },
+      { num:'04', label:'04 — Senator',           icon:'ph-crosshair',  name:'Counter‑Strike',  title:'Senator of the Clutch',      desc:'Economy management, map control, holding a corner alone with one bullet left. What CS teaches about composure under pressure carries into every high-stakes room.',                                                                                           extended:'Economy management, map control, information warfare, composure with one bullet left — all in 90 seconds. The lessons in that game show up in every boardroom, every difficult client conversation, every moment where panic is not an option.',                                                                                                    connects:['Music','Architecture'] },
+      { num:'05', label:'05 — Senator',           icon:'ph-coat-hanger',name:'Vintage',         title:'Senator of the Archive',     desc:'Culture compressed into fabric. A 1994 Wings Starter jacket isn\'t just clothing — it\'s a primary source. This senator collects, curates, and understands that style is memory made wearable.',                                                          extended:'Culture compresses into objects. A 1994 Wings Starter jacket is a primary source document. What you choose to carry says more than what you say. This senator collects, curates, and knows that style is memory made wearable.',                                                                                                                    connects:['Detroit','Collector'] },
+      { num:'06', label:'06 — Senator',           icon:'ph-stack',      name:'Collector',       title:'Senator of the Vault',       desc:'Star Wars Lego sets built with intent, basketball cards pulled and sleeved the same day. Collecting isn\'t hoarding — it\'s curation. This senator knows the difference.',                                                                                  extended:"The Lego sets get built and displayed. The basketball cards get sleeved the same day they're pulled. Collecting is a discipline — the difference between hoarding and curating is intention. This senator knows what it's keeping and why.",                                                                                                         connects:['Norse','Vintage'] },
+      { num:'07', label:'07 — Senator',           icon:'ph-cpu',        name:'AI',              title:'Senator of the Future',      desc:'The thing that changes everything — again. AI isn\'t just a tool; it\'s the new operating environment. This senator watches closely, experiments constantly, and keeps the chamber ahead of the curve.',                                                    extended:"AI isn't a tool. It's the new operating environment. Every industry, every workflow, every assumption about how things get done is being renegotiated. This senator doesn't just watch — it experiments, adapts, and keeps the chamber running at the frontier.",                                                                                   connects:['Architecture','Counter-Strike'] },
+      { num:'08', label:'08 — Presiding Senator', icon:'ph-blueprint',  name:'Architecture',    title:'Senator of Structure',       desc:'The professional seat — the one that brings every other senator to order. Translating what a business actually needs into systems that work. When the chamber reaches a verdict, this senator turns it into a blueprint.',                                   extended:'The professional seat — the one that listens when the others debate and turns the verdict into something that works. It draws on the timing from Music, loyalty from Detroit, long-game from Norse, composure from Counter-Strike, curation from Vintage and Collector, frontier awareness from AI.',                                               connects:['Music','Detroit','Norse','Counter-Strike','Vintage','Collector','AI'] },
+    ];
 
+    const senMenu   = document.getElementById('senators-menu');
+    const senDetail = document.getElementById('senators-detail');
+    let activeIdx = 0;
 
-    // ─── SENATOR EXPAND MODAL ───
-    const senOverlay = document.createElement('div');
-    senOverlay.className = 'senator-overlay';
-    senOverlay.innerHTML = `
-      <div class="senator-modal">
-        <button class="senator-modal-close" aria-label="Close">✕</button>
-        <div class="senator-modal-num" id="modal-num"></div>
-        <div class="senator-modal-name" id="modal-name"></div>
-        <div class="senator-modal-title" id="modal-title"></div>
-        <p class="senator-modal-body" id="modal-body"></p>
-        <div class="senator-modal-connects">
-          <span class="senator-modal-connects-label">Connects to —</span>
-          <div id="modal-connects" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+    function renderMenu() {
+      senMenu.innerHTML = SENATORS.map((s, i) => `
+        <button class="sen-menu-item${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Senator ${s.name}">
+          <span class="sen-menu-num">${s.num}</span>
+          <i class="ph-bold ${s.icon} sen-menu-icon"></i>
+          <span class="sen-menu-name">${s.name}</span>
+        </button>
+      `).join('');
+      senMenu.querySelectorAll('.sen-menu-item').forEach(btn => {
+        btn.addEventListener('click', () => selectSenator(+btn.dataset.idx));
+      });
+    }
+
+    function renderDetail(idx) {
+      const s = SENATORS[idx];
+      senDetail.innerHTML = `
+        <div class="sd-num">${s.label}</div>
+        <i class="ph-bold ${s.icon} sd-icon"></i>
+        <div class="sd-name">${s.name}</div>
+        <div class="sd-title">${s.title}</div>
+        <p class="sd-desc">${s.desc}</p>
+        <div class="sd-divider"></div>
+        <p class="sd-extended">${s.extended}</p>
+        <div class="sd-connects">
+          <span class="sd-connects-label">Connects to —</span>
+          ${s.connects.map(c => `<span class="sd-chip">${c}</span>`).join('')}
         </div>
-      </div>
-    `;
-    document.body.appendChild(senOverlay);
-
-    function openSenatorModal(idx) {
-      const card = senatorCards[idx];
-      const data = SENATOR_DATA[idx];
-      document.getElementById('modal-num').textContent   = card.querySelector('.senator-num').textContent;
-      document.getElementById('modal-name').textContent  = card.querySelector('.senator-name').textContent;
-      document.getElementById('modal-title').textContent = card.querySelector('.senator-title').textContent;
-      document.getElementById('modal-body').textContent  = data.extended;
-      document.getElementById('modal-connects').innerHTML = data.connectNames
-        .map(n => `<span class="senator-connect-chip">${n}</span>`).join('');
-      senOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      `;
     }
 
-    function closeSenatorModal() {
-      senOverlay.classList.remove('open');
-      document.body.style.overflow = '';
+    function selectSenator(idx) {
+      if (idx === activeIdx) return;
+      activeIdx = idx;
+      senMenu.querySelectorAll('.sen-menu-item').forEach((b, i) => b.classList.toggle('active', i === idx));
+      senDetail.classList.add('fading');
+      setTimeout(() => {
+        renderDetail(idx);
+        senDetail.classList.remove('fading');
+      }, 180);
     }
 
-    senatorCards.forEach((card, i) => {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => openSenatorModal(i));
-    });
-    senOverlay.addEventListener('click', e => { if (e.target === senOverlay) closeSenatorModal(); });
-    senOverlay.querySelector('.senator-modal-close').addEventListener('click', closeSenatorModal);
+    renderMenu();
+    renderDetail(0);
 
     // ─── EASTER EGG: 9 CLICKS ON LOGO → HAVAMAL ───
     const valhalla = document.createElement('div');
