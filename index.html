@@ -532,9 +532,22 @@
       opacity: 0.6;
     }
 
+    /* Two-column chamber layout */
+    .chamber-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 80px;
+      align-items: start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .chamber-left {
+      position: sticky;
+      top: 100px;
+    }
+
     .chamber-intro {
-      max-width: 560px;
-      margin-bottom: 48px;
       position: relative;
       z-index: 2;
     }
@@ -543,7 +556,8 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      margin-bottom: 64px;
+      margin-bottom: 0;
+      margin-top: 36px;
       padding: 14px 20px;
       border: 1px solid var(--border);
       background: var(--surface-2);
@@ -589,7 +603,7 @@
       flex-direction: row;
       border: 1px solid var(--border);
       overflow: hidden;
-      margin-top: 48px;
+      margin-top: 0;
       min-height: 520px;
       position: relative;
       z-index: 2;
@@ -1227,6 +1241,8 @@
       .work-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 56px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .chamber-layout { grid-template-columns: 1fr; gap: 48px; }
+      .chamber-left { position: static; }
       .stack-intro { grid-template-columns: 1fr; gap: 24px; }
       .stack-grid { grid-template-columns: repeat(2, 1fr); }
       #contact { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
@@ -1322,7 +1338,6 @@
       <li><a href="#chamber">Chamber</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#thoughts">Thoughts</a></li>
-      <li><a href="#about">About</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1334,7 +1349,6 @@
     <a href="#chamber" class="drawer-link">Chamber</a>
     <a href="#work" class="drawer-link">Work</a>
     <a href="#thoughts" class="drawer-link">Thoughts</a>
-    <a href="#about" class="drawer-link">About</a>
   </div>
 
   <!-- ─── HERO ─── -->
@@ -1377,31 +1391,50 @@
   <section id="chamber" class="sec">
     <canvas id="chamber-canvas"></canvas>
 
-    <div class="chamber-intro reveal">
-      <div class="chamber-ornament">
-        <div class="chamber-ornament-line"></div>
-        <span>The Chamber</span>
-        <div class="chamber-ornament-line"></div>
-      </div>
-      <h2 class="sec-title">The <em>Senate</em> of the Mind</h2>
-      <p class="chamber-intro-text">
-        Most people have interests. I have a Senate. Every passion, habit, and obsession occupies a seat in the chamber — and they're always in session, cross-pollinating, debating, building on each other. That's how the mind works when everything is connected.
-      </p>
-      <div class="chamber-ornament chamber-ornament-bottom">
-        <div class="chamber-ornament-line"></div>
-        <span>IX · MMXXVI</span>
-        <div class="chamber-ornament-line"></div>
-      </div>
-    </div>
+    <div class="chamber-layout">
 
-    <div class="chamber-status reveal">
-      <div class="chamber-status-dot"></div>
-      <span class="chamber-status-text"><strong>09 Senators</strong> — Always in session</span>
-    </div>
+      <!-- Left: Identity + Manifesto -->
+      <div class="chamber-left reveal">
+        <div class="chamber-intro">
+          <div class="chamber-ornament">
+            <div class="chamber-ornament-line"></div>
+            <span>The Chamber</span>
+            <div class="chamber-ornament-line"></div>
+          </div>
+          <h2 class="sec-title">The <em>Senate</em> of the Mind</h2>
+          <p class="chamber-intro-text">
+            Most people have interests. I have a Senate. Every passion, habit, and obsession holds a seat — and they're always in session, cross-pollinating, debating, building on each other.
+          </p>
+        </div>
 
-    <div class="senators-panel reveal">
-      <div class="senators-menu" id="senators-menu" role="navigation" aria-label="Senators"></div>
-      <div class="senators-detail" id="senators-detail"></div>
+        <blockquote class="about-quote" style="margin-top:32px;">
+          The Senate isn't a metaphor. It's how I actually run.
+        </blockquote>
+        <p class="about-body">
+          The passions that look unrelated are usually the ones talking to each other the loudest. Music and architecture. Norse mythology and how to face uncertainty. Counter-Strike and composure under pressure. They're not separate interests. They're senators.
+        </p>
+        <p class="about-body">
+          thesenate.io exists to make that visible — to think in public, build in the open, and document the cross-pollination. Every section is a seat in the chamber.
+        </p>
+
+        <div class="chamber-status">
+          <div class="chamber-status-dot"></div>
+          <span class="chamber-status-text"><strong>08 Senators</strong> — Always in session</span>
+        </div>
+
+        <div class="chamber-ornament chamber-ornament-bottom" style="margin-top:32px;">
+          <div class="chamber-ornament-line"></div>
+          <span>IX · MMXXVI</span>
+          <div class="chamber-ornament-line"></div>
+        </div>
+      </div>
+
+      <!-- Right: Senator panel -->
+      <div class="senators-panel reveal">
+        <div class="senators-menu" id="senators-menu" role="navigation" aria-label="Senators"></div>
+        <div class="senators-detail" id="senators-detail"></div>
+      </div>
+
     </div>
   </section>
 
@@ -1480,21 +1513,6 @@
     </div>
   </section>
 
-  <!-- ─── ABOUT ─── -->
-  <section id="about" class="sec">
-    <div style="max-width:680px;">
-      <div class="sec-label reveal">About</div>
-      <blockquote class="about-quote reveal">
-        The Senate isn't a metaphor. It's how I actually run.
-      </blockquote>
-      <p class="about-body reveal">
-        Most people keep their interests separate — work in one box, hobbies in another, obsessions hidden entirely. That never made sense. The passions that look unrelated are usually the ones talking to each other the loudest. Music and architecture. Norse mythology and how to face uncertainty. Counter-Strike and composure under pressure. They're not separate interests. They're senators.
-      </p>
-      <p class="about-body reveal">
-        thesenate.io exists to make that visible. To think in public, build in the open, and document the cross-pollination. Every section of this site is a seat in the chamber — and they're always in session.
-      </p>
-    </div>
-  </section>
 
   <!-- ─── STACK ─── -->
   <section id="stack" class="sec">
@@ -1801,14 +1819,45 @@
 
     // ─── SENATOR SPLIT PANEL ───
     const SENATORS = [
-      { num:'01', label:'01 — Senator',           icon:'ph-equalizer',  name:'Music',          title:'Senator of Sound',           desc:'Playing drums, hunting records, standing in the crowd. Rhythm isn\'t just sound — it\'s a system. This senator sets the tempo for everything else.',                                                                                                              extended:'Rhythm is the original system. Drums taught me to hold a framework together under pressure — to keep time when everything else is off. That discipline shows up everywhere: pattern recognition, tempo, the instinct to listen before speaking.',                                                                                                       connects:['Counter-Strike','Architecture'] },
-      { num:'02', label:'02 — Senator',           icon:'ph-basketball', name:'Detroit',         title:'Senator of the D',           desc:'Wings. Lions. Tigers. Pistons. Detroit sports aren\'t just teams — they\'re identity. This senator votes for loyalty, grit, and patience. Always.',                                                                                                          extended:"Bleeding Detroit sports isn't about the wins. It's about showing up when it costs something. Wings fans in the 90s knew they had something. Lions fans know something different. Both teach the same thing: loyalty isn't conditional.",                                                                                                            connects:['Vintage','Architecture'] },
-      { num:'03', label:'03 — Senator',           icon:'ph-lightning',  name:'Norse',           title:'Senator of the Nine Realms', desc:'Odin gave an eye. Hung from Yggdrasil for nine days. The Norse gods are flawed, doomed, and still show up — treating struggle and fate as truths to live with, not problems to solve.',                                                                   extended:"The Norse didn't fear Ragnarök. They prepared for it, accepted it, and fought anyway. That's not nihilism — that's clarity. Nordic blood runs deep, and so does the mythology. When the outcome isn't guaranteed, you fight for the quality of the fight.",                                                                                        connects:['Architecture','Collector'] },
-      { num:'04', label:'04 — Senator',           icon:'ph-crosshair',  name:'Counter‑Strike',  title:'Senator of the Clutch',      desc:'Economy management, map control, holding a corner alone with one bullet left. What CS teaches about composure under pressure carries into every high-stakes room.',                                                                                           extended:'Economy management, map control, information warfare, composure with one bullet left — all in 90 seconds. The lessons in that game show up in every boardroom, every difficult client conversation, every moment where panic is not an option.',                                                                                                    connects:['Music','Architecture'] },
-      { num:'05', label:'05 — Senator',           icon:'ph-coat-hanger',name:'Vintage',         title:'Senator of the Archive',     desc:'Culture compressed into fabric. A 1994 Wings Starter jacket isn\'t just clothing — it\'s a primary source. This senator collects, curates, and understands that style is memory made wearable.',                                                          extended:'Culture compresses into objects. A 1994 Wings Starter jacket is a primary source document. What you choose to carry says more than what you say. This senator collects, curates, and knows that style is memory made wearable.',                                                                                                                    connects:['Detroit','Collector'] },
-      { num:'06', label:'06 — Senator',           icon:'ph-stack',      name:'Collector',       title:'Senator of the Vault',       desc:'Star Wars Lego sets built with intent, basketball cards pulled and sleeved the same day. Collecting isn\'t hoarding — it\'s curation. This senator knows the difference.',                                                                                  extended:"The Lego sets get built and displayed. The basketball cards get sleeved the same day they're pulled. Collecting is a discipline — the difference between hoarding and curating is intention. This senator knows what it's keeping and why.",                                                                                                         connects:['Norse','Vintage'] },
-      { num:'07', label:'07 — Senator',           icon:'ph-cpu',        name:'AI',              title:'Senator of the Future',      desc:'The thing that changes everything — again. AI isn\'t just a tool; it\'s the new operating environment. This senator watches closely, experiments constantly, and keeps the chamber ahead of the curve.',                                                    extended:"AI isn't a tool. It's the new operating environment. Every industry, every workflow, every assumption about how things get done is being renegotiated. This senator doesn't just watch — it experiments, adapts, and keeps the chamber running at the frontier.",                                                                                   connects:['Architecture','Counter-Strike'] },
-      { num:'08', label:'08 — Presiding Senator', icon:'ph-blueprint',  name:'Architecture',    title:'Senator of Structure',       desc:'The professional seat — the one that brings every other senator to order. Translating what a business actually needs into systems that work. When the chamber reaches a verdict, this senator turns it into a blueprint.',                                   extended:'The professional seat — the one that listens when the others debate and turns the verdict into something that works. It draws on the timing from Music, loyalty from Detroit, long-game from Norse, composure from Counter-Strike, curation from Vintage and Collector, frontier awareness from AI.',                                               connects:['Music','Detroit','Norse','Counter-Strike','Vintage','Collector','AI'] },
+      { num:'01', label:'01 — Senator',           icon:'ph-equalizer',  name:'Music',          title:'Senator of Sound',
+        desc:'Drums before everything else. The instrument that demands precision, timing, and the discipline to hold a framework together while everything around you moves. Music isn\'t background — it\'s the metronome the rest of this runs on.',
+        extended:'Record digging brought something different: patience, specificity, the hunt for something nobody else is playing. You don\'t find the right record by browsing — you find it by showing up to the crate every time. That persistence migrates everywhere.',
+        connects:['Counter-Strike','Architecture'] },
+
+      { num:'02', label:'02 — Senator',           icon:'ph-basketball', name:'Detroit',         title:'Senator of the D',
+        desc:'Wings. Lions. Tigers. Pistons. Following Detroit sports through losing seasons as much as winning ones teaches something you can\'t learn from a dynasty fan: loyalty that isn\'t conditional on results.',
+        extended:'There\'s a specific discipline in being a Detroit fan in 2004. You show up to the Joe in October the same way you showed up in \'97. The city teaches that identity doesn\'t track with the standings — and that what you stay loyal to when it costs you something is the only loyalty that actually counts.',
+        connects:['Vintage','Architecture'] },
+
+      { num:'03', label:'03 — Senator',           icon:'ph-lightning',  name:'Norse',           title:'Senator of the Nine Realms',
+        desc:'Odin traded an eye for wisdom and hung from Yggdrasil for nine days to earn knowledge. The Norse myths aren\'t dramatic — they\'re a framework for understanding what things actually cost, and accepting the answer before you proceed.',
+        extended:'The Eddas read less like religion and more like a manual for high-stakes decision-making. Ragnarök is coming — the gods know it and fight anyway. Not to win, but because how you meet the outcome is the only thing that belongs entirely to you. Nordic blood, long game.',
+        connects:['Architecture','Collector'] },
+
+      { num:'04', label:'04 — Senator',           icon:'ph-crosshair',  name:'Counter‑Strike',  title:'Senator of the Clutch',
+        desc:'Sixteen rounds, five players, incomplete information, and stakes that reset every 90 seconds. CS compresses every difficult boardroom situation into a game — economy management, map control, and decisions under time pressure with no room for panic.',
+        extended:'The real lesson isn\'t tactical — it\'s psychological. A 1v3 defuse with one bullet left: panic is the only thing that finishes you before the enemy does. Staying locked in when the model says you\'re losing is a skill that migrates directly off-screen.',
+        connects:['Music','Architecture'] },
+
+      { num:'05', label:'05 — Senator',           icon:'ph-coat-hanger',name:'Vintage',         title:'Senator of the Archive',
+        desc:'A 1994 Wings Starter jacket is a primary source document. Vintage is archaeology in fabric form — the things you choose to carry tell a story that biography can\'t, and say more about who you are than what you say out loud.',
+        extended:'The curation instinct runs through every senator, but Vintage is where it\'s most visible. Each piece either earns its place in the archive or it doesn\'t. No volume, no trend-chasing — just objects that carry weight and connect to a city, a year, a moment worth remembering.',
+        connects:['Detroit','Collector'] },
+
+      { num:'06', label:'06 — Senator',           icon:'ph-stack',      name:'Collector',       title:'Senator of the Vault',
+        desc:'Star Wars Lego sets built and displayed with intent. Basketball cards sleeved the same day they\'re pulled. The line between collecting and hoarding is a system — one has a thesis, one doesn\'t.',
+        extended:'Every collection here is built around documentation and ritual: the process matters as much as the artifact. The set gets built because building it is the point. The cards get graded because care compounds. Collecting is a long game, and patience isn\'t a workaround — it\'s the strategy.',
+        connects:['Norse','Vintage'] },
+
+      { num:'07', label:'07 — Senator',           icon:'ph-cpu',        name:'AI',              title:'Senator of the Future',
+        desc:'Not a trend to monitor — a fundamental shift in what\'s possible. Every assumption about how work gets done is being renegotiated right now, and waiting for consensus means arriving after the decisions were already made.',
+        extended:'The chamber experiments, breaks things, and rebuilds faster than anyone watching from the sidelines. The question isn\'t whether AI changes the operation — it already has. The question is whether you\'re early enough to shape how it does. This senator doesn\'t wait for the industry to catch up.',
+        connects:['Architecture','Counter-Strike'] },
+
+      { num:'08', label:'08 — Presiding Senator', icon:'ph-blueprint',  name:'Architecture',    title:'Senator of Structure',
+        desc:'When the senate reaches a verdict, Architecture is the one that turns it into something that ships. The professional seat — translating what a business actually needs into systems that work, and knowing the difference between the two.',
+        extended:'Every other senator feeds this one: the timing from Music, the loyalty from Detroit, the long-game from Norse, the composure from Counter-Strike, the curation from Vintage and Collector, the frontier awareness from AI. Architecture is where all of that becomes a blueprint — and then a result.',
+        connects:['Music','Detroit','Norse','Counter-Strike','Vintage','Collector','AI'] },
     ];
 
     const senMenu   = document.getElementById('senators-menu');
