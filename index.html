@@ -673,37 +673,36 @@
       flex: 1;
       min-width: 0;
       background: var(--surface);
-      padding: 48px 52px;
+      padding: 0;
       position: relative;
       overflow: hidden;
       display: flex;
-      gap: 40px;
-      align-items: flex-start;
+      align-items: stretch;
       transition: opacity 0.18s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
     }
     .sd-content {
       flex: 1;
       min-width: 0;
+      padding: 48px 40px 48px 52px;
     }
     .sd-image {
-      width: 160px;
+      width: 180px;
       flex-shrink: 0;
+      align-self: stretch;
     }
-    .sd-image img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-      border: 1px solid var(--border);
-    }
+    .sd-image img,
     .sd-image-placeholder {
       width: 100%;
-      aspect-ratio: 2/3;
+      height: 100%;
+      display: block;
+    }
+    .sd-image img {
+      object-fit: cover;
+      border-left: 1px solid var(--border);
+    }
+    .sd-image-placeholder {
       background: var(--surface-3);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-left: 1px solid var(--border);
     }
     .senators-detail.fading {
       opacity: 0;
@@ -1274,7 +1273,8 @@
     @media (max-width: 760px) {
       .senators-panel { flex-direction: column; min-height: auto; }
       .senators-menu { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
-      .sen-menu-item { flex-direction: column; min-width: 72px; text-align: center; gap: 4px; padding: 12px 14px; border-bottom: none; border-right: 1px solid var(--border); }
+      .sen-menu-item { flex-direction: column; min-width: 64px; text-align: center; gap: 3px; padding: 10px 10px; border-bottom: none; border-right: 1px solid var(--border); }
+      .sen-menu-name { font-size: 9px; letter-spacing: 0.06em; }
       .sen-menu-item::before { left: 0; right: 0; bottom: 0; top: auto; height: 2px; width: auto; }
       .sen-menu-num { display: none; }
       .senators-detail { padding: 32px 24px; }
