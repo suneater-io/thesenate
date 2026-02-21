@@ -431,7 +431,7 @@
     <ul class="nav-links">
       <li><a href="/#chamber">Chamber</a></li>
       <li><a href="/#work">Work</a></li>
-      <li><a href="/blog/" class="active">Writing</a></li>
+      <li><a href="/blog/" class="active">Thoughts</a></li>
       <li><a href="/#about">About</a></li>
       <li><a href="/#contact">Contact</a></li>
     </ul>
@@ -444,7 +444,7 @@
   <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation">
     <a href="/#chamber" class="drawer-link">Chamber</a>
     <a href="/#work" class="drawer-link">Work</a>
-    <a href="/blog/" class="drawer-link">Writing</a>
+    <a href="/blog/" class="drawer-link">Thoughts</a>
     <a href="/#about" class="drawer-link">About</a>
     <a href="/#contact" class="drawer-link">Contact</a>
   </div>
@@ -546,7 +546,7 @@
 
         app.innerHTML = `
           <div class="post-header" style="animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both">
-            <a href="/blog/" class="post-back">&larr; Writing</a>
+            <a href="/blog/" class="post-back">&larr; Thoughts</a>
             <div class="post-meta">
               ${meta.date ? `<span class="post-date">${formatDate(meta.date)}</span>` : ''}
               ${tags.length ? `<div class="post-tags">${tagsHtml}</div>` : ''}
@@ -567,7 +567,7 @@
         <div class="post-error">
           <div class="post-error-code">${code}</div>
           <div class="post-error-msg">${message}</div>
-          <a href="/blog/" class="post-error-back">&larr; Back to Writing</a>
+          <a href="/blog/" class="post-error-back">&larr; Back to Thoughts</a>
         </div>
       `;
     }

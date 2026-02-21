@@ -810,6 +810,89 @@
       color: var(--blue);
     }
 
+    /* ─── THOUGHTS ─── */
+    #thoughts { border-top: 1px solid var(--border); }
+    .thoughts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .thought-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .thought-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--blue-dim) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .thought-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .thought-card:hover::before { opacity: 1; }
+    .thought-card-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+    .thought-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-1);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    .thought-card-excerpt {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .thought-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .thought-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid var(--blue-glow);
+      border-radius: 3px;
+      padding: 2px 7px;
+    }
+    .thoughts-cta {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .thoughts-empty {
+      color: var(--text-3);
+      font-size: 14px;
+      font-family: 'Space Mono', monospace;
+      margin-top: 48px;
+    }
+    @media (max-width: 960px) {
+      .thoughts-grid { grid-template-columns: 1fr; }
+    }
+
     /* ─── ABOUT ─── */
     #about { border-top: 1px solid var(--border); }
     .about-grid {
@@ -1294,7 +1377,7 @@
     <ul class="nav-links">
       <li><a href="#chamber">Chamber</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="/blog/">Writing</a></li>
+      <li><a href="#thoughts">Thoughts</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -1307,7 +1390,7 @@
   <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation">
     <a href="#chamber" class="drawer-link">Chamber</a>
     <a href="#work" class="drawer-link">Work</a>
-    <a href="/blog/" class="drawer-link">Writing</a>
+    <a href="#thoughts" class="drawer-link">Thoughts</a>
     <a href="#about" class="drawer-link">About</a>
     <a href="#contact" class="drawer-link">Contact</a>
   </div>
@@ -1474,18 +1557,6 @@
         <div class="senator-glow"></div>
       </div>
 
-      <!-- 09 Writing -->
-      <div class="senator reveal">
-        <div class="senator-num">09 — Senator</div>
-        <i class="ph-bold ph-pencil-line senator-icon"></i>
-        <div class="senator-name">Writing</div>
-        <div class="senator-title">Senator of the Record</div>
-        <p class="senator-desc">
-          The chamber's scribe. Thinking out loud, working things out in public. When an idea has been debated long enough, this senator files it — long-form, no shortcuts, no takeaways without the argument.
-        </p>
-        <div class="senator-glow"></div>
-      </div>
-
     </div>
   </section>
 
@@ -1539,6 +1610,28 @@
           <div class="wcard-desc">An opinionated design system focused on accessibility, systematic thinking, and zero compromise on aesthetics.</div>
         </div>
       </a>
+    </div>
+  </section>
+
+  <!-- ─── THOUGHTS ─── -->
+  <section id="thoughts" class="sec">
+    <div class="reveal">
+      <div class="sec-label">Thoughts</div>
+      <h2 class="sec-title">From the <em>Chamber</em></h2>
+      <p style="max-width:520px;color:var(--text-2);font-size:15px;line-height:1.7;margin-top:16px;">
+        When an idea has been debated long enough in the Senate, it earns the right to be written down. Long-form, no shortcuts, no takeaways without the argument.
+      </p>
+    </div>
+    <div class="thoughts-grid" id="thoughts-grid">
+      <!-- loaded by JS -->
+      <div class="thought-card" style="border-color:transparent;background:var(--surface-2);opacity:0.4;">
+        <div class="thought-card-date" style="background:var(--surface-3);height:10px;width:80px;border-radius:3px;"></div>
+        <div class="thought-card-title" style="background:var(--surface-3);height:20px;width:70%;border-radius:3px;"></div>
+        <div class="thought-card-excerpt" style="background:var(--surface-3);height:60px;border-radius:3px;"></div>
+      </div>
+    </div>
+    <div class="thoughts-cta reveal">
+      <a href="/blog/" class="btn btn-outline">Read all thoughts</a>
     </div>
   </section>
 
@@ -1859,6 +1952,29 @@
       tick();
     })();
 
+    // ─── THOUGHTS FEED ───
+    (async function () {
+      const grid = document.getElementById('thoughts-grid');
+      if (!grid) return;
+      try {
+        const res = await fetch('/posts/index.json');
+        const { posts } = await res.json();
+        const recent = posts.slice(0, 3);
+        grid.innerHTML = recent.map(p => `
+          <a href="/blog/post.html?slug=${p.slug}" class="thought-card reveal">
+            <div class="thought-card-date">${p.date}</div>
+            <div class="thought-card-title">${p.title}</div>
+            <p class="thought-card-excerpt">${p.excerpt}</p>
+            <div class="thought-card-tags">${(p.tags || []).map(t => `<span class="thought-tag">${t}</span>`).join('')}</div>
+          </a>
+        `).join('');
+        // re-run reveal observer on new cards
+        grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+      } catch {
+        grid.innerHTML = '<p class="thoughts-empty">No thoughts filed yet.</p>';
+      }
+    })();
+
     // ─── SENATOR DATA ───
     const SENATOR_DATA = [
       {
@@ -1890,12 +2006,8 @@
         connects: [7, 3], connectNames: ['Architecture', 'Counter-Strike']
       },
       {
-        extended: 'The professional seat — the one that listens when the others debate and turns the verdict into something that works. It draws on the timing from Music, loyalty from Detroit, long-game from Norse, composure from Counter-Strike, curation from Vintage and Collector, frontier awareness from AI, and the clarity that comes from Writing.',
-        connects: [0, 1, 2, 3, 4, 5, 6, 8], connectNames: ['Music', 'Detroit', 'Norse', 'Counter-Strike', 'Vintage', 'Collector', 'AI', 'Writing']
-      },
-      {
-        extended: "Writing is how the Senate thinks in public. When an idea won't leave the chamber — when it's been turned over, tested, and sharpened — it earns the right to be written down. This seat connects to everything, because nothing gets written until the other senators have had their say.",
-        connects: [7, 6], connectNames: ['Architecture', 'AI']
+        extended: 'The professional seat — the one that listens when the others debate and turns the verdict into something that works. It draws on the timing from Music, loyalty from Detroit, long-game from Norse, composure from Counter-Strike, curation from Vintage and Collector, frontier awareness from AI.',
+        connects: [0, 1, 2, 3, 4, 5, 6], connectNames: ['Music', 'Detroit', 'Norse', 'Counter-Strike', 'Vintage', 'Collector', 'AI']
       }
     ];
 
