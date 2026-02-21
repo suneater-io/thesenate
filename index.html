@@ -548,34 +548,6 @@
       padding-top: 4px;
     }
 
-    /* Chamber footer: quote left, meta right */
-    .chamber-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      position: relative;
-      z-index: 2;
-    }
-    .chamber-footer-quote {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(16px, 1.6vw, 22px);
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text-1);
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-    }
-    .chamber-footer-meta {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      flex-shrink: 0;
-    }
-
     .chamber-status {
       display: flex;
       align-items: center;
@@ -704,7 +676,34 @@
       padding: 48px 52px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
       transition: opacity 0.18s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .sd-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .sd-image {
+      width: 160px;
+      flex-shrink: 0;
+    }
+    .sd-image img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .sd-image-placeholder {
+      width: 100%;
+      aspect-ratio: 2/3;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .senators-detail.fading {
       opacity: 0;
@@ -748,7 +747,6 @@
       font-size: 14px;
       line-height: 1.8;
       color: var(--text-2);
-      max-width: 520px;
       margin-bottom: 24px;
     }
     .sd-divider {
@@ -760,7 +758,6 @@
       font-size: 14px;
       line-height: 1.85;
       color: var(--text-2);
-      max-width: 520px;
       margin-bottom: 36px;
     }
     .sd-connects {
@@ -1267,7 +1264,6 @@
       .about-grid { grid-template-columns: 1fr; gap: 56px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       .chamber-header { grid-template-columns: 1fr; gap: 24px; }
-      .chamber-footer { flex-direction: column; align-items: flex-start; gap: 24px; }
       .stack-intro { grid-template-columns: 1fr; gap: 24px; }
       .stack-grid { grid-template-columns: repeat(2, 1fr); }
       #contact { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
@@ -1282,6 +1278,7 @@
       .sen-menu-item::before { left: 0; right: 0; bottom: 0; top: auto; height: 2px; width: auto; }
       .sen-menu-num { display: none; }
       .senators-detail { padding: 32px 24px; }
+      .sd-image { display: none; }
       .sd-name { font-size: 40px; }
     }
 
@@ -1442,21 +1439,6 @@
       <div class="senators-detail" id="senators-detail"></div>
     </div>
 
-    <!-- Footer: quote left, meta right -->
-    <div class="chamber-footer reveal">
-      <span class="chamber-footer-quote">The Senate isn't a metaphor.<br>It's how I actually run.</span>
-      <div class="chamber-footer-meta">
-        <div class="chamber-status">
-          <div class="chamber-status-dot"></div>
-          <span class="chamber-status-text"><strong>08 Senators</strong> — Always in session</span>
-        </div>
-        <div class="chamber-ornament" style="margin:0;width:140px;">
-          <div class="chamber-ornament-line"></div>
-          <span>IX · MMXXVI</span>
-          <div class="chamber-ornament-line"></div>
-        </div>
-      </div>
-    </div>
 
   </section>
 
@@ -1844,42 +1826,42 @@
       { num:'01', label:'01 — Senator',           icon:'ph-equalizer',  name:'Music',          title:'Senator of Sound',
         desc:'Drums before everything else. The instrument that demands precision, timing, and the discipline to hold a framework together while everything around you moves. Music isn\'t background — it\'s the metronome the rest of this runs on.',
         extended:'Record digging brought something different: patience, specificity, the hunt for something nobody else is playing. You don\'t find the right record by browsing — you find it by showing up to the crate every time. That persistence migrates everywhere.',
-        connects:['Counter-Strike','Architecture'] },
+        img: null, connects:['Counter-Strike','Architecture'] },
 
       { num:'02', label:'02 — Senator',           icon:'ph-basketball', name:'Detroit',         title:'Senator of the D',
         desc:'Wings. Lions. Tigers. Pistons. Following Detroit sports through losing seasons as much as winning ones teaches something you can\'t learn from a dynasty fan: loyalty that isn\'t conditional on results.',
         extended:'There\'s a specific discipline in being a Detroit fan in 2004. You show up to the Joe in October the same way you showed up in \'97. The city teaches that identity doesn\'t track with the standings — and that what you stay loyal to when it costs you something is the only loyalty that actually counts.',
-        connects:['Vintage','Architecture'] },
+        img: null, connects:['Vintage','Architecture'] },
 
       { num:'03', label:'03 — Senator',           icon:'ph-lightning',  name:'Norse',           title:'Senator of the Nine Realms',
         desc:'Odin traded an eye for wisdom and hung from Yggdrasil for nine days to earn knowledge. The Norse myths aren\'t dramatic — they\'re a framework for understanding what things actually cost, and accepting the answer before you proceed.',
         extended:'The Eddas read less like religion and more like a manual for high-stakes decision-making. Ragnarök is coming — the gods know it and fight anyway. Not to win, but because how you meet the outcome is the only thing that belongs entirely to you. Nordic blood, long game.',
-        connects:['Architecture','Collector'] },
+        img: null, connects:['Architecture','Collector'] },
 
       { num:'04', label:'04 — Senator',           icon:'ph-crosshair',  name:'Counter‑Strike',  title:'Senator of the Clutch',
         desc:'Sixteen rounds, five players, incomplete information, and stakes that reset every 90 seconds. CS compresses every difficult boardroom situation into a game — economy management, map control, and decisions under time pressure with no room for panic.',
         extended:'The real lesson isn\'t tactical — it\'s psychological. A 1v3 defuse with one bullet left: panic is the only thing that finishes you before the enemy does. Staying locked in when the model says you\'re losing is a skill that migrates directly off-screen.',
-        connects:['Music','Architecture'] },
+        img: null, connects:['Music','Architecture'] },
 
       { num:'05', label:'05 — Senator',           icon:'ph-coat-hanger',name:'Vintage',         title:'Senator of the Archive',
         desc:'A 1994 Wings Starter jacket is a primary source document. Vintage is archaeology in fabric form — the things you choose to carry tell a story that biography can\'t, and say more about who you are than what you say out loud.',
         extended:'The curation instinct runs through every senator, but Vintage is where it\'s most visible. Each piece either earns its place in the archive or it doesn\'t. No volume, no trend-chasing — just objects that carry weight and connect to a city, a year, a moment worth remembering.',
-        connects:['Detroit','Collector'] },
+        img: null, connects:['Detroit','Collector'] },
 
       { num:'06', label:'06 — Senator',           icon:'ph-stack',      name:'Collector',       title:'Senator of the Vault',
         desc:'Star Wars Lego sets built and displayed with intent. Basketball cards sleeved the same day they\'re pulled. The line between collecting and hoarding is a system — one has a thesis, one doesn\'t.',
         extended:'Every collection here is built around documentation and ritual: the process matters as much as the artifact. The set gets built because building it is the point. The cards get graded because care compounds. Collecting is a long game, and patience isn\'t a workaround — it\'s the strategy.',
-        connects:['Norse','Vintage'] },
+        img: null, connects:['Norse','Vintage'] },
 
       { num:'07', label:'07 — Senator',           icon:'ph-cpu',        name:'AI',              title:'Senator of the Future',
         desc:'Not a trend to monitor — a fundamental shift in what\'s possible. Every assumption about how work gets done is being renegotiated right now, and waiting for consensus means arriving after the decisions were already made.',
         extended:'The chamber experiments, breaks things, and rebuilds faster than anyone watching from the sidelines. The question isn\'t whether AI changes the operation — it already has. The question is whether you\'re early enough to shape how it does. This senator doesn\'t wait for the industry to catch up.',
-        connects:['Architecture','Counter-Strike'] },
+        img: null, connects:['Architecture','Counter-Strike'] },
 
       { num:'08', label:'08 — Presiding Senator', icon:'ph-blueprint',  name:'Architecture',    title:'Senator of Structure',
         desc:'When the senate reaches a verdict, Architecture is the one that turns it into something that ships. The professional seat — translating what a business actually needs into systems that work, and knowing the difference between the two.',
         extended:'Every other senator feeds this one: the timing from Music, the loyalty from Detroit, the long-game from Norse, the composure from Counter-Strike, the curation from Vintage and Collector, the frontier awareness from AI. Architecture is where all of that becomes a blueprint — and then a result.',
-        connects:['Music','Detroit','Norse','Counter-Strike','Vintage','Collector','AI'] },
+        img: null, connects:['Music','Detroit','Norse','Counter-Strike','Vintage','Collector','AI'] },
     ];
 
     const senMenu   = document.getElementById('senators-menu');
@@ -1902,16 +1884,23 @@
     function renderDetail(idx) {
       const s = SENATORS[idx];
       senDetail.innerHTML = `
-        <div class="sd-num">${s.label}</div>
-        <i class="ph-bold ${s.icon} sd-icon"></i>
-        <div class="sd-name">${s.name}</div>
-        <div class="sd-title">${s.title}</div>
-        <p class="sd-desc">${s.desc}</p>
-        <div class="sd-divider"></div>
-        <p class="sd-extended">${s.extended}</p>
-        <div class="sd-connects">
-          <span class="sd-connects-label">Connects to —</span>
-          ${s.connects.map(c => `<span class="sd-chip">${c}</span>`).join('')}
+        <div class="sd-content">
+          <div class="sd-num">${s.label}</div>
+          <i class="ph-bold ${s.icon} sd-icon"></i>
+          <div class="sd-name">${s.name}</div>
+          <div class="sd-title">${s.title}</div>
+          <p class="sd-desc">${s.desc}</p>
+          <div class="sd-divider"></div>
+          <p class="sd-extended">${s.extended}</p>
+          <div class="sd-connects">
+            <span class="sd-connects-label">Connects to —</span>
+            ${s.connects.map(c => `<span class="sd-chip">${c}</span>`).join('')}
+          </div>
+        </div>
+        <div class="sd-image">
+          ${s.img
+            ? `<img src="${s.img}" alt="${s.name}">`
+            : `<div class="sd-image-placeholder"></div>`}
         </div>
       `;
     }
