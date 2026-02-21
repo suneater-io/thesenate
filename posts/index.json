@@ -6,6 +6,27 @@
       "date": "2026-02-20",
       "tags": ["Meta", "Writing"],
       "excerpt": "Why I built this site, what the Senate actually means, and why I finally started writing."
+    },
+    {
+      "slug": "the-economy-round",
+      "title": "The Economy Round",
+      "date": "2026-02-18",
+      "tags": ["Counter-Strike", "Strategy", "Decision-Making"],
+      "excerpt": "What CS taught me about resource management, when to spend, and why the round after a loss is the most important one you'll play."
+    },
+    {
+      "slug": "what-detroit-taught-me",
+      "title": "What Detroit Taught Me About Losing",
+      "date": "2026-02-14",
+      "tags": ["Detroit", "Sports", "Identity"],
+      "excerpt": "Thirty years of Lions football is not a tragedy. It's a masterclass in unconditional loyalty — and what it means to show up when it costs you something."
+    },
+    {
+      "slug": "prompts-are-architecture",
+      "title": "Prompts Are Architecture",
+      "date": "2026-02-10",
+      "tags": ["AI", "Architecture", "Systems"],
+      "excerpt": "The way you structure a prompt is the same problem as the way you structure a system. Bad architecture produces bad output regardless of how good the underlying technology is."
     }
   ]
 }
