@@ -498,31 +498,45 @@
       background: linear-gradient(to right, transparent, var(--blue-glow), transparent);
     }
 
+    /* Chamber snow canvas */
+    #chamber-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Black metal header ornaments */
+    .chamber-ornament {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+    .chamber-ornament-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--text-3) 40%, transparent);
+    }
+    .chamber-ornament-bottom {
+      margin-top: 20px;
+      margin-bottom: 0;
+      color: var(--text-3);
+      opacity: 0.6;
+    }
+
     .chamber-intro {
       max-width: 560px;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
       position: relative;
       z-index: 2;
-    }
-    .chamber-photo {
-      position: absolute;
-      top: 0; right: 0; bottom: 0;
-      width: 52%;
-      background: url('images/source5.png') center 40% / cover no-repeat;
-      filter: brightness(0.28) saturate(0.4);
-      mask-image: linear-gradient(to right,
-        transparent 0%,
-        rgba(0,0,0,0.2) 18%,
-        rgba(0,0,0,0.7) 42%,
-        black 65%
-      );
-      -webkit-mask-image: linear-gradient(to right,
-        transparent 0%,
-        rgba(0,0,0,0.2) 18%,
-        rgba(0,0,0,0.7) 42%,
-        black 65%
-      );
-      pointer-events: none;
     }
 
     .chamber-status {
@@ -1072,7 +1086,6 @@
       .nav-links { gap: 24px; }
       .sec { padding: 80px 24px; }
       #hero { padding: 100px 24px 80px; }
-      .chamber-photo { display: none; }
       .senators-grid { grid-template-columns: 1fr; }
       .senator-featured {
         grid-column: span 1;
@@ -1339,14 +1352,23 @@
 
   <!-- ─── THE CHAMBER ─── -->
   <section id="chamber" class="sec">
-    <div class="chamber-photo"></div>
+    <canvas id="chamber-canvas"></canvas>
 
     <div class="chamber-intro reveal">
-      <div class="sec-label">The Chamber</div>
+      <div class="chamber-ornament">
+        <div class="chamber-ornament-line"></div>
+        <span>The Chamber</span>
+        <div class="chamber-ornament-line"></div>
+      </div>
       <h2 class="sec-title">The <em>Senate</em> of the Mind</h2>
       <p class="chamber-intro-text">
         Most people have interests. I have a Senate. Every passion, habit, and obsession occupies a seat in the chamber — and they're always in session, cross-pollinating, debating, building on each other. That's how the mind works when everything is connected.
       </p>
+      <div class="chamber-ornament chamber-ornament-bottom">
+        <div class="chamber-ornament-line"></div>
+        <span>IX · MMXXVI</span>
+        <div class="chamber-ornament-line"></div>
+      </div>
     </div>
 
     <div class="chamber-status reveal">
@@ -1773,6 +1795,64 @@
         const r = canvas.getBoundingClientRect();
         mouse.x = e.clientX - r.left;
         mouse.y = e.clientY - r.top;
+      }, { passive: true });
+
+      init();
+      tick();
+    })();
+
+    // ─── CHAMBER SNOW ───
+    (function () {
+      const canvas = document.getElementById('chamber-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const COUNT = 90;
+      let W, H, particles = [];
+
+      function resize() {
+        const sec = canvas.parentElement;
+        W = canvas.width  = sec.offsetWidth;
+        H = canvas.height = sec.offsetHeight;
+      }
+
+      function mkFlake() {
+        const layer = Math.random();
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vy: 0.12 + layer * 0.35,
+          vx: (Math.random() - 0.5) * 0.1,
+          r:  0.2 + layer * 1.4,
+          o:  0.06 + layer * 0.28,
+          phase: Math.random() * Math.PI * 2,
+          freq:  0.003 + Math.random() * 0.005,
+        };
+      }
+
+      function init() { resize(); particles = Array.from({ length: COUNT }, mkFlake); }
+
+      let wind = 0;
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+        wind += 0.001;
+        for (const p of particles) {
+          p.phase += p.freq;
+          p.x += p.vx + Math.sin(p.phase + wind) * 0.2;
+          p.y += p.vy;
+          if (p.x < -4) p.x = W + 4;
+          if (p.x > W + 4) p.x = -4;
+          if (p.y > H + 6) { p.x = Math.random() * W; p.y = -6; }
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220, 238, 248, ${p.o})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+
+      window.addEventListener('resize', () => {
+        resize();
+        particles.forEach(p => { if (p.x > W) p.x = Math.random() * W; });
       }, { passive: true });
 
       init();
