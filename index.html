@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Senate — Grant Hansen</title>
+  <title>thesenate.io</title>
   <meta name="description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
 
   <!-- Favicon -->
@@ -1939,6 +1939,8 @@
         logoClicks = 0;
         valhalla.classList.add('open');
         document.body.style.overflow = 'hidden';
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
     valhalla.addEventListener('click', () => {
