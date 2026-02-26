@@ -421,26 +421,7 @@
       color: var(--text-2);
       transition: color 0.25s ease;
     }
-    .toc-dots {
-      flex: 1;
-      min-width: 0;
-      height: 1px;
-      margin: 0 14px;
-      background-image: radial-gradient(circle, rgba(120,175,210,0.3) 1px, transparent 1px);
-      background-size: 7px 1px;
-      background-repeat: repeat-x;
-      background-position: center;
-      align-self: center;
-    }
-    .toc-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      color: var(--text-3);
-      transition: color 0.25s ease;
-    }
     .toc-row:hover .toc-label { color: var(--text-1); }
-    .toc-row:hover .toc-num { color: var(--blue); }
     .toc-row:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── FOOTER ─── */
@@ -601,28 +582,18 @@
       <nav class="index-toc" aria-label="Site sections">
         <a href="/chamber/" class="toc-row">
           <span class="toc-label">About</span>
-          <span class="toc-dots"></span>
-          <span class="toc-num">I</span>
         </a>
         <a href="/blog/" class="toc-row">
           <span class="toc-label">Thoughts</span>
-          <span class="toc-dots"></span>
-          <span class="toc-num">II</span>
         </a>
         <a href="/creative/" class="toc-row">
           <span class="toc-label">Creative</span>
-          <span class="toc-dots"></span>
-          <span class="toc-num">III</span>
         </a>
         <a href="/professional/" class="toc-row">
           <span class="toc-label">Professional</span>
-          <span class="toc-dots"></span>
-          <span class="toc-num">IV</span>
         </a>
         <a href="mailto:hello@thesenate.io" class="toc-row">
           <span class="toc-label">Contact</span>
-          <span class="toc-dots"></span>
-          <span class="toc-num">V</span>
         </a>
       </nav>
     </div>
