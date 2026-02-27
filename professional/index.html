@@ -93,6 +93,24 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      padding-left: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover { color: var(--text-1); }
+    .nav-link.active { color: var(--blue); }
+    @media (max-width: 600px) { .nav-links { display: none; } }
 
     /* ─── PAGE HEADER ─── */
     .page-header {
@@ -439,6 +457,13 @@
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
+    <div class="nav-links">
+      <a href="/chamber/" class="nav-link">About</a>
+      <a href="/blog/" class="nav-link">Thoughts</a>
+      <a href="/creative/" class="nav-link">Creative</a>
+      <a href="/professional/" class="nav-link active">Professional</a>
+      <a href="mailto:hello@thesenate.io" class="nav-link">Contact</a>
+    </div>
   </nav>
 
   <!-- ─── HEADER ─── -->
