@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — The Senate</title>
+  <meta name="description" content="Get in touch with Grant Hansen." />
+
+  <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
+  <link rel="apple-touch-icon" href="/brand_assets/senate-logo-white.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --bg:        #060810;
+      --surface:   #090D18;
+      --surface-2: #0C1220;
+      --border:    rgba(120, 175, 210, 0.10);
+      --border-hi: rgba(120, 175, 210, 0.24);
+      --blue:      #7AAEC8;
+      --blue-dim:  rgba(100, 160, 200, 0.07);
+      --blue-glow: rgba(100, 160, 200, 0.14);
+      --text-1:    #D8EDF5;
+      --text-2:    #4A6878;
+      --text-3:    #243545;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: 'Chakra Petch', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.11;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .a1 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+    .a2 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+    .a3 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+    .a4 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(5, 7, 15, 0.88);
+      backdrop-filter: blur(24px) saturate(160%);
+      border-bottom-color: var(--border);
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      padding-left: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover { color: var(--text-1); }
+    .nav-link.active { color: var(--blue); }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 160px 52px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ph-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      padding-left: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .ph-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      color: var(--text-1);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .ph-line {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-2);
+      max-width: 440px;
+    }
+
+    /* ─── SOCIAL GRID ─── */
+    .social-section {
+      flex: 1;
+      padding: 80px 52px 80px;
+    }
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 32px 28px;
+      background: var(--bg);
+      text-decoration: none;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .social-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--blue-dim);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .social-card:hover { background: var(--surface); }
+    .social-card:hover::after { opacity: 1; }
+    .social-card:hover .social-icon { color: var(--blue); }
+    .social-card:hover .social-name { color: var(--text-1); }
+    .social-card:hover .social-handle { color: var(--text-2); }
+    .social-card:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+
+    .social-icon {
+      font-size: 28px;
+      color: var(--text-3);
+      transition: color 0.2s ease;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .social-text {
+      position: relative;
+      z-index: 1;
+    }
+    .social-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      transition: color 0.2s ease;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .social-handle {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .social-arrow {
+      margin-left: auto;
+      font-size: 18px;
+      color: var(--text-3);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .social-card:hover .social-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--blue);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ft-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+    }
+    .ft-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .ft-mark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--text-3);
+    }
+    .ft-mark span { color: var(--blue); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 20px 24px; }
+      .page-header { padding: 120px 24px 48px; }
+      .social-section { padding: 48px 24px 64px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .ft-name { position: static; transform: none; }
+    }
+    @media (max-width: 600px) {
+      .social-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
+    <div class="nav-links">
+      <a href="/chamber/" class="nav-link">About</a>
+      <a href="/blog/" class="nav-link">Thoughts</a>
+      <a href="/creative/" class="nav-link">Creative</a>
+      <a href="/professional/" class="nav-link">Professional</a>
+      <a href="/contact/" class="nav-link active">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ─── HEADER ─── -->
+  <div class="page-header">
+    <div class="ph-label a1">Get In Touch — 06</div>
+    <h1 class="ph-title a2">Contact</h1>
+    <p class="ph-line a3">Find me on the platforms below, or send a message directly.</p>
+  </div>
+
+  <!-- ─── SOCIALS ─── -->
+  <div class="social-section reveal">
+    <div class="social-grid">
+
+      <a href="#" class="social-card">
+        <i class="ph ph-envelope social-icon"></i>
+        <div class="social-text">
+          <span class="social-name">Email</span>
+          <span class="social-handle">hello@thesenate.io</span>
+        </div>
+        <i class="ph ph-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" class="social-card">
+        <i class="ph ph-linkedin-logo social-icon"></i>
+        <div class="social-text">
+          <span class="social-name">LinkedIn</span>
+          <span class="social-handle">@placeholder</span>
+        </div>
+        <i class="ph ph-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" class="social-card">
+        <i class="ph ph-github-logo social-icon"></i>
+        <div class="social-text">
+          <span class="social-name">GitHub</span>
+          <span class="social-handle">@placeholder</span>
+        </div>
+        <i class="ph ph-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" class="social-card">
+        <i class="ph ph-x-logo social-icon"></i>
+        <div class="social-text">
+          <span class="social-name">X / Twitter</span>
+          <span class="social-handle">@placeholder</span>
+        </div>
+        <i class="ph ph-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" class="social-card">
+        <i class="ph ph-instagram-logo social-icon"></i>
+        <div class="social-text">
+          <span class="social-name">Instagram</span>
+          <span class="social-handle">@placeholder</span>
+        </div>
+        <i class="ph ph-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" class="social-card">
+        <i class="ph ph-spotify-logo social-icon"></i>
+        <div class="social-text">
+          <span class="social-name">Spotify</span>
+          <span class="social-handle">placeholder</span>
+        </div>
+        <i class="ph ph-arrow-right social-arrow"></i>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-name">Grant Hansen</span>
+    <span class="ft-mark">THE<span>SENATE</span>.IO</span>
+  </footer>
+
+  <script>
+    // ─── STICKY NAV ───
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
+
+    // ─── SCROLL REVEAL ───
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('vis');
+        revealObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  </script>
+</body>
+</html>
