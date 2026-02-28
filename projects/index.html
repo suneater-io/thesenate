@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — The Senate</title>
-  <meta name="description" content="Get in touch with Grant Hansen." />
+  <title>Projects — The Senate</title>
+  <meta name="description" content="Demos and projects by Grant Hansen." />
 
   <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
   <link rel="apple-touch-icon" href="/brand_assets/senate-logo-white.png" />
@@ -61,7 +61,6 @@
     .a1 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
     .a2 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
     .a3 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
-    .a4 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
 
     .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
@@ -145,29 +144,29 @@
       max-width: 440px;
     }
 
-    /* ─── SOCIAL GRID ─── */
-    .social-section {
+    /* ─── PROJECT GRID ─── */
+    .projects-section {
       flex: 1;
-      padding: 80px 52px 80px;
+      padding: 80px 52px;
     }
-    .social-grid {
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
     }
-    .social-card {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 32px 28px;
+    .project-card {
       background: var(--bg);
+      padding: 40px 36px;
       text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
       position: relative;
       transition: background 0.2s ease;
     }
-    .social-card::after {
+    .project-card::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -175,58 +174,74 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .social-card:hover { background: var(--surface); }
-    .social-card:hover::after { opacity: 1; }
-    .social-card:hover .social-icon { color: var(--blue); }
-    .social-card:hover .social-name { color: var(--text-1); }
-    .social-card:hover .social-handle { color: var(--text-2); }
-    .social-card:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+    .project-card:hover { background: var(--surface); }
+    .project-card:hover::after { opacity: 1; }
+    .project-card:hover .project-title { color: var(--text-1); }
+    .project-card:hover .project-arrow { opacity: 1; transform: translate(3px, -3px); color: var(--blue); }
+    .project-card:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
 
-    .social-icon {
-      font-size: 28px;
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .project-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      padding-left: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(120, 175, 210, 0.08);
+      border: 1px solid rgba(120, 175, 210, 0.15);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    .project-arrow {
+      font-size: 20px;
       color: var(--text-3);
-      transition: color 0.2s ease;
+      opacity: 0.5;
+      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
       flex-shrink: 0;
-      position: relative;
-      z-index: 1;
     }
-    .social-text {
-      position: relative;
-      z-index: 1;
-    }
-    .social-name {
+    .project-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
       text-transform: uppercase;
       color: var(--text-2);
       transition: color 0.2s ease;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .social-handle {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      color: var(--text-3);
-      transition: color 0.2s ease;
-      display: block;
-    }
-    .social-arrow {
-      margin-left: auto;
-      font-size: 18px;
-      color: var(--text-3);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      line-height: 1.1;
       position: relative;
       z-index: 1;
     }
-    .social-card:hover .social-arrow {
-      opacity: 1;
-      transform: translateX(0);
-      color: var(--blue);
+    .project-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-3);
+      position: relative;
+      z-index: 1;
+    }
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .stack-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
     }
 
     /* ─── FOOTER ─── */
@@ -269,12 +284,12 @@
     @media (max-width: 960px) {
       nav { padding: 20px 24px; }
       .page-header { padding: 120px 24px 48px; }
-      .social-section { padding: 48px 24px 64px; }
+      .projects-section { padding: 48px 24px 64px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
     @media (max-width: 600px) {
-      .social-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -287,74 +302,35 @@
       <a href="/blog/" class="nav-link">Thoughts</a>
       <a href="/creative/" class="nav-link">Creative</a>
       <a href="/professional/" class="nav-link">Professional</a>
-      <a href="/projects/" class="nav-link">Projects</a>
-      <a href="/contact/" class="nav-link active">Contact</a>
+      <a href="/projects/" class="nav-link active">Projects</a>
+      <a href="/contact/" class="nav-link">Contact</a>
     </div>
   </nav>
 
   <!-- ─── HEADER ─── -->
   <div class="page-header">
-    <div class="ph-label a1">Get In Touch — 06</div>
-    <h1 class="ph-title a2">Contact</h1>
-    <p class="ph-line a3">Find me on the platforms below, or send a message directly.</p>
+    <div class="ph-label a1">Built Things — 07</div>
+    <h1 class="ph-title a2">Projects</h1>
+    <p class="ph-line a3">Demos, tools, and experiments worth sharing.</p>
   </div>
 
-  <!-- ─── SOCIALS ─── -->
-  <div class="social-section reveal">
-    <div class="social-grid">
+  <!-- ─── PROJECTS ─── -->
+  <div class="projects-section reveal">
+    <div class="projects-grid">
 
-      <a href="#" class="social-card">
-        <i class="ph ph-envelope social-icon"></i>
-        <div class="social-text">
-          <span class="social-name">Email</span>
-          <span class="social-handle">hello@thesenate.io</span>
+      <a href="/projects/wxccworkflowdemo/" class="project-card">
+        <div class="project-header">
+          <span class="project-tag">Demo</span>
+          <i class="ph ph-arrow-up-right project-arrow"></i>
         </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
-      </a>
-
-      <a href="#" class="social-card">
-        <i class="ph ph-linkedin-logo social-icon"></i>
-        <div class="social-text">
-          <span class="social-name">LinkedIn</span>
-          <span class="social-handle">@placeholder</span>
+        <div class="project-title">Webex CC Workflow Dashboard</div>
+        <p class="project-desc">A live contact center workflow demo built on Webex Contact Center. Visualises call routing, agent states, and queue activity in real time.</p>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Vite</span>
+          <span class="stack-tag">Webex CC</span>
+          <span class="stack-tag">Tailwind</span>
         </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
-      </a>
-
-      <a href="#" class="social-card">
-        <i class="ph ph-github-logo social-icon"></i>
-        <div class="social-text">
-          <span class="social-name">GitHub</span>
-          <span class="social-handle">@placeholder</span>
-        </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
-      </a>
-
-      <a href="#" class="social-card">
-        <i class="ph ph-x-logo social-icon"></i>
-        <div class="social-text">
-          <span class="social-name">X / Twitter</span>
-          <span class="social-handle">@placeholder</span>
-        </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
-      </a>
-
-      <a href="#" class="social-card">
-        <i class="ph ph-instagram-logo social-icon"></i>
-        <div class="social-text">
-          <span class="social-name">Instagram</span>
-          <span class="social-handle">@placeholder</span>
-        </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
-      </a>
-
-      <a href="#" class="social-card">
-        <i class="ph ph-spotify-logo social-icon"></i>
-        <div class="social-text">
-          <span class="social-name">Spotify</span>
-          <span class="social-handle">placeholder</span>
-        </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
     </div>
@@ -368,13 +344,11 @@
   </footer>
 
   <script>
-    // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 48);
     }, { passive: true });
 
-    // ─── SCROLL REVEAL ───
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;

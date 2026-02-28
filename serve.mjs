@@ -36,6 +36,19 @@ http.createServer((req, res) => {
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
+      // SPA fallback: serve index.html for any path under a known SPA directory
+      const spaRoots = ['/projects/wxccworkflowdemo'];
+      const isSpa = spaRoots.some(root => urlPath.startsWith(root));
+      if (isSpa) {
+        const spaRoot = spaRoots.find(root => urlPath.startsWith(root));
+        const spaIndex = path.join(__dirname, spaRoot, 'index.html');
+        fs.readFile(spaIndex, (err2, data2) => {
+          if (err2) { res.writeHead(404); res.end('Not found'); return; }
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(data2);
+        });
+        return;
+      }
       res.writeHead(404);
       res.end('Not found');
       return;
