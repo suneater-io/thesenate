@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "thesenate-static",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["serve.mjs"],
+      "port": 3000
+    },
+    {
+      "name": "wxcc-vite",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "pnpm", "--dir", "C:/Users/grant.hansen/AppData/Local/Temp/wxcc-build", "dev"],
+      "port": 5173
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(node -e \":*)",
+      "Bash(npx vite build --base=/projects/wxccworkflowdemo/)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(python -m json.tool)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node screenshot.mjs http://localhost:3000 snow1)",
+      "Bash(node screenshot.mjs http://localhost:3000 snow2)"
+    ]
+  }
+}
