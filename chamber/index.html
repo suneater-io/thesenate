@@ -255,7 +255,8 @@
       font-weight: 300;
       line-height: 1.82;
       color: var(--text-2);
-      max-width: 620px;
+      max-width: 600px;
+      margin-left: auto;
     }
 
     .statement-text strong {
@@ -278,9 +279,14 @@
     .discipline {
       padding: 72px 0;
       border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      column-gap: 80px;
+      align-items: end;
     }
 
     .disc-meta {
+      grid-column: 1 / -1;
       display: flex;
       align-items: center;
       gap: 18px;
@@ -310,7 +316,6 @@
       letter-spacing: -0.02em;
       line-height: 0.88;
       color: var(--text-1);
-      margin-bottom: 28px;
       display: block;
     }
 
@@ -320,7 +325,7 @@
       font-weight: 300;
       line-height: 1.88;
       color: var(--text-2);
-      max-width: 580px;
+      padding-bottom: 6px;
     }
 
     /* ─── CLOSE ─── */
@@ -457,7 +462,10 @@
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
       .statement-section { padding: 72px 24px; }
+      .statement-text { margin-left: 0; }
       .disciplines-section { padding: 0 24px; }
+      .discipline { grid-template-columns: 1fr; column-gap: 0; }
+      .disc-copy { padding-bottom: 0; padding-top: 20px; }
       .close-section { padding: 72px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
@@ -494,7 +502,7 @@
     <div class="hero-photo-overlay"></div>
     <div class="hero-glow"></div>
 
-    <!-- ghost initial — there if you look for it -->
+    <!-- ghost logo -->
     <div style="
       position: absolute;
       inset: 0;
@@ -504,18 +512,17 @@
       align-items: center;
       justify-content: center;
     ">
-      <span style="
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: clamp(240px, 40vw, 600px);
-        font-weight: 800;
-        font-style: italic;
-        letter-spacing: -0.04em;
-        color: var(--text-1);
-        opacity: 0.025;
-        line-height: 1;
-        user-select: none;
-        text-transform: uppercase;
-      ">GH</span>
+      <img
+        src="/brand_assets/senate-logo-white.png"
+        alt=""
+        style="
+          width: min(560px, 70vw);
+          opacity: 0.06;
+          mix-blend-mode: screen;
+          user-select: none;
+          filter: brightness(1.2);
+        "
+      />
     </div>
 
     <div class="hero-content">
