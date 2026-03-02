@@ -138,6 +138,7 @@
       justify-content: flex-end;
       padding: 0 52px 72px;
       overflow: hidden;
+      background: url('/images/wolf.jpg') center 40% / cover no-repeat;
     }
 
     #hero-canvas {
@@ -149,12 +150,24 @@
       pointer-events: none;
     }
 
+    .hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(4,6,14,0.72) 0%, transparent 35%),
+        linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.55) 42%, transparent 68%),
+        linear-gradient(to right, rgba(4,6,14,0.35) 0%, transparent 28%, transparent 72%, rgba(4,6,14,0.35) 100%),
+        linear-gradient(180deg, rgba(5,8,20,0.42) 0%, rgba(5,8,20,0.36) 100%);
+    }
+
     .hero-glow {
       position: absolute;
       width: 700px;
       height: 700px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(100, 160, 200, 0.055) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(80, 130, 180, 0.04) 0%, transparent 70%);
       top: 10%;
       right: -10%;
       pointer-events: none;
@@ -478,6 +491,7 @@
   <!-- ─── HERO ─── -->
   <section class="hero">
     <canvas id="hero-canvas"></canvas>
+    <div class="hero-photo-overlay"></div>
     <div class="hero-glow"></div>
 
     <!-- ghost initial — there if you look for it -->
@@ -535,7 +549,7 @@
         <div class="disc-rule"></div>
       </div>
       <span class="disc-name">Music</span>
-      <p class="disc-copy">Drums before everything else. The instrument that demands you hold the framework together while everything around you moves. You don't find the right record by browsing — you find it by showing up to the crate every time.</p>
+      <p class="disc-copy">Drums before everything else. Hold the framework while everything around you moves. The right record doesn't get found by browsing — you find it by showing up every time.</p>
     </article>
 
     <!-- 02 — DETROIT -->
@@ -545,7 +559,7 @@
         <div class="disc-rule"></div>
       </div>
       <span class="disc-name">Detroit</span>
-      <p class="disc-copy">Wings. Lions. Tigers. Pistons. Following Detroit through losing seasons as much as winning ones teaches something dynasty fans never learn. What you stay loyal to when it costs you something is the only loyalty that counts.</p>
+      <p class="disc-copy">Wings. Lions. Tigers. Pistons. Losing seasons as much as winning ones. What you stay loyal to when it costs you something is the only loyalty that counts.</p>
     </article>
 
     <!-- 03 — NORSE -->
@@ -555,7 +569,7 @@
         <div class="disc-rule"></div>
       </div>
       <span class="disc-name">Norse</span>
-      <p class="disc-copy">Odin traded an eye for wisdom and hung from Yggdrasil nine days to earn knowledge. The Eddas aren't religion — they're a manual for understanding what things cost. Ragnarök is coming; the gods know it and fight anyway.</p>
+      <p class="disc-copy">Odin traded an eye for wisdom. Hung from Yggdrasil nine days to earn knowledge. The Eddas aren't religion — they're a manual for what things cost. Ragnarök is coming. The gods know it and fight anyway.</p>
     </article>
 
     <!-- 04 — COUNTER-STRIKE -->
@@ -565,7 +579,7 @@
         <div class="disc-rule"></div>
       </div>
       <span class="disc-name">Counter&#8209;Strike</span>
-      <p class="disc-copy">Sixteen rounds, five players, incomplete information. A 1v3 defuse with one bullet left: panic is the only thing that finishes you before the enemy does. Staying locked when the model says you're losing migrates directly off-screen.</p>
+      <p class="disc-copy">Sixteen rounds, five players, incomplete information. A 1v3 defuse with one bullet left — panic is the only thing that finishes you before the enemy does. Staying locked when the model says you're losing migrates off-screen.</p>
     </article>
 
     <!-- 05 — VINTAGE -->
@@ -575,7 +589,7 @@
         <div class="disc-rule"></div>
       </div>
       <span class="disc-name">Vintage</span>
-      <p class="disc-copy">A 1994 Wings Starter jacket is a primary source document. Vintage is archaeology in fabric form — what you carry tells a story biography can't. Each piece either earns its place or it doesn't.</p>
+      <p class="disc-copy">A 1994 Wings Starter jacket is a primary source document. Vintage is archaeology in fabric form — what you carry tells a story biography can't. Each piece earns its place or it doesn't.</p>
     </article>
 
     <!-- 06 — ARCHITECTURE -->
@@ -594,7 +608,7 @@
   <section class="close-section reveal">
     <div class="section-label" style="max-width: 320px;">CONTACT</div>
     <p class="close-line">If you're reaching out, you already know why.</p>
-    <a href="mailto:grant@thesenate.io" class="close-link">thesenate.io</a>
+    <a href="/contact/" class="close-link">Make contact &rarr;</a>
   </section>
 
   <!-- ─── FOOTER ─── -->
@@ -636,7 +650,7 @@
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const COUNT = 200;
+      const COUNT = 420;
       let W, H, particles = [];
 
       function resize() {
