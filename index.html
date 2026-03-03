@@ -419,6 +419,15 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-2);
+      transition:
+        letter-spacing 0.55s cubic-bezier(0.16,1,0.3,1),
+        color 0.3s ease,
+        text-shadow 0.3s ease;
+    }
+    .toc-row:hover .toc-label {
+      letter-spacing: 0.18em;
+      color: var(--text-1);
+      text-shadow: 0 0 48px rgba(80,136,255,0.12);
     }
     .toc-row:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
