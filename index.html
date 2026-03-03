@@ -419,9 +419,7 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-2);
-      transition: color 0.25s ease;
     }
-    .toc-row:hover .toc-label { color: var(--text-1); }
     .toc-row:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── FOOTER ─── */
@@ -458,30 +456,6 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-    }
-
-    /* ─── TOC BACKGROUND CROSSFADE ─── */
-    .index-section { position: relative; }
-    .toc-bg-layer {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1);
-      filter: brightness(0.52) saturate(0.75);
-    }
-    .toc-bg-layer.active { opacity: 1; }
-    .toc-bg-dark {
-      position: absolute;
-      inset: 0;
-      background: rgba(6,8,16,0.60);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .index-inner {
-      position: relative;
-      z-index: 2;
     }
 
     /* ─── SCROLL REVEAL ─── */
@@ -611,30 +585,27 @@
   <section class="index-section reveal">
     <div class="index-inner">
       <nav class="index-toc" aria-label="Site sections">
-        <a href="/chamber/" class="toc-row" data-preview="/images/wolf.jpg">
+        <a href="/chamber/" class="toc-row">
           <span class="toc-label">About</span>
         </a>
-        <a href="/blog/" class="toc-row" data-preview="/images/oceanstorm.jpg">
+        <a href="/blog/" class="toc-row">
           <span class="toc-label">Thoughts</span>
         </a>
-        <a href="/creative/" class="toc-row" data-preview="/images/creative.jpg">
+        <a href="/creative/" class="toc-row">
           <span class="toc-label">Creative</span>
         </a>
-        <a href="/professional/" class="toc-row" data-preview="/images/packarddetroit.jpg">
+        <a href="/professional/" class="toc-row">
           <span class="toc-label">Professional</span>
         </a>
-        <a href="/projects/" class="toc-row" data-preview="/images/projects.jpg">
+        <a href="/projects/" class="toc-row">
           <span class="toc-label">Projects</span>
         </a>
-        <a href="/contact/" class="toc-row" data-preview="/images/openwindow.jpg">
+        <a href="/contact/" class="toc-row">
           <span class="toc-label">Contact</span>
         </a>
       </nav>
     </div>
 
-    <div class="toc-bg-layer" id="toc-bg-a" aria-hidden="true"></div>
-    <div class="toc-bg-layer" id="toc-bg-b" aria-hidden="true"></div>
-    <div class="toc-bg-dark" aria-hidden="true"></div>
   </section>
 
   <!-- ─── FOOTER ─── -->
@@ -645,47 +616,6 @@
   </footer>
 
   <script>
-    // ─── TOC BACKGROUND CROSSFADE ───
-    (function () {
-      const layers = [
-        document.getElementById('toc-bg-a'),
-        document.getElementById('toc-bg-b'),
-      ];
-      let activeIdx = 0;
-      let currentSrc = '';
-      let hideTimer;
-
-      // Preload all preview images
-      document.querySelectorAll('.toc-row[data-preview]').forEach(row => {
-        new Image().src = row.dataset.preview;
-      });
-
-      function show(src) {
-        clearTimeout(hideTimer);
-        if (src === currentSrc) return;
-        const next = 1 - activeIdx;
-        layers[next].style.backgroundImage = `url(${src})`;
-        layers[next].classList.add('active');
-        layers[activeIdx].classList.remove('active');
-        activeIdx = next;
-        currentSrc = src;
-      }
-
-      function hide() {
-        hideTimer = setTimeout(() => {
-          layers[0].classList.remove('active');
-          layers[1].classList.remove('active');
-          currentSrc = '';
-        }, 350);
-      }
-
-      document.querySelectorAll('.toc-row[data-preview]').forEach(row => {
-        row.addEventListener('mouseenter', () => show(row.dataset.preview));
-        row.addEventListener('mouseleave', hide);
-      });
-      document.querySelector('.index-section').addEventListener('mouseleave', hide);
-    })();
-
     // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
