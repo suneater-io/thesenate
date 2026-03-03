@@ -679,7 +679,7 @@
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const COUNT = 60;
+      const COUNT = 120;
       let W, H, puffs = [];
 
       function resize() {
@@ -696,8 +696,8 @@
         return {
           x:    W * src + (Math.random() - 0.5) * 24,
           y:    fromBottom ? H * 0.82 + Math.random() * H * 0.1 : H * (0.3 + Math.random() * 0.55),
-          r:    8 + Math.random() * 10,           // starting radius
-          vy:   -(0.35 + Math.random() * 0.4),   // slow rise
+          r:    12 + Math.random() * 16,          // starting radius
+          vy:   -(0.5 + Math.random() * 0.6),    // faster rise
           vx:   (Math.random() - 0.5) * 0.25,    // gentle horizontal drift
           age:  fromBottom ? 0 : Math.random() * life,
           life,

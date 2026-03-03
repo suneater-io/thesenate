@@ -551,12 +551,16 @@
         requestAnimationFrame(() => flash(frames.slice(1)));
       }
       function scheduleFlash() {
-        const delay = 10000 + Math.random() * 8000; // 10–18s
+        const delay = 2500 + Math.random() * 4000; // 2.5–6.5s
         setTimeout(() => {
           flash([0.04, 0.02, 0.008, 0]);
-          // Double-flash on ~30% of strikes
-          if (Math.random() < 0.3) {
+          // Double-flash on ~55% of strikes
+          if (Math.random() < 0.55) {
             setTimeout(() => flash([0.025, 0.01, 0]), 120 + Math.random() * 80);
+          }
+          // Triple-flash on ~15% of strikes
+          if (Math.random() < 0.15) {
+            setTimeout(() => flash([0.015, 0.008, 0]), 280 + Math.random() * 120);
           }
           scheduleFlash();
         }, delay);
