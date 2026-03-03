@@ -767,25 +767,49 @@
 
       function init() { resize(); particles = Array.from({ length: COUNT }, mkFlake); }
 
+      // Mouse tracking for waveform pull
+      let mx = -9999, my = 0, mxS = -9999, myS = 0;
+      const hero = canvas.parentElement;
+      hero.addEventListener('mousemove', e => {
+        const r = canvas.getBoundingClientRect();
+        mx = e.clientX - r.left;
+        my = e.clientY - r.top;
+      }, { passive: true });
+      hero.addEventListener('mouseleave', () => { mx = -9999; }, { passive: true });
+
       let wind = 0, waveT = 0;
       function tick() {
         ctx.clearRect(0, 0, W, H);
         wind += 0.001;
         waveT += 0.022;
 
-        // ── Audio waveform ──
+        // Smooth mouse lerp
+        mxS += (mx - mxS) * 0.06;
+        myS += (my - myS) * 0.06;
+
+        // ── Audio waveform (mouse-reactive) ──
         const wY      = H * 0.62;
         const breathe = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(waveT * 0.5));
         const maxAmp  = 18 * breathe;
-        ctx.save();
-        // Glow pass (wide, dim)
-        ctx.beginPath();
-        for (let x = 0; x <= W; x += 3) {
-          const y = wY
+        const sigma   = W * 0.14; // Gaussian influence radius
+        const hasMouse = mx > 0;
+
+        function waveY(x) {
+          const base = wY
             + Math.sin(x * 0.012 + waveT) * maxAmp
             + Math.sin(x * 0.025 - waveT * 1.3) * maxAmp * 0.4
             + Math.sin(x * 0.007 + waveT * 0.6) * maxAmp * 0.5;
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          if (!hasMouse) return base;
+          const d = x - mxS;
+          const pull = Math.exp(-(d * d) / (2 * sigma * sigma)) * (myS - wY) * 0.65;
+          return base + pull;
+        }
+
+        ctx.save();
+        // Glow pass
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 3) {
+          x === 0 ? ctx.moveTo(x, waveY(x)) : ctx.lineTo(x, waveY(x));
         }
         ctx.strokeStyle = 'rgba(248,232,212,0.08)';
         ctx.lineWidth = 8;
@@ -793,11 +817,7 @@
         // Crisp pass
         ctx.beginPath();
         for (let x = 0; x <= W; x += 2) {
-          const y = wY
-            + Math.sin(x * 0.012 + waveT) * maxAmp
-            + Math.sin(x * 0.025 - waveT * 1.3) * maxAmp * 0.4
-            + Math.sin(x * 0.007 + waveT * 0.6) * maxAmp * 0.5;
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          x === 0 ? ctx.moveTo(x, waveY(x)) : ctx.lineTo(x, waveY(x));
         }
         ctx.strokeStyle = 'rgba(248,232,212,0.20)';
         ctx.lineWidth = 1.5;
