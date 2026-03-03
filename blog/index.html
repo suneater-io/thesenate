@@ -551,7 +551,7 @@
         requestAnimationFrame(() => flash(frames.slice(1)));
       }
       function scheduleFlash() {
-        const delay = 25000 + Math.random() * 25000; // 25–50s
+        const delay = 10000 + Math.random() * 8000; // 10–18s
         setTimeout(() => {
           flash([0.04, 0.02, 0.008, 0]);
           // Double-flash on ~30% of strikes
