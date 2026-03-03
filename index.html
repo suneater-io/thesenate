@@ -460,6 +460,45 @@
       transform: translateX(-50%);
     }
 
+    /* ─── TOC PREVIEW PANEL ─── */
+    .index-section { position: relative; }
+    .toc-preview-panel {
+      position: absolute;
+      right: 52px;
+      top: 50%;
+      transform: translateY(-50%) translateX(20px);
+      width: min(380px, 30vw);
+      height: min(480px, 60vh);
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity 0.45s cubic-bezier(0.16,1,0.3,1),
+        transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+      border: 1px solid var(--border-hi);
+    }
+    .toc-preview-panel.visible {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+    .toc-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75) saturate(0.85);
+      transition: opacity 0.2s ease;
+    }
+    .toc-preview-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, transparent 40%, rgba(6,8,16,0.7) 100%),
+        linear-gradient(to right, rgba(6,8,16,0.25), transparent);
+    }
+    @media (max-width: 960px) {
+      .toc-preview-panel { display: none; }
+    }
+
     /* ─── SCROLL REVEAL ─── */
     .reveal {
       opacity: 0;
@@ -567,7 +606,14 @@
       class="hero-logo a2"
     />
 
+    <div class="hero-divider a3">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-diamond"></div>
+      <div class="hero-divider-line"></div>
+    </div>
 
+    <p class="hero-tagline a4">Everything. At full volume.</p>
+    <p class="hero-name a4">Grant Hansen &nbsp;&middot;&nbsp; Solution Architect</p>
 
 
     <div class="scroll-hint a6">
@@ -580,25 +626,30 @@
   <section class="index-section reveal">
     <div class="index-inner">
       <nav class="index-toc" aria-label="Site sections">
-        <a href="/chamber/" class="toc-row">
+        <a href="/chamber/" class="toc-row" data-preview="/images/wolf.jpg">
           <span class="toc-label">About</span>
         </a>
-        <a href="/blog/" class="toc-row">
+        <a href="/blog/" class="toc-row" data-preview="/images/oceanstorm.jpg">
           <span class="toc-label">Thoughts</span>
         </a>
-        <a href="/creative/" class="toc-row">
+        <a href="/creative/" class="toc-row" data-preview="/images/creative.jpg">
           <span class="toc-label">Creative</span>
         </a>
-        <a href="/professional/" class="toc-row">
+        <a href="/professional/" class="toc-row" data-preview="/images/professional.jpg">
           <span class="toc-label">Professional</span>
         </a>
-        <a href="/projects/" class="toc-row">
+        <a href="/projects/" class="toc-row" data-preview="/images/projects.jpg">
           <span class="toc-label">Projects</span>
         </a>
-        <a href="/contact/" class="toc-row">
+        <a href="/contact/" class="toc-row" data-preview="/images/openwindow.jpg">
           <span class="toc-label">Contact</span>
         </a>
       </nav>
+    </div>
+
+    <div class="toc-preview-panel" id="toc-preview-panel" aria-hidden="true">
+      <img class="toc-preview-img" id="toc-preview-img" src="" alt="" />
+      <div class="toc-preview-overlay"></div>
     </div>
   </section>
 
@@ -610,6 +661,33 @@
   </footer>
 
   <script>
+    // ─── TOC PREVIEW ───
+    (function () {
+      const tocPanel = document.getElementById('toc-preview-panel');
+      const tocImg   = document.getElementById('toc-preview-img');
+      let previewTimer;
+
+      document.querySelectorAll('.toc-row[data-preview]').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          clearTimeout(previewTimer);
+          const src = row.dataset.preview;
+          if (tocImg.getAttribute('src') !== src) {
+            tocImg.style.opacity = '0';
+            tocImg.src = src;
+            tocImg.onload = () => { tocImg.style.opacity = '1'; };
+          }
+          tocPanel.classList.add('visible');
+        });
+        row.addEventListener('mouseleave', () => {
+          previewTimer = setTimeout(() => tocPanel.classList.remove('visible'), 180);
+        });
+      });
+      tocPanel.addEventListener('mouseenter', () => clearTimeout(previewTimer));
+      tocPanel.addEventListener('mouseleave', () => {
+        previewTimer = setTimeout(() => tocPanel.classList.remove('visible'), 180);
+      });
+    })();
+
     // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {

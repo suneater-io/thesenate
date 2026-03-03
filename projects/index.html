@@ -421,6 +421,23 @@
         };
       }
 
+      // ── Crane warning lights ──
+      const craneLights = [
+        { xr: 0.18, yr: 0.10 },
+        { xr: 0.32, yr: 0.07 },
+        { xr: 0.44, yr: 0.14 },
+        { xr: 0.55, yr: 0.05 },
+        { xr: 0.65, yr: 0.18 },
+        { xr: 0.76, yr: 0.09 },
+        { xr: 0.88, yr: 0.06 },
+      ].map(l => ({
+        ...l,
+        on: Math.random() > 0.5,
+        countdown: Math.floor(Math.random() * 90),
+        onTicks:  72 + Math.floor(Math.random() * 140),
+        offTicks: 18 + Math.floor(Math.random() * 54),
+      }));
+
       function init() { resize(); particles = Array.from({ length: COUNT }, mkFlake); }
 
       let wind = 0;
@@ -439,6 +456,33 @@
           ctx.fillStyle = `rgba(248, 180, 180, ${p.o})`;
           ctx.fill();
         }
+
+        // ── Draw crane lights on top of snow ──
+        for (const light of craneLights) {
+          light.countdown--;
+          if (light.countdown <= 0) {
+            light.on = !light.on;
+            light.onTicks  = 72 + Math.floor(Math.random() * 140);
+            light.offTicks = 18 + Math.floor(Math.random() * 54);
+            light.countdown = light.on ? light.onTicks : light.offTicks;
+          }
+          if (!light.on) continue;
+          const x = light.xr * W, y = light.yr * H;
+          // Outer glow
+          const grd = ctx.createRadialGradient(x, y, 0, x, y, 9);
+          grd.addColorStop(0, 'rgba(220,65,65,0.55)');
+          grd.addColorStop(1, 'rgba(220,65,65,0)');
+          ctx.beginPath();
+          ctx.arc(x, y, 9, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+          // Core dot
+          ctx.beginPath();
+          ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(235,90,80,0.90)';
+          ctx.fill();
+        }
+
         requestAnimationFrame(tick);
       }
 

@@ -543,8 +543,28 @@
         particles.forEach(p => { if (p.x > W) p.x = Math.random() * W; });
       }, { passive: true });
 
+      // ── Lightning flash ──
+      function flash(frames) {
+        if (!frames.length) return;
+        ctx.fillStyle = `rgba(220,235,255,${frames[0]})`;
+        ctx.fillRect(0, 0, W, H);
+        requestAnimationFrame(() => flash(frames.slice(1)));
+      }
+      function scheduleFlash() {
+        const delay = 25000 + Math.random() * 25000; // 25–50s
+        setTimeout(() => {
+          flash([0.04, 0.02, 0.008, 0]);
+          // Double-flash on ~30% of strikes
+          if (Math.random() < 0.3) {
+            setTimeout(() => flash([0.025, 0.01, 0]), 120 + Math.random() * 80);
+          }
+          scheduleFlash();
+        }, delay);
+      }
+
       init();
       tick();
+      scheduleFlash();
     })();
 
     // ─── LOAD POSTS ───

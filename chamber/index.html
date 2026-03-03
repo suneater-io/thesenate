@@ -682,10 +682,32 @@
 
       function init() { resize(); particles = Array.from({ length: COUNT }, mkFlake); }
 
-      let wind = 0;
+      let wind = 0, auroraT = 0;
       function tick() {
         ctx.clearRect(0, 0, W, H);
         wind += 0.001;
+
+        // ── Aurora shimmer ──
+        auroraT += 0.003;
+        ctx.save();
+        for (let b = 0; b < 3; b++) {
+          const baseY = H * (0.07 + b * 0.055);
+          const amp   = 12 + b * 5;
+          const phase = auroraT * (0.7 + b * 0.3) + b * 2.0;
+          // 3 passes per band: thick/dim → medium → thin/bright
+          [{ lw: 22, o: 0.012 }, { lw: 8, o: 0.025 }, { lw: 2.5, o: 0.045 - b * 0.01 }].forEach(pass => {
+            ctx.beginPath();
+            for (let x = 0; x <= W; x += 4) {
+              const y = baseY + Math.sin(x * 0.005 + phase) * amp;
+              x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = `rgba(110,175,210,${pass.o})`;
+            ctx.lineWidth = pass.lw;
+            ctx.stroke();
+          });
+        }
+        ctx.restore();
+
         for (const p of particles) {
           p.phase += p.freq;
           p.x += p.vx + Math.sin(p.phase + wind) * 0.22;
