@@ -231,7 +231,7 @@
 
     /* The Senate logo */
     .hero-logo {
-      width: min(700px, 88vw);
+      width: min(840px, 92vw);
       display: block;
       mix-blend-mode: screen;
       margin: 0 auto 48px;
@@ -312,15 +312,17 @@
     }
     .nav-link {
       font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      padding-left: 0.22em;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      padding-left: 0.18em;
       text-transform: uppercase;
-      color: var(--text-2);
+      color: var(--text-1);
+      opacity: 0.55;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: opacity 0.2s ease;
     }
-    .nav-link:hover { color: var(--text-1); }
+    .nav-link:hover { opacity: 1; }
     @media (max-width: 600px) { .nav-links { display: none; } }
 
     /* ─── BUTTONS ─── */
