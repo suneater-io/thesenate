@@ -680,12 +680,12 @@
         cols = Array.from({ length: count }, (_, i) => ({
           x: i * COL_W + COL_W / 2,
           y: Math.random() * -H,
-          speed: 0.18 + Math.random() * 0.22,
+          speed: 0.55 + Math.random() * 0.65,
           charH: 14 + Math.floor(Math.random() * 4),
           len: 6 + Math.floor(Math.random() * 10),
           chars: [],
           tick: 0,
-          tickRate: 8 + Math.floor(Math.random() * 12),
+          tickRate: 4 + Math.floor(Math.random() * 6),
         }));
         cols.forEach(c => {
           c.chars = Array.from({ length: c.len }, () => CHARS[Math.floor(Math.random() * CHARS.length)]);
