@@ -738,36 +738,20 @@
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    // ─── HERO SNOW ───
+    // ─── HERO: ELECTRICAL DISCHARGE ───
     (function () {
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const COUNT = 280;
-      let W, H, particles = [];
 
-      function resize() {
-        W = canvas.width  = canvas.parentElement.offsetWidth;
-        H = canvas.height = canvas.parentElement.offsetHeight;
-      }
+      let W, H;
+      const COLS = 72;        // number of hard segments — more = more jagged detail
+      const BASE_Y_FRAC = 0.62;
+      let nodes = [];         // discharge line nodes
+      let surgeFrames = 0;    // frames remaining in current surge event
+      let sparks = [];        // debris sparks
 
-      function mkFlake() {
-        const layer = Math.random();
-        return {
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vy: 0.12 + layer * 0.38,
-          vx: (Math.random() - 0.5) * 0.1,
-          r:  0.3 + layer * 1.6,
-          o:  0.07 + layer * 0.28,
-          phase: Math.random() * Math.PI * 2,
-          freq:  0.003 + Math.random() * 0.005,
-        };
-      }
-
-      function init() { resize(); particles = Array.from({ length: COUNT }, mkFlake); }
-
-      // Mouse tracking for waveform pull
+      // ── Mouse ──
       let mx = -9999, my = 0, mxS = -9999, myS = 0;
       const hero = canvas.parentElement;
       hero.addEventListener('mousemove', e => {
@@ -777,73 +761,127 @@
       }, { passive: true });
       hero.addEventListener('mouseleave', () => { mx = -9999; }, { passive: true });
 
-      let wind = 0, waveT = 0;
+      function resize() {
+        W = canvas.width  = hero.offsetWidth;
+        H = canvas.height = hero.offsetHeight;
+        // Rebuild nodes on resize
+        nodes = [];
+        const step = W / COLS;
+        for (let i = 0; i <= COLS; i++) {
+          nodes.push({ x: i * step, y: H * BASE_Y_FRAC, vy: 0, target: 0 });
+        }
+      }
+
+      function mkSpark(x, y) {
+        return {
+          x, y,
+          vx: (Math.random() - 0.5) * 5,
+          vy: -1 - Math.random() * 4,
+          life: 1.0,
+          decay: 0.04 + Math.random() * 0.06,
+          r: 0.8 + Math.random() * 1.4,
+        };
+      }
+
+      function init() {
+        resize();
+        sparks = [];
+      }
+
       function tick() {
         ctx.clearRect(0, 0, W, H);
-        wind += 0.001;
-        waveT += 0.022;
 
-        // Smooth mouse lerp
-        mxS += (mx - mxS) * 0.06;
-        myS += (my - myS) * 0.06;
+        // Lerp mouse
+        mxS += (mx - mxS) * 0.08;
+        myS += (my - myS) * 0.08;
 
-        // ── Audio waveform (mouse-reactive) ──
-        const wY      = H * 0.62;
-        const breathe = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(waveT * 0.5));
-        const maxAmp  = 18 * breathe;
-        const sigma   = W * 0.14; // Gaussian influence radius
-        const hasMouse = mx > 0;
+        const isSurge = surgeFrames > 0;
+        if (isSurge) surgeFrames--;
 
-        function waveY(x) {
-          const base = wY
-            + Math.sin(x * 0.012 + waveT) * maxAmp
-            + Math.sin(x * 0.025 - waveT * 1.3) * maxAmp * 0.4
-            + Math.sin(x * 0.007 + waveT * 0.6) * maxAmp * 0.5;
-          if (!hasMouse) return base;
-          const d = x - mxS;
-          const pull = Math.exp(-(d * d) / (2 * sigma * sigma)) * (myS - wY) * 0.65;
-          return base + pull;
+        // ── Trigger random surge ──
+        if (Math.random() < 0.005) {
+          surgeFrames = 6 + Math.floor(Math.random() * 10);
+          // Explode a cluster of nodes
+          const ci = Math.floor(Math.random() * nodes.length);
+          const radius = 4 + Math.floor(Math.random() * 8);
+          for (let i = Math.max(0, ci - radius); i <= Math.min(nodes.length - 1, ci + radius); i++) {
+            nodes[i].vy += (Math.random() - 0.5) * (H * 0.9);
+          }
+          // Spawn sparks at surge centre
+          const sx = nodes[ci] ? nodes[ci].x : W * 0.5;
+          const sy = H * BASE_Y_FRAC;
+          for (let s = 0; s < 12; s++) sparks.push(mkSpark(sx, sy));
         }
 
-        ctx.save();
+        // ── Update nodes ──
+        const baseY = H * BASE_Y_FRAC;
+        nodes.forEach(n => {
+          // Random micro-spike
+          if (Math.random() < 0.04) {
+            n.target = (Math.random() - 0.5) * H * (isSurge ? 0.55 : 0.18);
+          }
+          // Spring toward base + target
+          const spring = (baseY + n.target) - n.y;
+          n.vy += spring * 0.22;       // aggressive spring constant
+          n.vy *= 0.68;                 // harsh damping — snaps, doesn't flow
+          n.y  += n.vy;
+          n.target *= 0.82;
+
+          // Mouse detonation — nodes near cursor get violently displaced
+          if (mx > 0) {
+            const dist = Math.abs(n.x - mxS);
+            if (dist < 90) {
+              const force = Math.pow(1 - dist / 90, 2) * 28;
+              const dir = myS < baseY ? -1 : 1;
+              n.vy += dir * force;
+              // Occasionally shed a spark near mouse
+              if (Math.random() < 0.008) sparks.push(mkSpark(n.x, n.y));
+            }
+          }
+        });
+
+        // ── Draw discharge line ──
+        const alpha     = isSurge ? 0.70 : 0.32;
+        const glowAlpha = isSurge ? 0.20 : 0.07;
+        const lineW     = isSurge ? 2.0  : 1.5;
+        const glowW     = isSurge ? 18   : 10;
+
         // Glow pass
+        ctx.save();
         ctx.beginPath();
-        for (let x = 0; x <= W; x += 3) {
-          x === 0 ? ctx.moveTo(x, waveY(x)) : ctx.lineTo(x, waveY(x));
-        }
-        ctx.strokeStyle = 'rgba(100,190,230,0.07)';
-        ctx.lineWidth = 8;
+        nodes.forEach((n, i) => i === 0 ? ctx.moveTo(n.x, n.y) : ctx.lineTo(n.x, n.y));
+        ctx.strokeStyle = `rgba(80,190,230,${glowAlpha})`;
+        ctx.lineWidth = glowW;
+        ctx.lineJoin = 'miter';
         ctx.stroke();
-        // Crisp pass
+
+        // Hard crisp pass — straight segments, sharp joins
         ctx.beginPath();
-        for (let x = 0; x <= W; x += 2) {
-          x === 0 ? ctx.moveTo(x, waveY(x)) : ctx.lineTo(x, waveY(x));
-        }
-        ctx.strokeStyle = 'rgba(140,210,240,0.18)';
-        ctx.lineWidth = 1.5;
+        nodes.forEach((n, i) => i === 0 ? ctx.moveTo(n.x, n.y) : ctx.lineTo(n.x, n.y));
+        ctx.strokeStyle = isSurge ? `rgba(220,245,255,${alpha})` : `rgba(160,215,240,${alpha})`;
+        ctx.lineWidth = lineW;
+        ctx.lineJoin = 'miter';
         ctx.stroke();
         ctx.restore();
 
-        for (const p of particles) {
-          p.phase += p.freq;
-          p.x += p.vx + Math.sin(p.phase + wind) * 0.22;
-          p.y += p.vy;
-          if (p.x < -4) p.x = W + 4;
-          if (p.x > W + 4) p.x = -4;
-          if (p.y > H + 6) { p.x = Math.random() * W; p.y = -6; }
+        // ── Draw sparks ──
+        sparks = sparks.filter(s => s.life > 0);
+        sparks.forEach(s => {
+          s.x  += s.vx;
+          s.y  += s.vy;
+          s.vy += 0.18;   // gravity
+          s.vx *= 0.96;
+          s.life -= s.decay;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(180, 225, 245, ${p.o})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200,240,255,${s.life * 0.9})`;
           ctx.fill();
-        }
+        });
+
         requestAnimationFrame(tick);
       }
 
-      window.addEventListener('resize', () => {
-        resize();
-        particles.forEach(p => { if (p.x > W) p.x = Math.random() * W; });
-      }, { passive: true });
-
+      window.addEventListener('resize', resize, { passive: true });
       init();
       tick();
     })();
