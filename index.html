@@ -312,14 +312,16 @@
       z-index: 2;
       display: flex;
       align-items: stretch;
-      border-top: 1px solid var(--border);
+      background: rgba(4, 6, 14, 0.82);
+      backdrop-filter: blur(16px) saturate(140%);
+      border-top: 1px solid var(--border-hi);
     }
     .hero-nav-item {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 18px 8px;
+      padding: 20px 8px;
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       letter-spacing: 0.22em;
@@ -608,32 +610,6 @@
     </nav>
   </section>
 
-  <!-- ─── INDEX ─── -->
-  <section class="index-section reveal">
-    <div class="index-inner">
-      <nav class="index-toc" aria-label="Site sections">
-        <a href="/chamber/" class="toc-row">
-          <span class="toc-label">About</span>
-        </a>
-        <a href="/blog/" class="toc-row">
-          <span class="toc-label">Thoughts</span>
-        </a>
-        <a href="/creative/" class="toc-row">
-          <span class="toc-label">Creative</span>
-        </a>
-        <a href="/professional/" class="toc-row">
-          <span class="toc-label">Professional</span>
-        </a>
-        <a href="/projects/" class="toc-row">
-          <span class="toc-label">Projects</span>
-        </a>
-        <a href="/contact/" class="toc-row">
-          <span class="toc-label">Contact</span>
-        </a>
-      </nav>
-    </div>
-
-  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
