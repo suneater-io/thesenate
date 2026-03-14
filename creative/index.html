@@ -17,19 +17,19 @@
 
   <style>
     :root {
-      --bg:        #060810;
-      --surface:   #090D18;
-      --surface-2: #0C1220;
-      --surface-3: #101929;
-      --border:    rgba(200, 148, 42, 0.12);
-      --border-hi: rgba(200, 148, 42, 0.28);
-      --blue:      #C8942A;
-      --blue-hi:   #D8A83A;
-      --blue-dim:  rgba(200, 148, 42, 0.07);
-      --blue-glow: rgba(200, 148, 42, 0.14);
-      --text-1:    #D8EDF5;
-      --text-2:    #4A6878;
-      --text-3:    #243545;
+      --bg:        #04060E;
+      --surface:   #070A16;
+      --surface-2: #0A0E1C;
+      --surface-3: #0E1424;
+      --border:    rgba(80, 150, 190, 0.10);
+      --border-hi: rgba(80, 150, 190, 0.24);
+      --blue:      #6FB5CC;
+      --blue-hi:   #8FCADE;
+      --blue-dim:  rgba(80, 150, 190, 0.07);
+      --blue-glow: rgba(80, 150, 190, 0.13);
+      --text-1:    #C8DDE8;
+      --text-2:    #3D5A6A;
+      --text-3:    #1E3040;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -139,10 +139,10 @@
       z-index: 1;
       pointer-events: none;
       background:
-        linear-gradient(rgba(4,6,14,0.68), rgba(4,6,14,0.68)),
-        radial-gradient(ellipse 90% 70% at 55% 40%, rgba(200,160,120,0.06) 0%, transparent 62%),
-        linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 30%),
-        linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.25) 32%, transparent 52%);
+        linear-gradient(rgba(3,5,12,0.72), rgba(3,5,12,0.72)),
+        radial-gradient(ellipse 80% 60% at 15% 55%, rgba(40,110,160,0.09) 0%, transparent 58%),
+        linear-gradient(to bottom, rgba(3,5,12,0.60) 0%, transparent 30%),
+        linear-gradient(to top, var(--bg) 0%, rgba(3,5,12,0.28) 32%, transparent 52%);
     }
     .hero-content {
       position: relative;
@@ -257,7 +257,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(200,160,120,0.08) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(40,110,160,0.07) 0%, transparent 60%);
       pointer-events: none;
     }
     .sound-text { padding-top: 8px; }
@@ -811,7 +811,7 @@
         for (let x = 0; x <= W; x += 3) {
           x === 0 ? ctx.moveTo(x, waveY(x)) : ctx.lineTo(x, waveY(x));
         }
-        ctx.strokeStyle = 'rgba(248,232,212,0.08)';
+        ctx.strokeStyle = 'rgba(100,190,230,0.07)';
         ctx.lineWidth = 8;
         ctx.stroke();
         // Crisp pass
@@ -819,7 +819,7 @@
         for (let x = 0; x <= W; x += 2) {
           x === 0 ? ctx.moveTo(x, waveY(x)) : ctx.lineTo(x, waveY(x));
         }
-        ctx.strokeStyle = 'rgba(248,232,212,0.20)';
+        ctx.strokeStyle = 'rgba(140,210,240,0.18)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
         ctx.restore();
@@ -833,7 +833,7 @@
           if (p.y > H + 6) { p.x = Math.random() * W; p.y = -6; }
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(248, 232, 212, ${p.o})`;
+          ctx.fillStyle = `rgba(180, 225, 245, ${p.o})`;
           ctx.fill();
         }
         requestAnimationFrame(tick);
