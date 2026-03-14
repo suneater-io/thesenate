@@ -147,6 +147,14 @@
         linear-gradient(90deg, rgba(110,196,184,0.018) 1px, transparent 1px);
       background-size: 48px 48px;
     }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
     .hero-content {
       position: relative;
       z-index: 3;
@@ -510,6 +518,7 @@
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-blueprint"></div>
+    <canvas id="hero-canvas"></canvas>
     <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
       <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(560px, 70vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
@@ -654,6 +663,68 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 48);
     }, { passive: true });
+
+    // ─── HERO DATA STREAM ───
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const CHARS = '0123456789ABCDEF';
+      const COL_W = 16;
+      let W, H, cols = [];
+
+      function resize() {
+        W = canvas.width  = canvas.parentElement.offsetWidth;
+        H = canvas.height = canvas.parentElement.offsetHeight;
+        const count = Math.floor(W / COL_W);
+        cols = Array.from({ length: count }, (_, i) => ({
+          x: i * COL_W + COL_W / 2,
+          y: Math.random() * -H,
+          speed: 0.18 + Math.random() * 0.22,
+          charH: 14 + Math.floor(Math.random() * 4),
+          len: 6 + Math.floor(Math.random() * 10),
+          chars: [],
+          tick: 0,
+          tickRate: 8 + Math.floor(Math.random() * 12),
+        }));
+        cols.forEach(c => {
+          c.chars = Array.from({ length: c.len }, () => CHARS[Math.floor(Math.random() * CHARS.length)]);
+        });
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+        for (const c of cols) {
+          c.y += c.speed;
+          c.tick++;
+          if (c.tick >= c.tickRate) {
+            c.tick = 0;
+            // randomise one char in the column
+            const idx = Math.floor(Math.random() * c.chars.length);
+            c.chars[idx] = CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          if (c.y - c.len * c.charH > H) {
+            c.y = Math.random() * -H * 0.5;
+            c.speed = 0.18 + Math.random() * 0.22;
+          }
+          for (let i = 0; i < c.chars.length; i++) {
+            const cy = c.y - i * c.charH;
+            if (cy < -c.charH || cy > H + c.charH) continue;
+            // head char brighter
+            const alpha = i === 0 ? 0.18 : (0.07 - i * 0.005);
+            if (alpha <= 0) continue;
+            ctx.font = `${c.charH - 2}px "Space Mono", monospace`;
+            ctx.fillStyle = `rgba(196,130,74,${alpha})`;
+            ctx.fillText(c.chars[i], c.x - 4, cy);
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+      tick();
+    })();
 
     // ─── SCROLL REVEAL ───
     const revealObs = new IntersectionObserver((entries) => {

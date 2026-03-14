@@ -428,70 +428,83 @@
       nav.classList.toggle('scrolled', window.scrollY > 48);
     }, { passive: true });
 
-    // ─── HERO WIND ───
+    // ─── HERO CONSTELLATION ───
     (function () {
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const COUNT = 55;
-      let W, H, streaks = [], gustT = 0;
+      const COUNT = 70;
+      const CONNECT_DIST = 120;
+      let W, H, dots = [], mouse = { x: -9999, y: -9999 };
+
+      function mkDot() {
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          r: 1 + Math.random() * 1.2,
+          o: 0.25 + Math.random() * 0.35,
+        };
+      }
 
       function resize() {
         W = canvas.width  = canvas.parentElement.offsetWidth;
         H = canvas.height = canvas.parentElement.offsetHeight;
-      }
-
-      function mkStreak(fromLeft) {
-        const layer = Math.random();
-        const len   = 15 + layer * 45;            // short — indoor wisps, not highway rain
-        return {
-          x:    fromLeft ? -len : Math.random() * W,
-          y:    Math.random() * H * 0.85,         // cluster toward upper window area
-          vx:   0.6 + layer * 1.4,                // slow drift, not a gust
-          vy:   (Math.random() - 0.5) * 0.5,      // more vertical wander indoors
-          len,
-          o:    0.025 + layer * 0.055,            // very low opacity
-          phase: Math.random() * Math.PI * 2,
-        };
-      }
-
-      function init() {
-        resize();
-        streaks = Array.from({ length: COUNT }, () => mkStreak(false));
+        dots = Array.from({ length: COUNT }, mkDot);
       }
 
       function tick() {
         ctx.clearRect(0, 0, W, H);
-        gustT += 0.003;
-        // Gentle breath — subtle pulse, not a storm
-        const gust = 0.85 + 0.15 * Math.sin(gustT);
 
-        for (const s of streaks) {
-          s.x  += s.vx * gust;
-          s.y  += s.vy + Math.sin(s.phase + gustT) * 0.6;
-          s.phase += 0.006;
-          if (s.x > W + s.len) Object.assign(s, mkStreak(true));
-
-          const grd = ctx.createLinearGradient(s.x, s.y, s.x - s.len, s.y);
-          grd.addColorStop(0,   `rgba(210,228,238,${s.o})`);
-          grd.addColorStop(0.5, `rgba(210,228,238,${s.o * 0.3})`);
-          grd.addColorStop(1,   'rgba(210,228,238,0)');
-          ctx.beginPath();
-          ctx.moveTo(s.x, s.y);
-          ctx.lineTo(s.x - s.len, s.y);
-          ctx.strokeStyle = grd;
-          ctx.lineWidth = 0.5 + s.o * 2;
-          ctx.stroke();
+        // move dots
+        for (const d of dots) {
+          d.x += d.vx;
+          d.y += d.vy;
+          if (d.x < 0 || d.x > W) d.vx *= -1;
+          if (d.y < 0 || d.y > H) d.vy *= -1;
         }
+
+        // draw connections (dots + mouse)
+        const all = [...dots, mouse];
+        for (let i = 0; i < dots.length; i++) {
+          for (let j = i + 1; j < all.length; j++) {
+            const dx = dots[i].x - all[j].x;
+            const dy = dots[i].y - all[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > CONNECT_DIST) continue;
+            const alpha = (1 - dist / CONNECT_DIST) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(all[j].x, all[j].y);
+            ctx.strokeStyle = `rgba(138,174,187,${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+
+        // draw dots
+        for (const d of dots) {
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(138,174,187,${d.o})`;
+          ctx.fill();
+        }
+
         requestAnimationFrame(tick);
       }
 
-      window.addEventListener('resize', () => {
-        resize();
-        streaks.forEach(s => { if (s.x > W) s.x = Math.random() * W; });
+      canvas.parentElement.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      }, { passive: true });
+      canvas.parentElement.addEventListener('mouseleave', () => {
+        mouse.x = -9999; mouse.y = -9999;
       }, { passive: true });
 
-      init();
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
       tick();
     })();
 
