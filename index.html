@@ -305,38 +305,23 @@
     }
     .hero-identity span { color: var(--blue); opacity: 0.5; margin: 0 10px; }
 
-    /* ─── HERO NAV STRIP ─── */
-    .hero-nav-strip {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 2;
-      display: flex;
-      align-items: stretch;
-      background: rgba(4, 6, 14, 0.82);
-      backdrop-filter: blur(16px) saturate(140%);
-      border-top: 1px solid var(--border-hi);
-    }
-    .hero-nav-item {
-      flex: 1;
+    .nav-links {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 20px 8px;
+      gap: 32px;
+    }
+    .nav-link {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       letter-spacing: 0.22em;
+      padding-left: 0.22em;
       text-transform: uppercase;
       color: var(--text-2);
       text-decoration: none;
-      border-right: 1px solid var(--border);
-      transition: color 0.2s ease, background 0.2s ease;
+      transition: color 0.2s ease;
     }
-    .hero-nav-item:last-child { border-right: none; }
-    .hero-nav-item:hover { color: var(--text-1); background: var(--blue-dim); }
-    .hero-nav-item:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
-    @media (max-width: 600px) {
-      .hero-nav-item { font-size: 8px; padding: 14px 4px; letter-spacing: 0.12em; }
-    }
+    .nav-link:hover { color: var(--text-1); }
+    @media (max-width: 600px) { .nav-links { display: none; } }
 
     /* ─── BUTTONS ─── */
     .btn {
@@ -574,6 +559,14 @@
   <!-- ─── NAV ─── -->
   <nav id="nav">
     <a href="#" class="nav-logo">The<span>Senate</span>.io</a>
+    <div class="nav-links">
+      <a href="/chamber/"      class="nav-link">About</a>
+      <a href="/blog/"         class="nav-link">Thoughts</a>
+      <a href="/creative/"     class="nav-link">Creative</a>
+      <a href="/professional/" class="nav-link">Professional</a>
+      <a href="/projects/"     class="nav-link">Projects</a>
+      <a href="/contact/"      class="nav-link">Contact</a>
+    </div>
   </nav>
 
   <!-- ─── HERO ─── -->
@@ -600,14 +593,6 @@
     <p class="hero-name a4">Grant Hansen &nbsp;&middot;&nbsp; Solution Architect</p>
     <p class="hero-identity a5">Architect<span>·</span>Drummer<span>·</span>Collector<span>·</span>Detroit</p>
 
-    <nav class="hero-nav-strip a6" aria-label="Site sections">
-      <a href="/chamber/"      class="hero-nav-item">About</a>
-      <a href="/blog/"         class="hero-nav-item">Thoughts</a>
-      <a href="/creative/"     class="hero-nav-item">Creative</a>
-      <a href="/professional/" class="hero-nav-item">Professional</a>
-      <a href="/projects/"     class="hero-nav-item">Projects</a>
-      <a href="/contact/"      class="hero-nav-item">Contact</a>
-    </nav>
   </section>
 
 
