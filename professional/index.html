@@ -105,13 +105,95 @@
       letter-spacing: 0.22em;
       padding-left: 0.22em;
       text-transform: uppercase;
-      color: var(--text-2);
+      color: var(--text-1);
+      opacity: 0.75;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: opacity 0.2s ease, color 0.2s ease;
     }
-    .nav-link:hover { color: var(--text-1); }
-    .nav-link.active { color: var(--blue); }
-    @media (max-width: 600px) { .nav-links { display: none; } }
+    .nav-link:hover { opacity: 1; }
+    .nav-link.active { opacity: 1; color: var(--blue); }
+
+    /* ─── SKIP LINK ─── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      padding: 8px 16px;
+      background: var(--blue);
+      color: var(--bg);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      z-index: 9999;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ─── HAMBURGER ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 11px 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-1);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── MOBILE DRAWER ─── */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 250;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .nav-drawer.open { opacity: 1; pointer-events: all; }
+    .nav-drawer .nav-link {
+      font-size: 22px !important;
+      letter-spacing: 0.12em !important;
+      opacity: 0.8 !important;
+    }
+    .nav-drawer .nav-link:hover,
+    .nav-drawer .nav-link.active { opacity: 1 !important; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -502,6 +584,17 @@
 </head>
 <body>
 
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/chamber/" class="nav-link">About</a>
+    <a href="/blog/" class="nav-link">Thoughts</a>
+    <a href="/creative/" class="nav-link">Creative</a>
+    <a href="/professional/" class="nav-link active">Professional</a>
+    <a href="/projects/" class="nav-link">Projects</a>
+    <a href="/contact/" class="nav-link">Contact</a>
+  </div>
+
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
@@ -512,13 +605,16 @@
       <a href="/projects/" class="nav-link">Projects</a>
       <a href="/contact/" class="nav-link">Contact</a>
     </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- ─── HERO ─── -->
-  <section class="hero">
+  <section class="hero" id="main">
     <div class="hero-overlay"></div>
     <div class="hero-blueprint"></div>
-    <canvas id="hero-canvas"></canvas>
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
       <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(560px, 70vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
@@ -664,8 +760,31 @@
       nav.classList.toggle('scrolled', window.scrollY > 48);
     }, { passive: true });
 
+    // ─── MOBILE NAV ───
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('nav-drawer');
+    function closeDrawer() {
+      navDrawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', () => {
+      const isOpen = navDrawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    navDrawer.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
     // ─── HERO DATA STREAM ───
     (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
