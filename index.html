@@ -262,7 +262,7 @@
       flex-shrink: 0;
     }
 
-    .hero-tagline {
+    .hero-role {
       position: relative; z-index: 2;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(18px, 2vw, 26px);
@@ -313,10 +313,10 @@
     }
     .nav-link {
       font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.18em;
-      padding-left: 0.18em;
+      letter-spacing: 0.22em;
+      padding-left: 0.22em;
       text-transform: uppercase;
       color: var(--text-1);
       opacity: 0.75;
@@ -557,8 +557,8 @@
       opacity: 0;
       transform: translateY(20px);
       transition:
-        opacity 0.9s cubic-bezier(0.16,1,0.3,1),
-        transform 0.9s cubic-bezier(0.16,1,0.3,1);
+        opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+        transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
     .reveal.vis { opacity: 1; transform: translateY(0); }
     .index-section.reveal { transform: translateY(0); }
@@ -688,7 +688,7 @@
       <div class="hero-divider-line"></div>
     </div>
 
-    <p class="hero-tagline a4">Everything. At full volume.</p>
+    <p class="hero-role a4">Everything. At full volume.</p>
     <p class="hero-name a4">Grant Hansen &nbsp;&middot;&nbsp; Solution Architect</p>
     <p class="hero-identity a5">Architect<span>·</span>Drummer<span>·</span>Collector<span>·</span>Detroit</p>
 
@@ -735,7 +735,7 @@
         entry.target.classList.add('vis');
         revealObs.unobserve(entry.target);
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
     // ─── HERO SNOW ───
