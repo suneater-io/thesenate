@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>thesenate.io</title>
-  <meta name="description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
+  <meta name="description" content="The Senate is everything I am. Every interest, discipline, and obsession holds a seat." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="brand_assets/senate-logo-white.png" />
@@ -14,13 +14,13 @@
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://thesenate.io" />
   <meta property="og:title"       content="The Senate — Grant Hansen" />
-  <meta property="og:description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
+  <meta property="og:description" content="The Senate is everything I am. Every interest, discipline, and obsession holds a seat." />
   <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="The Senate — Grant Hansen" />
-  <meta name="twitter:description" content="Solution Architect. The Senate is the conglomerate of everything I am — every interest, discipline, and obsession that occupies a seat in the chamber." />
+  <meta name="twitter:description" content="The Senate is everything I am. Every interest, discipline, and obsession holds a seat." />
   <meta name="twitter:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -290,6 +290,24 @@
     .nav-link:hover, .nav-link.active { opacity: 1; }
     .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
     .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    /* Nav underline micro-interaction */
+    .nav-links .nav-link {
+      position: relative;
+    }
+    .nav-links .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 8px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0.65;
+    }
+    .nav-links .nav-link:hover::after,
+    .nav-links .nav-link.active::after { transform: scaleX(1); }
 
     /* ─── SKIP LINK ─── */
     .skip-link {

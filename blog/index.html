@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thoughts — The Senate</title>
-  <meta name="description" content="Long-form thoughts from the chamber. Architecture, AI, culture, mythology, and whatever else demands a seat." />
+  <meta name="description" content="What I think about. Architecture, AI, culture, mythology — whatever is loud enough to write down." />
 
   <link rel="icon" type="image/png" href="../brand_assets/senate-logo-white.png" />
   <link rel="apple-touch-icon" href="../brand_assets/senate-logo-white.png" />
@@ -112,6 +112,24 @@
     .nav-link.active { opacity: 1; color: var(--blue); }
     .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
     .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    /* Nav underline micro-interaction */
+    .nav-links .nav-link {
+      position: relative;
+    }
+    .nav-links .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 8px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0.65;
+    }
+    .nav-links .nav-link:hover::after,
+    .nav-links .nav-link.active::after { transform: scaleX(1); }
     /* ─── SKIP LINK ─── */
     .skip-link {
       position: absolute;
@@ -277,7 +295,8 @@
     .posts-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px;
+      gap: 1px;
+      background: var(--border);
     }
 
     .post-card:first-child {
@@ -293,7 +312,7 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.25s ease, background 0.25s ease;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
     }
     .post-card::before {
       content: '';
@@ -306,7 +325,8 @@
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
       z-index: 1;
     }
-    .post-card:hover { border-color: var(--border-hi); background: var(--surface-2); }
+    .post-card:hover { border-color: var(--border-hi); background: var(--surface-2); transform: translateY(-3px); }
+    .post-card:first-child:hover { transform: translateY(-1px); }
     .post-card:hover::before { transform: scaleX(1); }
     .post-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 

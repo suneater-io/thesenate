@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — The Senate</title>
-  <meta name="description" content="Get in touch with Grant Hansen." />
+  <meta name="description" content="The inbox is open. Use it." />
 
   <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
   <link rel="apple-touch-icon" href="/brand_assets/senate-logo-white.png" />
@@ -118,6 +118,24 @@
     .nav-link.active { opacity: 1; color: var(--blue); }
     .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
     .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    /* Nav underline micro-interaction */
+    .nav-links .nav-link {
+      position: relative;
+    }
+    .nav-links .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 8px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0.65;
+    }
+    .nav-links .nav-link:hover::after,
+    .nav-links .nav-link.active::after { transform: scaleX(1); }
 
     /* ─── SKIP LINK ─── */
     .skip-link {
@@ -291,7 +309,7 @@
     }
     .social-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -304,7 +322,13 @@
       background: var(--bg);
       text-decoration: none;
       position: relative;
-      transition: background 0.2s ease;
+      transition: background 0.2s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    /* Email is the primary contact — give it full width and more breathing room */
+    .social-card--primary {
+      grid-column: 1 / -1;
+      padding: 48px 40px;
+      background: var(--surface);
     }
     .social-card::after {
       content: '';
@@ -314,12 +338,18 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .social-card:hover { background: var(--surface); }
+    .social-card:hover { background: var(--surface); transform: translateY(-2px); }
+    .social-card--primary:hover { background: var(--surface-2); transform: translateY(-2px); }
     .social-card:hover::after { opacity: 1; }
+    .social-card:active { transform: translateY(0) scale(0.99); }
     .social-card:hover .social-icon { color: var(--blue); }
     .social-card:hover .social-name { color: var(--text-1); }
     .social-card:hover .social-handle { color: var(--text-2); }
     .social-card:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+
+    .social-card--primary .social-name { font-size: 22px; color: var(--text-1); }
+    .social-card--primary .social-handle { font-size: 11px; color: var(--text-2); letter-spacing: 0.08em; }
+    .social-card--primary .social-icon { font-size: 36px; color: var(--blue-hi); }
 
     .social-icon {
       font-size: 28px;
@@ -456,17 +486,17 @@
     <div class="hero-content">
       <h1 class="ph-title">Contact</h1>
       <div class="hero-bar">
-        <p class="hero-role">The inbox is open. Use it with intention.</p>
+        <p class="hero-role">The inbox is open. Use it.</p>
         <div class="hero-line"></div>
       </div>
     </div>
   </section>
 
   <!-- ─── SOCIALS ─── -->
-  <div class="social-section reveal">
+  <div class="social-section">
     <div class="social-grid">
 
-      <a href="mailto:hurricanegrant@gmail.com" class="social-card">
+      <a href="mailto:hurricanegrant@gmail.com" class="social-card social-card--primary reveal">
         <i class="ph ph-envelope social-icon"></i>
         <div class="social-text">
           <span class="social-name">Email</span>
@@ -475,7 +505,7 @@
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
-      <a href="https://www.linkedin.com/in/grant-hansen-suneater" class="social-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/grant-hansen-suneater" class="social-card reveal" style="transition-delay: 0.12s" target="_blank" rel="noopener noreferrer">
         <i class="ph ph-linkedin-logo social-icon"></i>
         <div class="social-text">
           <span class="social-name">LinkedIn</span>
@@ -484,7 +514,7 @@
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
-      <a href="#" class="social-card">
+      <a href="#" class="social-card reveal" style="transition-delay: 0.20s">
         <i class="ph ph-github-logo social-icon"></i>
         <div class="social-text">
           <span class="social-name">GitHub</span>
@@ -493,7 +523,7 @@
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
-      <a href="#" class="social-card">
+      <a href="#" class="social-card reveal" style="transition-delay: 0.28s">
         <i class="ph ph-x-logo social-icon"></i>
         <div class="social-text">
           <span class="social-name">X / Twitter</span>
@@ -502,7 +532,7 @@
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
-      <a href="https://www.instagram.com/maxis_sports_vintage/" class="social-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.instagram.com/maxis_sports_vintage/" class="social-card reveal" style="transition-delay: 0.36s" target="_blank" rel="noopener noreferrer">
         <i class="ph ph-instagram-logo social-icon"></i>
         <div class="social-text">
           <span class="social-name">Instagram</span>

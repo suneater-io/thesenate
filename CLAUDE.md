@@ -52,3 +52,75 @@
 - Do not stop after one screenshot pass
 - Do not use `transition-all`
 - Do not use default Tailwind blue/indigo as primary color
+
+---
+
+## Design Context
+
+### Users
+thesenate.io is personal expression first — no target conversion, no optimized persona. Visitors arrive through curiosity. The job is to reward that curiosity without packaging anything. The range of identities (architect, drummer, collector, Detroit, CS) should land as genuinely surprising. Nothing is pre-digested for the visitor's comfort. Desired outcome: they walk away wanting to know more.
+
+### Brand Personality
+**Three words: earned, heavy, precise.**
+
+Grant Hansen. Two registers simultaneously — raw, dark, metal-adjacent AND systematic, architectural, competence-driven. The tension between them *is* the identity, not a contradiction to resolve.
+
+Voice: terse, declarative, real. Short sentences. No fluff. No exclamation marks. No "passionate about" language.
+
+Tagline: *Everything. At full volume.*
+
+### Aesthetic Direction
+**Visual world**: Heavy music / metal aesthetics. The SENATE wordmark is a death metal illustration — organic dripping letterforms, blade-like spikes, curved horns. The site lives in the same territory: industrial weight, darkness as natural environment (not a style choice), typographic precision alongside raw graphic force.
+
+**Theme**: Dark only. Near-black deep navy (`#060810`). Never pure black. Never light mode. No white surfaces.
+
+**Not**:
+- Cyberpunk (no neon, no circuit-board motifs)
+- Gothic-romantic (no ornate flourishes)
+- Corporate dark mode (no smooth rounded-card design language)
+- A standard portfolio — the structure itself should feel unexpected
+
+### Design Principles
+
+1. **Restraint over decoration.** The darkness is the environment, not the effect. Space, weight, and type carry hierarchy. Add only what earns its place.
+
+2. **Tension as a feature.** Industrial metal weight and architectural precision coexist. Don't resolve the friction — use it.
+
+3. **Reveal, don't explain.** Layer content behind exploration. The range of identities creates cognitive surprise — never package it into a tidy narrative.
+
+4. **Every element has a job.** Nothing decorative that doesn't serve atmosphere or structure. No filler copy. Icons only where they clarify function.
+
+5. **Atmosphere is ambient, content is primary.** Canvas effects, grain, orbs, gradients set the mood. The moment a visitor notices an effect, reduce its opacity until it disappears, then bring it back 30%.
+
+### Token Quick Reference
+```
+--bg:        #060810   page background
+--surface:   #090D18   elevated panels
+--surface-2: #0C1220   nested surfaces
+--border:    rgba(120,175,210,0.10)
+--border-hi: rgba(120,175,210,0.24)
+--text-1:    #D8EDF5   primary text
+--text-2:    #4A6878   secondary/muted
+--text-3:    #243545   ghost/disabled
+--blue:      per-page accent (see brand_assets/BRAND_GUIDELINES.md §3)
+--blue-dim:  rgba(--blue, 0.07)   tag bg, subtle fills
+--blue-glow: rgba(--blue, 0.14)   glow, hover states
+```
+
+### Font Stack
+```
+Barlow Condensed — display / headings
+Chakra Petch     — body / UI
+Space Mono       — labels / nav / mono data
+```
+
+### Hard Anti-Patterns
+- Default Tailwind palette (indigo-500, blue-600, slate-300)
+- `transition-all` — only animate `transform` and `opacity`
+- Light or white backgrounds in any context
+- Purple, green, or red hero tints (must match page `--blue`)
+- Cards nested inside cards
+- Identical card grids everywhere (icon + heading + text, repeated)
+- Gradient text or glassmorphism
+- Hero metric / big-number layouts as decoration
+- System fonts, Inter, Roboto, Arial
