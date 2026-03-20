@@ -674,13 +674,13 @@
 
           // Steel-blue colour ramp — black = invisible on screen-blend
           vec3 col = vec3(0.0);
-          col += vec3(0.08, 0.17, 0.32) * smoothstep(0.20, 0.50, n1) * 3.0;
-          col += vec3(0.20, 0.38, 0.66) * smoothstep(0.32, 0.62, n2) * 2.6;
-          col += vec3(0.50, 0.78, 1.00) * max(0.0, n3 - 0.70) * 6.0; // bright streaks
+          col += vec3(0.07, 0.15, 0.28) * smoothstep(0.24, 0.52, n1) * 2.4;
+          col += vec3(0.17, 0.33, 0.58) * smoothstep(0.36, 0.66, n2) * 2.0;
+          col += vec3(0.46, 0.76, 0.98) * max(0.0, n3 - 0.73) * 5.0; // bright streaks
 
           // Vignette
           vec2 vig = uv - 0.5;
-          float v = 1.0 - dot(vig * vec2(1.0, 1.4), vig * vec2(1.0, 1.4)) * 1.8;
+          float v = 1.0 - dot(vig * vec2(1.0, 1.4), vig * vec2(1.0, 1.4)) * 2.2;
           col *= clamp(v, 0.0, 1.0);
 
           // Bottom fade (hero content continues below fold)
