@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — The Senate</title>
+
+  <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Chakra+Petch:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:      #060810;
+      --surface: #090D18;
+      --border:  rgba(120, 175, 210, 0.10);
+      --blue:    #7AAEC8;
+      --text-1:  #D8EDF5;
+      --text-2:  #4A6878;
+      --text-3:  #243545;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: 'Chakra Petch', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.09;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      text-align: left;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .code {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(120px, 22vw, 220px);
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: var(--surface);
+      user-select: none;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--blue);
+      margin: 28px 0 24px;
+      opacity: 0.6;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+
+    .msg {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 12px;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s both;
+    }
+
+    .sub {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-2);
+      margin-bottom: 40px;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      transition: gap 0.2s cubic-bezier(0.16,1,0.3,1);
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+    }
+    .back:hover { gap: 16px; }
+
+    .nav-logo {
+      position: fixed;
+      top: 28px; left: 40px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      text-decoration: none;
+      z-index: 10;
+      opacity: 0.6;
+    }
+    .nav-logo span { color: var(--blue); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
+
+  <div class="wrap">
+    <div class="code">404</div>
+    <div class="divider"></div>
+    <div class="msg">Page not found</div>
+    <p class="sub">This page doesn't exist. Or it did and it's gone.<br>Either way — nothing here.</p>
+    <a href="/" class="back">&larr; Back to the Senate</a>
+  </div>
+
+</body>
+</html>

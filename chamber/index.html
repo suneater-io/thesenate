@@ -320,86 +320,105 @@
       background: var(--border);
     }
 
-    /* ─── STATEMENT ─── */
-    .statement-section {
-      padding: 100px 52px 96px;
+    /* ─── WHO ─── */
+    .who-section {
+      padding: 100px 52px;
       border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      column-gap: 100px;
+      align-items: start;
     }
 
-    .statement-text {
+    .who-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      opacity: 0.8;
+      filter: saturate(0.35);
+      border: 1px solid var(--border);
+    }
+
+    .who-copy {
+      padding-top: 8px;
+    }
+
+    .who-copy p {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: clamp(15px, 1.5vw, 20px);
+      font-size: 15px;
       font-weight: 300;
-      line-height: 1.82;
+      line-height: 1.9;
       color: var(--text-2);
-      max-width: none;
+      margin-bottom: 1.6em;
     }
 
-    .statement-text strong {
+    .who-copy p:last-child { margin-bottom: 0; }
+
+    .who-copy strong {
       color: var(--text-1);
       font-weight: 500;
     }
 
-    /* ─── DISCIPLINES ─── */
-    .disciplines-section {
-      padding: 0 52px;
-    }
-
-    .disciplines-header {
-      padding: 48px 0;
-      margin-bottom: 0;
-    }
-
-    .discipline {
-      padding: 72px 0;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      column-gap: 80px;
-      align-items: end;
-    }
-
-    .disc-meta {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .disc-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--blue);
-      opacity: 0.65;
-      flex-shrink: 0;
-    }
-
-    .disc-rule {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .disc-name {
+    .who-copy .who-name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(52px, 8.5vw, 120px);
+      font-size: clamp(48px, 6vw, 80px);
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
-      line-height: 0.88;
+      line-height: 0.9;
       color: var(--text-1);
+      margin-bottom: 40px;
       display: block;
     }
 
-    .disc-copy {
+    /* ─── BELIEF ─── */
+    .belief-section {
+      padding: 96px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .belief-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-top: 0;
+    }
+
+    .belief-item {
+      background: var(--bg);
+      padding: 48px 40px;
+    }
+
+    .belief-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--blue);
+      opacity: 0.5;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .belief-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .belief-copy {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 300;
-      line-height: 1.88;
+      line-height: 1.85;
       color: var(--text-2);
-      padding-bottom: 6px;
     }
 
     /* ─── CLOSE ─── */
@@ -539,10 +558,10 @@
     @media (max-width: 960px) {
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
-      .statement-section { padding: 72px 24px; }
-.disciplines-section { padding: 0 24px; }
-      .discipline { grid-template-columns: 1fr; column-gap: 0; }
-      .disc-copy { padding-bottom: 0; padding-top: 20px; }
+      .who-section { padding: 72px 24px; grid-template-columns: 1fr; }
+      .who-photo { max-width: 320px; aspect-ratio: 1 / 1; }
+      .belief-section { padding: 72px 24px; }
+      .belief-grid { grid-template-columns: 1fr; }
       .close-section { padding: 72px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
@@ -551,9 +570,9 @@
     @media (max-width: 600px) {
       .hero { padding: 0 20px 48px; }
       .hero-coord { display: none; }
-      .statement-section { padding: 64px 20px; }
-      .disciplines-section { padding: 0 20px; }
-      .discipline { padding: 56px 0; }
+      .who-section { padding: 64px 20px; }
+      .belief-section { padding: 64px 20px; }
+      .belief-item { padding: 36px 24px; }
       .close-section { padding: 64px 20px; }
     }
   </style>
@@ -628,84 +647,64 @@
 
   </section>
 
-  <!-- ─── STATEMENT ─── -->
-  <section class="statement-section">
-    <div class="section-label reveal">ABOUT</div>
-    <p class="statement-text reveal" style="transition-delay: 0.1s;">
-      Most people manage chaos. They organize around it, wait for it to settle. Grant reads it.<br><br>
-      The ability isn't technical. It's perceptual. A broken architecture, a losing round, a year that cost more than it gave back — the surface changes, the problem doesn't. Chaos has a shape. Systems don't fail randomly; they fail along the same seams, every time. Pull back far enough and the line through becomes obvious. The work is learning to do that before the noise convinces you there isn't one.<br><br>
-      Music came first — not the kind that's easy to like, but some of the most complex and technical music out there. The kind most people never get past the surface of. When you spend years tracking everything happening inside music that demands that level of attention, you stop hearing things one layer at a time. Counter&#8209;Strike after — thirteen rounds of incomplete information at high stakes. Norse mythology, Detroit, vintage — different worlds, same thing: stay in it when it's costing you, see what everyone else has given up on, build what actually ships.<br><br>
-      <strong>Everything here was built alone. The record, the systems, the disciplines. Not as a condition. As a choice.</strong>
-    </p>
+  <!-- ─── WHO ─── -->
+  <section class="who-section">
+    <div class="who-copy reveal">
+      <span class="who-name">Grant<br>Hansen</span>
+      <p>
+        I'm a Solution Architect. I live for my kids. I bleed Detroit.
+        That's the short version.
+      </p>
+      <p>
+        The longer version starts with a 486 in my parents' house and ends
+        somewhere in AI infrastructure — with drums, death metal, Counter&#8209;Strike,
+        a vintage clothing archive, and a Lego collection in between.
+        None of it is separate. All of it made me better at my job.
+      </p>
+      <p>
+        I believe music matters more than most people let themselves admit.
+        Not as background. As a force. The kind that shapes how you think,
+        how you listen, how you handle the hard parts.
+      </p>
+      <p>
+        Detroit taught me the rest. You can only truly feel success if you've
+        experienced failure. The city knows this better than anywhere.
+        I chose those teams. I chose that city. I stayed loyal when it cost me.
+        <strong>That's not a tragedy — that's the education.</strong>
+      </p>
+      <p>
+        The best decision I ever made was my kids.
+        Everything else — the career, the house, the work — is built around that.
+      </p>
+    </div>
+    <img
+      class="who-photo reveal"
+      style="transition-delay: 0.15s;"
+      src="https://placehold.co/380x510/090D18/243545?text=photo"
+      alt="Grant Hansen"
+    />
   </section>
 
-  <!-- ─── DISCIPLINES ─── -->
-  <section class="disciplines-section">
-
-    <div class="disciplines-header reveal">
-      <div class="section-label" style="margin-bottom: 0;">DISCIPLINES / 06</div>
+  <!-- ─── WHAT I BELIEVE ─── -->
+  <section class="belief-section">
+    <div class="section-label reveal">WHAT I BELIEVE</div>
+    <div class="belief-grid">
+      <div class="belief-item reveal">
+        <span class="belief-num">01</span>
+        <div class="belief-heading">Earned, not given</div>
+        <p class="belief-copy">Nothing worth having arrives easily. The house, the job, the relationships — all of it costs something. I don't trust things that didn't. You can only feel success if you've felt failure first. That's not pessimism. That's the only honest map.</p>
+      </div>
+      <div class="belief-item reveal" style="transition-delay: 0.12s;">
+        <span class="belief-num">02</span>
+        <div class="belief-heading">Music is not optional</div>
+        <p class="belief-copy">Music is how I process everything. Not background noise — a force. The most technically complex music I know taught me how to hear structure inside chaos. I believe most people don't let music do what it can actually do for them. That's a loss they don't know they're taking.</p>
+      </div>
+      <div class="belief-item reveal" style="transition-delay: 0.24s;">
+        <span class="belief-num">03</span>
+        <div class="belief-heading">There's always a layer underneath</div>
+        <p class="belief-copy">Computers aren't click-and-open things. Problems aren't what they look like on the surface. People aren't their first impression. Everything rewards the person who keeps pulling at it. That curiosity — the <em>how does this work, though</em> — is the through line in everything I do.</p>
+      </div>
     </div>
-
-    <!-- 01 — MUSIC -->
-    <article class="discipline reveal">
-      <div class="disc-meta">
-        <span class="disc-num">01</span>
-        <div class="disc-rule"></div>
-      </div>
-      <span class="disc-name">Music</span>
-      <p class="disc-copy">There's music that rewards you immediately and music that makes you work for it. Grant has always gone toward the second kind — dense, technical, structurally demanding. The kind where you hear something new on the hundredth listen. Not because difficulty is the point, but because anything worth understanding takes more than one pass.</p>
-    </article>
-
-    <!-- 02 — DETROIT -->
-    <article class="discipline reveal">
-      <div class="disc-meta">
-        <span class="disc-num">02</span>
-        <div class="disc-rule"></div>
-      </div>
-      <span class="disc-name">Detroit</span>
-      <p class="disc-copy">Wings. Lions. Tigers. Pistons. Decades of going in knowing you might lose. Detroit sports loyalty isn't the easy kind — it's the kind you maintain after the third losing season, after the trade that shouldn't have happened, after everyone else has moved on to a better story. Loyalty that only holds when the team is winning isn't loyalty. It's tourism.</p>
-    </article>
-
-    <!-- 03 — NORSE -->
-    <article class="discipline reveal">
-      <div class="disc-meta">
-        <span class="disc-num">03</span>
-        <div class="disc-rule"></div>
-      </div>
-      <span class="disc-name">Norse</span>
-      <p class="disc-copy">Odin didn't seek wisdom because it was available. He traded an eye for it. Hung from Yggdrasil nine days to earn the runes — not because he needed them to survive, but because he wanted to understand what others couldn't. Read the Eddas as religion if you want. Read them as a manual and they hit different. Every story is about what things cost and whether you pay anyway. Ragnarök is coming. The gods know it. They fight anyway.</p>
-    </article>
-
-    <!-- 04 — COUNTER-STRIKE -->
-    <article class="discipline reveal">
-      <div class="disc-meta">
-        <span class="disc-num">04</span>
-        <div class="disc-rule"></div>
-      </div>
-      <span class="disc-name">Counter&#8209;Strike</span>
-      <p class="disc-copy">Thirteen rounds to win. Five players, incomplete information, and a map that punishes bad decisions immediately. A 1v3 with the bomb planted — the math says it's over. The discipline is staying locked when the math says it's over. Panic is the only thing that finishes you before the enemy does. That applies further than the game.</p>
-    </article>
-
-    <!-- 05 — VINTAGE -->
-    <article class="discipline reveal">
-      <div class="disc-meta">
-        <span class="disc-num">05</span>
-        <div class="disc-rule"></div>
-      </div>
-      <span class="disc-name">Vintage</span>
-      <p class="disc-copy">Vintage isn't nostalgia. It's archaeology. A 1994 Wings Starter jacket is a primary source document — it places you in a specific moment, a specific culture, a specific decision someone made about what mattered. Collecting it right means knowing what you're looking at, which means doing the work to understand the context. Nothing earns its place by being easy to find. That's the standard — and it's not just for jackets.</p>
-    </article>
-
-    <!-- 06 — ARCHITECTURE -->
-    <article class="discipline reveal">
-      <div class="disc-meta">
-        <span class="disc-num">06</span>
-        <div class="disc-rule"></div>
-      </div>
-      <span class="disc-name">Architecture</span>
-      <p class="disc-copy">Everything else feeds this one. Music trained the ear to hear structure inside noise. Counter-Strike trained the mind to decide with incomplete information. Detroit trained the commitment to see it through. Norse mythology named what things cost. Vintage trained the eye to recognize what's worth keeping. Architecture is where all of it becomes a result. The one that actually ships.</p>
-    </article>
-
   </section>
 
   <!-- ─── CLOSE ─── -->

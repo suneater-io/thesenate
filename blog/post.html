@@ -62,6 +62,19 @@
       50% { opacity: 0.8; }
     }
 
+    /* ─── READING PROGRESS ─── */
+    #read-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--blue);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
     /* ─── NAV ─── */
     nav {
       position: fixed;
@@ -357,6 +370,7 @@
 </head>
 <body>
 
+  <div id="read-progress" aria-hidden="true"></div>
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
@@ -470,6 +484,29 @@
     }
 
     loadPost();
+
+    // ─── READING PROGRESS ───
+    (function () {
+      const bar = document.getElementById('read-progress');
+      window.addEventListener('scroll', () => {
+        const doc = document.documentElement;
+        const scrolled = doc.scrollTop || document.body.scrollTop;
+        const total = doc.scrollHeight - doc.clientHeight;
+        bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+      }, { passive: true });
+    })();
+
+    // ─── CONSOLE EASTER EGG ───
+    (function () {
+      const s1 = 'background:#060810;color:#7AAEC8;font-family:monospace;font-size:13px;padding:6px 12px;border-left:3px solid #7AAEC8;';
+      const s2 = 'background:#060810;color:#4A6878;font-family:monospace;font-size:11px;padding:4px 12px;';
+      const s3 = 'background:#060810;color:#D8EDF5;font-family:monospace;font-size:11px;padding:4px 12px;font-style:italic;';
+      console.log('%c THESENATE.IO ', s1);
+      console.log('%c You opened the console. Curious by nature.', s2);
+      console.log('%c That curiosity is the whole point.', s2);
+      console.log('%c "There\'s always something behind what you see." ', s3);
+      console.log('%c — Grant', s2);
+    })();
   </script>
 </body>
 </html>
