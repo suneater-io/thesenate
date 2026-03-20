@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.2/src/index.js"
+          integrity="sha384-J7cw2fbG1T4C5MirTVUxsZGaMfw2m0XsCgOQEqUvB1OF9VIsHWuZF1GmyVRzs7eu"
+          crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -110,9 +112,12 @@
       opacity: 0.75;
       text-decoration: none;
       transition: opacity 0.2s ease, color 0.2s ease;
+      padding: 10px 0;
     }
     .nav-link:hover { opacity: 1; }
     .nav-link.active { opacity: 1; color: var(--blue); }
+    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── SKIP LINK ─── */
     .skip-link {
@@ -223,7 +228,7 @@
       pointer-events: none;
       background:
         linear-gradient(rgba(4,6,14,0.68), rgba(4,6,14,0.68)),
-        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(122,200,160,0.04) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(138,174,187,0.04) 0%, transparent 65%),
         linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 30%),
         linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.25) 32%, transparent 52%);
     }
@@ -461,20 +466,20 @@
   <div class="social-section reveal">
     <div class="social-grid">
 
-      <a href="#" class="social-card">
+      <a href="mailto:hurricanegrant@gmail.com" class="social-card">
         <i class="ph ph-envelope social-icon"></i>
         <div class="social-text">
           <span class="social-name">Email</span>
-          <span class="social-handle">hello@thesenate.io</span>
+          <span class="social-handle">hurricanegrant@gmail.com</span>
         </div>
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
-      <a href="#" class="social-card">
+      <a href="https://www.linkedin.com/in/grant-hansen-suneater" class="social-card" target="_blank" rel="noopener noreferrer">
         <i class="ph ph-linkedin-logo social-icon"></i>
         <div class="social-text">
           <span class="social-name">LinkedIn</span>
-          <span class="social-handle">@placeholder</span>
+          <span class="social-handle">grant-hansen-suneater</span>
         </div>
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
@@ -497,11 +502,11 @@
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
 
-      <a href="#" class="social-card">
+      <a href="https://www.instagram.com/maxis_sports_vintage/" class="social-card" target="_blank" rel="noopener noreferrer">
         <i class="ph ph-instagram-logo social-icon"></i>
         <div class="social-text">
           <span class="social-name">Instagram</span>
-          <span class="social-handle">@placeholder</span>
+          <span class="social-handle">@maxis_sports_vintage</span>
         </div>
         <i class="ph ph-arrow-right social-arrow"></i>
       </a>
@@ -527,17 +532,43 @@
     // ─── MOBILE NAV ───
     const hamburger = document.getElementById('hamburger');
     const navDrawer = document.getElementById('nav-drawer');
+    navDrawer.setAttribute('role', 'dialog');
+    navDrawer.setAttribute('aria-modal', 'true');
+    navDrawer.setAttribute('aria-label', 'Navigation');
+
+    function getFocusable() {
+      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
+    }
+    function trapFocus(e) {
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
     function closeDrawer() {
       navDrawer.classList.remove('open');
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      navDrawer.removeEventListener('keydown', trapFocus);
+      hamburger.focus();
     }
     hamburger.addEventListener('click', () => {
       const isOpen = navDrawer.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (isOpen) {
+        const focusable = getFocusable();
+        if (focusable.length) focusable[0].focus();
+        navDrawer.addEventListener('keydown', trapFocus);
+      } else {
+        navDrawer.removeEventListener('keydown', trapFocus);
+      }
     });
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
@@ -610,7 +641,7 @@
           ctx.fill();
         }
 
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
       }
 
       canvas.parentElement.addEventListener('mousemove', (e) => {
@@ -624,7 +655,12 @@
 
       window.addEventListener('resize', resize, { passive: true });
       resize();
+      let rafId;
       tick();
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else tick();
+      });
     })();
 
     // ─── SCROLL REVEAL ───

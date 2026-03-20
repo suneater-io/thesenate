@@ -1,5 +1,5 @@
 # SENATE — Brand Guidelines
-*Last updated: 2026-03-15*
+*Last updated: 2026-03-20*
 
 ---
 
@@ -71,14 +71,17 @@ The site uses a layered dark-mode palette built on near-black deep navy, not pur
 
 ### Page Accent Colors
 
-Each sub-page has a distinct accent (`--blue`) that represents its character:
+Each page has a distinct accent held in the `--blue` token (named for its default; value varies per page). Derived tokens `--blue-dim` (rgba at 0.07) and `--blue-glow` (rgba at 0.14) are used for glow effects and tag backgrounds — always use these tokens, never hardcode rgba values.
 
-| Page | Accent | Hex | Character |
+| Page | Accent Name | Hex | Character |
 |---|---|---|---|
 | Landing | Steel Blue | `#7AAEC8` | Neutral anchor, ties all pages together |
 | Creative | Cold Steel | `#6FB5CC` | Icy, industrial, the music |
 | Professional | Amber Copper | `#C4824A` | Warmth of craft, technical precision |
 | Contact | Slate | `#8AAEBB` | Open, receptive, calm |
+| Chamber | Pale Steel | `#A8CEDD` | Clear, elevated, the institution |
+| Blog | Slate Blue | `#7090A8` | Considered, measured, editorial |
+| Projects | Burnt Orange | `#C86A28` | Drive, construction, output |
 
 **Rules:**
 - Never substitute default Tailwind palette colors (indigo-500, blue-600, etc.)
@@ -88,9 +91,11 @@ Each sub-page has a distinct accent (`--blue`) that represents its character:
 
 ### Glow & Atmospheric Treatment
 
-- Accent glow: `rgba(100,160,200,0.14)` — used for card hover states and ambient orbs
-- Orbs: large blurred radial gradients at very low opacity (4–8%) positioned at hero corners
-- Grain overlay: fixed SVG fractalNoise at `opacity: 0.11` on `body::after` — present on all pages
+- Accent glow: `var(--blue-glow)` (rgba at 0.14 of page accent) — used for card hover states and ambient orbs
+- Accent dim: `var(--blue-dim)` (rgba at 0.07 of page accent) — used for tag backgrounds, subtle fills
+- Orbs: large blurred radial gradients at very low opacity (4–8%) positioned at hero corners; tint must match page accent, not be purple/green/red
+- Grain overlay: fixed SVG fractalNoise at `opacity: 0.11` on `body::after` — present on **all** pages — do not deviate
+- Hero radial tint: matches the page accent color at ≤0.05 opacity — never use purple, green, or red tints
 
 ---
 
@@ -143,6 +148,23 @@ The site uses intentional spacing tokens, not arbitrary Tailwind steps.
 | Button padding | `14px` vertical, `30px` horizontal |
 | Gap between nav links | `32px` |
 
+### Nav Link Pattern
+
+All nav links use the opacity-transition approach (not color-transition):
+
+```css
+.nav-link {
+  color: var(--text-1);
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+  font-weight: 700;
+}
+.nav-link:hover { opacity: 1; }
+.nav-link.active { opacity: 1; color: var(--blue); }
+.nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
+.nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+```
+
 **Layout principles:**
 - Full-width hero sections, centered content
 - Cards and grids break to single column at `960px`
@@ -164,6 +186,7 @@ The site uses intentional spacing tokens, not arbitrary Tailwind steps.
 - Every interactive element must have hover, focus-visible, and active states
 - Active state: `translateY(1px)` on buttons
 - Canvas effects (data stream, wind, constellations) are ambient only — never obstruct content
+- All canvas rAF loops must pause on `visibilitychange` (document.hidden) and resume on reveal
 
 ---
 
@@ -177,6 +200,9 @@ Each page has a distinct ambient canvas effect that reflects its character:
 | Creative | Displacement warp + rain streaks | Industrial, distorted, rain through a fence |
 | Professional | Falling hex data stream | Technical, systematic, infrastructure |
 | Contact | Constellation drift | Network, connection, signals forming |
+| Chamber | Snow particles (subtle) | Same cold atmosphere as the landing |
+| Blog | Storm rain + lightning | Writing under pressure, thought in motion |
+| Projects | Crane warning lights + rain | Construction site, work in progress |
 
 Effects are always `z-index: 0`, `pointer-events: none`, subtle enough to feel atmospheric rather than decorative.
 
@@ -208,11 +234,13 @@ Each sub-page under The Senate is a distinct chamber with its own accent colour 
 
 | Page | URL | Accent | Hero Treatment |
 |---|---|---|---|
-| Landing | `/` | Steel Blue | Full-bleed forest photo, floating logo |
-| Creative | `/creative/` | Cold Steel | Chain-link fence at night (Unsplash) |
-| Professional | `/professional/` | Amber Copper | Blueprint grid overlay |
-| Contact | `/contact/` | Slate | Dark ambient, wind streaks |
-| Projects | `/projects/` | Steel Blue | Cards grid |
+| Landing | `/` | Steel Blue `#7AAEC8` | Full-bleed forest photo, floating logo |
+| Creative | `/creative/` | Cold Steel `#6FB5CC` | Chain-link fence at night (Unsplash) |
+| Professional | `/professional/` | Amber Copper `#C4824A` | Blueprint grid overlay |
+| Contact | `/contact/` | Slate `#8AAEBB` | Dark ambient, constellation drift |
+| Chamber | `/chamber/` | Pale Steel `#A8CEDD` | Dark ambient, snow particles |
+| Blog | `/blog/` | Slate Blue `#7090A8` | Storm rain with lightning |
+| Projects | `/projects/` | Burnt Orange `#C86A28` | Crane warning lights + rain |
 
 ---
 

@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.2/src/index.js"
+          integrity="sha384-J7cw2fbG1T4C5MirTVUxsZGaMfw2m0XsCgOQEqUvB1OF9VIsHWuZF1GmyVRzs7eu"
+          crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -102,16 +104,93 @@
     .nav-link {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
+      font-weight: 700;
       letter-spacing: 0.22em;
       padding-left: 0.22em;
       text-transform: uppercase;
-      color: var(--text-2);
+      color: var(--text-1);
+      opacity: 0.75;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: opacity 0.2s ease;
+      padding: 10px 0;
     }
-    .nav-link:hover { color: var(--text-1); }
-    .nav-link.active { color: var(--blue); }
-    @media (max-width: 600px) { .nav-links { display: none; } }
+    .nav-link:hover { opacity: 1; }
+    .nav-link.active { opacity: 1; color: var(--blue); }
+    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    /* ─── SKIP LINK ─── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      padding: 8px 16px;
+      background: var(--blue);
+      color: var(--bg);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      z-index: 9999;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ─── HAMBURGER ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 11px 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-1);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── MOBILE DRAWER ─── */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 250;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .nav-drawer.open { opacity: 1; pointer-events: all; }
+    .nav-drawer .nav-link {
+      font-size: 22px !important;
+      letter-spacing: 0.12em !important;
+      color: var(--text-1) !important;
+      opacity: 0.8;
+    }
+    .nav-drawer .nav-link:hover,
+    .nav-drawer .nav-link.active { opacity: 1; color: var(--blue) !important; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -140,7 +219,7 @@
       pointer-events: none;
       background:
         linear-gradient(rgba(4,6,14,0.68), rgba(4,6,14,0.68)),
-        radial-gradient(ellipse 80% 70% at 40% 50%, rgba(200,80,80,0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 80% 70% at 40% 50%, rgba(200,106,40,0.05) 0%, transparent 65%),
         linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 30%),
         linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.25) 32%, transparent 52%);
     }
@@ -230,8 +309,8 @@
       padding-left: 0.22em;
       text-transform: uppercase;
       color: var(--blue);
-      background: rgba(200, 80, 80, 0.08);
-      border: 1px solid rgba(200, 80, 80, 0.15);
+      background: var(--blue-dim);
+      border: 1px solid var(--border);
       padding: 4px 10px;
       border-radius: 2px;
     }
@@ -330,6 +409,18 @@
 </head>
 <body>
 
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ─── MOBILE DRAWER ─── -->
+  <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/chamber/" class="nav-link">About</a>
+    <a href="/blog/" class="nav-link">Thoughts</a>
+    <a href="/creative/" class="nav-link">Creative</a>
+    <a href="/professional/" class="nav-link">Professional</a>
+    <a href="/projects/" class="nav-link active">Projects</a>
+    <a href="/contact/" class="nav-link">Contact</a>
+  </div>
+
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
@@ -340,11 +431,14 @@
       <a href="/projects/" class="nav-link active">Projects</a>
       <a href="/contact/" class="nav-link">Contact</a>
     </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- ─── HERO ─── -->
-  <section class="hero">
-    <canvas id="hero-canvas"></canvas>
+  <section class="hero" id="main">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-overlay"></div>
     <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
@@ -409,8 +503,57 @@
       nav.classList.toggle('scrolled', window.scrollY > 48);
     }, { passive: true });
 
+    // ─── MOBILE NAV ───
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('nav-drawer');
+    navDrawer.setAttribute('role', 'dialog');
+    navDrawer.setAttribute('aria-modal', 'true');
+    navDrawer.setAttribute('aria-label', 'Navigation');
+
+    function getFocusable() {
+      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
+    }
+    function trapFocus(e) {
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
+    function closeDrawer() {
+      navDrawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      navDrawer.removeEventListener('keydown', trapFocus);
+      hamburger.focus();
+    }
+    hamburger.addEventListener('click', () => {
+      const isOpen = navDrawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (isOpen) {
+        const focusable = getFocusable();
+        if (focusable.length) focusable[0].focus();
+        navDrawer.addEventListener('keydown', trapFocus);
+      } else {
+        navDrawer.removeEventListener('keydown', trapFocus);
+      }
+    });
+    navDrawer.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
     // ─── HERO SNOW ───
     (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const canvas = document.getElementById('hero-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -498,7 +641,7 @@
           ctx.fill();
         }
 
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
       }
 
       window.addEventListener('resize', () => {
@@ -507,7 +650,12 @@
       }, { passive: true });
 
       init();
+      let rafId;
       tick();
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else tick();
+      });
     })();
 
     // ─── SCROLL REVEAL ───

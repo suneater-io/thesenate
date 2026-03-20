@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.2/src/index.js"
+          integrity="sha384-J7cw2fbG1T4C5MirTVUxsZGaMfw2m0XsCgOQEqUvB1OF9VIsHWuZF1GmyVRzs7eu"
+          crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -109,9 +111,12 @@
       opacity: 0.75;
       text-decoration: none;
       transition: opacity 0.2s ease, color 0.2s ease;
+      padding: 10px 0;
     }
     .nav-link:hover { opacity: 1; color: var(--text-1); }
     .nav-link.active { opacity: 1; color: var(--blue); }
+    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── SKIP LINK ─── */
     .skip-link {
@@ -653,6 +658,7 @@
       .design-section { padding: 60px 24px; }
       .design-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .ft-name { position: static; transform: none; }
     }
 
     @media (max-width: 600px) {
@@ -854,17 +860,43 @@
     // ─── MOBILE NAV ───
     const hamburger = document.getElementById('hamburger');
     const navDrawer = document.getElementById('nav-drawer');
+    navDrawer.setAttribute('role', 'dialog');
+    navDrawer.setAttribute('aria-modal', 'true');
+    navDrawer.setAttribute('aria-label', 'Navigation');
+
+    function getFocusable() {
+      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
+    }
+    function trapFocus(e) {
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
     function closeDrawer() {
       navDrawer.classList.remove('open');
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      navDrawer.removeEventListener('keydown', trapFocus);
+      hamburger.focus();
     }
     hamburger.addEventListener('click', () => {
       const isOpen = navDrawer.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (isOpen) {
+        const focusable = getFocusable();
+        if (focusable.length) focusable[0].focus();
+        navDrawer.addEventListener('keydown', trapFocus);
+      } else {
+        navDrawer.removeEventListener('keydown', trapFocus);
+      }
     });
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
@@ -884,9 +916,14 @@
         const bfx = 0.0045 + Math.sin(t * 1.1) * 0.003;
         const bfy = 0.008  + Math.sin(t * 0.7 + 1.4) * 0.005;
         turb.setAttribute('baseFrequency', `${bfx.toFixed(5)} ${bfy.toFixed(5)}`);
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
       }
+      let rafId;
       tick();
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else tick();
+      });
     })();
 
     // ─── HERO RAIN ───
@@ -933,12 +970,17 @@
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
       }
 
       window.addEventListener('resize', resize, { passive: true });
       resize();
+      let rafId;
       tick();
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else tick();
+      });
     })();
 
     // ─── SCROLL REVEAL ───

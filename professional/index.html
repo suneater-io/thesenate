@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.2/src/index.js"
+          integrity="sha384-J7cw2fbG1T4C5MirTVUxsZGaMfw2m0XsCgOQEqUvB1OF9VIsHWuZF1GmyVRzs7eu"
+          crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -109,9 +111,12 @@
       opacity: 0.75;
       text-decoration: none;
       transition: opacity 0.2s ease, color 0.2s ease;
+      padding: 10px 0;
     }
     .nav-link:hover { opacity: 1; }
     .nav-link.active { opacity: 1; color: var(--blue); }
+    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── SKIP LINK ─── */
     .skip-link {
@@ -574,6 +579,7 @@
       .work-year { display: none; }
       .cta-section { padding: 60px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .ft-name { position: static; transform: none; }
     }
 
     @media (max-width: 600px) {
@@ -638,17 +644,17 @@
   <div class="what-grid reveal">
     <div class="what-card">
       <i class="ph ph-blueprint what-icon"></i>
-      <div class="what-title">System Architecture</div>
+      <h3 class="what-title">System Architecture</h3>
       <p class="what-desc">Designing the blueprint before a single line ships. Translating ambiguous business needs into clear system boundaries, data flows, and integration patterns that scale without surprise.</p>
     </div>
     <div class="what-card">
       <i class="ph ph-cpu what-icon"></i>
-      <div class="what-title">AI & Automation</div>
+      <h3 class="what-title">AI & Automation</h3>
       <p class="what-desc">Finding where human time is being spent on work machines should own, then building the plumbing. The real leverage isn't the model — it's the architecture around it.</p>
     </div>
     <div class="what-card">
       <i class="ph ph-crosshair what-icon"></i>
-      <div class="what-title">Strategic Operations</div>
+      <h3 class="what-title">Strategic Operations</h3>
       <p class="what-desc">Economy management, clear priorities, decisions under pressure. CS taught this: staying composed when the model says you're losing is a skill that migrates directly off-screen.</p>
     </div>
   </div>
@@ -721,7 +727,7 @@
       <div class="work-num">01</div>
       <div class="work-content">
         <div class="work-industry">Enterprise / Financial Services</div>
-        <div class="work-title">AI-Driven Document Intelligence</div>
+        <h3 class="work-title">AI-Driven Document Intelligence</h3>
         <p class="work-outcome">Replaced a 6-person manual review process with an AI pipeline that classifies, extracts, and routes financial documents with 94% accuracy — zero human touchpoints on 80% of volume.</p>
       </div>
       <div class="work-year">2025</div>
@@ -730,7 +736,7 @@
       <div class="work-num">02</div>
       <div class="work-content">
         <div class="work-industry">Healthcare / Operations</div>
-        <div class="work-title">Clinical Scheduling Automation</div>
+        <h3 class="work-title">Clinical Scheduling Automation</h3>
         <p class="work-outcome">Redesigned a fragmented scheduling stack across 12 departments into a single event-driven platform. Reduced scheduling conflicts by 67% and cut coordinator time-on-task by half.</p>
       </div>
       <div class="work-year">2024</div>
@@ -739,7 +745,7 @@
       <div class="work-num">03</div>
       <div class="work-content">
         <div class="work-industry">Retail / E-Commerce</div>
-        <div class="work-title">Platform Migration & Re-Architecture</div>
+        <h3 class="work-title">Platform Migration & Re-Architecture</h3>
         <p class="work-outcome">Led end-to-end migration from a legacy monolith to a microservices architecture. Went live with zero downtime. Response times improved 4x. First fully cloud-native deployment for the org.</p>
       </div>
       <div class="work-year">2023</div>
@@ -763,17 +769,43 @@
     // ─── MOBILE NAV ───
     const hamburger = document.getElementById('hamburger');
     const navDrawer = document.getElementById('nav-drawer');
+    navDrawer.setAttribute('role', 'dialog');
+    navDrawer.setAttribute('aria-modal', 'true');
+    navDrawer.setAttribute('aria-label', 'Navigation');
+
+    function getFocusable() {
+      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
+    }
+    function trapFocus(e) {
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
     function closeDrawer() {
       navDrawer.classList.remove('open');
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      navDrawer.removeEventListener('keydown', trapFocus);
+      hamburger.focus();
     }
     hamburger.addEventListener('click', () => {
       const isOpen = navDrawer.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (isOpen) {
+        const focusable = getFocusable();
+        if (focusable.length) focusable[0].focus();
+        navDrawer.addEventListener('keydown', trapFocus);
+      } else {
+        navDrawer.removeEventListener('keydown', trapFocus);
+      }
     });
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
@@ -837,12 +869,17 @@
             ctx.fillText(c.chars[i], c.x - 4, cy);
           }
         }
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
       }
 
       window.addEventListener('resize', resize, { passive: true });
       resize();
+      let rafId;
       tick();
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else tick();
+      });
     })();
 
     // ─── SCROLL REVEAL ───
