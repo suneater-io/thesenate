@@ -684,6 +684,56 @@
       padding: 8px 14px;
     }
 
+    /* ─── 07 / HORROR ─── */
+    .horror-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0 52px 80px;
+    }
+    .horror-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .horror-img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.15) brightness(0.75);
+      transition: filter 0.5s ease;
+    }
+    .horror-img:hover { filter: saturate(0.3) brightness(0.9); }
+    .horror-films {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .horror-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      background: var(--blue-dim);
+    }
+    .horror-tag--hero {
+      color: var(--text-1);
+      border-color: var(--border-hi);
+      background: var(--surface-2);
+    }
+    @media (max-width: 960px) {
+      .horror-section { padding: 0 24px 64px; }
+      .horror-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
     /* ─── 06 / TECHNOLOGY ─── */
     .tech-section {
       background: var(--surface);
@@ -861,7 +911,7 @@
     <div class="hero-content">
       <h1 class="ph-title">Creative</h1>
       <div class="hero-bar">
-        <p class="hero-role">Music &nbsp;·&nbsp; Vintage &nbsp;·&nbsp; CS &nbsp;·&nbsp; Lego &nbsp;·&nbsp; Detroit &nbsp;·&nbsp; Tech</p>
+        <p class="hero-role">Music &nbsp;·&nbsp; Vintage &nbsp;·&nbsp; CS &nbsp;·&nbsp; Lego &nbsp;·&nbsp; Detroit &nbsp;·&nbsp; Tech &nbsp;·&nbsp; Horror</p>
         <div class="hero-line"></div>
       </div>
     </div>
@@ -1116,6 +1166,43 @@
       <div class="reveal" style="transition-delay: 0.12s">
         <!-- Replace with gaming PC / tech setup photo -->
         <img class="tech-img" src="https://placehold.co/800x500/0A0E1C/1E3040?text=[ pc+setup ]" alt="Gaming PC setup" />
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 07 / HORROR -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="horror-section">
+    <div class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
+      <span class="sec-divider-num">07</span>
+      <div class="sec-divider-line"></div>
+      <span class="sec-divider-label">Horror</span>
+    </div>
+    <div class="horror-inner">
+      <div class="reveal">
+        <div class="sec-label">Obsession</div>
+        <h2 class="sec-title">Can't<br>Jump Scare.</h2>
+        <p class="sec-body">I grew up on Halloween, Nightmare on Elm Street and Friday the 13th. That's the baseline. It never left.</p>
+        <p class="sec-body">Somewhere along the way the fear response stopped working. No jump scares. No flinching. Most people would take that as a reason to stop watching. For me it turned into something deeper. An obsession with the craft, the atmosphere, the darkness underneath it all. Now I watch everything. Psychological, slashers, gore, torture. The more uncomfortable the better.</p>
+        <p class="sec-body">Michael Myers is the definitive one. Not because of the kills. Because of the calm. He doesn't run. He doesn't rage. He just moves. That stillness amongst the chaos is one of the most powerful things I've ever seen on screen. You never knew if he was human or not. That question is the whole film. Myers, Freddy and Jason are on my left leg sleeve. They earned it.</p>
+        <p class="sec-body">Terrifier 3 is the best horror film in years. Art the Clown is the other end of the spectrum from Myers — pure anarchic chaos where Myers is composed stillness. I live at both ends.</p>
+        <p class="sec-body">The scene that has never left me: the ending of The Devil's Rejects. The Firefly family driving toward a police roadblock. Free Bird playing. They know exactly what's coming. They drive anyway. Most people watch that as a brutal ending. I watch it as the most honest thing horror has ever put on screen. You face what's coming. You don't slow down.</p>
+        <p class="sec-body">Horror is taboo. Uncomfortable. Dark, sad, unsettling. Not what most people want. That's exactly why I love it.</p>
+        <div class="horror-films">
+          <span class="horror-tag horror-tag--hero">Halloween</span>
+          <span class="horror-tag horror-tag--hero">Terrifier</span>
+          <span class="horror-tag">A Nightmare on Elm Street</span>
+          <span class="horror-tag">Friday the 13th</span>
+          <span class="horror-tag">The Devil's Rejects</span>
+          <span class="horror-tag">Psychological</span>
+          <span class="horror-tag">Gore</span>
+          <span class="horror-tag">Torture Horror</span>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay: 0.12s;">
+        <img class="horror-img" src="https://placehold.co/600x900/060810/1E3040?text=[ horror ]" alt="Horror" />
       </div>
     </div>
   </div>
