@@ -58,6 +58,22 @@ That practice — watching yourself from above and asking *what could have been 
 
 Why don't more people do this? It's the most obvious thing in the world once you've seen it.
 
+## It's Sport
+
+At some point the game stopped being something I played and became something I followed.
+
+ESL Challenger. IEM Sydney 2023. IEM Melbourne 2025. I've been to all of it.
+
+At IEM Sydney I was in the arena watching Complexity face FaZe in the grand final. TC was coaching Complexity at the time. We'd met at an earlier event, stayed in contact, and here we were on opposite sides of the crowd watching the same match from different angles. FaZe won. It was one of the greatest things I've ever witnessed.
+
+TC and I still talk. He leads PassionUA now. That friendship started because two people met at a CS event and recognised something in each other.
+
+Being in that arena is hard to describe. Fifteen thousand people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes — you see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
+
+That's not watching. That's something else.
+
+This is sport. It always was.
+
 ## The Interview
 
 When I interviewed for my current role, they asked the usual questions.
