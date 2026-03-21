@@ -6,6 +6,20 @@
   <title>Loading... — The Senate</title>
   <meta name="description" content="" />
 
+  <!-- Open Graph (set dynamically) -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="The Senate" />
+  <meta property="og:url"         content="" />
+  <meta property="og:title"       content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
+
+  <!-- Twitter Card (set dynamically) -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="" />
+  <meta name="twitter:description" content="" />
+  <meta name="twitter:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
+
   <link rel="icon" type="image/png" href="../brand_assets/senate-logo-white.png" />
   <link rel="apple-touch-icon" href="../brand_assets/senate-logo-white.png" />
 
@@ -445,7 +459,26 @@
         const raw = await res.text();
         const { meta, content } = parseFrontmatter(raw);
 
-        if (meta.title) document.title = `${meta.title} — The Senate`;
+        if (meta.title) {
+          document.title = `${meta.title} — The Senate`;
+          document.querySelector('meta[property="og:title"]').content = `${meta.title} — The Senate`;
+          document.querySelector('meta[name="twitter:title"]').content = `${meta.title} — The Senate`;
+        }
+        if (meta.description) {
+          document.querySelector('meta[name="description"]').content = meta.description;
+          document.querySelector('meta[property="og:description"]').content = meta.description;
+          document.querySelector('meta[name="twitter:description"]').content = meta.description;
+        }
+        const slug = new URLSearchParams(window.location.search).get('slug');
+        if (slug) {
+          const postUrl = `https://thesenate.io/blog/post.html?slug=${slug}`;
+          document.querySelector('meta[property="og:url"]').content = postUrl;
+        }
+        if (meta.cover) {
+          const coverUrl = meta.cover.startsWith('http') ? meta.cover : `https://thesenate.io${meta.cover}`;
+          document.querySelector('meta[property="og:image"]').content = coverUrl;
+          document.querySelector('meta[name="twitter:image"]').content = coverUrl;
+        }
 
         const htmlContent = marked.parse(content);
         const tags = Array.isArray(meta.tags) ? meta.tags : (meta.tags ? [meta.tags] : []);
