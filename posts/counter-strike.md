@@ -10,13 +10,13 @@ I picked up Counter-Strike 1.6 thinking it was simple.
 
 Two teams. One objective. Buy guns, shoot people. Plan the bomb or defuse it. How deep could it be?
 
-The first time I played online I found out. The skill gap was enormous. Not just mechanical skill but conceptual skill. The way people read a round, anticipated a push, communicated without wasting words. I had no idea what I was looking at. I just knew I needed to understand it.
+The first time I played online I found out. The skill gap was enormous. Conceptual skill more than mechanical. The way people read a round, anticipated a push, communicated without wasting words. I had no idea what I was looking at. I just knew I needed to understand it.
 
 That need never went away.
 
 ## The Clan
 
-![Counter-Strike: Source — where the obsession deepened](/images/blog/css-screenshot.jpg)
+![Counter-Strike: Source, where the obsession deepened](/images/blog/css-screenshot.jpg)
 
 Counter-Strike: Source. My brother and I landed in a clan playing ranked ladder through Game Arena in Australia. At our peak we hit 7th in the country.
 
@@ -54,9 +54,9 @@ Before every session you review demos. You watch your own gameplay from a birds-
 
 After every session you do the same thing. Win or loss. It doesn't matter. You watch it back.
 
-Most people only reflect on failure. CS taught me to reflect on everything. Just because you won doesn't mean you played it perfectly. Just because the project shipped doesn't mean the communication was right. Just because the incident was resolved doesn't mean you handled every moment the way you would handle it again.
+Most people only reflect on failure. CS taught me to reflect on everything. Winning doesn't mean you played it perfectly. A project shipping doesn't mean the communication was right. An incident resolved doesn't mean you'd handle every moment the same way again.
 
-That practice, watching yourself from above and asking *what could have been done better here*, is the most transferable skill the game gave me. Not aim or game sense. The habit of honest self-review, applied to wins and losses equally.
+That practice, watching yourself from above and asking *what could have been done better here*, is the most transferable skill the game gave me. Not aim or game sense. The habit of looking at yourself honestly, whether you won or lost.
 
 Why don't more people do this? It's the most obvious thing in the world once you've seen it.
 
@@ -72,11 +72,11 @@ At IEM Sydney I was in the arena watching Complexity face FaZe in the grand fina
 
 ![IEM Sydney — the crowd, the atmosphere, the game at its highest level](/images/blog/iemsydney1.jpg)
 
-TC and I still talk. He leads PassionUA now. That friendship started because two people met at a CS event and recognised something in each other.
+TC and I still talk. He leads PassionUA now. That friendship started at a CS event and has outlasted every tournament since.
 
 ![IEM Sydney 2023](/images/blog/IEMSYDNEY2.jpg)
 
-Being in that arena is hard to describe. Thousands of people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes — you see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
+Being in that arena is hard to describe. Thousands of people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes. You see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
 
 Watching doesn't cover it.
 
@@ -92,7 +92,7 @@ When I interviewed for my current role, they asked the usual questions.
 
 Every answer I had was Counter-Strike. The clan. The ladder. The Sev 1s that played out exactly like a ranked match with everything on the line.
 
-I told them straight: I have 5000 hours in competitive Counter-Strike. I was an IGL. That taught me how to lead different personality types, across different communication styles, toward the same goal — with people I'd never met, against problems I knew nothing about, making calls on the fly.
+I told them straight: I have 5000 hours in competitive Counter-Strike. I was an IGL. That taught me how to lead different personality types, across different communication styles, toward the same goal. People I'd never met. Problems I knew nothing about. Calls made on the fly.
 
 They might not know what Counter-Strike is. But they know what that is.
 
