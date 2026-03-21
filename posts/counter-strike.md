@@ -32,7 +32,7 @@ Some guys had pure mechanical skill. Clicking heads all day. Technically gifted.
 
 I learned something from that. You can't change a person. What you can do is put that person in the best position to succeed. Give them the role that plays to exactly what they're good at. Stop trying to make them something they're not.
 
-When you do that, you earn their trust. And when you have their trust, you have their buy-in.
+Do that and you earn their trust. With trust comes buy-in.
 
 I use that every single day at work.
 
@@ -46,7 +46,7 @@ I've been here before. Not in a hospital. On Dust2. Long A pushing, clock tickin
 
 The skill is the same: stay composed, read the situation fast, and put the right people in the right places. Engineer 1 to investigate Core Switch 1. Same way I'd call my brother to entry long pop. You pick the person for the role based on what you know about them, what the moment needs, and what gives the team the best shot.
 
-Panic is contagious. Calm is contagious. The IGL sets the temperature of the room.
+Panic spreads. So does calm. The IGL decides which one.
 
 ## The Thing CS Actually Taught Me
 
@@ -56,7 +56,7 @@ After every session you do the same thing. Win or loss. It doesn't matter. You w
 
 Most people only reflect on failure. CS taught me to reflect on everything. Just because you won doesn't mean you played it perfectly. Just because the project shipped doesn't mean the communication was right. Just because the incident was resolved doesn't mean you handled every moment the way you would handle it again.
 
-That practice — watching yourself from above and asking *what could have been done better here* — is the most transferable skill the game gave me. Not aim. Not game sense. The habit of honest self-review, applied to wins and losses equally.
+That practice, watching yourself from above and asking *what could have been done better here*, is the most transferable skill the game gave me. Not aim or game sense. The habit of honest self-review, applied to wins and losses equally.
 
 Why don't more people do this? It's the most obvious thing in the world once you've seen it.
 
@@ -78,9 +78,9 @@ TC and I still talk. He leads PassionUA now. That friendship started because two
 
 Being in that arena is hard to describe. Thousands of people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes — you see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
 
-That's not watching. That's something else.
+Watching doesn't cover it.
 
-This is sport. It always was.
+This was always sport.
 
 ## The Interview
 
