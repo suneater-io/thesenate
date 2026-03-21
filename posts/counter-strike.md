@@ -8,17 +8,19 @@ description: What 5000 hours of competitive Counter-Strike taught me about leadi
 
 I picked up Counter-Strike 1.6 thinking it was simple.
 
-Two teams. One objective. Buy guns, shoot people. How deep could it be?
+Two teams. One objective. Buy guns, shoot people. Plan the bomb or defuse it. How deep could it be?
 
-The first time I played online I found out. The skill gap was enormous. Not mechanical skill — conceptual skill. The way people read a round, anticipated a push, communicated without wasting words. I had no idea what I was looking at. I just knew I needed to understand it.
+The first time I played online I found out. The skill gap was enormous. Not just mechanical skill but conceptual skill. The way people read a round, anticipated a push, communicated without wasting words. I had no idea what I was looking at. I just knew I needed to understand it.
 
 That need never went away.
 
 ## The Clan
 
+![Counter-Strike: Source — where the obsession deepened](/images/blog/css-screenshot.jpg)
+
 Counter-Strike: Source. My brother and I landed in a clan playing ranked ladder through Game Arena in Australia. At our peak we hit 7th in the country.
 
-I had printouts of our maps on my desk. I was drawing strategies by hand — entry points, flash timings, how to split a site, when to hold and when to push. I didn't have a name for what I was doing. I was just trying to win.
+I had printouts of our maps on my desk. I was drawing strategies by hand. Entry points, flash timings, smoke positions, how to split a site, when to hold and when to push. I didn't have a name for what I was doing. I was just trying to win.
 
 What I was actually doing was becoming an IGL. An In-Game Leader. The person who calls the round in real time, adapts when the plan falls apart, and decides who goes where and when.
 
@@ -64,11 +66,17 @@ At some point the game stopped being something I played and became something I f
 
 ESL Challenger. IEM Sydney 2023. IEM Melbourne 2025. I've been to all of it.
 
+![IEM Sydney 2023](/images/blog/iem-sydney-stage.jpg)
+
 At IEM Sydney I was in the arena watching Complexity face FaZe in the grand final. TC was coaching Complexity at the time. We'd met at an earlier event, stayed in contact, and here we were on opposite sides of the crowd watching the same match from different angles. FaZe won. It was one of the greatest things I've ever witnessed.
+
+![IEM Sydney — the crowd, the atmosphere, the game at its highest level](/images/blog/iemsydney1.jpg)
 
 TC and I still talk. He leads PassionUA now. That friendship started because two people met at a CS event and recognised something in each other.
 
-Being in that arena is hard to describe. Fifteen thousand people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes — you see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
+![IEM Sydney 2023](/images/blog/IEMSYDNEY2.jpg)
+
+Being in that arena is hard to describe. Thousands of people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes — you see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
 
 That's not watching. That's something else.
 
