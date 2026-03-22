@@ -5,7 +5,7 @@
 
 ## 1. Brand Identity
 
-**The Senate** is the personal brand of Grant Hansen — Solution Architect, drummer, collector, Detroit. It is not a single-discipline portfolio. It is the conglomerate: every interest, discipline, and obsession that occupies a seat in the chamber.
+**The Senate** is the personal brand of Grant Hansen — Solution Architect, drummer, collector, Detroit. It is not a single-discipline portfolio. It is the conglomerate: every interest, discipline, and obsession, all at full volume.
 
 The brand operates across two registers simultaneously:
 
@@ -79,7 +79,6 @@ Each page has a distinct accent held in the `--blue` token (named for its defaul
 | Creative | Cold Steel | `#6FB5CC` | Icy, industrial, the music |
 | Professional | Amber Copper | `#C4824A` | Warmth of craft, technical precision |
 | Contact | Slate | `#8AAEBB` | Open, receptive, calm |
-| Chamber | Pale Steel | `#A8CEDD` | Clear, elevated, the institution |
 | Blog | Slate Blue | `#7090A8` | Considered, measured, editorial |
 | Projects | Burnt Orange | `#C86A28` | Drive, construction, output |
 
@@ -200,7 +199,6 @@ Each page has a distinct ambient canvas effect that reflects its character:
 | Creative | Displacement warp + rain streaks | Industrial, distorted, rain through a fence |
 | Professional | Falling hex data stream | Technical, systematic, infrastructure |
 | Contact | Constellation drift | Network, connection, signals forming |
-| Chamber | Snow particles (subtle) | Same cold atmosphere as the landing |
 | Blog | Storm rain + lightning | Writing under pressure, thought in motion |
 | Projects | Crane warning lights + rain | Construction site, work in progress |
 
@@ -230,7 +228,7 @@ Effects are always `z-index: 0`, `pointer-events: none`, subtle enough to feel a
 
 ## 9. Sub-Page Identity
 
-Each sub-page under The Senate is a distinct chamber with its own accent colour and hero treatment, but they all share the same base typography, spacing, grain overlay, and dark background.
+Each sub-page under The Senate has its own accent colour and hero treatment, but they all share the same base typography, spacing, grain overlay, and dark background.
 
 | Page | URL | Accent | Hero Treatment |
 |---|---|---|---|
@@ -238,7 +236,6 @@ Each sub-page under The Senate is a distinct chamber with its own accent colour 
 | Creative | `/creative/` | Cold Steel `#6FB5CC` | Chain-link fence at night (Unsplash) |
 | Professional | `/professional/` | Amber Copper `#C4824A` | Blueprint grid overlay |
 | Contact | `/contact/` | Slate `#8AAEBB` | Dark ambient, constellation drift |
-| Chamber | `/chamber/` | Pale Steel `#A8CEDD` | Dark ambient, snow particles |
 | Blog | `/blog/` | Slate Blue `#7090A8` | Storm rain with lightning |
 | Projects | `/projects/` | Burnt Orange `#C86A28` | Crane warning lights + rain |
 
@@ -250,5 +247,5 @@ Each sub-page under The Senate is a distinct chamber with its own accent colour 
 - Not gothic-romantic (no ornate flourishes, candles, Victorian details)
 - Not cyberpunk (no neon, no circuit-board motifs as decoration)
 - Not corporate dark mode (no smooth rounded cards as the primary design language)
-- Not a simple band website — the music is one seat in the chamber, not the whole room
+- Not a simple band website — the music is one part of the whole, not the whole room
 - Not performative — the darkness is not aesthetic posturing, it is the natural environment

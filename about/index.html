@@ -371,6 +371,37 @@
 
     .who-copy p:last-child { margin-bottom: 0; }
 
+    .who-cta-line {
+      margin-top: 32px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .who-ctas {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .who-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .who-cta:hover,
+    .who-cta:focus-visible {
+      opacity: 0.7;
+      outline: none;
+    }
+
     .now-link {
       display: inline-block;
       margin-top: 32px;
@@ -742,6 +773,17 @@
         They've taught me more about myself than I've ever taught them.
         They're my best friends. They just don't know it yet.
       </p>
+      <p>
+        Everyone tells you that you can't understand the love you have for your
+        children until you have them. They're right. Watching them enter the world
+        and being their father is the greatest thing I'll ever do.
+      </p>
+      <p class="who-cta-line">Now that you know who I am, go see what I do.</p>
+      <div class="who-ctas">
+        <a href="/creative/" class="who-cta">Creative &rarr;</a>
+        <a href="/professional/" class="who-cta">Professional &rarr;</a>
+        <a href="/projects/" class="who-cta">Projects &rarr;</a>
+      </div>
       <a href="/now/" class="now-link">What am I doing right now? &rarr;</a>
     </div>
     <figure style="display:flex;flex-direction:column;gap:0;align-self:start;">
