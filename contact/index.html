@@ -91,7 +91,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      transition: background 0.4s ease, border-color 0.4s ease;
       border-bottom: 1px solid transparent;
     }
     nav.scrolled {
@@ -246,6 +246,7 @@
       background: url('/images/openwindow.jpg') center center / cover no-repeat;
     }
     #hero-canvas {
+      will-change: transform;
       position: absolute;
       inset: 0;
       width: 100%;
@@ -363,7 +364,7 @@
 
     .social-card--primary .social-name { font-size: 22px; color: var(--text-1); }
     .social-card--primary .social-handle { font-size: 11px; color: var(--text-2); letter-spacing: 0.08em; }
-    .social-card--primary .social-icon { font-size: 36px; color: var(--blue-hi); }
+    .social-card--primary .social-icon { font-size: 36px; color: var(--blue); }
 
     .social-icon {
       font-size: 28px;

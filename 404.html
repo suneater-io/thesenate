@@ -109,6 +109,11 @@
       animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both;
     }
     .back:hover { gap: 16px; }
+    .back:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
 
     .nav-logo {
       position: fixed;
@@ -124,6 +129,11 @@
       opacity: 0.6;
     }
     .nav-logo span { color: var(--blue); }
+    .nav-logo:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }

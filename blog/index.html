@@ -84,7 +84,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      transition: background 0.4s ease, border-color 0.4s ease;
       border-bottom: 1px solid transparent;
     }
     nav.scrolled {
@@ -231,6 +231,7 @@
       background: url('/images/oceanstorm.jpg') center center / cover no-repeat;
     }
     #hero-canvas {
+      will-change: transform;
       position: absolute;
       inset: 0;
       width: 100%;
@@ -423,9 +424,9 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--blue);
-      transition: gap 0.2s ease;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1);
     }
-    .post-card:hover .post-arrow { gap: 14px; }
+    .post-card:hover .post-arrow { transform: translateX(6px); }
 
     /* ─── EMPTY STATE ─── */
     .posts-empty {

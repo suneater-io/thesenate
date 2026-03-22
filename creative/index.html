@@ -42,10 +42,10 @@
       --blue:      #6FB5CC;
       --blue-hi:   #8FCADE;
       --blue-dim:  rgba(80, 150, 190, 0.07);
-      --blue-glow: rgba(80, 150, 190, 0.13);
+      --blue-glow: rgba(80, 150, 190, 0.14);
       --text-1:    #C8DDE8;
-      --text-2:    #3D5A6A;
-      --text-3:    #1E3040;
+      --text-2:    #6A8EA0;
+      --text-3:    #3D5A70;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -90,7 +90,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      transition: background 0.4s ease, border-color 0.4s ease;
       border-bottom: 1px solid transparent;
     }
     nav.scrolled {
@@ -257,6 +257,7 @@
       display: block;
     }
     #hero-canvas {
+      will-change: transform;
       position: absolute;
       inset: 0;
       width: 100%;
@@ -931,7 +932,7 @@
   <div class="music-section">
     <div class="music-img-col reveal">
       <!-- Replace with a live show or personal photo -->
-      <img class="music-img" src="https://placehold.co/800x600/070A16/1E3040?text=[ show+photo ]" alt="Live show" />
+      <img class="music-img" src="https://placehold.co/800x600/070A16/1E3040?text=[ show+photo ]" alt="Live show" loading="lazy" />
     </div>
     <div class="reveal" style="transition-delay: 0.12s">
       <div class="sec-label">Sound</div>
@@ -993,7 +994,7 @@
     <div class="vintage-grid">
       <div class="vintage-card reveal">
         <!-- Replace with actual piece photo -->
-        <img class="vintage-card-img" src="https://placehold.co/600x800/0A0E1C/1E3040?text=[ piece+01 ]" alt="Vintage piece 01" />
+        <img class="vintage-card-img" src="https://placehold.co/600x800/0A0E1C/1E3040?text=[ piece+01 ]" alt="Vintage piece 01" loading="lazy" />
         <div class="vintage-card-info">
           <div class="vintage-card-era">NASCAR</div>
           <div class="vintage-card-name">Add piece name</div>
@@ -1002,7 +1003,7 @@
       </div>
       <div class="vintage-card reveal" style="transition-delay: 0.12s">
         <!-- Replace with actual piece photo -->
-        <img class="vintage-card-img" src="https://placehold.co/600x800/070A16/1E3040?text=[ piece+02 ]" alt="Vintage piece 02" />
+        <img class="vintage-card-img" src="https://placehold.co/600x800/070A16/1E3040?text=[ piece+02 ]" alt="Vintage piece 02" loading="lazy" />
         <div class="vintage-card-info">
           <div class="vintage-card-era">Detroit Sports</div>
           <div class="vintage-card-name">Add piece name</div>
@@ -1011,7 +1012,7 @@
       </div>
       <div class="vintage-card reveal" style="transition-delay: 0.24s">
         <!-- Replace with actual piece photo -->
-        <img class="vintage-card-img" src="https://placehold.co/600x800/0A0E1C/1E3040?text=[ piece+03 ]" alt="Vintage piece 03" />
+        <img class="vintage-card-img" src="https://placehold.co/600x800/0A0E1C/1E3040?text=[ piece+03 ]" alt="Vintage piece 03" loading="lazy" />
         <div class="vintage-card-info">
           <div class="vintage-card-era">Hats</div>
           <div class="vintage-card-name">Add piece name</div>
@@ -1047,7 +1048,7 @@
     <div class="reveal" style="transition-delay: 0.12s">
       <div class="cs-img-wrap">
         <!-- Replace with gaming setup or in-game screenshot -->
-        <img class="cs-img" src="https://placehold.co/800x500/070A16/1E3040?text=[ gaming+setup ]" alt="Counter-Strike setup" />
+        <img class="cs-img" src="https://placehold.co/800x500/070A16/1E3040?text=[ gaming+setup ]" alt="Counter-Strike setup" loading="lazy" />
       </div>
     </div>
   </div>
@@ -1074,17 +1075,17 @@
     <div class="detroit-grid">
       <div class="detroit-card reveal">
         <!-- Replace with jersey photo -->
-        <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ jersey ]" alt="Detroit jersey" />
+        <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ jersey ]" alt="Detroit jersey" loading="lazy" />
         <div class="detroit-card-label">Jerseys</div>
       </div>
       <div class="detroit-card reveal" style="transition-delay: 0.12s">
         <!-- Replace with card collection photo -->
-        <img class="detroit-card-img" src="https://placehold.co/600x450/070A16/1E3040?text=[ cards ]" alt="Basketball cards" />
+        <img class="detroit-card-img" src="https://placehold.co/600x450/070A16/1E3040?text=[ cards ]" alt="Basketball cards" loading="lazy" />
         <div class="detroit-card-label">Basketball Cards</div>
       </div>
       <div class="detroit-card reveal" style="transition-delay: 0.24s">
         <!-- Replace with memorabilia photo -->
-        <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ memorabilia ]" alt="Sports memorabilia" />
+        <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ memorabilia ]" alt="Sports memorabilia" loading="lazy" />
         <div class="detroit-card-label">Memorabilia</div>
       </div>
     </div>
@@ -1114,19 +1115,19 @@
     <div class="lego-grid reveal" style="transition-delay: 0.12s">
       <!-- Replace with actual display cabinet / set photos -->
       <div class="lego-card">
-        <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+01 ]" alt="Lego Star Wars build" />
+        <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+01 ]" alt="Lego Star Wars build" loading="lazy" />
         <div class="lego-card-label">Star Wars</div>
       </div>
       <div class="lego-card">
-        <img src="https://placehold.co/400x400/070A16/1E3040?text=[ build+02 ]" alt="Lego Batman build" />
+        <img src="https://placehold.co/400x400/070A16/1E3040?text=[ build+02 ]" alt="Lego Batman build" loading="lazy" />
         <div class="lego-card-label">Batman</div>
       </div>
       <div class="lego-card">
-        <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+03 ]" alt="Lego display cabinet" />
+        <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+03 ]" alt="Lego display cabinet" loading="lazy" />
         <div class="lego-card-label">Display Cabinet</div>
       </div>
       <div class="lego-card">
-        <img src="https://placehold.co/400x400/070A16/1E3040?text=[ build+04 ]" alt="Lego collection" />
+        <img src="https://placehold.co/400x400/070A16/1E3040?text=[ build+04 ]" alt="Lego collection" loading="lazy" />
         <div class="lego-card-label">The Collection</div>
       </div>
     </div>
@@ -1166,7 +1167,7 @@
       </div>
       <div class="reveal" style="transition-delay: 0.12s">
         <!-- Replace with gaming PC / tech setup photo -->
-        <img class="tech-img" src="https://placehold.co/800x500/0A0E1C/1E3040?text=[ pc+setup ]" alt="Gaming PC setup" />
+        <img class="tech-img" src="https://placehold.co/800x500/0A0E1C/1E3040?text=[ pc+setup ]" alt="Gaming PC setup" loading="lazy" />
       </div>
     </div>
   </div>
@@ -1205,7 +1206,7 @@
         </div>
       </div>
       <div class="reveal" style="transition-delay: 0.12s;">
-        <img class="horror-img" src="https://placehold.co/600x900/060810/1E3040?text=[ horror ]" alt="Horror" />
+        <img class="horror-img" src="https://placehold.co/600x900/060810/1E3040?text=[ horror ]" alt="Horror" loading="lazy" />
       </div>
     </div>
   </div>
