@@ -273,7 +273,15 @@
     }
     .brief-col-text strong { color: var(--text-1); font-weight: 500; }
 
-    /* ─── SCREENSHOT ─── */
+    /* ─── SCREENSHOTS ─── */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 960px) {
+      .screenshots-grid { grid-template-columns: 1fr; }
+    }
     .screenshot-wrap {
       position: relative;
     }
@@ -502,19 +510,34 @@
     </div>
   </div>
 
-  <!-- ─── SCREENSHOT ─── -->
+  <!-- ─── SCREENSHOTS ─── -->
   <div class="section reveal" style="padding-top:0;border-top:none;">
-    <div class="screenshot-wrap">
-      <div class="screenshot-glow"></div>
-      <img
-        src="./screenshots/quick-review.png"
-        alt="SenatePop Quick Review screen — AI-filled listing form showing a Detroit Pistons tee with photo, fields, measurements, and generated description"
-        class="screenshot-img"
-        loading="lazy"
-      />
-      <div class="screenshot-caption">
-        <span class="screenshot-label">Quick Review</span>
-        <span class="screenshot-desc">AI fills the form. You check it, correct anything wrong, then approve.</span>
+    <div class="screenshots-grid">
+      <div class="screenshot-wrap">
+        <div class="screenshot-glow"></div>
+        <img
+          src="./screenshots/quick-review.png"
+          alt="SenatePop Quick Review screen — AI-filled listing form showing a Detroit Pistons tee with photo, fields, measurements, and generated description"
+          class="screenshot-img"
+          loading="lazy"
+        />
+        <div class="screenshot-caption">
+          <span class="screenshot-label">Quick Review</span>
+          <span class="screenshot-desc">AI fills the form. Check it, fix anything wrong, approve.</span>
+        </div>
+      </div>
+      <div class="screenshot-wrap">
+        <div class="screenshot-glow"></div>
+        <img
+          src="./screenshots/fulledit.png"
+          alt="SenatePop Full Editor — complete listing form with all fields, measurements, category, and publish controls"
+          class="screenshot-img"
+          loading="lazy"
+        />
+        <div class="screenshot-caption">
+          <span class="screenshot-label">Full Editor</span>
+          <span class="screenshot-desc">Every field. Override anything the AI got wrong.</span>
+        </div>
       </div>
     </div>
   </div>
