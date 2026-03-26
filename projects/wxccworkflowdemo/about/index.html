@@ -110,11 +110,11 @@
     .stack-pill { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-2); border: 1px solid var(--border); padding: 6px 14px; transition: border-color 0.2s ease, color 0.2s ease; }
     .stack-pill:hover { border-color: var(--border-hi); color: var(--text-1); }
 
-    .launch-section { padding: 64px 52px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-    .launch-text { font-family: 'Chakra Petch', sans-serif; font-size: 13px; color: var(--text-3); }
-    .launch-btn { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bg); background: var(--blue); padding: 14px 32px; text-decoration: none; transition: opacity 0.2s ease, gap 0.2s ease; flex-shrink: 0; }
-    .launch-btn:hover { opacity: 0.85; gap: 16px; }
-    .launch-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    .screens-grid { display: grid; grid-template-columns: 1fr; gap: 2px; }
+    .screen-item { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border); }
+    .screen-item img { display: block; width: 100%; height: auto; opacity: 0.92; transition: opacity 0.3s ease; }
+    .screen-item:hover img { opacity: 1; }
+    .screen-caption { padding: 14px 20px; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); border-top: 1px solid var(--border); }
 
     footer { border-top: 1px solid var(--border); padding: 24px 52px; display: flex; align-items: center; justify-content: space-between; position: relative; }
     .ft-copy { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--text-3); }
@@ -128,7 +128,6 @@
       .workflow { grid-template-columns: 1fr; }
       .wf-arrow { padding: 8px 0; transform: rotate(90deg); justify-content: flex-start; padding-left: 24px; }
       .cap-row { grid-template-columns: 36px 1fr; gap: 0 16px; } .cap-desc { grid-column: 2; margin-top: 6px; }
-      .launch-section { padding: 48px 24px; flex-direction: column; align-items: flex-start; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; } .ft-name { position: static; transform: none; }
     }
     @media (max-width: 600px) { .cap-row { grid-template-columns: 1fr; gap: 6px 0; padding: 20px 0; } .cap-num { display: none; } }
@@ -288,12 +287,23 @@
     </div>
   </div>
 
-  <!-- ─── LAUNCH ─── -->
-  <div class="launch-section reveal">
-    <span class="launch-text">Live demo — runs in the browser.</span>
-    <a href="/projects/wxccworkflowdemo/" class="launch-btn">
-      Launch demo &nbsp;<i class="ph ph-arrow-right"></i>
-    </a>
+  <!-- ─── SCREENSHOTS ─── -->
+  <div class="section reveal">
+    <div class="section-label">04 &nbsp;—&nbsp; In the demo</div>
+    <div class="screens-grid">
+      <div class="screen-item">
+        <img src="wxcc-demo-kpi.png" alt="KPI header — $75K metric and efficiency headline" loading="eager" />
+        <div class="screen-caption">01 &nbsp;—&nbsp; KPI header</div>
+      </div>
+      <div class="screen-item">
+        <img src="wxcc-demo-cards.png" alt="Journey overview — three patient workflow stages" loading="eager" />
+        <div class="screen-caption">02 &nbsp;—&nbsp; Journey overview</div>
+      </div>
+      <div class="screen-item">
+        <img src="wxcc-demo-journey.png" alt="Patient journey — form, phone mockup, and workflow trigger buttons" loading="eager" />
+        <div class="screen-caption">03 &nbsp;—&nbsp; Patient journey controls</div>
+      </div>
+    </div>
   </div>
 
   <footer>
