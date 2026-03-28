@@ -602,6 +602,64 @@
       justify-content: space-between;
     }
 
+    .band-track-vol {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .band-track-vol-btn {
+      background: none;
+      border: none;
+      color: var(--text-2);
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      transition: color 0.2s ease;
+    }
+    .band-track-vol-btn:hover { color: var(--text-1); }
+    .band-track-vol-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 72px;
+      height: 2px;
+      background: var(--surface-2);
+      outline: none;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    .band-track-vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      background: var(--text-1);
+      cursor: pointer;
+      border-radius: 0;
+    }
+    .band-track-vol-slider::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      background: var(--text-1);
+      cursor: pointer;
+      border: none;
+      border-radius: 0;
+    }
+    .band-track-vol-slider::-webkit-slider-runnable-track {
+      background: linear-gradient(to right, var(--blue) var(--vol-pct, 80%), var(--surface-2) var(--vol-pct, 80%));
+      height: 2px;
+    }
+    .band-track-vol-slider::-moz-range-track {
+      background: var(--surface-2);
+      height: 2px;
+    }
+    .band-track-vol-slider::-moz-range-progress {
+      background: var(--blue);
+      height: 2px;
+    }
+
     /* Spotify / listening link */
     .music-link {
       display: inline-flex;
@@ -1203,6 +1261,12 @@
               <span id="trackDuration">--:--</span>
             </div>
           </div>
+          <div class="band-track-vol">
+            <button class="band-track-vol-btn" id="trackVolBtn" aria-label="Mute">
+              <i class="ph ph-speaker-high" id="trackVolIcon"></i>
+            </button>
+            <input class="band-track-vol-slider" id="trackVolSlider" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" style="--vol-pct: 80%" />
+          </div>
         </div>
         <audio id="bandTrack" src="/audio/on-the-shores-of-hell.m4a" preload="metadata"></audio>
       </div>
@@ -1799,6 +1863,43 @@
         const rect = bar.getBoundingClientRect();
         const pct = (e.clientX - rect.left) / rect.width;
         audio.currentTime = pct * audio.duration;
+      });
+
+      const volBtn = document.getElementById('trackVolBtn');
+      const volIcon = document.getElementById('trackVolIcon');
+      const volSlider = document.getElementById('trackVolSlider');
+      let lastVol = 0.8;
+      audio.volume = 0.8;
+
+      function updateVolIcon(v) {
+        if (v === 0) volIcon.className = 'ph ph-speaker-slash';
+        else if (v < 0.4) volIcon.className = 'ph ph-speaker-low';
+        else volIcon.className = 'ph ph-speaker-high';
+      }
+
+      volSlider.addEventListener('input', () => {
+        const v = parseFloat(volSlider.value);
+        audio.volume = v;
+        audio.muted = v === 0;
+        volSlider.style.setProperty('--vol-pct', (v * 100) + '%');
+        updateVolIcon(v);
+        if (v > 0) lastVol = v;
+      });
+
+      volBtn.addEventListener('click', () => {
+        if (audio.muted || audio.volume === 0) {
+          audio.muted = false;
+          audio.volume = lastVol;
+          volSlider.value = lastVol;
+          volSlider.style.setProperty('--vol-pct', (lastVol * 100) + '%');
+          updateVolIcon(lastVol);
+        } else {
+          lastVol = audio.volume;
+          audio.muted = true;
+          volSlider.value = 0;
+          volSlider.style.setProperty('--vol-pct', '0%');
+          updateVolIcon(0);
+        }
       });
     })();
 
