@@ -374,14 +374,7 @@
     /* ─── 01 / MUSIC ─── */
     .music-section {
       padding: 0 52px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      max-width: 1200px;
-      margin: 0 auto;
     }
-    .music-img-col { display: flex; flex-direction: column; gap: 2px; }
     .music-img-primary {
       width: 100%;
       aspect-ratio: 4/3;
@@ -394,7 +387,6 @@
 
     /* ─── Band Grid ─── */
     .bands-grid-wrap {
-      grid-column: 1 / -1;
       margin-top: 64px;
       padding-top: 48px;
       border-top: 1px solid var(--border);
@@ -939,8 +931,8 @@
       .hero { padding: 0 24px 56px; }
       .sec-divider { padding: 48px 24px 40px; }
       .bands-grid { grid-template-columns: repeat(3, 1fr); }
-      .music-section,
       .cs-section { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
+      .music-section,
       .lego-section,
       .vintage-section,
       .detroit-section,
@@ -964,6 +956,7 @@
       .music-section,
       .cs-section,
       .lego-section { padding: 0 20px 48px; }
+
       .vintage-section,
       .detroit-section,
       .tech-section { padding: 0 20px 48px; }
@@ -1040,34 +1033,98 @@
   </div>
 
   <div class="music-section">
-    <div class="music-img-col reveal">
-      <!-- Shoot: live show — crowd, stage, or pit photo -->
-      <div class="mag-img-wrap">
-        <img class="mag-img mag-img--wide" src="https://placehold.co/800x500/070A16/1E3040?text=[ live+show ]" alt="Live show" loading="lazy" />
-        <div class="mag-caption">Shoot: live show — stage or pit</div>
-      </div>
-      <!-- Shoot: your drum kit or behind the kit POV -->
-      <div class="mag-img-wrap" style="margin-top: 2px;">
-        <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ drum+kit ]" alt="Drum kit" loading="lazy" />
-        <div class="mag-caption">Shoot: drum kit or behind-the-kit</div>
-      </div>
-    </div>
-    <div class="reveal" style="transition-delay: 0.12s">
-      <div class="sec-label">Sound</div>
-      <h2 class="sec-title">The<br>Heartbeat</h2>
-      <p class="sec-body">Music is not something I do. It's what I am.</p>
-      <p class="sec-body">It started at 8 and never stopped. Metallica. Slayer. By 12, Dying Fetus, Morbid Angel, Cannibal Corpse. At 14, Meshuggah changed everything. Nothing has been the same since. Still my number one. Still the first tattoo. Controlled chaos, syncopated, relentless, and somehow in perfect control. That's exactly how my brain works.</p>
-      <p class="sec-body">It only went further from there. Faster. More extreme. More technical. I play drums. I've been on stage. Six to ten shows a year, minimum. I go down rabbit holes and don't come back.</p>
+    <div class="mag-section-inner">
 
-      <!-- Replace href with actual Spotify listening stats link when available -->
-      <a href="#" class="music-link">
+      <!-- Opener: title + intro left / live show hero right -->
+      <div class="mag-opener reveal">
+        <div>
+          <div class="sec-label">Sound</div>
+          <h2 class="sec-title">The<br>Heartbeat</h2>
+          <p class="sec-body">Music is not something I do. It's what I am.</p>
+          <p class="sec-body">It started before I even knew what I was looking for. I'd go through mum and dad's CDs, tapes and records. Not really listening. Just looking at the artwork. Something about those covers. Bat out of Hell by Meat Loaf I requested more times than I can count.</p>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: live show — wide stage shot or crowd from stage -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/070A16/1E3040?text=[ live+show ]" alt="Live show" loading="lazy" />
+          <div class="mag-caption">Shoot: live show — wide stage or crowd from stage</div>
+        </div>
+      </div>
+
+      <!-- Body: Metallica + thrash -->
+      <div class="mag-body reveal">
+        <p class="sec-body">Real independence came when I got Metallica Garage Inc on CD, a big wooden Metallica poster, and my own boombox. I would have been 9. I put it on and nothing was ever the same. It was so heavy. Like nothing I'd heard before. The thrash metal obsession started right there. Thrash drove me through the genres. The Big Four led me to the classics of death metal. By 12 I was deep into Dying Fetus, Morbid Angel, Cannibal Corpse. I kept going further in.</p>
+      </div>
+
+      <!-- Full-width atmosphere break: pit/crowd -->
+      <div class="mag-img-strip reveal">
+        <!-- Shoot: crowd or pit shot — wide, atmospheric, from inside the show -->
+        <img class="mag-img mag-img--wide" src="https://placehold.co/1400x600/070A16/1E3040?text=[ pit+crowd+atmosphere ]" alt="Metal show crowd" loading="lazy" />
+        <div class="mag-caption">Shoot: crowd or pit — wide, atmospheric, from inside</div>
+      </div>
+
+      <!-- Body: Meshuggah -->
+      <div class="mag-body reveal">
+        <p class="sec-body">Then at 14 I walked into my lead guitarist's room. He was older than me. Working, driving, living. I was still at school. He said "check this out" and put on the Meshuggah album Nothing.</p>
+        <p class="sec-body">Instantly my mind was blown. I don't even know how to describe how it felt listening to them for the first time. It was like the music was demonstrating the way my brain worked. Chaotic, loud, odd, different. Time signatures I'd never heard. Accents in places that shouldn't be accented. It broke every rule I knew about music. There was this metaphorical glass ceiling and Meshuggah just catapulted me through it. Love at first listen. Still my number one. Nothing has come close.</p>
+      </div>
+
+      <!-- Image pair: Meshuggah tattoo | childhood era item -->
+      <div class="mag-img-pair reveal">
+        <div class="mag-img-wrap">
+          <!-- Shoot: Meshuggah tattoo on your arm — close up -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ meshuggah+tattoo ]" alt="Meshuggah tattoo" loading="lazy" />
+          <div class="mag-caption">Shoot: Meshuggah tattoo — close up</div>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: old Metallica CD / wooden poster / boombox or childhood metal memorabilia -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/070A16/1E3040?text=[ garage+inc+or+old+metal+item ]" alt="Garage Inc or old metal item" loading="lazy" />
+          <div class="mag-caption">Shoot: Garage Inc CD, wooden Metallica poster, or old metal item</div>
+        </div>
+      </div>
+
+      <!-- Body: drums -->
+      <div class="mag-body reveal">
+        <p class="sec-body">I started drums at 12 or 13. A friend's birthday party. He had a kit, nobody there could play it. I basically spent the next few hours working it out. Breaking the way my arms moved from the way my legs moved. By the time my parents arrived I could play For Whom the Bell Tolls. They bought me a kit not long after.</p>
+        <p class="sec-body">Playing drums is hard to explain. It's hard work. Mentally and physically. Growing up on thrash it was all about that thrash beat and double kick rolls. Convincing mum and dad to buy me double kick pedals was probably my first sales pitch. I played them One by Metallica. Explained exactly why I couldn't do it without the pedals. How they worked. Why I needed them. They bought them.</p>
+      </div>
+
+      <!-- Image pair: drum kit | stage shot -->
+      <div class="mag-img-pair reveal">
+        <div class="mag-img-wrap">
+          <!-- Shoot: your drum kit — full kit or behind-the-kit POV -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ drum+kit ]" alt="Drum kit" loading="lazy" />
+          <div class="mag-caption">Shoot: drum kit — full kit or behind-the-kit POV</div>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: on stage — live band photo or action shot from a show -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/070A16/1E3040?text=[ on+stage ]" alt="On stage" loading="lazy" />
+          <div class="mag-caption">Shoot: on stage — live band photo or action shot</div>
+        </div>
+      </div>
+
+      <!-- Body: band years + final show -->
+      <div class="mag-body reveal">
+        <p class="sec-body">A few years later I was on stage with my band. We'd won two or three Battle of the Bands. I could drive. These were some of the greatest times of my life. I met lifelong friends. Experienced more than I could have expected. We were playing alongside Parkway Drive, I Killed the Prom Queen, The Red Shore, and other up and coming Australian bands. We signed with a label, released two EPs, and were building toward something real. It never came. Our singer joined another band and toured the world. We tried to keep going but it wasn't the same. We parted ways the right way though. One final show. People moshing everywhere. Crowd surfers. Kids jumping from the stage into piles of people. I'll never forget it.</p>
+      </div>
+
+      <!-- Body: live shows + elder metalhead -->
+      <div class="mag-body reveal">
+        <p class="sec-body">Since I turned 18 I've been seeing bands five to ten times a year. Just days after my 18th birthday I saw Cryptopsy in Melbourne. Flo Mournier was a huge influence to me at the time. Our band manager Storm basically crowd surfed to the front to make sure she caught his drum stick when he threw it. She brought it back to me. I still have it.</p>
+        <p class="sec-body">Now in my late 30s I still go. Five to ten a year. Do I still mosh, crowd surf, get in the pit? Hell yes. What's worse for my body than standing still for three or four hours? I get right in the guts and experience it the way it should be experienced. My body feels better for it every time. I guess I am one of those elder metalheads now.</p>
+        <p class="sec-body">Meshuggah was my first tattoo. There was nothing in my life that had the impact they did. I knew immediately I wanted them on me. Family pushed back. A few aunts tried to change my mind. My mind was already made up. Meshuggah on my arm. I will always love it.</p>
+        <p class="sec-body">Thirty years in, I explain music to people like medicine. Some people have something they need every day to keep them alive, keep them sane, in control, healthy. That's music for me. Without my music, there is no me. It connects to everything I do and am. Complex, fast, heavy. Sometimes it's sad. Sometimes angry. Sometimes it lifts you off the ground. But it's always something. I would rather go blind than go deaf.</p>
+      </div>
+
+      <!-- Spotify link -->
+      <a href="#" class="music-link reveal">
         <i class="ph ph-spotify-logo"></i>
         Listening habits
         <i class="ph ph-arrow-right"></i>
       </a>
+
     </div>
 
-    <!-- ── Band Grid — full-width, spans both columns ── -->
+    <!-- ── Band Grid ── -->
     <div class="bands-grid-wrap reveal">
       <div class="bands-grid-label">Bands that shaped my life</div>
       <div class="bands-grid">
