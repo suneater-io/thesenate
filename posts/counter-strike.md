@@ -30,11 +30,11 @@ Not everyone in the clan was all in.
 
 Some guys had pure mechanical skill. Clicking heads all day. Technically gifted. But they wouldn't study the strategies. Wouldn't listen when a call was made. Wouldn't commit.
 
-I learned something from that. You can't change a person. What you can do is put that person in the best position to succeed. Give them the role that plays to exactly what they're good at. Stop trying to make them something they're not.
+I learned something from that. You can't change a person. What you can do is put that person in the best position to succeed. Give them the role that plays to what they're good at. Stop trying to make them something they're not.
 
 Do that and you earn their trust. With trust comes buy-in.
 
-I use that every single day at work.
+I use that at work every day.
 
 ## Sev 1
 
@@ -58,11 +58,11 @@ Most people only reflect on failure. CS taught me to reflect on everything. Winn
 
 That practice, watching yourself from above and asking *what could have been done better here*, is the most transferable skill the game gave me. Not aim or game sense. The habit of looking at yourself honestly, whether you won or lost.
 
-Why don't more people do this? It's the most obvious thing in the world once you've seen it.
+Why don't more people do this? I genuinely don't know.
 
 ## It's Sport
 
-At some point the game stopped being something I played and became something I followed.
+At some point I stopped playing and started following.
 
 ESL Challenger. IEM Sydney 2023. IEM Melbourne 2025. I've been to all of it.
 
@@ -76,7 +76,7 @@ TC and I still talk. He leads PassionUA now. That friendship started at a CS eve
 
 ![IEM Sydney 2023](/images/blog/IEMSYDNEY2.jpg)
 
-Being in that arena is hard to describe. Thousands of people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes. You see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand exactly what it cost to execute it.
+Being in that arena is hard to describe. Thousands of people who love this game the way I love this game. The production, the crowd, the noise when a clutch lands. And you're watching it with 5000 hours behind your eyes. You see what everyone else sees, but you also see the decision that was made half a second before it happened. You see the IGL's call play out in real time. You understand what it cost to execute it.
 
 Watching doesn't cover it.
 
