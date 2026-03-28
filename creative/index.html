@@ -491,6 +491,48 @@
       color: var(--text-2);
     }
 
+    /* ─── Magazine Layout System ─── */
+    .mag-section-inner { max-width: 1200px; margin: 0 auto; }
+    .mag-opener {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-bottom: 56px;
+    }
+    .mag-img-wrap { overflow: hidden; position: relative; }
+    .mag-img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.2) brightness(0.65);
+      transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mag-img-wrap:hover .mag-img { filter: saturate(0.4) brightness(0.8); }
+    .mag-img--hero  { aspect-ratio: 4/3; }
+    .mag-img--wide  { aspect-ratio: 16/9; }
+    .mag-img--tall  { aspect-ratio: 3/4; }
+    .mag-img--sq    { aspect-ratio: 1; }
+    .mag-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-top: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mag-body { margin-bottom: 48px; }
+    .mag-img-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 48px;
+    }
+    .mag-img-strip { margin-bottom: 48px; }
+    .mag-img-strip .mag-img { aspect-ratio: 21/9; }
+
     /* Spotify / listening link */
     .music-link {
       display: inline-flex;
@@ -702,14 +744,7 @@
     /* ─── 05 / LEGO ─── */
     .lego-section {
       padding: 0 52px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      max-width: 1200px;
-      margin: 0 auto;
     }
-    .lego-text { padding-top: 8px; }
     .lego-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -905,17 +940,17 @@
       .sec-divider { padding: 48px 24px 40px; }
       .bands-grid { grid-template-columns: repeat(3, 1fr); }
       .music-section,
-      .cs-section,
-      .lego-section { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
+      .cs-section { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
+      .lego-section,
       .vintage-section,
       .detroit-section,
       .tech-section { padding: 0 24px 60px; }
+      .mag-opener { grid-template-columns: 1fr; gap: 40px; }
+      .mag-img-pair { grid-template-columns: 1fr; }
       .vintage-header,
-      .detroit-header,
       .tech-inner { grid-template-columns: 1fr; gap: 32px; }
       .vintage-grid,
       .detroit-grid { grid-template-columns: 1fr 1fr; }
-      .detroit-year { text-align: left; }
       .vintage-header-right { justify-content: flex-start; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
@@ -1006,8 +1041,16 @@
 
   <div class="music-section">
     <div class="music-img-col reveal">
-      <!-- Replace with a live show or personal photo -->
-      <img class="music-img" src="https://placehold.co/800x600/070A16/1E3040?text=[ show+photo ]" alt="Live show" loading="lazy" />
+      <!-- Shoot: live show — crowd, stage, or pit photo -->
+      <div class="mag-img-wrap">
+        <img class="mag-img mag-img--wide" src="https://placehold.co/800x500/070A16/1E3040?text=[ live+show ]" alt="Live show" loading="lazy" />
+        <div class="mag-caption">Shoot: live show — stage or pit</div>
+      </div>
+      <!-- Shoot: your drum kit or behind the kit POV -->
+      <div class="mag-img-wrap" style="margin-top: 2px;">
+        <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ drum+kit ]" alt="Drum kit" loading="lazy" />
+        <div class="mag-caption">Shoot: drum kit or behind-the-kit</div>
+      </div>
     </div>
     <div class="reveal" style="transition-delay: 0.12s">
       <div class="sec-label">Sound</div>
@@ -1174,42 +1217,79 @@
       <div class="sec-divider-line"></div>
       <span class="sec-divider-label">Detroit Sports</span>
     </div>
-    <div class="detroit-header reveal">
-      <div>
-        <div class="sec-label">Collection Since 2007</div>
-        <h2 class="sec-title">Pistons.<br>Red Wings.<br>Detroit.</h2>
-        <p class="sec-body">Cards, jerseys, memorabilia. Not as an investment. As devotion.</p>
-        <p class="sec-body">It started with the Pistons. As a kid I liked the Bulls but so did everyone else — this was the 90s. Really though, I wanted to root for the team that made Jordan's life miserable. The team that gave it to him. The team that refused to back down. That was Detroit.</p>
+    <div class="mag-section-inner">
+
+      <!-- Opener: title + intro left / hero game photo right -->
+      <div class="mag-opener reveal">
+        <div>
+          <div class="sec-label">Collection Since 2007</div>
+          <h2 class="sec-title">Pistons.<br>Red Wings.<br>Detroit.</h2>
+          <p class="sec-body">Cards, jerseys, memorabilia. Not as an investment. As devotion.</p>
+          <p class="sec-body">It started with the Pistons. As a kid I liked the Bulls but so did everyone else — this was the 90s. Really though, I wanted to root for the team that made Jordan's life miserable. The team that gave it to him. The team that refused to back down. That was Detroit.</p>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: Pistons game — Little Caesars Arena, game action or crowd -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ pistons+game ]" alt="Pistons game" loading="lazy" />
+          <div class="mag-caption">Shoot: Pistons at Little Caesars Arena</div>
+        </div>
+      </div>
+
+      <!-- Body: Bad Boys through DVD service -->
+      <div class="mag-body reveal">
         <p class="sec-body">The deeper I dug into the history, the more I realised I was made for this. The Bad Boys. The bad image. The hard play style. Laimbeer. Isiah. Dumars. I watched the DVDs. I rewatched the games. I learned where it all came from in that late 80s run. That team is my personality on a basketball court.</p>
         <p class="sec-body">The Ben Wallace era is where I fell completely in love. No superstar contract, no ego, just dominance through sheer will. Rasheed. Mr. Big Shot. RIP. Tayshaun with those insane lengths. That team had something you can't manufacture. Defense first, built on grit, played like it.</p>
         <p class="sec-body">In 2004 I was in Year 10 and had discovered live music. Basketball had taken a back seat — which is how I missed the championship run. Coming back in 2006 made it hurt knowing exactly what I'd walked away from. And there was no easy way back in. No streaming, no League Pass. I paid for a service that would burn the local broadcast feed onto a DVD and post it to me in Australia. I'd watch the game days later on disc. I had hundreds of those DVDs before League Pass existed. That's how much I wanted back in.</p>
+      </div>
+
+      <!-- Image pair: Pistons memorabilia | Wings jersey -->
+      <div class="mag-img-pair reveal">
+        <div class="mag-img-wrap">
+          <!-- Shoot: Bad Boys / Ben Wallace era memorabilia or jersey flat lay -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ pistons+memorabilia ]" alt="Pistons memorabilia" loading="lazy" />
+          <div class="mag-caption">Shoot: Bad Boys or Ben Wallace era — jersey or memorabilia</div>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: Red Wings Winged Wheel jersey or item -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/070A16/1E3040?text=[ wings+jersey ]" alt="Red Wings jersey" loading="lazy" />
+          <div class="mag-caption">Shoot: Red Wings — Winged Wheel jersey or item</div>
+        </div>
+      </div>
+
+      <!-- Body: Wings -->
+      <div class="mag-body reveal">
         <p class="sec-body">The Wings came next. A friend of mine — Cameron, a Canucks fan living in Canada at the time — followed hockey. I figured if I'm going Detroit, I'm going all the way. Enter the Wings.</p>
         <p class="sec-body">The deeper I dug, the harder I fell. The Yzerman and Lidstrom stories. The championship legacies. The rivalry with Colorado — brutal, physical, earned. I was learning about legacies that spanned decades. Howe. Yzerman. Federov. Delvecchio. Shanahan. Chelios. Probert. Konstantinov. Draper. Now Larkin. That history is as powerful as any franchise in professional sport.</p>
         <p class="sec-body">The Winged Wheel is one of the most iconic logos in sports. Pulling that jersey on in public is one of the most recognizable ways of saying I love Detroit. Simple as that. It makes me proud every time.</p>
         <p class="sec-body">The 2011 to 2014 run locked me in for life. Deep playoff runs. Conference final Game 7s. Chicago. I can't talk about it. Absolutely heartbreaking. But that's the thing — heartbreak that deep only happens when it means that much.</p>
+      </div>
+
+      <!-- Body: Collection + championship wait -->
+      <div class="mag-body reveal">
         <p class="sec-body">The collection spans all eras but right now it's all Cade. Signed pieces, memorabilia, basketball cards. Some high-end hockey cards too. The collection is serious and still growing.</p>
         <p class="sec-body">Detroit resonates because of what the city carries. Blue collar to the bone. Hard work is rewarded. They've been knocked down over and over and they keep showing up. That mentality doesn't just describe a city. It describes how I want to operate.</p>
         <p class="sec-body">I've been die-hard Detroit for 20 years and I haven't experienced a championship as a dedicated fan — not once, across any sport. I want the Pistons or the Wings to be the first. Getting married. Having kids. Pistons championship. Those are the moments of life. I have no idea what it will feel like. I imagine tears of joy. Tears of confusion. Probably a lot of confusion. So many fans watch their teams win chip after chip like it's nothing. For me it will be everything. When it comes, it will be one of the greatest moments of my life.</p>
         <p class="sec-body">As I write this the Pistons are 53-20 and sitting top of the Eastern Conference. That sentence alone is something I never imagined writing. We are ahead of schedule. Most of my life has been losing. It's the winning that's hard to get used to. I'm keeping the lid on. Staying calm. Enjoying the ride.</p>
       </div>
-      <div class="detroit-year">2007</div>
-    </div>
-    <div class="detroit-grid">
-      <div class="detroit-card reveal">
-        <!-- Replace with jersey photo -->
-        <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ jersey ]" alt="Detroit jersey" loading="lazy" />
-        <div class="detroit-card-label">Jerseys</div>
+
+      <!-- Collection grid -->
+      <div class="detroit-grid reveal">
+        <!-- Shoot: Cade Cunningham signed jersey or item -->
+        <div class="detroit-card">
+          <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ cade+jersey ]" alt="Cade Cunningham jersey" loading="lazy" />
+          <div class="detroit-card-label">Shoot: Cade Cunningham — signed jersey or item</div>
+        </div>
+        <!-- Shoot: basketball card collection flat lay -->
+        <div class="detroit-card">
+          <img class="detroit-card-img" src="https://placehold.co/600x450/070A16/1E3040?text=[ card+collection ]" alt="Card collection" loading="lazy" />
+          <div class="detroit-card-label">Shoot: card collection flat lay</div>
+        </div>
+        <!-- Shoot: signed memorabilia display -->
+        <div class="detroit-card">
+          <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ signed+memorabilia ]" alt="Signed memorabilia" loading="lazy" />
+          <div class="detroit-card-label">Shoot: signed memorabilia display</div>
+        </div>
       </div>
-      <div class="detroit-card reveal" style="transition-delay: 0.12s">
-        <!-- Replace with card collection photo -->
-        <img class="detroit-card-img" src="https://placehold.co/600x450/070A16/1E3040?text=[ cards ]" alt="Basketball cards" loading="lazy" />
-        <div class="detroit-card-label">Basketball Cards</div>
-      </div>
-      <div class="detroit-card reveal" style="transition-delay: 0.24s">
-        <!-- Replace with memorabilia photo -->
-        <img class="detroit-card-img" src="https://placehold.co/600x450/0A0E1C/1E3040?text=[ memorabilia ]" alt="Sports memorabilia" loading="lazy" />
-        <div class="detroit-card-label">Memorabilia</div>
-      </div>
+
     </div>
   </div>
 
@@ -1255,40 +1335,79 @@
   </div>
 
   <div class="lego-section">
-    <div class="lego-text reveal">
-      <div class="sec-label">Collector & Builder</div>
-      <h2 class="sec-title">Star Wars.<br>Batman.<br>Built.</h2>
-      <p class="sec-body">Collector and builder. The sets live in display cabinets. Everything is built with intent.</p>
-      <p class="sec-body">It started young. Pirates. Knights. Racing sets. Built, taken apart, rebuilt. Lego was just part of growing up. As an adult, with adult money, I came back properly. As a collector.</p>
-      <p class="sec-body">Star Wars comes first — but this goes beyond Lego. Star Wars is a massive part of my life. The books, the movies, the shows, the animated series, the merchandise. All of it. The Lego collection is an extension of that obsession. Mostly UCS sets and ships. The crafts and vehicles within that universe are what draw me — the design language, the scale, the detail. Built and displayed.</p>
-      <p class="sec-body">The Empire specifically. People call them the bad guys. I'm not sure that's right. Are the rebels terrorists? It's a question worth sitting with. Either way — I love the Empire. Always have.</p>
-      <p class="sec-body">Batman started at three years old. A VHS of the 1960s series. That was the hook. As I grew up it became the Michael Keaton films — and Keaton remains my Batman. Always will be. The Dark Knight trilogy was something different entirely. I remember sitting in the cinema at the end of The Dark Knight Rises and crying. People around me asking why. I couldn't fully explain it then. Batman was invincible to me as a kid. That scene — flying out over the water with the bomb, giving everything — felt like something dying. Not just a character. A part of my childhood closing out. It hit that hard.</p>
-      <p class="sec-body">My favourite set is the Keaton Batmobile. It gets front and centre in the Batman display.</p>
-      <p class="sec-body">Building Lego is something special. For that time you are locked into a single task with a single role and a single responsibility. You are not just a builder. You are an architect, an artist, a craftsman. Sure, you're following instructions. But it is you doing it. Turning coloured blocks into something real. Something that sits in a cabinet and holds its shape and tells a story about who built it and why. It's meditative in a way that almost nothing else is.</p>
-      <p class="sec-body">The displays take up serious space. I take a lot of pride in them.</p>
-      <div class="lego-themes">
-        <span class="lego-theme">Star Wars</span>
-        <span class="lego-theme">Batman</span>
+    <div class="mag-section-inner">
+
+      <!-- Opener: title + intro left / display cabinet hero right -->
+      <div class="mag-opener reveal">
+        <div>
+          <div class="sec-label">Collector & Builder</div>
+          <h2 class="sec-title">Star Wars.<br>Batman.<br>Built.</h2>
+          <p class="sec-body">Collector and builder. The sets live in display cabinets. Everything is built with intent.</p>
+          <p class="sec-body">It started young. Pirates. Knights. Racing sets. Built, taken apart, rebuilt. Lego was just part of growing up. As an adult, with adult money, I came back properly. As a collector.</p>
+          <p class="sec-body">Star Wars comes first — but this goes beyond Lego. Star Wars is a massive part of my life. The books, the movies, the shows, the animated series, the merchandise. All of it. The Lego collection is an extension of that obsession. Mostly UCS sets and ships. The crafts and vehicles within that universe are what draw me — the design language, the scale, the detail. Built and displayed.</p>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: full display cabinet — wide shot showing both Star Wars and Batman sections -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ display+cabinet ]" alt="Lego display cabinet" loading="lazy" />
+          <div class="mag-caption">Shoot: full display cabinet — wide shot</div>
+        </div>
       </div>
-    </div>
-    <div class="lego-grid reveal" style="transition-delay: 0.12s">
-      <!-- Replace with actual display cabinet / set photos -->
-      <div class="lego-card">
-        <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+01 ]" alt="Lego Star Wars build" loading="lazy" />
-        <div class="lego-card-label">Star Wars</div>
+
+      <!-- Body: Empire + Batman -->
+      <div class="mag-body reveal">
+        <p class="sec-body">The Empire specifically. People call them the bad guys. I'm not sure that's right. Are the rebels terrorists? It's a question worth sitting with. Either way — I love the Empire. Always have.</p>
+        <p class="sec-body">Batman started at three years old. A VHS of the 1960s series. That was the hook. As I grew up it became the Michael Keaton films — and Keaton remains my Batman. Always will be. The Dark Knight trilogy was something different entirely. I remember sitting in the cinema at the end of The Dark Knight Rises and crying. People around me asking why. I couldn't fully explain it then. Batman was invincible to me as a kid. That scene — flying out over the water with the bomb, giving everything — felt like something dying. Not just a character. A part of my childhood closing out. It hit that hard.</p>
       </div>
-      <div class="lego-card">
-        <img src="https://placehold.co/400x400/070A16/1E3040?text=[ build+02 ]" alt="Lego Batman build" loading="lazy" />
-        <div class="lego-card-label">Batman</div>
+
+      <!-- Image pair: Star Wars UCS set | Keaton Batmobile -->
+      <div class="mag-img-pair reveal">
+        <div class="mag-img-wrap">
+          <!-- Shoot: favourite Star Wars UCS ship — close up or 3/4 angle -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ star+wars+UCS ]" alt="Star Wars UCS set" loading="lazy" />
+          <div class="mag-caption">Shoot: Star Wars UCS ship — close up or 3/4 angle</div>
+        </div>
+        <div class="mag-img-wrap">
+          <!-- Shoot: Keaton Batmobile — front and centre in the Batman display -->
+          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/070A16/1E3040?text=[ keaton+batmobile ]" alt="Keaton Batmobile Lego set" loading="lazy" />
+          <div class="mag-caption">Shoot: Keaton Batmobile — front and centre</div>
+        </div>
       </div>
-      <div class="lego-card">
-        <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+03 ]" alt="Lego display cabinet" loading="lazy" />
-        <div class="lego-card-label">Display Cabinet</div>
+
+      <!-- Body: building + display -->
+      <div class="mag-body reveal">
+        <p class="sec-body">My favourite set is the Keaton Batmobile. It gets front and centre in the Batman display.</p>
+        <p class="sec-body">Building Lego is something special. For that time you are locked into a single task with a single role and a single responsibility. You are not just a builder. You are an architect, an artist, a craftsman. Sure, you're following instructions. But it is you doing it. Turning coloured blocks into something real. Something that sits in a cabinet and holds its shape and tells a story about who built it and why. It's meditative in a way that almost nothing else is.</p>
+        <p class="sec-body">The displays take up serious space. I take a lot of pride in them.</p>
+        <div class="lego-themes">
+          <span class="lego-theme">Star Wars</span>
+          <span class="lego-theme">Batman</span>
+        </div>
       </div>
-      <div class="lego-card">
-        <img src="https://placehold.co/400x400/070A16/1E3040?text=[ build+04 ]" alt="Lego collection" loading="lazy" />
-        <div class="lego-card-label">The Collection</div>
+
+      <!-- Build grid -->
+      <div class="lego-grid reveal">
+        <!-- Shoot: Star Wars display section — overview -->
+        <div class="lego-card">
+          <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ SW+display ]" alt="Star Wars display" loading="lazy" />
+          <div class="lego-card-label">Shoot: Star Wars display section</div>
+        </div>
+        <!-- Shoot: Batman display section — overview -->
+        <div class="lego-card">
+          <img src="https://placehold.co/400x400/070A16/1E3040?text=[ batman+display ]" alt="Batman display" loading="lazy" />
+          <div class="lego-card-label">Shoot: Batman display section</div>
+        </div>
+        <!-- Shoot: build in progress or pieces detail -->
+        <div class="lego-card">
+          <img src="https://placehold.co/400x400/0A0E1C/1E3040?text=[ build+in+progress ]" alt="Build in progress" loading="lazy" />
+          <div class="lego-card-label">Shoot: build in progress</div>
+        </div>
+        <!-- Shoot: collection overview — full cabinet wide shot -->
+        <div class="lego-card">
+          <img src="https://placehold.co/400x400/070A16/1E3040?text=[ full+collection ]" alt="Full collection" loading="lazy" />
+          <div class="lego-card-label">Shoot: full collection overview</div>
+        </div>
       </div>
+
     </div>
   </div>
 
