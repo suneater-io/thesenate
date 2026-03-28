@@ -525,6 +525,83 @@
     .mag-img-strip { margin-bottom: 48px; }
     .mag-img-strip .mag-img { aspect-ratio: 21/9; }
 
+    /* ─── Band Track Player ─── */
+    .band-track {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 20px 24px;
+      margin-bottom: 48px;
+    }
+    .band-track-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .band-track-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .band-track-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-1);
+    }
+    .band-track-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .band-track-play {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-hi);
+      background: transparent;
+      color: var(--text-1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .band-track-play:hover { background: var(--blue-dim); border-color: var(--blue); }
+    .band-track-play i { font-size: 16px; }
+    .band-track-progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .band-track-bar {
+      width: 100%;
+      height: 2px;
+      background: var(--surface-2);
+      position: relative;
+      cursor: pointer;
+    }
+    .band-track-bar-fill {
+      height: 100%;
+      background: var(--blue);
+      width: 0%;
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+    .band-track-time {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      display: flex;
+      justify-content: space-between;
+    }
+
     /* Spotify / listening link */
     .music-link {
       display: inline-flex;
@@ -1107,6 +1184,29 @@
         <p class="sec-body">A few years later I was on stage with my band. We'd won two or three Battle of the Bands. I could drive. These were some of the greatest times of my life. I met lifelong friends. Experienced more than I could have expected. We were playing alongside Parkway Drive, I Killed the Prom Queen, The Red Shore, and other up and coming Australian bands. We signed with a label, released two EPs, and were building toward something real. It never came. Our singer joined another band and toured the world. We tried to keep going but it wasn't the same. We parted ways the right way though. One final show. People moshing everywhere. Crowd surfers. Kids jumping from the stage into piles of people. I'll never forget it.</p>
       </div>
 
+      <!-- Band track player -->
+      <div class="band-track reveal">
+        <div class="band-track-meta">
+          <span class="band-track-label">From the archive</span>
+          <span class="band-track-name">On the Shores of Hell</span>
+        </div>
+        <div class="band-track-controls">
+          <button class="band-track-play" id="trackPlay" aria-label="Play">
+            <i class="ph ph-play" id="trackPlayIcon"></i>
+          </button>
+          <div class="band-track-progress-wrap">
+            <div class="band-track-bar" id="trackBar">
+              <div class="band-track-bar-fill" id="trackFill"></div>
+            </div>
+            <div class="band-track-time">
+              <span id="trackCurrent">0:00</span>
+              <span id="trackDuration">--:--</span>
+            </div>
+          </div>
+        </div>
+        <audio id="bandTrack" src="/audio/on-the-shores-of-hell.m4a" preload="metadata"></audio>
+      </div>
+
       <!-- Body: live shows + elder metalhead -->
       <div class="mag-body reveal">
         <p class="sec-body">Since I turned 18 I've been seeing bands five to ten times a year. Just days after my 18th birthday I saw Cryptopsy in Melbourne. Flo Mournier was a huge influence to me at the time. Our band manager Storm basically crowd surfed to the front to make sure she caught his drum stick when he threw it. She brought it back to me. I still have it.</p>
@@ -1613,6 +1713,56 @@
   </footer>
 
   <script>
+    // ─── BAND TRACK PLAYER ───
+    (function() {
+      const audio = document.getElementById('bandTrack');
+      const playBtn = document.getElementById('trackPlay');
+      const playIcon = document.getElementById('trackPlayIcon');
+      const fill = document.getElementById('trackFill');
+      const bar = document.getElementById('trackBar');
+      const current = document.getElementById('trackCurrent');
+      const duration = document.getElementById('trackDuration');
+      if (!audio) return;
+
+      function fmt(s) {
+        const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+        return m + ':' + (sec < 10 ? '0' : '') + sec;
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+        duration.textContent = fmt(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        fill.style.width = pct + '%';
+        current.textContent = fmt(audio.currentTime);
+      });
+
+      audio.addEventListener('ended', () => {
+        playIcon.className = 'ph ph-play';
+        fill.style.width = '0%';
+        current.textContent = '0:00';
+      });
+
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          playIcon.className = 'ph ph-pause';
+        } else {
+          audio.pause();
+          playIcon.className = 'ph ph-play';
+        }
+      });
+
+      bar.addEventListener('click', (e) => {
+        const rect = bar.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = pct * audio.duration;
+      });
+    })();
+
     // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
