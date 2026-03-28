@@ -392,31 +392,104 @@
     }
     .music-img-primary:hover { filter: saturate(0.5) brightness(0.9); }
 
-    /* Artist roster */
-    .artist-roster {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2px;
-      margin-top: 32px;
+    /* ─── Band Grid ─── */
+    .bands-grid-wrap {
+      grid-column: 1 / -1;
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
     }
-    .artist-tag {
+    .bands-grid-label {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--text-2);
+      color: var(--text-3);
+      margin-bottom: 24px;
+    }
+    .bands-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+    .band-cell {
+      position: relative;
+      aspect-ratio: 4/3;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 8px 14px;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+      cursor: default;
     }
-    .artist-tag:hover { border-color: var(--border-hi); color: var(--text-1); transform: translateY(-2px); }
-    .artist-tag--first {
+    .band-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 24px;
+      filter: saturate(0) brightness(0.5);
+      transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .band-cell:hover .band-logo-img {
+      filter: saturate(0) brightness(0.12);
+      transform: scale(1.04);
+    }
+
+    /* Overlay */
+    .band-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .band-cell:hover .band-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .band-overlay-album {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+      filter: saturate(0.4);
+      position: absolute;
+      inset: 0;
+    }
+    .band-overlay-content {
+      position: relative;
+      z-index: 2;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      background: linear-gradient(to top, rgba(6,8,16,0.96) 40%, rgba(6,8,16,0.5) 70%, transparent 100%);
+    }
+    .band-overlay-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .band-overlay-album-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--blue);
-      border-color: rgba(80,150,190,0.30);
-      background: var(--blue-dim);
+      margin-bottom: 8px;
     }
-    .artist-tag--first:hover { color: var(--blue-hi); border-color: var(--border-hi); }
+    .band-overlay-text {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 10px;
+      line-height: 1.6;
+      color: var(--text-2);
+    }
 
     /* Spotify / listening link */
     .music-link {
@@ -830,6 +903,7 @@
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
       .sec-divider { padding: 48px 24px 40px; }
+      .bands-grid { grid-template-columns: repeat(3, 1fr); }
       .music-section,
       .cs-section,
       .lego-section { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
@@ -848,6 +922,7 @@
     }
 
     @media (max-width: 600px) {
+      .bands-grid { grid-template-columns: repeat(2, 1fr); }
       .vintage-grid,
       .detroit-grid { grid-template-columns: 1fr; }
       .lego-grid { grid-template-columns: 1fr 1fr; }
@@ -942,24 +1017,150 @@
       <p class="sec-body">It only went further from there. Faster. More extreme. More technical. I play drums. I've been on stage. Six to ten shows a year, minimum. I go down rabbit holes and don't come back.</p>
       <p class="sec-body">It shapes who I am.</p>
 
-      <div class="artist-roster">
-        <span class="artist-tag artist-tag--first">Meshuggah</span>
-        <span class="artist-tag">The Black Dahlia Murder</span>
-        <span class="artist-tag">Dying Fetus</span>
-        <span class="artist-tag">Cattle Decapitation</span>
-        <span class="artist-tag">Between the Buried and Me</span>
-        <span class="artist-tag">Devin Townsend</span>
-        <span class="artist-tag">Pantera</span>
-        <span class="artist-tag">Slayer</span>
-        <span class="artist-tag">Behemoth</span>
-      </div>
-
       <!-- Replace href with actual Spotify listening stats link when available -->
       <a href="#" class="music-link">
         <i class="ph ph-spotify-logo"></i>
         Listening habits
         <i class="ph ph-arrow-right"></i>
       </a>
+    </div>
+
+    <!-- ── Band Grid — full-width, spans both columns ── -->
+    <div class="bands-grid-wrap reveal">
+      <div class="bands-grid-label">Bands that shaped my life</div>
+      <div class="bands-grid">
+
+        <!-- Meshuggah -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=MESHUGGAH" alt="Meshuggah logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=obZen" alt="obZen album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Meshuggah</div>
+              <div class="band-overlay-album-title">obZen · 2008</div>
+              <div class="band-overlay-text">Changed everything at 14. Still my number one. Controlled chaos, syncopated and relentless. First tattoo.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Black Dahlia Murder -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=THE+BLACK+DAHLIA+MURDER" alt="The Black Dahlia Murder logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Nocturnal" alt="Nocturnal album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">The Black Dahlia Murder</div>
+              <div class="band-overlay-album-title">Nocturnal · 2007</div>
+              <div class="band-overlay-text">Michigan's finest. Melodic death metal at full velocity. Every record lands differently.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dying Fetus -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=DYING+FETUS" alt="Dying Fetus logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Destroy+the+Opposition" alt="Destroy the Opposition album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Dying Fetus</div>
+              <div class="band-overlay-album-title">Destroy the Opposition · 2000</div>
+              <div class="band-overlay-text">By 12, I was here. Brutal tech-death from Maryland. Breakdowns that hit like a wall.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cattle Decapitation -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=CATTLE+DECAPITATION" alt="Cattle Decapitation logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Monolith+of+Inhumanity" alt="Monolith of Inhumanity album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Cattle Decapitation</div>
+              <div class="band-overlay-album-title">Monolith of Inhumanity · 2012</div>
+              <div class="band-overlay-text">Travis Ryan's vocals shouldn't be possible. One of the most extreme records ever made.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Between the Buried and Me -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=BTBAM" alt="Between the Buried and Me logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Colors" alt="Colors album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Between the Buried and Me</div>
+              <div class="band-overlay-album-title">Colors · 2007</div>
+              <div class="band-overlay-text">The most ambitious thing prog metal ever produced. No rules, no ceiling. Colors is a masterwork.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Devin Townsend -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=DEVIN+TOWNSEND" alt="Devin Townsend logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Ziltoid" alt="Ziltoid album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Devin Townsend</div>
+              <div class="band-overlay-album-title">Ziltoid the Omniscient · 2007</div>
+              <div class="band-overlay-text">One man, infinite range. From brutal to orchestral to absurd. No one else operates like this.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pantera -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=PANTERA" alt="Pantera logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Vulgar+Display+of+Power" alt="Vulgar Display of Power album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Pantera</div>
+              <div class="band-overlay-album-title">Vulgar Display of Power · 1992</div>
+              <div class="band-overlay-text">The gateway. The aggression. The groove. Before Pantera, then after. Two different eras.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slayer -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=SLAYER" alt="Slayer logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Reign+in+Blood" alt="Reign in Blood album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Slayer</div>
+              <div class="band-overlay-album-title">Reign in Blood · 1986</div>
+              <div class="band-overlay-text">28 minutes. No fat. The most violent, precise album thrash metal ever made.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Behemoth -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=BEHEMOTH" alt="Behemoth logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=The+Satanist" alt="The Satanist album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Behemoth</div>
+              <div class="band-overlay-album-title">The Satanist · 2014</div>
+              <div class="band-overlay-text">Nergal at full command. Blackened death metal as ritual. The Satanist is a monument.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Morbid Angel -->
+        <div class="band-cell">
+          <img class="band-logo-img" src="https://placehold.co/400x300/090D18/1E3040?text=MORBID+ANGEL" alt="Morbid Angel logo" loading="lazy" />
+          <div class="band-overlay">
+            <img class="band-overlay-album" src="https://placehold.co/400x300/090D18/1E3040?text=Altars+of+Madness" alt="Altars of Madness album art" loading="lazy" />
+            <div class="band-overlay-content">
+              <div class="band-overlay-name">Morbid Angel</div>
+              <div class="band-overlay-album-title">Altars of Madness · 1989</div>
+              <div class="band-overlay-text">Death metal's ground zero. Trey Azagthoth plays like no other human. Foundational.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
