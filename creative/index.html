@@ -373,30 +373,43 @@
 
     /* ─── PAGE INTRO ─── */
     .page-intro {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 72px 52px 56px;
-      text-align: center;
+      padding: 80px 52px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
     }
+    .page-intro-left {}
     .page-intro-text {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(22px, 3vw, 32px);
-      font-weight: 600;
-      letter-spacing: 0.03em;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
       text-transform: uppercase;
       color: var(--text-1);
-      line-height: 1.3;
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+    .page-intro-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--border-hi);
+      margin-bottom: 32px;
+    }
+    .page-intro-body {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--text-2);
       margin-bottom: 16px;
     }
-    .page-intro-sub {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-3);
+    .page-intro-body:last-of-type { margin-bottom: 0; }
+    @media (max-width: 960px) {
+      .page-intro { padding: 56px 24px 48px; grid-template-columns: 1fr; gap: 40px; }
     }
-    @media (max-width: 960px) { .page-intro { padding: 56px 24px 40px; } }
-    @media (max-width: 600px) { .page-intro { padding: 48px 20px 32px; } }
+    @media (max-width: 600px) { .page-intro { padding: 48px 20px 40px; } }
 
     /* ─── 01 / MUSIC ─── */
     .music-section {
@@ -1186,9 +1199,16 @@
 
 
   <!-- ─── PAGE INTRO ─── -->
-  <div class="page-intro reveal">
-    <p class="page-intro-text">Solution Architect. Father. Drummer. Music obsessive. Detroit die-hard. IGL. Collector.</p>
-    <p class="page-intro-sub">This is what I'm made of.</p>
+  <div class="page-intro">
+    <div class="page-intro-left reveal">
+      <p class="page-intro-text">Solution Architect.<br>Father. Drummer.<br>Music obsessive.<br>Detroit die-hard.<br>IGL. Collector.</p>
+    </div>
+    <div class="reveal" style="transition-delay: 0.12s;">
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-body">Solution Architect by day. Everything else all the time. I live for my kids, bleed Detroit, play drums, and still get in the pit. The person in the boardroom on Monday is the same one in the front row on Wednesday night. I don't change who I am depending on the room.</p>
+      <p class="page-intro-body">It started with a 486 in my parents' house. I pulled everything apart to see how it worked. That never stopped. Meshuggah at 14 changed everything. Not just the music. The idea that something could break every rule and be better for it. Rules are starting points. You learn them until you know which ones to cross.</p>
+      <p class="page-intro-body">Over 50 hours in the tattoo chair. My great-grandparents came from Norway. I've been on stage with bands, in enterprise architecture meetings, and deep in the pit. All the same person. Everything below is the full picture.</p>
+    </div>
   </div>
 
 
