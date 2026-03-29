@@ -55,6 +55,8 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
     }
@@ -153,8 +155,8 @@
 
     /* ─── SKIP LINK ─── */
     .skip-link {
-      position: absolute;
-      top: -100%;
+      position: fixed;
+      top: 16px;
       left: 16px;
       padding: 8px 16px;
       background: var(--blue);
@@ -166,9 +168,31 @@
       text-transform: uppercase;
       text-decoration: none;
       z-index: 9999;
-      transition: top 0.2s ease;
+      transform: translateY(calc(-100% - 32px));
+      transition: transform 0.2s ease;
     }
-    .skip-link:focus { top: 16px; }
+    .skip-link:focus { transform: translateY(0); }
+
+    
+    /* ─── DRAWER CLOSE ─── */
+    .drawer-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── HAMBURGER ─── */
     .nav-hamburger {
@@ -236,6 +260,8 @@
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
+
+      height: 100dvh;
       min-height: 600px;
       position: relative;
       display: flex;
@@ -467,6 +493,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
 
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
@@ -510,7 +537,7 @@
     <div class="social-grid">
 
       <a href="mailto:hurricanegrant@gmail.com" class="social-card social-card--primary reveal">
-        <i class="ph ph-envelope social-icon"></i>
+        <i class="ph ph-envelope social-icon" aria-hidden="true"></i>
         <div class="social-text">
           <span class="social-name">Email</span>
           <span class="social-handle">hurricanegrant@gmail.com</span>
@@ -519,7 +546,7 @@
       </a>
 
       <a href="https://www.linkedin.com/in/grant-hansen-suneater" class="social-card reveal" style="transition-delay: 0.12s" target="_blank" rel="noopener noreferrer">
-        <i class="ph ph-linkedin-logo social-icon"></i>
+        <i class="ph ph-linkedin-logo social-icon" aria-hidden="true"></i>
         <div class="social-text">
           <span class="social-name">LinkedIn</span>
           <span class="social-handle">grant-hansen-suneater</span>
@@ -528,7 +555,7 @@
       </a>
 
       <a href="https://www.instagram.com/maxis_sports_vintage/" class="social-card reveal" style="transition-delay: 0.20s" target="_blank" rel="noopener noreferrer">
-        <i class="ph ph-instagram-logo social-icon"></i>
+        <i class="ph ph-instagram-logo social-icon" aria-hidden="true"></i>
         <div class="social-text">
           <span class="social-name">Instagram</span>
           <span class="social-handle">@maxis_sports_vintage</span>
@@ -598,6 +625,7 @@
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeDrawer();
     });

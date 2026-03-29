@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — The Senate</title>
   <meta name="description" content="Demos and projects by Grant Hansen." />
+  <link rel="canonical" href="https://thesenate.io/projects/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://thesenate.io/projects/" />
+  <meta property="og:title"       content="Projects — The Senate" />
+  <meta property="og:description" content="Demos and projects by Grant Hansen." />
+  <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Projects — The Senate" />
+  <meta name="twitter:description" content="Demos and projects by Grant Hansen." />
+  <meta name="twitter:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
   <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
   <link rel="apple-touch-icon" href="/brand_assets/senate-logo-white.png" />
@@ -41,6 +55,8 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
     }
@@ -120,8 +136,8 @@
     .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
     /* ─── SKIP LINK ─── */
     .skip-link {
-      position: absolute;
-      top: -100%;
+      position: fixed;
+      top: 16px;
       left: 16px;
       padding: 8px 16px;
       background: var(--blue);
@@ -133,9 +149,31 @@
       text-transform: uppercase;
       text-decoration: none;
       z-index: 9999;
-      transition: top 0.2s ease;
+      transform: translateY(calc(-100% - 32px));
+      transition: transform 0.2s ease;
     }
-    .skip-link:focus { top: 16px; }
+    .skip-link:focus { transform: translateY(0); }
+
+    
+    /* ─── DRAWER CLOSE ─── */
+    .drawer-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── HAMBURGER ─── */
     .nav-hamburger {
@@ -195,6 +233,8 @@
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
+
+      height: 100dvh;
       min-height: 600px;
       position: relative;
       display: flex;
@@ -414,6 +454,7 @@
 
   <!-- ─── MOBILE DRAWER ─── -->
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link">Professional</a>
 <a href="/projects/" class="nav-link active">Projects</a>
@@ -577,6 +618,7 @@
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeDrawer();
     });

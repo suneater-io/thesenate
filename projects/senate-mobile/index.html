@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Webex CC ROI Calculator — The Senate</title>
-  <meta name="description" content="A Webex Contact Center ROI calculator built for healthcare. Configure workflows, set parameters, get break-even month, net annual gain, and total ROI." />
-  <link rel="canonical" href="https://thesenate.io/projects/wxccroi/about/" />
+  <title>Senate Mobile — The Senate</title>
+  <meta name="description" content="A personal AI-powered health and habit tracking app. Zero manual entry. Claude-powered assistant. Built with React Native and Expo." />
+  <link rel="canonical" href="https://thesenate.io/projects/senate-mobile/" />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://thesenate.io/projects/wxccroi/about/" />
-  <meta property="og:title"       content="Webex CC ROI Calculator — The Senate" />
-  <meta property="og:description" content="A Webex Contact Center ROI calculator built for healthcare. Configure workflows, set parameters, get break-even month, net annual gain, and total ROI." />
+  <meta property="og:url"         content="https://thesenate.io/projects/senate-mobile/" />
+  <meta property="og:title"       content="Senate Mobile — The Senate" />
+  <meta property="og:description" content="A personal AI-powered health and habit tracking app. Zero manual entry. Claude-powered assistant. Built with React Native and Expo." />
   <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Webex CC ROI Calculator — The Senate" />
-  <meta name="twitter:description" content="A Webex Contact Center ROI calculator built for healthcare. Configure workflows, set parameters, get break-even month, net annual gain, and total ROI." />
+  <meta name="twitter:title"       content="Senate Mobile — The Senate" />
+  <meta name="twitter:description" content="A personal AI-powered health and habit tracking app. Zero manual entry. Claude-powered assistant. Built with React Native and Expo." />
   <meta name="twitter:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
   <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
@@ -112,15 +112,19 @@
     .nav-drawer .nav-link:hover, .nav-drawer .nav-link.active { opacity: 1; color: var(--blue) !important; }
     @media (max-width: 600px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
     /* ─── HERO ─── */
     .hero { height: 100vh; height: 100dvh; min-height: 600px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 52px 72px; overflow: hidden; }
     #hero-canvas { will-change: transform; position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
-        radial-gradient(ellipse 80% 65% at 25% 45%, rgba(200,106,40,0.07) 0%, transparent 60%),
-        linear-gradient(to bottom, rgba(4,6,14,0.45) 0%, transparent 28%),
-        linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.2) 30%, transparent 50%);
+        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(200,106,40,0.08) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 30%),
+        linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.2) 30%, transparent 52%);
     }
     .hero-content { position: relative; z-index: 3; }
     .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
@@ -144,7 +148,7 @@
     .brief-col-text { font-size: 14px; line-height: 1.8; color: var(--text-2); }
     .brief-col-text strong { color: var(--text-1); font-weight: 500; }
 
-    /* ─── WORKFLOW ─── */
+    /* ─── HOW IT WORKS ─── */
     .workflow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; }
     .wf-node { border: 1px solid var(--border); background: var(--surface); padding: 24px 20px; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s ease, background 0.2s ease; }
     .wf-node:hover { border-color: var(--border-hi); background: var(--surface-2); }
@@ -167,15 +171,16 @@
     .stack-pill { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-2); border: 1px solid var(--border); padding: 6px 14px; transition: border-color 0.2s ease, color 0.2s ease; }
     .stack-pill:hover { border-color: var(--border-hi); color: var(--text-1); }
 
-    /* ─── LAUNCH CTA ─── */
-    .launch-section { padding: 64px 52px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-    .launch-text { font-family: 'Chakra Petch', sans-serif; font-size: 13px; color: var(--text-3); }
-    .launch-btn { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bg); background: var(--blue); padding: 14px 32px; text-decoration: none; transition: opacity 0.2s ease, gap 0.2s ease; flex-shrink: 0; }
-    .launch-btn:hover { opacity: 0.85; gap: 16px; }
-    .launch-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    /* ─── STATUS ─── */
+    .status-section { padding: 64px 52px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .status-left {}
+    .status-label { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+    .status-text { font-family: 'Chakra Petch', sans-serif; font-size: 13px; line-height: 1.7; color: var(--text-3); max-width: 480px; }
+    .status-badge { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); border: 1px solid var(--border-hi); padding: 14px 32px; flex-shrink: 0; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); opacity: 0.7; }
 
     /* ─── FOOTER ─── */
-    footer { border-top: 1px solid var(--border); padding: 24px 52px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+    footer { border-top: 1px solid var(--border); padding: 24px 52px; display: flex; align-items: center; justify-content: space-between; position: relative; margin-top: auto; }
     .ft-copy { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--text-3); }
     .ft-name { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); position: absolute; left: 50%; transform: translateX(-50%); }
     .ft-mark { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3); }
@@ -192,7 +197,7 @@
       .wf-arrow { padding: 8px 0; transform: rotate(90deg); justify-content: flex-start; padding-left: 24px; }
       .cap-row { grid-template-columns: 36px 1fr; gap: 0 16px; }
       .cap-desc { grid-column: 2; margin-top: 6px; }
-      .launch-section { padding: 48px 24px; flex-direction: column; align-items: flex-start; }
+      .status-section { padding: 48px 24px; flex-direction: column; align-items: flex-start; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
@@ -209,21 +214,21 @@
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
-<a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link active">Projects</a>
-<a href="/blog/" class="nav-link">Thoughts</a>
-<a href="/contact/" class="nav-link">Contact</a>
-</div>
+    <a href="/professional/" class="nav-link">Professional</a>
+    <a href="/projects/" class="nav-link active">Projects</a>
+    <a href="/blog/" class="nav-link">Thoughts</a>
+    <a href="/contact/" class="nav-link">Contact</a>
+  </div>
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
       <a href="/creative/" class="nav-link">Everything</a>
-<a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link active">Projects</a>
-<a href="/blog/" class="nav-link">Thoughts</a>
-<a href="/contact/" class="nav-link">Contact</a>
-</div>
+      <a href="/professional/" class="nav-link">Professional</a>
+      <a href="/projects/" class="nav-link active">Projects</a>
+      <a href="/blog/" class="nav-link">Thoughts</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -239,11 +244,11 @@
       <div class="hero-eyebrow a1">
         <a href="/projects/">Projects</a>
         <span class="hero-eyebrow-sep">/</span>
-        <span>Tool</span>
+        <span>App</span>
       </div>
-      <h1 class="ph-title a2">ROI<br>Calculator</h1>
+      <h1 class="ph-title a2">Senate<br>Mobile</h1>
       <div class="hero-sub a3">
-        <span class="hero-tagline">The numbers before the pitch.</span>
+        <span class="hero-tagline">Zero input. Full context.</span>
         <div class="hero-divider"></div>
       </div>
     </div>
@@ -256,51 +261,50 @@
       <div>
         <div class="brief-col-label">The Problem</div>
         <p class="brief-col-text">
-          Selling Webex Contact Center automation means answering one question first:
-          what does it cost and what does it save? Without that, nothing moves.
-          Decision-makers need a break-even month, a net annual number, and a
-          total ROI figure. Not slides about operational efficiency.
+          Tracking health and habits means opening five apps, entering numbers
+          manually, and still missing the context that makes any of it useful.
+          Data without intelligence is noise. You end up ignoring all of it.
         </p>
       </div>
       <div class="brief-vr"></div>
       <div>
         <div class="brief-col-label">The Build</div>
         <p class="brief-col-text">
-          A calculator built for <strong>Webex Contact Center in healthcare.</strong>
-          Configure your workflows: appointment scheduling, prescription refills,
-          triage routing. Set call volumes, handle times, and staff costs.
-          Get the financial case out the other side.
+          A personal AI app built for Android. <strong>Zero manual entry</strong> —
+          steps, sleep, and activity pull automatically from Health Connect and Strava.
+          Havi, a Claude-powered assistant, is the primary interface.
+          You talk to it. It knows your data.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- ─── WORKFLOW ─── -->
+  <!-- ─── HOW IT WORKS ─── -->
   <div class="section reveal">
     <div class="section-label">01 &nbsp;—&nbsp; How it works</div>
     <div class="workflow">
       <div class="wf-node">
         <span class="wf-num">01</span>
-        <span class="wf-label">Select<br>Workflows</span>
-        <span class="wf-desc">Healthcare-specific: appointment scheduling, prescription refills, triage routing, patient callback.</span>
+        <span class="wf-label">Connect<br>Sources</span>
+        <span class="wf-desc">Link Health Connect and Strava. Steps, sleep, heart rate, and activity flow in automatically.</span>
       </div>
-      <div class="wf-arrow"><i class="ph ph-arrow-right"></i></div>
+      <div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
       <div class="wf-node">
         <span class="wf-num">02</span>
-        <span class="wf-label">Set<br>Parameters</span>
-        <span class="wf-desc">Call volumes, average handle time, staff cost, automation rate. All adjustable.</span>
+        <span class="wf-label">Ask<br>Havi</span>
+        <span class="wf-desc">Talk to the Claude-powered assistant. It reads your health data and responds in context.</span>
       </div>
-      <div class="wf-arrow"><i class="ph ph-arrow-right"></i></div>
+      <div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
       <div class="wf-node">
         <span class="wf-num">03</span>
-        <span class="wf-label">Calculate<br>ROI</span>
-        <span class="wf-desc">Break-even month, net annual gain, total ROI, cost-per-call comparison before and after.</span>
+        <span class="wf-label">Review<br>Dashboard</span>
+        <span class="wf-desc">Stats, streaks, Notion calendar events, and Strava activity. All in one place.</span>
       </div>
-      <div class="wf-arrow"><i class="ph ph-arrow-right"></i></div>
+      <div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
       <div class="wf-node">
         <span class="wf-num">04</span>
-        <span class="wf-label">Review &amp;<br>Present</span>
-        <span class="wf-desc">Adjust inputs to model scenarios. Built for sharing with decision-makers.</span>
+        <span class="wf-label">Set<br>Alerts</span>
+        <span class="wf-desc">Push reminders with one-tap notification actions. Medicine, water, habits. No app open required.</span>
       </div>
     </div>
   </div>
@@ -311,28 +315,33 @@
     <div>
       <div class="cap-row">
         <span class="cap-num">01</span>
-        <span class="cap-title">Healthcare Workflows</span>
-        <p class="cap-desc">Pre-configured for appointment scheduling, prescription refills, triage routing, and patient callback. Not a generic ROI template.</p>
+        <span class="cap-title">Havi AI Assistant</span>
+        <span class="cap-desc">Claude-powered chatbot with full access to your health data. Ask questions, get summaries, understand trends. Plain language.</span>
       </div>
       <div class="cap-row">
         <span class="cap-num">02</span>
-        <span class="cap-title">Break-Even Analysis</span>
-        <p class="cap-desc">See exactly which month automation costs pay off. Month-by-month cumulative cost and savings tracked.</p>
+        <span class="cap-title">Zero-Entry Data</span>
+        <span class="cap-desc">Health Connect and Strava integration. Steps, sleep, heart rate, weight, and activity auto-pulled. No manual input.</span>
       </div>
       <div class="cap-row">
         <span class="cap-num">03</span>
-        <span class="cap-title">ROI Metrics</span>
-        <p class="cap-desc">Net annual gain, total ROI percentage, and cost-per-call comparison, before and after automation.</p>
+        <span class="cap-title">Smart Reminders</span>
+        <span class="cap-desc">Push notifications with one-tap action buttons. Dismiss, complete, or snooze without opening the app. Habit streaks tracked automatically.</span>
       </div>
       <div class="cap-row">
         <span class="cap-num">04</span>
-        <span class="cap-title">Scenario Modelling</span>
-        <p class="cap-desc">Adjust any input. Model optimistic, conservative, and expected outcomes. Change one number, everything recalculates.</p>
+        <span class="cap-title">Notion Calendar</span>
+        <span class="cap-desc">Events pulled from Notion into the dashboard. Havi can reference your schedule when answering questions.</span>
       </div>
       <div class="cap-row">
         <span class="cap-num">05</span>
-        <span class="cap-title">Webex CC Specific</span>
-        <p class="cap-desc">Built on Webex Contact Center workflow patterns and automation capabilities. The numbers reflect the actual platform.</p>
+        <span class="cap-title">Secure by Default</span>
+        <span class="cap-desc">API keys stored in expo-secure-store. No cloud sync of personal health data. Everything stays on-device.</span>
+      </div>
+      <div class="cap-row">
+        <span class="cap-num">06</span>
+        <span class="cap-title">Haptic Feedback</span>
+        <span class="cap-desc">Haptics throughout: reminders, settings saves, onboarding. The app responds to every interaction with physical confirmation.</span>
       </div>
     </div>
   </div>
@@ -341,22 +350,37 @@
   <div class="section reveal">
     <div class="section-label">03 &nbsp;—&nbsp; Stack</div>
     <div class="stack-flow">
-      <span class="stack-pill">Next.js</span>
-      <span class="stack-pill">React</span>
+      <span class="stack-pill">React Native</span>
+      <span class="stack-pill">Expo SDK 55</span>
       <span class="stack-pill">TypeScript</span>
-      <span class="stack-pill">Tailwind</span>
-      <span class="stack-pill">Webex CC</span>
+      <span class="stack-pill">expo-router</span>
+      <span class="stack-pill">Zustand</span>
+      <span class="stack-pill">@anthropic-ai/sdk</span>
+      <span class="stack-pill">Health Connect</span>
+      <span class="stack-pill">Strava API</span>
+      <span class="stack-pill">expo-notifications</span>
+      <span class="stack-pill">expo-haptics</span>
+      <span class="stack-pill">expo-secure-store</span>
+      <span class="stack-pill">Notion API</span>
     </div>
   </div>
 
-  <!-- ─── LAUNCH ─── -->
-  <div class="launch-section reveal">
-    <span class="launch-text">Live. Runs in the browser.</span>
-    <a href="/projects/wxccroi/" class="launch-btn">
-      Launch tool &nbsp;<i class="ph ph-arrow-right"></i>
-    </a>
+  <!-- ─── STATUS ─── -->
+  <div class="status-section reveal">
+    <div class="status-left">
+      <div class="status-label">Current Status</div>
+      <p class="status-text">
+        Builds and runs stably on Android. All core features are working.
+        Health Connect integration is in progress. Personal use only. Not publicly released.
+      </p>
+    </div>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      In Development
+    </div>
   </div>
 
+  <!-- ─── FOOTER ─── -->
   <footer>
     <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
     <span class="ft-name">Grant Hansen</span>
@@ -364,34 +388,66 @@
   </footer>
 
   <script>
+    // ─── NAV SCROLL ───
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 48); }, { passive: true });
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
 
+    // ─── MOBILE NAV ───
     const hamburger = document.getElementById('hamburger');
-    const navDrawer  = document.getElementById('nav-drawer');
-    navDrawer.setAttribute('role', 'dialog'); navDrawer.setAttribute('aria-modal', 'true'); navDrawer.setAttribute('aria-label', 'Navigation');
-    function getFocusable() { return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])')); }
-    function trapFocus(e) { const f = getFocusable(); if (!f.length) return; const first = f[0], last = f[f.length-1]; if (e.key === 'Tab') { if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } } }
-    function closeDrawer() { navDrawer.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; navDrawer.removeEventListener('keydown', trapFocus); hamburger.focus(); }
-    hamburger.addEventListener('click', () => { const isOpen = navDrawer.classList.toggle('open'); hamburger.classList.toggle('open', isOpen); hamburger.setAttribute('aria-expanded', String(isOpen)); document.body.style.overflow = isOpen ? 'hidden' : ''; if (isOpen) { const f = getFocusable(); if (f.length) f[0].focus(); navDrawer.addEventListener('keydown', trapFocus); } else { navDrawer.removeEventListener('keydown', trapFocus); } });
-    navDrawer.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', closeDrawer));
+    const navDrawer = document.getElementById('nav-drawer');
+    navDrawer.setAttribute('role', 'dialog');
+    navDrawer.setAttribute('aria-modal', 'true');
+    navDrawer.setAttribute('aria-label', 'Navigation');
+
+    function getFocusable() {
+      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
+    }
+    function trapFocus(e) {
+      if (e.key === 'Escape') { e.preventDefault(); closeDrawer(); return; }
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+    function closeDrawer() {
+      navDrawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      navDrawer.removeEventListener('keydown', trapFocus);
+      hamburger.focus();
+    }
+    hamburger.addEventListener('click', () => {
+      const isOpen = navDrawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (isOpen) {
+        const focusable = getFocusable();
+        if (focusable.length) focusable[0].focus();
+        navDrawer.addEventListener('keydown', trapFocus);
+      } else {
+        navDrawer.removeEventListener('keydown', trapFocus);
+      }
+    });
+    navDrawer.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
     document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-    (function () {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const canvas = document.getElementById('hero-canvas'); if (!canvas) return;
-      const ctx = canvas.getContext('2d'); const COUNT = 52; let W, H, particles = [];
-      function resize() { W = canvas.width = canvas.parentElement.offsetWidth; H = canvas.height = canvas.parentElement.offsetHeight; }
-      function mkParticle(fromBottom) { const layer = Math.random(); return { x: Math.random()*W, y: fromBottom ? H+Math.random()*60 : Math.random()*H, vy: -(0.10+layer*0.20), vx: (Math.random()-0.5)*0.12, r: 0.35+layer*1.1, o: 0.04+layer*0.16, life: fromBottom ? 0 : Math.floor(Math.random()*400), maxLife: 320+Math.floor(Math.random()*280), phase: Math.random()*Math.PI*2, freq: 0.007+Math.random()*0.006 }; }
-      function init() { resize(); particles = Array.from({ length: COUNT }, () => mkParticle(false)); }
-      function tick() { ctx.clearRect(0,0,W,H); for (let i=0;i<particles.length;i++) { const p=particles[i]; p.phase+=p.freq; p.x+=p.vx+Math.sin(p.phase)*0.16; p.y+=p.vy; p.life++; if (p.life>=p.maxLife||p.y<-12) { particles[i]=mkParticle(true); continue; } const prog=p.life/p.maxLife; const fade=prog<0.12?prog/0.12:prog>0.78?1-(prog-0.78)/0.22:1; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(200,106,40,${p.o*fade})`; ctx.fill(); } rafId=requestAnimationFrame(tick); }
-      window.addEventListener('resize', () => { resize(); particles.forEach(p => { if (p.x>W) p.x=Math.random()*W; }); }, { passive: true });
-      init(); let rafId; tick();
-      document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(rafId); else tick(); });
-    })();
-
-    const revealObs = new IntersectionObserver((entries) => { entries.forEach(entry => { if (!entry.isIntersecting) return; entry.target.classList.add('vis'); revealObs.unobserve(entry.target); }); }, { threshold: 0.06 });
+    // ─── SCROLL REVEAL ───
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('vis');
+        revealObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   </script>
 </body>

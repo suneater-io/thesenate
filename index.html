@@ -136,6 +136,7 @@
     /* ─── HERO ─── */
     #main {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -314,8 +315,8 @@
 
     /* ─── SKIP LINK ─── */
     .skip-link {
-      position: absolute;
-      top: -100%;
+      position: fixed;
+      top: 16px;
       left: 16px;
       padding: 8px 16px;
       background: var(--blue);
@@ -327,9 +328,30 @@
       text-transform: uppercase;
       text-decoration: none;
       z-index: 9999;
-      transition: top 0.2s ease;
+      transform: translateY(calc(-100% - 32px));
+      transition: transform 0.2s ease;
     }
-    .skip-link:focus { top: 16px; }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* ─── DRAWER CLOSE ─── */
+    .drawer-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── HAMBURGER ─── */
     .nav-hamburger {
@@ -383,6 +405,17 @@
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
+      .hero-name {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+      }
+      .hero-identity {
+        letter-spacing: 0.14em;
+        max-width: calc(100vw - 48px);
+        text-align: center;
+        word-break: break-word;
+      }
     }
 
     /* ─── REDUCED MOTION ─── */
@@ -534,6 +567,7 @@
 
   <!-- ─── MOBILE DRAWER ─── -->
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
@@ -578,7 +612,6 @@
 
     <p class="hero-role a4">Everything. At full volume.</p>
     <p class="hero-name a4">Grant Hansen &nbsp;&middot;&nbsp; Solution Architect</p>
-    <p class="hero-identity a5">Architect<span>·</span>Drummer<span>·</span>Collector<span>·</span>Detroit</p>
 
   </section>
 
@@ -608,6 +641,7 @@
       return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
     }
     function trapFocus(e) {
+      if (e.key === 'Escape') { e.preventDefault(); closeDrawer(); return; }
       const focusable = getFocusable();
       if (!focusable.length) return;
       const first = focusable[0], last = focusable[focusable.length - 1];
@@ -641,6 +675,7 @@
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
 
     // ─── SCROLL REVEAL ───
     const revealObs = new IntersectionObserver((entries) => {

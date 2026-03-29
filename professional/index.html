@@ -152,8 +152,8 @@
 
     /* ─── SKIP LINK ─── */
     .skip-link {
-      position: absolute;
-      top: -100%;
+      position: fixed;
+      top: 16px;
       left: 16px;
       padding: 8px 16px;
       background: var(--blue);
@@ -165,9 +165,31 @@
       text-transform: uppercase;
       text-decoration: none;
       z-index: 9999;
-      transition: top 0.2s ease;
+      transform: translateY(calc(-100% - 32px));
+      transition: transform 0.2s ease;
     }
-    .skip-link:focus { top: 16px; }
+    .skip-link:focus { transform: translateY(0); }
+
+    
+    /* ─── DRAWER CLOSE ─── */
+    .drawer-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── HAMBURGER ─── */
     .nav-hamburger {
@@ -235,6 +257,8 @@
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
+
+      height: 100dvh;
       min-height: 600px;
       position: relative;
       display: flex;
@@ -622,6 +646,7 @@
     @media (max-width: 600px) {
       .work-num { font-size: 40px; }
       .what-card { padding: 36px 24px; }
+      .ph-title { font-size: clamp(40px, 10.5vw, 80px); }
     }
   </style>
 </head>
@@ -630,6 +655,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
 
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link active">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
@@ -678,19 +704,19 @@
   </div>
   <div class="what-grid">
     <div class="what-card reveal">
-      <i class="ph ph-headset what-icon"></i>
+      <i class="ph ph-headset what-icon" aria-hidden="true"></i>
       <h3 class="what-title">Webex Contact Center</h3>
       <p class="what-desc">End-to-end contact centre architecture on the Cisco Webex platform. IVR design, agent routing, AI automation, reporting. From pre-sales through go-live.</p>
     </div>
     <div class="what-card reveal" style="transition-delay: 0.12s">
-      <i class="ph ph-heartbeat what-icon"></i>
+      <i class="ph ph-heartbeat what-icon" aria-hidden="true"></i>
       <h3 class="what-title">Integrated Health</h3>
       <p class="what-desc">Clinical communications for hospitals and healthcare networks. Nurse call, personal duress, clinical mobility, RTLS. The systems that run in the background so clinicians don't have to think about them.</p>
     </div>
     <div class="what-card reveal" style="transition-delay: 0.24s">
-      <i class="ph ph-blueprint what-icon"></i>
+      <i class="ph ph-blueprint what-icon" aria-hidden="true"></i>
       <h3 class="what-title">Solution Architecture</h3>
-      <p class="what-desc">Pre-sales architecture and technical design for complex enterprise deployments. I translate requirements into designs that can actually be built — and defend them in front of procurement.</p>
+      <p class="what-desc">Pre-sales architecture and technical design for complex enterprise deployments. I translate requirements into designs that can actually be built. And I defend them in front of procurement.</p>
     </div>
   </div>
 
@@ -863,6 +889,7 @@
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeDrawer();
     });

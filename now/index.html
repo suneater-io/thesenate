@@ -47,6 +47,8 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
     }
@@ -140,8 +142,8 @@
 
     /* ─── SKIP LINK ─── */
     .skip-link {
-      position: absolute;
-      top: -100%;
+      position: fixed;
+      top: 16px;
       left: 16px;
       padding: 8px 16px;
       background: var(--blue);
@@ -153,9 +155,31 @@
       text-transform: uppercase;
       text-decoration: none;
       z-index: 9999;
-      transition: top 0.2s ease;
+      transform: translateY(calc(-100% - 32px));
+      transition: transform 0.2s ease;
     }
-    .skip-link:focus { top: 16px; }
+    .skip-link:focus { transform: translateY(0); }
+
+    
+    /* ─── DRAWER CLOSE ─── */
+    .drawer-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
     /* ─── HAMBURGER ─── */
     .nav-hamburger {
@@ -373,6 +397,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
 
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
@@ -426,7 +451,7 @@
     <div class="now-entry reveal" style="transition-delay: 0.2s;">
       <span class="now-label">Playing</span>
       <div class="now-content">
-        CS2 as always. Also a lot of Super Battle Golf lately — that game brings a specific kind of laugh that nothing else does.
+        CS2 as always. Also a lot of Super Battle Golf lately. That game brings a specific kind of laugh that nothing else does.
       </div>
     </div>
 
@@ -496,6 +521,7 @@
     navDrawer.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeDrawer);
     });
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeDrawer();
     });
