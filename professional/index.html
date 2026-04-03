@@ -452,53 +452,90 @@
       max-width: 580px;
     }
 
-    /* ─── 02: THE STACK ─── */
-    .stack-section {
+    /* ─── 02: 20+ YEARS ─── */
+    .depth-section {
       padding: 64px 52px;
       border-bottom: 1px solid var(--border);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 56px 80px;
+      gap: 0 80px;
+      align-items: start;
     }
-    .stack-group { }
-    .stack-group-label {
+
+    /* Left — timeline */
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .timeline-item:first-child { padding-top: 0; }
+    .timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .timeline-years {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-3);
+      text-transform: uppercase;
+      padding-top: 4px;
+      white-space: nowrap;
+    }
+    .timeline-role {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--text-1);
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+    .timeline-desc {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-2);
+    }
+
+    /* Right — solutions */
+    .solutions-col {
+      border-left: 1px solid var(--border);
+      padding-left: 80px;
+    }
+    .sol-group {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sol-group:first-child { padding-top: 0; }
+    .sol-group:last-child { border-bottom: none; padding-bottom: 0; }
+    .sol-group-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-1);
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
+      margin-bottom: 14px;
     }
-    .stack-group-label::after {
-      content: attr(data-count);
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      color: var(--text-3);
-    }
-    .stack-items {
+    .sol-items {
       display: flex;
       flex-wrap: wrap;
       gap: 2px;
     }
-    .stack-item {
+    .sol-item {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.06em;
+      font-size: 11px;
+      letter-spacing: 0.05em;
       color: var(--text-2);
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 10px 16px;
+      padding: 8px 14px;
       transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
     }
-    .stack-item:hover { border-color: var(--border-hi); color: var(--text-1); background: var(--surface-2); }
+    .sol-item:hover { border-color: var(--border-hi); color: var(--text-1); background: var(--surface-2); }
 
     /* ─── 03: WORK ─── */
     .work-section {
@@ -673,7 +710,8 @@
       .practice-item { grid-template-columns: 1fr; padding: 48px 24px; }
       .practice-left { padding-right: 0; margin-bottom: 28px; position: static; }
       .practice-num { font-size: 52px; }
-      .stack-section { padding: 48px 24px; grid-template-columns: 1fr; gap: 40px; }
+      .depth-section { padding: 48px 24px; grid-template-columns: 1fr; gap: 48px; }
+      .solutions-col { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 48px; }
       .work-section { padding: 0; grid-template-columns: 1fr; }
       .work-card { padding: 40px 24px; }
       .cta-section { padding: 60px 24px; }
@@ -777,58 +815,99 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 02 / THE STACK -->
+  <!-- 02 / 20+ YEARS -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="section-num-header reveal">
     <span class="section-num">02</span>
-    <h2 class="section-title">The Stack</h2>
+    <h2 class="section-title">20+ Years</h2>
   </div>
-  <div class="stack-section reveal">
-    <div class="stack-group">
-      <div class="stack-group-label" data-count="7 tools">Contact Center</div>
-      <div class="stack-items">
-        <span class="stack-item">Webex Contact Center</span>
-        <span class="stack-item">CUCM</span>
-        <span class="stack-item">UCCX</span>
-        <span class="stack-item">Cisco Finesse</span>
-        <span class="stack-item">CUBE</span>
-        <span class="stack-item">SIP / VoIP</span>
-        <span class="stack-item">IVR Design</span>
+  <div class="depth-section reveal">
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-years">2006</span>
+        <div>
+          <div class="timeline-role">IT Support</div>
+          <p class="timeline-desc">Where it started. Fixing what breaks. Learning, early, that people matter more than the technology they're using.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-years">2012</span>
+        <div>
+          <div class="timeline-role">Desktop Support</div>
+          <p class="timeline-desc">Enterprise scale at a major bank. Thousands of endpoints. High-pressure fault resolution. The methodical approach was built here.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-years">2016</span>
+        <div>
+          <div class="timeline-role">VoIP Engineer</div>
+          <p class="timeline-desc">Moved into UC. PBX-to-VoIP migrations, greenfield deployments, national branch rollouts. Owned the UC solution end to end on every engagement.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-years">2020</span>
+        <div>
+          <div class="timeline-role">Network Engineer</div>
+          <p class="timeline-desc">Deeper into infrastructure. Service team lead. The full network picture — not just comms.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-years">2023 —</span>
+        <div>
+          <div class="timeline-role">Solution Architect</div>
+          <p class="timeline-desc">Where everything connects. Healthcare AI, integrated health ecosystems, contact centre. Twenty years of seeing what breaks — now applied at the design stage.</p>
+        </div>
       </div>
     </div>
-    <div class="stack-group">
-      <div class="stack-group-label" data-count="6 tools">Clinical Mobility</div>
-      <div class="stack-items">
-        <span class="stack-item">Spectralink</span>
-        <span class="stack-item">Olinqua</span>
-        <span class="stack-item">MobiCall</span>
-        <span class="stack-item">Duress.com</span>
-        <span class="stack-item">Nurse Call Integration</span>
-        <span class="stack-item">Personal Duress</span>
+
+    <!-- Solutions -->
+    <div class="solutions-col">
+      <div class="sol-group">
+        <div class="sol-group-label">Contact Centre</div>
+        <div class="sol-items">
+          <span class="sol-item">Webex Contact Center</span>
+          <span class="sol-item">CUCM</span>
+          <span class="sol-item">UCCX</span>
+          <span class="sol-item">Cisco Finesse</span>
+          <span class="sol-item">SIP / VoIP</span>
+          <span class="sol-item">IVR Design</span>
+          <span class="sol-item">AI Agent Assist</span>
+        </div>
+      </div>
+      <div class="sol-group">
+        <div class="sol-group-label">Integrated Health</div>
+        <div class="sol-items">
+          <span class="sol-item">Clinical Mobility</span>
+          <span class="sol-item">Staff Duress</span>
+          <span class="sol-item">Nurse Call Integration</span>
+          <span class="sol-item">Clinical Messaging</span>
+          <span class="sol-item">Message Integration Engines</span>
+        </div>
+      </div>
+      <div class="sol-group">
+        <div class="sol-group-label">RTLS & Safety</div>
+        <div class="sol-items">
+          <span class="sol-item">Real-Time Location</span>
+          <span class="sol-item">Asset Tracking</span>
+          <span class="sol-item">Staff Location</span>
+          <span class="sol-item">Ekahau</span>
+          <span class="sol-item">AiRISTA</span>
+          <span class="sol-item">Kontakt IO</span>
+        </div>
+      </div>
+      <div class="sol-group">
+        <div class="sol-group-label">Network & Security</div>
+        <div class="sol-items">
+          <span class="sol-item">Fortinet</span>
+          <span class="sol-item">Cisco Meraki</span>
+          <span class="sol-item">Wi-Fi Design</span>
+          <span class="sol-item">SD-WAN</span>
+        </div>
       </div>
     </div>
-    <div class="stack-group">
-      <div class="stack-group-label" data-count="6 tools">RTLS & Safety</div>
-      <div class="stack-items">
-        <span class="stack-item">Ekahau</span>
-        <span class="stack-item">AiRISTA Flow</span>
-        <span class="stack-item">Securitas Healthcare</span>
-        <span class="stack-item">Kontakt IO</span>
-        <span class="stack-item">Asset Tracking</span>
-        <span class="stack-item">Staff Location</span>
-      </div>
-    </div>
-    <div class="stack-group">
-      <div class="stack-group-label" data-count="6 tools">Network & Security</div>
-      <div class="stack-items">
-        <span class="stack-item">Fortinet</span>
-        <span class="stack-item">CCNA</span>
-        <span class="stack-item">Wi-Fi Design</span>
-        <span class="stack-item">Ekahau Site Survey</span>
-        <span class="stack-item">Cisco Meraki</span>
-        <span class="stack-item">SD-WAN</span>
-      </div>
-    </div>
+
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
