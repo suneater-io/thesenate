@@ -439,6 +439,73 @@
       color: var(--blue);
     }
 
+    /* ─── CONTEXT SECTION ─── */
+    .context-section {
+      padding: 0 52px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+    .context-intro {
+      max-width: 680px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(20px, 2.5vw, 24px);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--text-2);
+      letter-spacing: 0.02em;
+    }
+    .context-intro .hi { color: var(--text-1); }
+    .context-divider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .context-line-l { width: 40px; height: 1px; background: var(--border-hi); flex-shrink: 0; }
+    .context-line-r { flex: 1; height: 1px; background: linear-gradient(to right, var(--border-hi), transparent); }
+    .context-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: var(--blue);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .context-item { display: flex; flex-direction: column; gap: 12px; }
+    .context-item-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--text-3);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .context-item-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+    .context-item-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--text-2);
+      line-height: 1.45;
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -480,6 +547,8 @@
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
       .social-section { padding: 48px 24px 64px; }
+      .context-section { padding: 0 24px 80px; gap: 40px; }
+      .context-grid { grid-template-columns: 1fr; gap: 32px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
@@ -566,6 +635,32 @@
 
     </div>
   </div>
+
+  <!-- ─── CONTEXT ─── -->
+  <section class="context-section">
+    <p class="context-intro reveal">
+      If it's about <span class="hi">work</span> — architecture, contact centre, AI integration — use LinkedIn. If it's about <span class="hi">everything else</span> — music, Counter-Strike, vintage gear, Detroit sports — use email. Both inboxes are open.
+    </p>
+    <div class="context-divider-wrap reveal" style="transition-delay: 0.1s;">
+      <div class="context-line-l"></div>
+      <span class="context-label">What's Worth Your Time</span>
+      <div class="context-line-r"></div>
+    </div>
+    <div class="context-grid reveal" style="transition-delay: 0.2s;">
+      <div class="context-item">
+        <span class="context-item-label">Professional</span>
+        <p class="context-item-text">Enterprise architecture, contact centre deployments, and automation that actually ships.</p>
+      </div>
+      <div class="context-item">
+        <span class="context-item-label">Culture</span>
+        <p class="context-item-text">Counter-Strike strats, 90s sportswear, Detroit sports, anything music.</p>
+      </div>
+      <div class="context-item">
+        <span class="context-item-label">Everything Else</span>
+        <p class="context-item-text">Open to interpretation. If it's interesting, the inbox will respond.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
