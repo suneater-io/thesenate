@@ -1114,7 +1114,8 @@
     /* ─── SIDEBAR SECTION NAV ─── */
     .section-nav {
       position: fixed;
-      left: 20px;
+      right: 20px;
+      left: auto;
       top: auto;
       bottom: 40px;
       z-index: 100;
@@ -1133,6 +1134,7 @@
     .section-nav-item {
       display: flex;
       align-items: center;
+      flex-direction: row-reverse;
       gap: 10px;
       text-decoration: none;
       cursor: pointer;
@@ -1155,7 +1157,7 @@
       text-transform: uppercase;
       color: var(--text-3);
       opacity: 0;
-      transform: translateX(-6px);
+      transform: translateX(6px);
       transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
       white-space: nowrap;
       pointer-events: none;
