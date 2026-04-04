@@ -1111,6 +1111,71 @@
       line-height: 1.5;
     }
 
+    /* ─── SIDEBAR SECTION NAV ─── */
+    .section-nav {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .section-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .section-nav-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--text-3);
+      flex-shrink: 0;
+      transition: background 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .section-nav-item.active .section-nav-dot {
+      background: var(--blue);
+      transform: scale(1.6);
+    }
+    .section-nav-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .section-nav-item:hover .section-nav-label { opacity: 1; transform: translateX(0); color: var(--text-2); }
+    .section-nav-item.active .section-nav-label { opacity: 1; transform: translateX(0); color: var(--blue); }
+    @media (max-width: 1100px) { .section-nav { display: none; } }
+
+    /* ─── SECTION WATERMARK ─── */
+    .sec-divider { position: relative; }
+    .sec-divider > *:not(.sec-divider-wm) { position: relative; z-index: 1; }
+    .sec-divider-wm {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(120px, 18vw, 240px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--text-1);
+      opacity: 0.055;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -1190,6 +1255,17 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
 
+  <!-- Sidebar section nav -->
+  <nav class="section-nav" aria-label="Section navigation">
+    <a href="#s1" class="section-nav-item" data-target="s1"><div class="section-nav-dot"></div><span class="section-nav-label">Music</span></a>
+    <a href="#s2" class="section-nav-item" data-target="s2"><div class="section-nav-dot"></div><span class="section-nav-label">Detroit</span></a>
+    <a href="#s3" class="section-nav-item" data-target="s3"><div class="section-nav-dot"></div><span class="section-nav-label">CS</span></a>
+    <a href="#s4" class="section-nav-item" data-target="s4"><div class="section-nav-dot"></div><span class="section-nav-label">Lego</span></a>
+    <a href="#s5" class="section-nav-item" data-target="s5"><div class="section-nav-dot"></div><span class="section-nav-label">Vintage</span></a>
+    <a href="#s6" class="section-nav-item" data-target="s6"><div class="section-nav-dot"></div><span class="section-nav-label">Horror</span></a>
+    <a href="#s7" class="section-nav-item" data-target="s7"><div class="section-nav-dot"></div><span class="section-nav-label">Tech</span></a>
+  </nav>
+
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link active">Everything</a>
@@ -1266,10 +1342,11 @@
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- 01 / MUSIC -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="sec-divider reveal">
+  <div id="s1" class="sec-divider reveal">
     <span class="sec-divider-num">01</span>
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Music</span>
+    <span class="sec-divider-wm" aria-hidden="true">01</span>
   </div>
 
   <div class="music-section">
@@ -1589,10 +1666,11 @@
   <!-- 02 / DETROIT SPORTS -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="detroit-section">
-    <div class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
+    <div id="s2" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
       <span class="sec-divider-num">02</span>
       <div class="sec-divider-line"></div>
       <span class="sec-divider-label">Detroit Sports</span>
+      <span class="sec-divider-wm" aria-hidden="true">02</span>
     </div>
     <div class="mag-section-inner">
 
@@ -1674,10 +1752,11 @@
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- 03 / COUNTER-STRIKE -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="sec-divider reveal">
+  <div id="s3" class="sec-divider reveal">
     <span class="sec-divider-num">03</span>
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Gaming</span>
+    <span class="sec-divider-wm" aria-hidden="true">03</span>
   </div>
 
   <div class="cs-section">
@@ -1705,10 +1784,11 @@
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- 04 / LEGO -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="sec-divider reveal">
+  <div id="s4" class="sec-divider reveal">
     <span class="sec-divider-num">04</span>
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Lego</span>
+    <span class="sec-divider-wm" aria-hidden="true">04</span>
   </div>
 
   <div class="lego-section">
@@ -1783,10 +1863,11 @@
   <!-- 05 / VINTAGE -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="vintage-section">
-    <div class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
+    <div id="s5" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
       <span class="sec-divider-num">05</span>
       <div class="sec-divider-line"></div>
       <span class="sec-divider-label">Vintage</span>
+      <span class="sec-divider-wm" aria-hidden="true">05</span>
     </div>
     <div class="mag-section-inner">
 
@@ -1868,10 +1949,11 @@
   <!-- 06 / HORROR -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="horror-section">
-    <div class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
+    <div id="s6" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
       <span class="sec-divider-num">06</span>
       <div class="sec-divider-line"></div>
       <span class="sec-divider-label">Horror</span>
+      <span class="sec-divider-wm" aria-hidden="true">06</span>
     </div>
     <div class="horror-inner">
       <div class="reveal">
@@ -1907,10 +1989,11 @@
   <!-- 07 / TECHNOLOGY -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="tech-section">
-    <div class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
+    <div id="s7" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
       <span class="sec-divider-num">07</span>
       <div class="sec-divider-line"></div>
       <span class="sec-divider-label">Technology</span>
+      <span class="sec-divider-wm" aria-hidden="true">07</span>
     </div>
     <div class="tech-inner">
       <div class="reveal">
@@ -2173,6 +2256,26 @@
       });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // ─── SIDEBAR NAV ACTIVE STATE ───
+    (function () {
+      const navItems = document.querySelectorAll('.section-nav-item');
+      if (!navItems.length) return;
+      const sectionIds = ['s1','s2','s3','s4','s5','s6','s7'];
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      let current = null;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            current = entry.target.id;
+            navItems.forEach(item => {
+              item.classList.toggle('active', item.dataset.target === current);
+            });
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      sections.forEach(s => obs.observe(s));
+    })();
   </script>
 
 </body>
