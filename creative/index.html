@@ -1122,6 +1122,13 @@
       flex-direction: column;
       gap: 14px;
       align-items: flex-start;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .section-nav.visible {
+      opacity: 1;
+      pointer-events: auto;
     }
     .section-nav-item {
       display: flex;
@@ -2258,24 +2265,34 @@
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    // ─── SIDEBAR NAV ACTIVE STATE ───
+    // ─── SIDEBAR NAV ACTIVE STATE + HERO HIDE ───
     (function () {
+      const nav = document.querySelector('.section-nav');
       const navItems = document.querySelectorAll('.section-nav-item');
-      if (!navItems.length) return;
+      if (!nav || !navItems.length) return;
+
+      // Show/hide based on hero visibility
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        const heroObs = new IntersectionObserver((entries) => {
+          nav.classList.toggle('visible', !entries[0].isIntersecting);
+        }, { threshold: 0.1 });
+        heroObs.observe(hero);
+      }
+
+      // Active dot tracking
       const sectionIds = ['s1','s2','s3','s4','s5','s6','s7'];
       const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-      let current = null;
-      const obs = new IntersectionObserver((entries) => {
+      const sectionObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            current = entry.target.id;
             navItems.forEach(item => {
-              item.classList.toggle('active', item.dataset.target === current);
+              item.classList.toggle('active', item.dataset.target === entry.target.id);
             });
           }
         });
       }, { rootMargin: '-30% 0px -60% 0px' });
-      sections.forEach(s => obs.observe(s));
+      sections.forEach(s => sectionObs.observe(s));
     })();
   </script>
 
