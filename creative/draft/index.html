@@ -10,13 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     :root {
       --bg:        #04060E;
       --surface:   #070A16;
-      --surface-2: #0A0E1C;
       --border:    rgba(80, 150, 190, 0.10);
       --border-hi: rgba(80, 150, 190, 0.24);
       --blue:      #6FB5CC;
@@ -28,12 +26,11 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html, body { overflow: hidden; height: 100%; }
     body {
       background: var(--bg);
       color: var(--text-1);
       font-family: 'Chakra Petch', sans-serif;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -44,67 +41,21 @@
       inset: 0;
       z-index: 9999;
       pointer-events: none;
-      opacity: 0.11;
+      opacity: 0.10;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 300px 300px;
     }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.5; }
-      50%       { opacity: 1; }
-    }
-
-    /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition:
-        opacity 0.8s cubic-bezier(0.16,1,0.3,1),
-        transform 0.8s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.d1 { transition-delay: 0.1s; }
-    .reveal.d2 { transition-delay: 0.22s; }
-    .reveal.d3 { transition-delay: 0.36s; }
-    .reveal.d4 { transition-delay: 0.5s; }
-    .reveal.vis { opacity: 1; transform: translateY(0); }
-
-    /* ─── SCROLL PROGRESS ─── */
-    .scroll-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 1px;
-      width: 0%;
-      background: linear-gradient(to right, transparent 0%, var(--blue) 40%, var(--blue-hi) 60%, transparent 100%);
-      z-index: 9998;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .scroll-progress.active { opacity: 0.55; }
 
     /* ─── NAV ─── */
     nav#nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
+      z-index: 300;
       padding: 24px 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s ease, border-color 0.4s ease;
-      border-bottom: 1px solid transparent;
-    }
-    nav#nav.scrolled {
-      background: rgba(4, 6, 14, 0.90);
-      backdrop-filter: blur(24px) saturate(160%);
-      border-bottom-color: var(--border);
-      padding-top: 16px;
-      padding-bottom: 16px;
+      background: linear-gradient(to bottom, rgba(4,6,14,0.7) 0%, transparent 100%);
     }
     .nav-logo {
       font-family: 'Space Mono', monospace;
@@ -131,261 +82,51 @@
       opacity: 0.75;
       text-decoration: none;
       transition: opacity 0.2s ease;
-      padding: 10px 0;
-      position: relative;
     }
-    .nav-link:hover, .nav-link.active { opacity: 1; }
-    .nav-link.active { color: var(--blue); }
-    .nav-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-    .nav-links .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 8px; left: 0;
-      width: 100%; height: 1px;
-      background: var(--blue);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
-      opacity: 0.65;
-    }
-    .nav-links .nav-link:hover::after,
-    .nav-links .nav-link.active::after { transform: scaleX(1); }
+    .nav-link:hover { opacity: 1; }
+    .nav-link.active { opacity: 1; color: var(--blue); }
 
-    /* ─── SKIP LINK ─── */
-    .skip-link {
-      position: fixed;
-      top: 16px; left: 16px;
-      padding: 8px 16px;
-      background: var(--blue);
-      color: var(--bg);
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      z-index: 9999;
-      transform: translateY(calc(-100% - 32px));
-      transition: transform 0.2s ease;
-    }
-    .skip-link:focus { transform: translateY(0); }
-
-    /* ─── MOBILE DRAWER ─── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 44px; height: 44px;
-      padding: 11px 10px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      z-index: 300;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 22px; height: 1.5px;
-      background: var(--text-1);
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-drawer {
+    /* ─── SLIDE CONTAINER ─── */
+    .slides-wrapper {
       position: fixed;
       inset: 0;
-      background: var(--bg);
-      z-index: 250;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .nav-drawer.open { opacity: 1; pointer-events: all; }
-    .nav-drawer .nav-link {
-      font-size: 22px !important;
-      letter-spacing: 0.12em !important;
-      opacity: 0.8 !important;
-    }
-    .nav-drawer .nav-link:hover,
-    .nav-drawer .nav-link.active { opacity: 1 !important; }
-    .drawer-close {
-      position: absolute;
-      top: 24px; right: 24px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      background: none;
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      cursor: pointer;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-    .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .slides-wrapper::-webkit-scrollbar { display: none; }
 
-    /* ─── SIDEBAR DOT NAV ─── */
-    .section-nav {
-      position: fixed;
-      bottom: 40px;
-      right: 36px;
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      opacity: 0;
-      transform: translateX(12px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      pointer-events: none;
-    }
-    .section-nav.visible {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: all;
-    }
-    .snav-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--text-3);
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
-      text-decoration: none;
-      display: block;
-    }
-    .snav-dot:hover { background: var(--text-2); transform: scale(1.4); }
-    .snav-dot.active { background: var(--blue); transform: scale(1.3); }
-
-    /* ─── HERO ─── */
-    .hero {
+    /* ─── INDIVIDUAL SLIDE ─── */
+    .slide {
+      width: 100vw;
       height: 100vh;
       height: 100dvh;
-      min-height: 600px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 52px 72px;
       overflow: hidden;
-      background: var(--bg);
-    }
-    .hero-warp {
-      position: absolute;
-      inset: -4%;
-      z-index: 0;
-      pointer-events: none;
-      filter: url(#hero-displace);
-    }
-    .hero-warp img {
-      width: 108%;
-      height: 108%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-    #hero-canvas {
-      will-change: transform;
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        linear-gradient(rgba(3,5,12,0.72), rgba(3,5,12,0.72)),
-        radial-gradient(ellipse 80% 60% at 15% 55%, rgba(40,110,160,0.09) 0%, transparent 58%),
-        linear-gradient(to bottom, rgba(3,5,12,0.60) 0%, transparent 30%),
-        linear-gradient(to top, var(--bg) 0%, rgba(3,5,12,0.28) 32%, transparent 52%);
-    }
-    .hero-ghost-logo {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 18vh;
-    }
-    .hero-ghost-logo img {
-      width: min(672px, 84vw);
-      opacity: 0.06;
-      mix-blend-mode: screen;
-      filter: brightness(1.2);
-      user-select: none;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      animation: fadeUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-    }
-    .hero-bar {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .hero-role {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(18px, 2.2vw, 26px);
-      font-weight: 500;
-      font-style: italic;
-      letter-spacing: 0.04em;
-      color: var(--text-2);
-      line-height: 1.4;
-    }
-    .hero-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--border-hi), transparent);
-    }
-    .ph-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(80px, 14vw, 180px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.88;
-      color: var(--text-1);
-      text-transform: uppercase;
-    }
-
-    /* ─── CHAPTER SECTIONS ─── */
-    .chapter {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
       display: flex;
       align-items: flex-end;
-      overflow: hidden;
     }
-    .chapter-bg {
+
+    /* ─── SLIDE BG + OVERLAY ─── */
+    .slide-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
-    .chapter-overlay {
+    .slide-overlay {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 1;
     }
-    .chapter-num {
+    .slide-num {
       position: absolute;
       top: -0.08em;
       right: -0.04em;
@@ -400,13 +141,24 @@
       user-select: none;
       z-index: 1;
     }
-    .chapter-content {
+
+    /* ─── SLIDE CONTENT ─── */
+    .slide-content {
       position: relative;
       z-index: 2;
       padding: 0 80px 96px;
-      max-width: 580px;
+      max-width: 620px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+        transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
-    .chapter-label {
+    .slide.active .slide-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .slide-label {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 700;
@@ -419,7 +171,7 @@
       align-items: center;
       gap: 14px;
     }
-    .chapter-label::before {
+    .slide-label::before {
       content: '';
       display: block;
       width: 32px; height: 1px;
@@ -427,7 +179,7 @@
       opacity: 0.5;
       flex-shrink: 0;
     }
-    .chapter-headline {
+    .slide-headline {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(60px, 8.5vw, 120px);
       font-weight: 800;
@@ -437,7 +189,7 @@
       color: var(--text-1);
       margin-bottom: 20px;
     }
-    .chapter-sub {
+    .slide-sub {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(20px, 2.2vw, 27px);
       font-weight: 400;
@@ -446,154 +198,177 @@
       margin-bottom: 24px;
       line-height: 1.3;
     }
-    .chapter-rule {
+    .slide-rule {
       width: 48px; height: 1px;
       background: var(--border-hi);
       margin-bottom: 24px;
     }
-    .chapter-body {
+    .slide-body {
       font-family: 'Chakra Petch', sans-serif;
       font-size: clamp(13px, 1vw, 15px);
       line-height: 1.8;
       color: var(--text-1);
       opacity: 0.75;
-      max-width: 380px;
+      max-width: 400px;
     }
 
-    /* Architect — blue-cold, softened */
-    .chapter--architect .chapter-bg { filter: brightness(0.72) saturate(0.85); }
-    .chapter--architect .chapter-overlay {
+    /* ─── SLIDE 0: HERO ─── */
+    .slide--hero {
+      align-items: flex-end;
+    }
+    .slide--hero .slide-bg {
+      filter: brightness(0.65) saturate(0.8);
+    }
+    .slide--hero .slide-overlay {
+      background:
+        linear-gradient(rgba(3,5,12,0.65), rgba(3,5,12,0.65)),
+        linear-gradient(to top, var(--bg) 0%, rgba(3,5,12,0.2) 30%, transparent 50%),
+        linear-gradient(to bottom, rgba(3,5,12,0.55) 0%, transparent 28%);
+    }
+    .hero-ghost-logo {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 15vh;
+    }
+    .hero-ghost-logo img {
+      width: min(600px, 80vw);
+      opacity: 0.06;
+      mix-blend-mode: screen;
+      filter: brightness(1.2);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 52px 72px;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s;
+    }
+    .slide--hero.active .hero-content { opacity: 1; transform: translateY(0); }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.88;
+      color: var(--text-1);
+      text-transform: uppercase;
+    }
+    .hero-bar {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .hero-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-2);
+    }
+    .hero-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border-hi), transparent);
+    }
+
+    /* ─── SLIDE OVERLAYS PER THEME ─── */
+    .slide--architect .slide-bg { filter: brightness(0.72) saturate(0.85); }
+    .slide--architect .slide-overlay {
       background:
         linear-gradient(to top,    rgba(4,6,14,0.88) 0%, rgba(4,6,14,0.45) 38%, transparent 58%),
         linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 28%),
-        linear-gradient(to right,  rgba(4,6,14,0.38) 0%, transparent 52%),
-        linear-gradient(180deg,    rgba(8,18,46,0.18) 0%, transparent 100%);
+        linear-gradient(to right,  rgba(4,6,14,0.38) 0%, transparent 52%);
     }
 
-    /* Detroit — warm amber, softened */
-    .chapter--detroit .chapter-bg { filter: brightness(0.7) saturate(0.9); }
-    .chapter--detroit .chapter-overlay {
+    .slide--detroit .slide-bg { filter: brightness(0.70) saturate(0.9); }
+    .slide--detroit .slide-overlay {
       background:
         linear-gradient(to top,    rgba(10,6,2,0.88)  0%, rgba(10,6,2,0.45) 38%, transparent 58%),
         linear-gradient(to bottom, rgba(10,6,2,0.55)  0%, transparent 28%),
-        linear-gradient(to right,  rgba(10,6,2,0.38)  0%, transparent 52%),
-        linear-gradient(180deg,    rgba(60,28,4,0.16)  0%, transparent 100%);
+        linear-gradient(to right,  rgba(10,6,2,0.38)  0%, transparent 52%);
     }
-    .chapter--detroit .chapter-label { color: #C8903A; }
-    .chapter--detroit .chapter-label::before { background: #C8903A; }
+    .slide--detroit .slide-label { color: #C8903A; }
+    .slide--detroit .slide-label::before { background: #C8903A; }
 
-    /* Metal — near-dark */
-    .chapter--metal .chapter-overlay {
+    .slide--metal .slide-bg { background: #03040A; }
+    .slide--metal .slide-overlay {
       background:
         linear-gradient(to top,    rgba(3,4,8,0.88)  0%, rgba(3,4,8,0.28) 36%, transparent 56%),
         linear-gradient(to bottom, rgba(3,4,8,0.55)  0%, transparent 24%),
         linear-gradient(to right,  rgba(3,4,8,0.28)  0%, transparent 58%);
     }
 
-    /* ─── COLLECTION SECTION ─── */
-    .collection {
+    /* ─── SLIDE: COLLECTION ─── */
+    .slide--collection {
       background: var(--bg);
-      padding: 120px 0 80px;
+      align-items: stretch;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
     }
-    .collection-header {
-      padding: 0 80px 48px;
-    }
-    .collection-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--blue);
-      opacity: 0.7;
+    .collection-left {
+      position: relative;
+      z-index: 2;
       display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 64px 96px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
-    .collection-eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px; height: 1px;
-      background: var(--blue);
-      opacity: 0.5;
-    }
-    .collection-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(52px, 7vw, 96px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 0.92;
-      text-transform: uppercase;
-      color: var(--text-1);
-    }
-    .collection-strip {
-      overflow-x: scroll;
-      overflow-y: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      cursor: grab;
-      user-select: none;
-    }
-    .collection-strip::-webkit-scrollbar { display: none; }
-    .collection-strip.dragging { cursor: grabbing; }
-    .collection-track {
-      display: flex;
+    .slide--collection.active .collection-left { opacity: 1; transform: translateY(0); }
+    .collection-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
       gap: 3px;
-      width: max-content;
-      padding: 0 80px;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.9s ease 0.2s;
     }
-    .collection-img {
-      height: clamp(320px, 55vh, 600px);
-      width: auto;
-      flex-shrink: 0;
+    .slide--collection.active .collection-grid { opacity: 1; }
+    .collection-grid-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.88) saturate(0.85);
+      filter: brightness(0.85) saturate(0.8);
       transition: filter 0.4s ease;
     }
-    .collection-img:hover { filter: brightness(1) saturate(1); }
-    .collection-footer {
-      padding: 56px 80px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 80px;
-    }
-    .collection-sub {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2.2vw, 27px);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--text-2);
-      line-height: 1.3;
-      flex-shrink: 0;
-    }
-    .collection-rule {
-      width: 1px;
-      height: 60px;
-      background: var(--border-hi);
-      flex-shrink: 0;
-      margin-top: 4px;
-    }
-    .collection-body {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: clamp(13px, 1vw, 15px);
-      line-height: 1.8;
-      color: var(--text-1);
-      opacity: 0.7;
-      max-width: 400px;
+    .collection-grid-img:hover { filter: brightness(1) saturate(1); }
+    .collection-grid-item:first-child {
+      grid-row: span 2;
     }
 
-    /* ─── PITCH SECTION ─── */
-    .pitch {
+    /* ─── SLIDE: PITCH ─── */
+    .slide--pitch {
       background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 140px 80px 120px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .pitch-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
+      padding: 0 80px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
+    .slide--pitch.active .pitch-inner { opacity: 1; transform: translateY(0); }
     .pitch-eyebrow {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
@@ -611,7 +386,7 @@
       line-height: 0.95;
       text-transform: uppercase;
       color: var(--text-1);
-      max-width: 900px;
+      max-width: 800px;
       margin-bottom: 32px;
     }
     .pitch-body {
@@ -620,7 +395,7 @@
       line-height: 1.75;
       color: var(--text-2);
       max-width: 480px;
-      margin-bottom: 80px;
+      margin-bottom: 64px;
     }
     .pitch-links {
       display: flex;
@@ -634,7 +409,7 @@
       text-transform: uppercase;
       color: var(--text-2);
       text-decoration: none;
-      padding: 12px 32px;
+      padding: 12px 28px;
       border: 1px solid var(--border);
       border-right: none;
       transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
@@ -645,105 +420,91 @@
       border-color: var(--border-hi);
       background: var(--blue-dim);
     }
-    .pitch-link:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 52px;
+    /* ─── ARROW NAVIGATION ─── */
+    .slide-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 200;
+      width: 48px; height: 48px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      position: relative;
+      justify-content: center;
+      background: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, opacity 0.3s ease;
+      opacity: 0.5;
     }
-    .ft-copy {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--text-3);
+    .slide-arrow:hover { border-color: var(--border-hi); background: rgba(111,181,204,0.06); opacity: 1; }
+    .slide-arrow:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .slide-arrow--prev { left: 24px; }
+    .slide-arrow--next { right: 24px; }
+    .slide-arrow.hidden { opacity: 0; pointer-events: none; }
+    .slide-arrow svg { width: 18px; height: 18px; stroke: var(--text-1); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ─── DOT PAGINATION ─── */
+    .slide-dots {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .ft-mark {
+    .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--text-3);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .dot:hover { background: var(--text-2); transform: scale(1.3); }
+    .dot.active { background: var(--blue); transform: scale(1.4); }
+
+    /* ─── SLIDE COUNTER ─── */
+    .slide-counter {
+      position: fixed;
+      bottom: 28px;
+      right: 52px;
+      z-index: 200;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.2em;
       color: var(--text-3);
     }
-    .ft-mark span { color: var(--blue); }
-    .ft-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+    .slide-counter span { color: var(--blue); }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 960px) {
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
       nav#nav { padding: 20px 24px; }
-      .nav-links { gap: 24px; }
-      .hero { padding: 0 24px 56px; }
-      .hero-line { display: none; }
-      footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
-      .ft-name { position: static; transform: none; }
-      .chapter-content { padding: 0 32px 80px; }
-      .collection-header { padding: 0 32px 40px; }
-      .collection-track { padding: 0 32px; }
-      .collection-footer { padding: 40px 32px 0; flex-direction: column; gap: 32px; }
-      .collection-rule { display: none; }
-      .pitch { padding: 100px 32px 80px; }
+      .nav-links { display: none; }
+      .slide-content { padding: 0 32px 80px; }
+      .slide-headline { font-size: clamp(48px, 14vw, 80px); }
+      .hero-content { padding: 0 32px 64px; }
+      .slide-arrow { display: none; }
+      .slide--collection { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+      .collection-left { padding: 32px 32px 48px; justify-content: flex-end; }
+      .pitch-inner { padding: 0 32px; }
       .pitch-links { flex-wrap: wrap; justify-content: center; }
       .pitch-link { border-right: 1px solid var(--border); margin-bottom: -1px; }
-      .section-nav { display: none; }
-    }
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .hero-bar { overflow: hidden; }
-      .hero-role { white-space: nowrap; }
-      .chapter-content { padding: 0 24px 60px; }
-      .chapter-headline { font-size: clamp(48px, 14vw, 80px); }
-      .collection-track { gap: 2px; }
-      .collection-img { height: clamp(220px, 45vw, 360px); }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+      .slide-content, .hero-content, .collection-left, .pitch-inner, .collection-grid {
+        transition: none;
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
 </head>
 <body>
-
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-  <a href="#main" class="skip-link">Skip to content</a>
-
-  <!-- Sidebar dot nav -->
-  <nav class="section-nav" id="section-nav" aria-label="Section navigation">
-    <a href="#main"               class="snav-dot active" aria-label="Everything"></a>
-    <a href="#section-architect"  class="snav-dot"        aria-label="Architect"></a>
-    <a href="#section-detroit"    class="snav-dot"        aria-label="Detroit"></a>
-    <a href="#section-metal"      class="snav-dot"        aria-label="Metal"></a>
-    <a href="#section-collection" class="snav-dot"        aria-label="Collection"></a>
-    <a href="#section-pitch"      class="snav-dot"        aria-label="The Senate"></a>
-  </nav>
-
-  <!-- Mobile drawer -->
-  <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
-    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
-    <a href="/creative/" class="nav-link active">Everything</a>
-    <a href="/professional/" class="nav-link">Professional</a>
-    <a href="/projects/" class="nav-link">Projects</a>
-    <a href="/blog/" class="nav-link">Thoughts</a>
-    <a href="/contact/" class="nav-link">Contact</a>
-  </div>
 
   <!-- Nav -->
   <nav id="nav">
@@ -755,315 +516,237 @@
       <a href="/blog/" class="nav-link">Thoughts</a>
       <a href="/contact/" class="nav-link">Contact</a>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </nav>
 
-  <!-- SVG displacement filter -->
-  <svg width="0" height="0" style="position:absolute">
-    <defs>
-      <filter id="hero-displace" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-        <feTurbulence id="heroTurb" type="turbulence" baseFrequency="0.0045 0.008" numOctaves="3" seed="2" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="38" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </defs>
-  </svg>
+  <!-- Arrow nav -->
+  <button class="slide-arrow slide-arrow--prev hidden" id="arrow-prev" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="slide-arrow slide-arrow--next" id="arrow-next" aria-label="Next slide">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
 
-  <!-- ─── HERO ─── -->
-  <section class="hero" id="main">
-    <div class="hero-warp">
-      <img src="/images/source5.webp" alt="" loading="eager" width="1440" height="900" />
-    </div>
-    <div class="hero-overlay"></div>
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <div class="hero-ghost-logo">
-      <img src="/brand_assets/senate-logo-white.png" alt="" />
-    </div>
-    <div class="hero-content">
-      <h1 class="ph-title">Everything</h1>
-      <div class="hero-bar">
-        <p class="hero-role">Architect &nbsp;&middot;&nbsp; Detroit &nbsp;&middot;&nbsp; Metal &nbsp;&middot;&nbsp; Collector</p>
-        <div class="hero-line"></div>
+  <!-- Dot pagination -->
+  <div class="slide-dots" role="tablist" aria-label="Slides">
+    <button class="dot active" data-idx="0" aria-label="Everything" role="tab"></button>
+    <button class="dot"        data-idx="1" aria-label="Architect"  role="tab"></button>
+    <button class="dot"        data-idx="2" aria-label="Detroit"    role="tab"></button>
+    <button class="dot"        data-idx="3" aria-label="Metal"      role="tab"></button>
+    <button class="dot"        data-idx="4" aria-label="Collection" role="tab"></button>
+    <button class="dot"        data-idx="5" aria-label="The Senate" role="tab"></button>
+  </div>
+
+  <!-- Counter -->
+  <div class="slide-counter" aria-hidden="true">
+    <span id="counter-current">01</span> / 06
+  </div>
+
+  <!-- Slides -->
+  <div class="slides-wrapper" id="slides-wrapper">
+
+    <!-- 00 · EVERYTHING (hero) -->
+    <div class="slide slide--hero active" id="slide-0">
+      <div class="slide-bg" style="background-image: url('/images/source5.webp');"></div>
+      <div class="slide-overlay"></div>
+      <div class="hero-ghost-logo">
+        <img src="/brand_assets/senate-logo-white.png" alt="" />
       </div>
-    </div>
-  </section>
-
-  <!-- ─── 01 ARCHITECT ─── -->
-  <section id="section-architect" class="chapter chapter--architect">
-    <div class="chapter-bg" style="background-image: url('/images/professional.webp'); background-position: center 40%;"></div>
-    <div class="chapter-overlay"></div>
-    <div class="chapter-num" aria-hidden="true">01</div>
-    <div class="chapter-content">
-      <p class="chapter-label reveal d1">01 / Architect</p>
-      <h2 class="chapter-headline reveal d2">Solution<br>Architect</h2>
-      <p class="chapter-sub reveal d3">The role fits the way I think.</p>
-      <div class="chapter-rule reveal d3"></div>
-      <p class="chapter-body reveal d4">
-        20+ years in IT. The title caught up eventually.
-        Systems, structure, how things connect — that's not
-        work. That's just how I see everything.
-        It started with a 486 in my parents' house.
-        I pulled everything apart to see how it worked.
-        Never stopped. Rules are starting points.
-        You learn them until you know which ones to cross.
-      </p>
-    </div>
-  </section>
-
-  <!-- ─── 02 DETROIT ─── -->
-  <section id="section-detroit" class="chapter chapter--detroit">
-    <div class="chapter-bg" style="background-image: url('/images/packarddetroit.webp'); background-position: center 60%;"></div>
-    <div class="chapter-overlay"></div>
-    <div class="chapter-num" aria-hidden="true">02</div>
-    <div class="chapter-content">
-      <p class="chapter-label reveal d1">02 / Detroit</p>
-      <h2 class="chapter-headline reveal d2">Detroit</h2>
-      <p class="chapter-sub reveal d3">Not where I'm from. Where I belong.</p>
-      <div class="chapter-rule reveal d3"></div>
-      <p class="chapter-body reveal d4">
-        It started with the Pistons. Everyone liked the Bulls.
-        I wanted the team that made Jordan's life miserable.
-        The team that refused to back down. That was Detroit.
-        The Wings came next. The Winged Wheel is one of the
-        most iconic logos in sports. Blue collar to the bone.
-        Hard work rewarded. Knocked down, keeps showing up.
-        That mentality doesn't just describe a city.
-        It describes how I want to operate.
-      </p>
-    </div>
-  </section>
-
-  <!-- ─── 03 METAL ─── -->
-  <section id="section-metal" class="chapter chapter--metal">
-    <!-- Placeholder: swap for live show photo when available -->
-    <div class="chapter-bg" style="background: #03040A;"></div>
-    <div class="chapter-overlay"></div>
-    <div class="chapter-num" aria-hidden="true">03</div>
-    <div class="chapter-content">
-      <p class="chapter-label reveal d1">03 / Metal</p>
-      <h2 class="chapter-headline reveal d2">Metal</h2>
-      <p class="chapter-sub reveal d3">Not a taste. A life support system.</p>
-      <div class="chapter-rule reveal d3"></div>
-      <p class="chapter-body reveal d4">
-        Music is not something I do. It's what I am.
-        Meshuggah at 14 changed everything. Not just the music —
-        the idea that something could break every rule
-        and be better for it. Like the music was demonstrating
-        the way my brain worked. Chaotic, loud, odd, different.
-        Thirty years in. Still my medicine. Still my brain.
-        Without it, nothing else around it works.
-        Nothing else exists.
-      </p>
-    </div>
-  </section>
-
-  <!-- ─── 04 COLLECTION ─── -->
-  <section id="section-collection" class="collection">
-    <div class="collection-header">
-      <p class="collection-eyebrow reveal">04 / The Collection</p>
-      <h2 class="collection-title reveal d1">The<br>Collection</h2>
-    </div>
-
-    <div class="collection-strip" id="collection-strip" role="region" aria-label="Collection gallery — drag to scroll">
-      <div class="collection-track">
-        <img src="/images/lego-cabinet-wide.jpg"      alt="Lego display cabinet"          class="collection-img" draggable="false" />
-        <img src="/images/lego-star-wars-ucs.jpg"     alt="Lego Star Wars UCS sets"        class="collection-img" draggable="false" />
-        <img src="/images/lego-sw-display1.jpg"       alt="Lego Star Wars display"         class="collection-img" draggable="false" />
-        <img src="/images/lego-batman-display.jpg"    alt="Lego Batman display"            class="collection-img" draggable="false" />
-        <img src="/images/detroit-signed-display.jpg" alt="Signed Detroit memorabilia"     class="collection-img" draggable="false" />
-        <img src="/images/detroit-cade-jersey.jpg"    alt="Cade Cunningham jersey"         class="collection-img" draggable="false" />
-        <img src="/images/detroit-wings-jersey.jpg"   alt="Detroit Red Wings jersey"       class="collection-img" draggable="false" />
-        <img src="/images/detroit-card-collection.jpg" alt="Detroit card collection"       class="collection-img" draggable="false" />
-        <img src="/images/detroit-memorabilia1.jpg"   alt="Detroit memorabilia"            class="collection-img" draggable="false" />
+      <div class="hero-content">
+        <h1 class="hero-title">Everything</h1>
+        <div class="hero-bar">
+          <p class="hero-role">Architect &nbsp;&middot;&nbsp; Detroit &nbsp;&middot;&nbsp; Metal &nbsp;&middot;&nbsp; Collector</p>
+          <div class="hero-line"></div>
+        </div>
       </div>
     </div>
 
-    <div class="collection-footer">
-      <p class="collection-sub reveal">Everything gets<br>a monument.</p>
-      <div class="collection-rule reveal d1"></div>
-      <p class="collection-body reveal d2">
-        When something matters, it takes up space.
-        A display case. A signed jersey. A build that
-        took weeks. This is what total investment looks like
-        when it becomes physical.
-      </p>
+    <!-- 01 · ARCHITECT -->
+    <div class="slide slide--architect" id="slide-1">
+      <div class="slide-bg" style="background-image: url('/images/professional.webp'); background-position: center 40%;"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-num" aria-hidden="true">01</div>
+      <div class="slide-content">
+        <p class="slide-label">01 / Architect</p>
+        <h2 class="slide-headline">Solution<br>Architect</h2>
+        <p class="slide-sub">The role fits the way I think.</p>
+        <div class="slide-rule"></div>
+        <p class="slide-body">
+          20+ years in IT. The title caught up eventually.
+          It started with a 486 in my parents' house —
+          I pulled everything apart to see how it worked. Never stopped.
+          Systems, structure, how things connect — that's not work.
+          That's just how I see everything.
+          Rules are starting points. You learn them until you know which ones to cross.
+        </p>
+      </div>
     </div>
-  </section>
 
-  <!-- ─── PITCH ─── -->
-  <section id="section-pitch" class="pitch">
-    <p class="pitch-eyebrow reveal">The Senate</p>
-    <h2 class="pitch-headline reveal d1">The Senate is everything I am.</h2>
-    <p class="pitch-body reveal d2">
-      Every interest. Every obsession. Every discipline.<br>
-      Nothing curated. Nothing explained.
-    </p>
-    <nav class="pitch-links reveal d3" aria-label="Site sections">
-      <a href="/professional/" class="pitch-link">Professional</a>
-      <a href="/projects/"     class="pitch-link">Projects</a>
-      <a href="/blog/"         class="pitch-link">Thoughts</a>
-      <a href="/contact/"      class="pitch-link">Contact</a>
-    </nav>
-  </section>
+    <!-- 02 · DETROIT -->
+    <div class="slide slide--detroit" id="slide-2">
+      <div class="slide-bg" style="background-image: url('/images/packarddetroit.webp'); background-position: center 60%;"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-num" aria-hidden="true">02</div>
+      <div class="slide-content">
+        <p class="slide-label">02 / Detroit</p>
+        <h2 class="slide-headline">Detroit</h2>
+        <p class="slide-sub">Not where I'm from. Where I belong.</p>
+        <div class="slide-rule"></div>
+        <p class="slide-body">
+          It started with the Pistons. Everyone liked the Bulls.
+          I wanted the team that made Jordan's life miserable —
+          the team that refused to back down. That was Detroit.
+          The Wings came next. Blue collar to the bone.
+          Hard work rewarded. Knocked down, keeps showing up.
+          That mentality doesn't just describe a city.
+          It describes how I want to operate.
+        </p>
+      </div>
+    </div>
 
-  <!-- ─── FOOTER ─── -->
-  <footer>
-    <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
-    <span class="ft-name">Grant Hansen</span>
-    <span class="ft-mark">THE<span>SENATE</span>.IO</span>
-  </footer>
+    <!-- 03 · METAL -->
+    <div class="slide slide--metal" id="slide-3">
+      <div class="slide-bg"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-num" aria-hidden="true">03</div>
+      <div class="slide-content">
+        <p class="slide-label">03 / Metal</p>
+        <h2 class="slide-headline">Metal</h2>
+        <p class="slide-sub">Not a taste. A life support system.</p>
+        <div class="slide-rule"></div>
+        <p class="slide-body">
+          Music is not something I do. It's what I am.
+          Meshuggah at 14 changed everything — not just the music,
+          the idea that something could break every rule and be better for it.
+          Like the music was demonstrating the way my brain worked.
+          Chaotic, loud, odd, different.
+          Thirty years in. Still my medicine. Still my brain.
+          Without it, nothing else around it works. Nothing else exists.
+        </p>
+      </div>
+    </div>
+
+    <!-- 04 · COLLECTION -->
+    <div class="slide slide--collection" id="slide-4">
+      <div class="collection-left">
+        <p class="slide-label">04 / The Collection</p>
+        <h2 class="slide-headline">The<br>Collection</h2>
+        <p class="slide-sub">Everything gets a monument.</p>
+        <div class="slide-rule"></div>
+        <p class="slide-body">
+          When something matters, it takes up space.
+          A display case. A signed jersey. A build that took weeks.
+          This is what total investment looks like when it becomes physical.
+        </p>
+      </div>
+      <div class="collection-grid">
+        <div class="collection-grid-item" style="grid-row: span 2;">
+          <img class="collection-grid-img" src="/images/lego-cabinet-wide.jpg" alt="Lego display cabinet" />
+        </div>
+        <div class="collection-grid-item">
+          <img class="collection-grid-img" src="/images/detroit-signed-display.jpg" alt="Signed Detroit memorabilia" />
+        </div>
+        <div class="collection-grid-item">
+          <img class="collection-grid-img" src="/images/lego-star-wars-ucs.jpg" alt="Lego Star Wars UCS" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 · THE SENATE -->
+    <div class="slide slide--pitch" id="slide-5">
+      <div class="pitch-inner">
+        <p class="pitch-eyebrow">The Senate</p>
+        <h2 class="pitch-headline">The Senate is everything I am.</h2>
+        <p class="pitch-body">
+          Every interest. Every obsession. Every discipline.<br>
+          Nothing curated. Nothing explained.
+        </p>
+        <nav class="pitch-links" aria-label="Site sections">
+          <a href="/professional/" class="pitch-link">Professional</a>
+          <a href="/projects/"     class="pitch-link">Projects</a>
+          <a href="/blog/"         class="pitch-link">Thoughts</a>
+          <a href="/contact/"      class="pitch-link">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+  </div><!-- /slides-wrapper -->
 
   <script>
-    // ─── STICKY NAV ───
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 48);
+    const wrapper   = document.getElementById('slides-wrapper');
+    const slides    = Array.from(document.querySelectorAll('.slide'));
+    const dots      = Array.from(document.querySelectorAll('.dot'));
+    const btnPrev   = document.getElementById('arrow-prev');
+    const btnNext   = document.getElementById('arrow-next');
+    const counter   = document.getElementById('counter-current');
+    const TOTAL     = slides.length;
+    let current     = 0;
+    let isScrolling = false;
+
+    function pad(n) { return String(n + 1).padStart(2, '0'); }
+
+    function goTo(idx) {
+      idx = Math.max(0, Math.min(TOTAL - 1, idx));
+      if (idx === current) return;
+
+      slides[current].classList.remove('active');
+      current = idx;
+      slides[current].classList.add('active');
+
+      wrapper.scrollTo({ left: current * window.innerWidth, behavior: 'smooth' });
+      updateUI();
+    }
+
+    function updateUI() {
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = pad(current);
+      btnPrev.classList.toggle('hidden', current === 0);
+      btnNext.classList.toggle('hidden', current === TOTAL - 1);
+    }
+
+    // Arrow buttons
+    btnPrev.addEventListener('click', () => goTo(current - 1));
+    btnNext.addEventListener('click', () => goTo(current + 1));
+
+    // Dot buttons
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); goTo(current - 1); }
+    });
+
+    // Sync active state when user scrolls manually (e.g. touch swipe)
+    let scrollTimer;
+    wrapper.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const idx = Math.round(wrapper.scrollLeft / window.innerWidth);
+        if (idx !== current) {
+          slides[current].classList.remove('active');
+          current = idx;
+          slides[current].classList.add('active');
+          updateUI();
+        }
+      }, 80);
     }, { passive: true });
 
-    // ─── MOBILE NAV ───
-    const hamburger = document.getElementById('hamburger');
-    const navDrawer = document.getElementById('nav-drawer');
-    navDrawer.setAttribute('role', 'dialog');
-    navDrawer.setAttribute('aria-modal', 'true');
+    // Wheel → horizontal scroll
+    wrapper.addEventListener('wheel', e => {
+      e.preventDefault();
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 10) return;
+      goTo(delta > 0 ? current + 1 : current - 1);
+    }, { passive: false });
 
-    function getFocusable() {
-      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
-    }
-    function trapFocus(e) {
-      if (e.key === 'Escape') { e.preventDefault(); closeDrawer(); return; }
-      const focusable = getFocusable();
-      if (!focusable.length) return;
-      const first = focusable[0], last = focusable[focusable.length - 1];
-      if (e.key === 'Tab') {
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-    }
-    function closeDrawer() {
-      navDrawer.classList.remove('open');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-      navDrawer.removeEventListener('keydown', trapFocus);
-      hamburger.focus();
-    }
-    hamburger.addEventListener('click', () => {
-      const isOpen = navDrawer.classList.toggle('open');
-      hamburger.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      if (isOpen) {
-        const focusable = getFocusable();
-        if (focusable.length) focusable[0].focus();
-        navDrawer.addEventListener('keydown', trapFocus);
-      } else {
-        navDrawer.removeEventListener('keydown', trapFocus);
-      }
-    });
-    navDrawer.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', closeDrawer));
-    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+    // Resize: re-snap
+    window.addEventListener('resize', () => {
+      wrapper.scrollLeft = current * window.innerWidth;
+    }, { passive: true });
 
-    // ─── SCROLL REVEAL ───
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('vis');
-        revealObs.unobserve(entry.target);
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-    // ─── SCROLL PROGRESS ───
-    (function () {
-      const bar = document.getElementById('scroll-progress');
-      if (!bar) return;
-      window.addEventListener('scroll', () => {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        if (h <= 0) return;
-        bar.style.width = (window.scrollY / h * 100) + '%';
-        bar.classList.toggle('active', window.scrollY > 10);
-      }, { passive: true });
-    })();
-
-    // ─── SIDEBAR DOT NAV ───
-    (function () {
-      const sideNav = document.getElementById('section-nav');
-      const heroEl  = document.getElementById('main');
-      const dots    = Array.from(sideNav.querySelectorAll('.snav-dot'));
-      const sections = [
-        document.getElementById('main'),
-        document.getElementById('section-architect'),
-        document.getElementById('section-detroit'),
-        document.getElementById('section-metal'),
-        document.getElementById('section-collection'),
-        document.getElementById('section-pitch'),
-      ];
-
-      const heroObs = new IntersectionObserver(([entry]) => {
-        sideNav.classList.toggle('visible', !entry.isIntersecting);
-      }, { threshold: 0.1 });
-      heroObs.observe(heroEl);
-
-      const sectionObs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const idx = sections.indexOf(entry.target);
-          if (idx < 0) return;
-          dots.forEach(d => d.classList.remove('active'));
-          if (dots[idx]) dots[idx].classList.add('active');
-        });
-      }, { threshold: 0.4 });
-      sections.forEach(s => { if (s) sectionObs.observe(s); });
-    })();
-
-    // ─── COLLECTION DRAG SCROLL ───
-    (function () {
-      const strip = document.getElementById('collection-strip');
-      if (!strip) return;
-      let isDown = false, startX, scrollLeft;
-      strip.addEventListener('mousedown', e => {
-        isDown = true;
-        strip.classList.add('dragging');
-        startX = e.pageX - strip.offsetLeft;
-        scrollLeft = strip.scrollLeft;
-        e.preventDefault();
-      });
-      strip.addEventListener('mouseleave', () => { isDown = false; strip.classList.remove('dragging'); });
-      strip.addEventListener('mouseup',    () => { isDown = false; strip.classList.remove('dragging'); });
-      strip.addEventListener('mousemove', e => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - strip.offsetLeft;
-        strip.scrollLeft = scrollLeft - (x - startX) * 1.4;
-      });
-    })();
-
-    // ─── HERO CANVAS (atmospheric) ───
-    (function () {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const canvas = document.getElementById('hero-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      function resize() {
-        canvas.width  = canvas.parentElement.offsetWidth;
-        canvas.height = canvas.parentElement.offsetHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-
-      // Animate displacement
-      const turb = document.getElementById('heroTurb');
-      let bf = 0.0045, dir = 1;
-      setInterval(() => {
-        bf += dir * 0.00005;
-        if (bf > 0.006 || bf < 0.003) dir *= -1;
-        if (turb) turb.setAttribute('baseFrequency', bf.toFixed(5) + ' 0.008');
-      }, 80);
-    })();
+    // Init
+    slides[0].classList.add('active');
+    updateUI();
   </script>
 
 </body>
