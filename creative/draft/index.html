@@ -23,10 +23,11 @@
       --text-1:    #C8DDE8;
       --text-2:    #6A8EA0;
       --text-3:    #3D5A70;
+      --ease:      cubic-bezier(0.76, 0, 0.24, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { overflow: hidden; height: 100%; }
+    html, body { overflow: hidden; height: 100%; width: 100%; }
     body {
       background: var(--bg);
       color: var(--text-1);
@@ -50,12 +51,12 @@
     nav#nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 300;
+      z-index: 500;
       padding: 24px 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(4,6,14,0.7) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(4,6,14,0.72) 0%, transparent 100%);
     }
     .nav-logo {
       font-family: 'Space Mono', monospace;
@@ -86,33 +87,175 @@
     .nav-link:hover { opacity: 1; }
     .nav-link.active { opacity: 1; color: var(--blue); }
 
-    /* ─── SLIDE CONTAINER ─── */
-    .slides-wrapper {
+    /* ─── PHASE SYSTEM ─── */
+    /* Two full-screen phases stacked vertically.
+       JS moves them with translateY to transition between them. */
+    #phase-hero,
+    #phase-slides {
       position: fixed;
       inset: 0;
-      display: flex;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.9s var(--ease);
+      will-change: transform;
     }
-    .slides-wrapper::-webkit-scrollbar { display: none; }
+    #phase-hero   { transform: translateY(0); }
+    #phase-slides { transform: translateY(100%); }
+
+    body.in-slides #phase-hero   { transform: translateY(-100%); }
+    body.in-slides #phase-slides { transform: translateY(0); }
+
+    /* ─── HERO PHASE ─── */
+    .hero {
+      width: 100%; height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 52px 72px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: -4%;
+      z-index: 0;
+      filter: url(#hero-displace);
+    }
+    .hero-bg img {
+      width: 108%; height: 108%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.65) saturate(0.85);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(3,5,12,0.65), rgba(3,5,12,0.65)),
+        linear-gradient(to top, var(--bg) 0%, rgba(3,5,12,0.2) 30%, transparent 50%),
+        linear-gradient(to bottom, rgba(3,5,12,0.55) 0%, transparent 28%);
+    }
+    .hero-ghost-logo {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 15vh;
+    }
+    .hero-ghost-logo img {
+      width: min(600px, 80vw);
+      opacity: 0.06;
+      mix-blend-mode: screen;
+      filter: brightness(1.2);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.88;
+      color: var(--text-1);
+      text-transform: uppercase;
+    }
+    .hero-bar {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .hero-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+    .hero-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border-hi), transparent);
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s both;
+    }
+    .scroll-hint-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .scroll-hint-arrow {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--text-3), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp  { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.5; }
+      50%       { transform: scaleY(1.4); opacity: 1; }
+    }
+
+    /* ─── SLIDES PHASE ─── */
+    #phase-slides {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Horizontal slides wrapper */
+    .slides-wrapper {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+    .slides-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.75s var(--ease);
+      will-change: transform;
+    }
 
     /* ─── INDIVIDUAL SLIDE ─── */
     .slide {
       width: 100vw;
-      height: 100vh;
-      height: 100dvh;
+      height: 100%;
       flex-shrink: 0;
-      scroll-snap-align: start;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: flex-end;
     }
-
-    /* ─── SLIDE BG + OVERLAY ─── */
     .slide-bg {
       position: absolute;
       inset: 0;
@@ -128,8 +271,7 @@
     }
     .slide-num {
       position: absolute;
-      top: -0.08em;
-      right: -0.04em;
+      top: -0.08em; right: -0.04em;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(160px, 24vw, 340px);
       font-weight: 800;
@@ -149,15 +291,11 @@
       padding: 0 80px 96px;
       max-width: 620px;
       opacity: 0;
-      transform: translateY(18px);
-      transition:
-        opacity 0.7s cubic-bezier(0.16,1,0.3,1),
-        transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s,
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s;
     }
-    .slide.active .slide-content {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .slide.active .slide-content { opacity: 1; transform: translateY(0); }
     .slide-label {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
@@ -198,11 +336,7 @@
       margin-bottom: 24px;
       line-height: 1.3;
     }
-    .slide-rule {
-      width: 48px; height: 1px;
-      background: var(--border-hi);
-      margin-bottom: 24px;
-    }
+    .slide-rule { width: 48px; height: 1px; background: var(--border-hi); margin-bottom: 24px; }
     .slide-body {
       font-family: 'Chakra Petch', sans-serif;
       font-size: clamp(13px, 1vw, 15px);
@@ -212,74 +346,7 @@
       max-width: 400px;
     }
 
-    /* ─── SLIDE 0: HERO ─── */
-    .slide--hero {
-      align-items: flex-end;
-    }
-    .slide--hero .slide-bg {
-      filter: brightness(0.65) saturate(0.8);
-    }
-    .slide--hero .slide-overlay {
-      background:
-        linear-gradient(rgba(3,5,12,0.65), rgba(3,5,12,0.65)),
-        linear-gradient(to top, var(--bg) 0%, rgba(3,5,12,0.2) 30%, transparent 50%),
-        linear-gradient(to bottom, rgba(3,5,12,0.55) 0%, transparent 28%);
-    }
-    .hero-ghost-logo {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 15vh;
-    }
-    .hero-ghost-logo img {
-      width: min(600px, 80vw);
-      opacity: 0.06;
-      mix-blend-mode: screen;
-      filter: brightness(1.2);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 52px 72px;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s;
-    }
-    .slide--hero.active .hero-content { opacity: 1; transform: translateY(0); }
-    .hero-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(80px, 14vw, 180px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.88;
-      color: var(--text-1);
-      text-transform: uppercase;
-    }
-    .hero-bar {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .hero-role {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(18px, 2.2vw, 26px);
-      font-weight: 500;
-      font-style: italic;
-      color: var(--text-2);
-    }
-    .hero-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--border-hi), transparent);
-    }
-
-    /* ─── SLIDE OVERLAYS PER THEME ─── */
+    /* ─── SLIDE THEMES ─── */
     .slide--architect .slide-bg { filter: brightness(0.72) saturate(0.85); }
     .slide--architect .slide-overlay {
       background:
@@ -306,13 +373,11 @@
         linear-gradient(to right,  rgba(3,4,8,0.28)  0%, transparent 58%);
     }
 
-    /* ─── SLIDE: COLLECTION ─── */
+    /* ─── COLLECTION SLIDE ─── */
     .slide--collection {
-      background: var(--bg);
-      align-items: stretch;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
+      align-items: stretch;
     }
     .collection-left {
       position: relative;
@@ -322,51 +387,48 @@
       justify-content: flex-end;
       padding: 0 64px 96px;
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s,
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s;
     }
     .slide--collection.active .collection-left { opacity: 1; transform: translateY(0); }
     .collection-grid {
-      position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       gap: 3px;
-      height: 100%;
       overflow: hidden;
       opacity: 0;
-      transition: opacity 0.9s ease 0.2s;
+      transition: opacity 0.9s ease 0.3s;
     }
     .slide--collection.active .collection-grid { opacity: 1; }
     .collection-grid-img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
       filter: brightness(0.85) saturate(0.8);
       transition: filter 0.4s ease;
     }
     .collection-grid-img:hover { filter: brightness(1) saturate(1); }
-    .collection-grid-item:first-child {
-      grid-row: span 2;
-    }
+    .collection-grid-item:first-child { grid-row: span 2; }
 
-    /* ─── SLIDE: PITCH ─── */
+    /* ─── PITCH SLIDE ─── */
     .slide--pitch {
       background: var(--surface);
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      text-align: center;
     }
     .pitch-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
       padding: 0 80px;
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s,
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s;
     }
     .slide--pitch.active .pitch-inner { opacity: 1; transform: translateY(0); }
     .pitch-eyebrow {
@@ -376,7 +438,7 @@
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--text-3);
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
     .pitch-headline {
       font-family: 'Barlow Condensed', sans-serif;
@@ -387,7 +449,7 @@
       text-transform: uppercase;
       color: var(--text-1);
       max-width: 800px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .pitch-body {
       font-family: 'Chakra Petch', sans-serif;
@@ -395,12 +457,9 @@
       line-height: 1.75;
       color: var(--text-2);
       max-width: 480px;
-      margin-bottom: 64px;
+      margin-bottom: 56px;
     }
-    .pitch-links {
-      display: flex;
-      align-items: center;
-    }
+    .pitch-links { display: flex; align-items: center; }
     .pitch-link {
       font-family: 'Space Mono', monospace;
       font-size: 11px;
@@ -415,18 +474,14 @@
       transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     .pitch-link:last-child { border-right: 1px solid var(--border); }
-    .pitch-link:hover {
-      color: var(--text-1);
-      border-color: var(--border-hi);
-      background: var(--blue-dim);
-    }
+    .pitch-link:hover { color: var(--text-1); border-color: var(--border-hi); background: var(--blue-dim); }
 
-    /* ─── ARROW NAVIGATION ─── */
+    /* ─── ARROW NAV ─── */
     .slide-arrow {
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 200;
+      z-index: 400;
       width: 48px; height: 48px;
       display: flex;
       align-items: center;
@@ -434,14 +489,16 @@
       background: none;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: border-color 0.2s ease, background 0.2s ease, opacity 0.3s ease;
-      opacity: 0.5;
+      transition: border-color 0.2s ease, background 0.2s ease,
+                  opacity 0.4s ease, visibility 0.4s ease;
+      opacity: 0;
+      visibility: hidden;
     }
-    .slide-arrow:hover { border-color: var(--border-hi); background: rgba(111,181,204,0.06); opacity: 1; }
-    .slide-arrow:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    body.in-slides .slide-arrow { opacity: 0.5; visibility: visible; }
+    body.in-slides .slide-arrow:hover { border-color: var(--border-hi); background: rgba(111,181,204,0.06); opacity: 1; }
+    .slide-arrow.hidden { opacity: 0 !important; pointer-events: none; }
     .slide-arrow--prev { left: 24px; }
     .slide-arrow--next { right: 24px; }
-    .slide-arrow.hidden { opacity: 0; pointer-events: none; }
     .slide-arrow svg { width: 18px; height: 18px; stroke: var(--text-1); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
     /* ─── DOT PAGINATION ─── */
@@ -450,11 +507,15 @@
       bottom: 32px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 200;
+      z-index: 400;
       display: flex;
       align-items: center;
       gap: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
+    body.in-slides .slide-dots { opacity: 1; visibility: visible; }
     .dot {
       width: 5px; height: 5px;
       border-radius: 50%;
@@ -467,39 +528,75 @@
     .dot:hover { background: var(--text-2); transform: scale(1.3); }
     .dot.active { background: var(--blue); transform: scale(1.4); }
 
-    /* ─── SLIDE COUNTER ─── */
+    /* ─── COUNTER ─── */
     .slide-counter {
       position: fixed;
       bottom: 28px;
       right: 52px;
-      z-index: 200;
+      z-index: 400;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--text-3);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
+    body.in-slides .slide-counter { opacity: 1; visibility: visible; }
     .slide-counter span { color: var(--blue); }
+
+    /* Back-to-hero hint (shows on slide 0) */
+    .back-hint {
+      position: fixed;
+      left: 50%;
+      top: 80px;
+      transform: translateX(-50%);
+      z-index: 400;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      cursor: pointer;
+    }
+    .back-hint.visible { opacity: 0.45; pointer-events: all; }
+    .back-hint:hover { opacity: 0.9; }
+    .back-hint-arrow {
+      width: 1px; height: 24px;
+      background: linear-gradient(to top, var(--text-3), transparent);
+    }
+    .back-hint-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
 
     /* ─── MOBILE ─── */
     @media (max-width: 768px) {
       nav#nav { padding: 20px 24px; }
       .nav-links { display: none; }
+      .hero { padding: 0 24px 64px; }
       .slide-content { padding: 0 32px 80px; }
       .slide-headline { font-size: clamp(48px, 14vw, 80px); }
-      .hero-content { padding: 0 32px 64px; }
       .slide-arrow { display: none; }
-      .slide--collection { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
-      .collection-left { padding: 32px 32px 48px; justify-content: flex-end; }
+      .slide--collection { grid-template-columns: 1fr; grid-template-rows: 50% 50%; }
+      .collection-left { padding: 32px 32px 40px; }
       .pitch-inner { padding: 0 32px; }
       .pitch-links { flex-wrap: wrap; justify-content: center; }
-      .pitch-link { border-right: 1px solid var(--border); margin-bottom: -1px; }
+      .pitch-link { border-right: 1px solid var(--border); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .slide-content, .hero-content, .collection-left, .pitch-inner, .collection-grid {
-        transition: none;
-        opacity: 1;
-        transform: none;
+      #phase-hero, #phase-slides, .slides-track,
+      .slide-content, .collection-left, .pitch-inner, .collection-grid {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
   </style>
@@ -512,9 +609,9 @@
     <div class="nav-links">
       <a href="/creative/" class="nav-link active">Everything</a>
       <a href="/professional/" class="nav-link">Professional</a>
-      <a href="/projects/" class="nav-link">Projects</a>
-      <a href="/blog/" class="nav-link">Thoughts</a>
-      <a href="/contact/" class="nav-link">Contact</a>
+      <a href="/projects/"     class="nav-link">Projects</a>
+      <a href="/blog/"         class="nav-link">Thoughts</a>
+      <a href="/contact/"      class="nav-link">Contact</a>
     </div>
   </nav>
 
@@ -527,27 +624,42 @@
   </button>
 
   <!-- Dot pagination -->
-  <div class="slide-dots" role="tablist" aria-label="Slides">
-    <button class="dot active" data-idx="0" aria-label="Everything" role="tab"></button>
-    <button class="dot"        data-idx="1" aria-label="Architect"  role="tab"></button>
-    <button class="dot"        data-idx="2" aria-label="Detroit"    role="tab"></button>
-    <button class="dot"        data-idx="3" aria-label="Metal"      role="tab"></button>
-    <button class="dot"        data-idx="4" aria-label="Collection" role="tab"></button>
-    <button class="dot"        data-idx="5" aria-label="The Senate" role="tab"></button>
+  <div class="slide-dots" role="tablist">
+    <button class="dot active" data-idx="0" aria-label="Architect"  role="tab"></button>
+    <button class="dot"        data-idx="1" aria-label="Detroit"    role="tab"></button>
+    <button class="dot"        data-idx="2" aria-label="Metal"      role="tab"></button>
+    <button class="dot"        data-idx="3" aria-label="Collection" role="tab"></button>
+    <button class="dot"        data-idx="4" aria-label="The Senate" role="tab"></button>
   </div>
 
   <!-- Counter -->
   <div class="slide-counter" aria-hidden="true">
-    <span id="counter-current">01</span> / 06
+    <span id="counter-current">01</span> / 05
   </div>
 
-  <!-- Slides -->
-  <div class="slides-wrapper" id="slides-wrapper">
+  <!-- Back to hero hint -->
+  <div class="back-hint" id="back-hint" role="button" tabindex="0" aria-label="Back to top">
+    <div class="back-hint-arrow"></div>
+    <span class="back-hint-label">Back</span>
+  </div>
 
-    <!-- 00 · EVERYTHING (hero) -->
-    <div class="slide slide--hero active" id="slide-0">
-      <div class="slide-bg" style="background-image: url('/images/source5.webp');"></div>
-      <div class="slide-overlay"></div>
+  <!-- SVG displacement filter -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <filter id="hero-displace" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+        <feTurbulence id="heroTurb" type="turbulence" baseFrequency="0.0045 0.008" numOctaves="3" seed="2" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="38" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ── PHASE 1: HERO ── -->
+  <div id="phase-hero">
+    <div class="hero">
+      <div class="hero-bg">
+        <img src="/images/source5.webp" alt="" loading="eager" />
+      </div>
+      <div class="hero-overlay"></div>
       <div class="hero-ghost-logo">
         <img src="/brand_assets/senate-logo-white.png" alt="" />
       </div>
@@ -558,141 +670,174 @@
           <div class="hero-line"></div>
         </div>
       </div>
-    </div>
-
-    <!-- 01 · ARCHITECT -->
-    <div class="slide slide--architect" id="slide-1">
-      <div class="slide-bg" style="background-image: url('/images/professional.webp'); background-position: center 40%;"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-num" aria-hidden="true">01</div>
-      <div class="slide-content">
-        <p class="slide-label">01 / Architect</p>
-        <h2 class="slide-headline">Solution<br>Architect</h2>
-        <p class="slide-sub">The role fits the way I think.</p>
-        <div class="slide-rule"></div>
-        <p class="slide-body">
-          20+ years in IT. The title caught up eventually.
-          It started with a 486 in my parents' house —
-          I pulled everything apart to see how it worked. Never stopped.
-          Systems, structure, how things connect — that's not work.
-          That's just how I see everything.
-          Rules are starting points. You learn them until you know which ones to cross.
-        </p>
+      <!-- Scroll down hint -->
+      <div class="scroll-hint" id="scroll-hint">
+        <span class="scroll-hint-label">Scroll</span>
+        <div class="scroll-hint-arrow"></div>
       </div>
     </div>
+  </div>
 
-    <!-- 02 · DETROIT -->
-    <div class="slide slide--detroit" id="slide-2">
-      <div class="slide-bg" style="background-image: url('/images/packarddetroit.webp'); background-position: center 60%;"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-num" aria-hidden="true">02</div>
-      <div class="slide-content">
-        <p class="slide-label">02 / Detroit</p>
-        <h2 class="slide-headline">Detroit</h2>
-        <p class="slide-sub">Not where I'm from. Where I belong.</p>
-        <div class="slide-rule"></div>
-        <p class="slide-body">
-          It started with the Pistons. Everyone liked the Bulls.
-          I wanted the team that made Jordan's life miserable —
-          the team that refused to back down. That was Detroit.
-          The Wings came next. Blue collar to the bone.
-          Hard work rewarded. Knocked down, keeps showing up.
-          That mentality doesn't just describe a city.
-          It describes how I want to operate.
-        </p>
-      </div>
-    </div>
+  <!-- ── PHASE 2: SLIDES ── -->
+  <div id="phase-slides">
+    <div class="slides-wrapper">
+      <div class="slides-track" id="slides-track">
 
-    <!-- 03 · METAL -->
-    <div class="slide slide--metal" id="slide-3">
-      <div class="slide-bg"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-num" aria-hidden="true">03</div>
-      <div class="slide-content">
-        <p class="slide-label">03 / Metal</p>
-        <h2 class="slide-headline">Metal</h2>
-        <p class="slide-sub">Not a taste. A life support system.</p>
-        <div class="slide-rule"></div>
-        <p class="slide-body">
-          Music is not something I do. It's what I am.
-          Meshuggah at 14 changed everything — not just the music,
-          the idea that something could break every rule and be better for it.
-          Like the music was demonstrating the way my brain worked.
-          Chaotic, loud, odd, different.
-          Thirty years in. Still my medicine. Still my brain.
-          Without it, nothing else around it works. Nothing else exists.
-        </p>
-      </div>
-    </div>
-
-    <!-- 04 · COLLECTION -->
-    <div class="slide slide--collection" id="slide-4">
-      <div class="collection-left">
-        <p class="slide-label">04 / The Collection</p>
-        <h2 class="slide-headline">The<br>Collection</h2>
-        <p class="slide-sub">Everything gets a monument.</p>
-        <div class="slide-rule"></div>
-        <p class="slide-body">
-          When something matters, it takes up space.
-          A display case. A signed jersey. A build that took weeks.
-          This is what total investment looks like when it becomes physical.
-        </p>
-      </div>
-      <div class="collection-grid">
-        <div class="collection-grid-item" style="grid-row: span 2;">
-          <img class="collection-grid-img" src="/images/lego-cabinet-wide.jpg" alt="Lego display cabinet" />
+        <!-- 01 · ARCHITECT -->
+        <div class="slide slide--architect active" id="slide-0">
+          <div class="slide-bg" style="background-image: url('/images/professional.webp'); background-position: center 40%;"></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-num" aria-hidden="true">01</div>
+          <div class="slide-content">
+            <p class="slide-label">01 / Architect</p>
+            <h2 class="slide-headline">Solution<br>Architect</h2>
+            <p class="slide-sub">The role fits the way I think.</p>
+            <div class="slide-rule"></div>
+            <p class="slide-body">
+              20+ years in IT. The title caught up eventually.
+              It started with a 486 in my parents' house —
+              I pulled everything apart to see how it worked. Never stopped.
+              Systems, structure, how things connect — that's not work.
+              That's just how I see everything.
+              Rules are starting points. You learn them until you know which ones to cross.
+            </p>
+          </div>
         </div>
-        <div class="collection-grid-item">
-          <img class="collection-grid-img" src="/images/detroit-signed-display.jpg" alt="Signed Detroit memorabilia" />
-        </div>
-        <div class="collection-grid-item">
-          <img class="collection-grid-img" src="/images/lego-star-wars-ucs.jpg" alt="Lego Star Wars UCS" />
-        </div>
-      </div>
-    </div>
 
-    <!-- 05 · THE SENATE -->
-    <div class="slide slide--pitch" id="slide-5">
-      <div class="pitch-inner">
-        <p class="pitch-eyebrow">The Senate</p>
-        <h2 class="pitch-headline">The Senate is everything I am.</h2>
-        <p class="pitch-body">
-          Every interest. Every obsession. Every discipline.<br>
-          Nothing curated. Nothing explained.
-        </p>
-        <nav class="pitch-links" aria-label="Site sections">
-          <a href="/professional/" class="pitch-link">Professional</a>
-          <a href="/projects/"     class="pitch-link">Projects</a>
-          <a href="/blog/"         class="pitch-link">Thoughts</a>
-          <a href="/contact/"      class="pitch-link">Contact</a>
-        </nav>
-      </div>
-    </div>
+        <!-- 02 · DETROIT -->
+        <div class="slide slide--detroit" id="slide-1">
+          <div class="slide-bg" style="background-image: url('/images/packarddetroit.webp'); background-position: center 60%;"></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-num" aria-hidden="true">02</div>
+          <div class="slide-content">
+            <p class="slide-label">02 / Detroit</p>
+            <h2 class="slide-headline">Detroit</h2>
+            <p class="slide-sub">Not where I'm from. Where I belong.</p>
+            <div class="slide-rule"></div>
+            <p class="slide-body">
+              It started with the Pistons. Everyone liked the Bulls.
+              I wanted the team that made Jordan's life miserable —
+              the team that refused to back down. That was Detroit.
+              The Wings came next. Blue collar to the bone.
+              Hard work rewarded. Knocked down, keeps showing up.
+              That mentality doesn't just describe a city.
+              It describes how I want to operate.
+            </p>
+          </div>
+        </div>
 
-  </div><!-- /slides-wrapper -->
+        <!-- 03 · METAL -->
+        <div class="slide slide--metal" id="slide-2">
+          <div class="slide-bg"></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-num" aria-hidden="true">03</div>
+          <div class="slide-content">
+            <p class="slide-label">03 / Metal</p>
+            <h2 class="slide-headline">Metal</h2>
+            <p class="slide-sub">Not a taste. A life support system.</p>
+            <div class="slide-rule"></div>
+            <p class="slide-body">
+              Music is not something I do. It's what I am.
+              Meshuggah at 14 changed everything — not just the music,
+              the idea that something could break every rule and be better for it.
+              Like the music was demonstrating the way my brain worked.
+              Thirty years in. Still my medicine. Still my brain.
+              Without it, nothing else around it works. Nothing else exists.
+            </p>
+          </div>
+        </div>
+
+        <!-- 04 · COLLECTION -->
+        <div class="slide slide--collection" id="slide-3">
+          <div class="collection-left">
+            <p class="slide-label">04 / The Collection</p>
+            <h2 class="slide-headline">The<br>Collection</h2>
+            <p class="slide-sub">Everything gets a monument.</p>
+            <div class="slide-rule"></div>
+            <p class="slide-body">
+              When something matters, it takes up space.
+              A display case. A signed jersey. A build that took weeks.
+              This is what total investment looks like when it becomes physical.
+            </p>
+          </div>
+          <div class="collection-grid">
+            <div class="collection-grid-item" style="grid-row: span 2;">
+              <img class="collection-grid-img" src="/images/lego-cabinet-wide.jpg" alt="Lego display cabinet" />
+            </div>
+            <div class="collection-grid-item">
+              <img class="collection-grid-img" src="/images/detroit-signed-display.jpg" alt="Signed Detroit memorabilia" />
+            </div>
+            <div class="collection-grid-item">
+              <img class="collection-grid-img" src="/images/lego-star-wars-ucs.jpg" alt="Lego Star Wars UCS" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 · THE SENATE -->
+        <div class="slide slide--pitch" id="slide-4">
+          <div class="pitch-inner">
+            <p class="pitch-eyebrow">The Senate</p>
+            <h2 class="pitch-headline">The Senate is everything I am.</h2>
+            <p class="pitch-body">
+              Every interest. Every obsession. Every discipline.<br>
+              Nothing curated. Nothing explained.
+            </p>
+            <nav class="pitch-links" aria-label="Site sections">
+              <a href="/professional/" class="pitch-link">Professional</a>
+              <a href="/projects/"     class="pitch-link">Projects</a>
+              <a href="/blog/"         class="pitch-link">Thoughts</a>
+              <a href="/contact/"      class="pitch-link">Contact</a>
+            </nav>
+          </div>
+        </div>
+
+      </div><!-- /slides-track -->
+    </div><!-- /slides-wrapper -->
+  </div><!-- /phase-slides -->
 
   <script>
-    const wrapper   = document.getElementById('slides-wrapper');
-    const slides    = Array.from(document.querySelectorAll('.slide'));
-    const dots      = Array.from(document.querySelectorAll('.dot'));
-    const btnPrev   = document.getElementById('arrow-prev');
-    const btnNext   = document.getElementById('arrow-next');
-    const counter   = document.getElementById('counter-current');
-    const TOTAL     = slides.length;
-    let current     = 0;
-    let isScrolling = false;
+    const body       = document.body;
+    const track      = document.getElementById('slides-track');
+    const slides     = Array.from(document.querySelectorAll('.slide'));
+    const dots       = Array.from(document.querySelectorAll('.dot'));
+    const btnPrev    = document.getElementById('arrow-prev');
+    const btnNext    = document.getElementById('arrow-next');
+    const counter    = document.getElementById('counter-current');
+    const backHint   = document.getElementById('back-hint');
+    const TOTAL      = slides.length;
+    let current      = 0;
+    let inSlides     = false;
+    let transitioning = false;
 
     function pad(n) { return String(n + 1).padStart(2, '0'); }
 
+    // ── Enter / exit slide phase ──
+    function enterSlides() {
+      if (inSlides || transitioning) return;
+      transitioning = true;
+      inSlides = true;
+      body.classList.add('in-slides');
+      setTimeout(() => { transitioning = false; }, 900);
+    }
+
+    function exitSlides() {
+      if (!inSlides || transitioning) return;
+      transitioning = true;
+      inSlides = false;
+      body.classList.remove('in-slides');
+      setTimeout(() => { transitioning = false; }, 900);
+    }
+
+    // ── Horizontal slide navigation ──
     function goTo(idx) {
-      idx = Math.max(0, Math.min(TOTAL - 1, idx));
+      if (idx < 0) { exitSlides(); return; }
+      idx = Math.min(TOTAL - 1, idx);
       if (idx === current) return;
 
       slides[current].classList.remove('active');
       current = idx;
       slides[current].classList.add('active');
-
-      wrapper.scrollTo({ left: current * window.innerWidth, behavior: 'smooth' });
+      track.style.transform = `translateX(-${current * 100}vw)`;
       updateUI();
     }
 
@@ -701,51 +846,75 @@
       counter.textContent = pad(current);
       btnPrev.classList.toggle('hidden', current === 0);
       btnNext.classList.toggle('hidden', current === TOTAL - 1);
+      backHint.classList.toggle('visible', current === 0 && inSlides);
     }
 
-    // Arrow buttons
-    btnPrev.addEventListener('click', () => goTo(current - 1));
-    btnNext.addEventListener('click', () => goTo(current + 1));
+    // ── Wheel handler ──
+    let wheelLock = false;
+    window.addEventListener('wheel', e => {
+      e.preventDefault();
+      if (wheelLock) return;
+      wheelLock = true;
+      setTimeout(() => { wheelLock = false; }, 700);
 
-    // Dot buttons
-    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (!inSlides) {
+        if (delta > 30) enterSlides();
+        return;
+      }
+      if (delta > 20)       goTo(current + 1);
+      else if (delta < -20) goTo(current - 1);
+    }, { passive: false });
 
-    // Keyboard
+    // ── Touch / swipe ──
+    let touchStartX = 0, touchStartY = 0;
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const dx = touchStartX - e.changedTouches[0].clientX;
+      const dy = touchStartY - e.changedTouches[0].clientY;
+      if (!inSlides) {
+        if (dy > 40 && Math.abs(dy) > Math.abs(dx)) { enterSlides(); return; }
+        return;
+      }
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        goTo(dx > 0 ? current + 1 : current - 1);
+      } else if (dy < -40 && current === 0) {
+        exitSlides();
+      }
+    }, { passive: true });
+
+    // ── Keyboard ──
     document.addEventListener('keydown', e => {
+      if (!inSlides) {
+        if (e.key === 'ArrowDown') { e.preventDefault(); enterSlides(); }
+        return;
+      }
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
       if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); goTo(current - 1); }
     });
 
-    // Sync active state when user scrolls manually (e.g. touch swipe)
-    let scrollTimer;
-    wrapper.addEventListener('scroll', () => {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        const idx = Math.round(wrapper.scrollLeft / window.innerWidth);
-        if (idx !== current) {
-          slides[current].classList.remove('active');
-          current = idx;
-          slides[current].classList.add('active');
-          updateUI();
-        }
-      }, 80);
-    }, { passive: true });
+    // ── Controls ──
+    btnPrev.addEventListener('click', () => goTo(current - 1));
+    btnNext.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    backHint.addEventListener('click', exitSlides);
 
-    // Wheel → horizontal scroll
-    wrapper.addEventListener('wheel', e => {
-      e.preventDefault();
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 10) return;
-      goTo(delta > 0 ? current + 1 : current - 1);
-    }, { passive: false });
+    // ── Scroll hint click ──
+    document.getElementById('scroll-hint').addEventListener('click', enterSlides);
 
-    // Resize: re-snap
-    window.addEventListener('resize', () => {
-      wrapper.scrollLeft = current * window.innerWidth;
-    }, { passive: true });
+    // ── Animate hero displacement ──
+    const turb = document.getElementById('heroTurb');
+    let bf = 0.0045, dir = 1;
+    setInterval(() => {
+      bf += dir * 0.00004;
+      if (bf > 0.006 || bf < 0.003) dir *= -1;
+      if (turb) turb.setAttribute('baseFrequency', bf.toFixed(5) + ' 0.008');
+    }, 80);
 
-    // Init
-    slides[0].classList.add('active');
+    // ── Init ──
     updateUI();
   </script>
 
