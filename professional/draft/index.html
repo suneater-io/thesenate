@@ -25,14 +25,18 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; }
+    html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       font-family: 'Chakra Petch', sans-serif;
       color: var(--text-1);
       -webkit-font-smoothing: antialiased;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* Grain overlay */
@@ -48,13 +52,22 @@
 
     /* ─── NAV ─── */
     nav {
-      flex-shrink: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 24px 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 40px;
-      border-bottom: 1px solid rgba(80,150,190,0.07);
-      z-index: 100;
+      transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(3,5,8,0.90);
+      backdrop-filter: blur(24px) saturate(160%);
+      border-bottom-color: rgba(80,150,190,0.10);
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
     .nav-logo {
       font-family: 'Space Mono', monospace;
@@ -66,7 +79,7 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; gap: 28px; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-link {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
@@ -75,24 +88,168 @@
       color: var(--text-2);
       text-decoration: none;
       transition: color 0.2s;
+      position: relative;
+      padding: 8px 0;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 6px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
     }
     .nav-link:hover { color: var(--text-1); }
+    .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
     .nav-link.active { color: var(--blue); }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px; height: 44px;
+      padding: 11px 10px;
+      cursor: pointer;
+      background: none; border: none;
+      z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--text-1);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .nav-drawer {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      z-index: 250;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 36px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .nav-drawer.open { opacity: 1; pointer-events: all; }
+    .nav-drawer .nav-link { font-size: 20px !important; letter-spacing: 0.12em !important; }
+    .drawer-close {
+      position: absolute; top: 24px; right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-2); background: none;
+      border: 1px solid rgba(80,150,190,0.12);
+      padding: 10px 16px; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .drawer-close:hover { color: var(--text-1); border-color: rgba(80,150,190,0.3); }
+    @media (max-width: 600px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      height: 100vh; height: 100dvh;
+      min-height: 600px;
+      position: relative;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 52px 72px;
+      overflow: hidden;
+      background: url('/images/forest-fog.jpg') center center / cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(3,5,8,0.35), rgba(3,5,8,0.35)),
+        radial-gradient(ellipse 60% 80% at 85% 45%, rgba(80,150,190,0.05) 0%, transparent 65%),
+        linear-gradient(to bottom, rgba(3,5,8,0.45) 0%, transparent 35%),
+        linear-gradient(to top, var(--bg) 0%, rgba(3,5,8,0.25) 32%, transparent 52%);
+    }
+    .hero-blueprint {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(80,150,190,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(80,150,190,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 2; pointer-events: none;
+      will-change: transform;
+    }
+    .hero-ghost {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      display: flex; align-items: flex-start; justify-content: center;
+      padding-top: 18vh;
+    }
+    .hero-ghost img { width: min(600px, 80vw); opacity: 0.06; mix-blend-mode: screen; }
+    .hero-content {
+      position: relative; z-index: 3;
+      animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    .ph-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 0.88; color: var(--text-1);
+      text-transform: uppercase;
+    }
+    .hero-bar { margin-top: 20px; display: flex; align-items: center; gap: 20px; }
+    .hero-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 500; font-style: italic;
+      letter-spacing: 0.04em; color: var(--text-2);
+    }
+    .hero-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(80,150,190,0.3), transparent); }
+
+    /* ─── BOOK SECTION LABEL ─── */
+    .book-section-header {
+      padding: 80px 52px 56px;
+      display: flex; align-items: baseline; gap: 24px;
+      border-bottom: 1px solid rgba(80,150,190,0.08);
+    }
+    .book-section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--blue);
+    }
+    .book-section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800; letter-spacing: -0.02em;
+      line-height: 0.92; text-transform: uppercase;
+      color: var(--text-1);
+    }
     @media (max-width: 768px) { .nav-links { display: none; } }
 
     /* ─── SCENE — desk the book sits on ─── */
     .scene {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 28px;
-      padding: 32px 20px 24px;
+      padding: 60px 20px 80px;
+      min-height: 100vh;
       background:
         radial-gradient(ellipse 100% 60% at 50% 100%, rgba(10,25,60,0.18) 0%, transparent 65%),
         radial-gradient(ellipse 60% 40% at 50% 45%, rgba(15,35,80,0.10) 0%, transparent 55%);
-      overflow: hidden;
     }
 
     /* ─── BOOK WRAPPER — provides perspective ─── */
@@ -467,7 +624,17 @@
 </head>
 <body>
 
-  <nav>
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="nav-drawer">
+    <button class="drawer-close" id="drawer-close">✕&nbsp;&nbsp;Close</button>
+    <a href="/creative/"     class="nav-link">Everything</a>
+    <a href="/professional/" class="nav-link active">Professional</a>
+    <a href="/projects/"     class="nav-link">Projects</a>
+    <a href="/blog/"         class="nav-link">Thoughts</a>
+    <a href="/contact/"      class="nav-link">Contact</a>
+  </div>
+
+  <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
       <a href="/creative/"     class="nav-link">Everything</a>
@@ -476,7 +643,33 @@
       <a href="/blog/"         class="nav-link">Thoughts</a>
       <a href="/contact/"      class="nav-link">Contact</a>
     </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-blueprint"></div>
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-ghost">
+      <img src="/brand_assets/senate-logo-white.png" alt="" />
+    </div>
+    <div class="hero-content">
+      <h1 class="ph-title">Professional</h1>
+      <div class="hero-bar">
+        <p class="hero-role">Solution Architect</p>
+        <div class="hero-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BOOK SECTION ─── -->
+  <div class="book-section-header">
+    <span class="book-section-num">01</span>
+    <h2 class="book-section-title">The Work</h2>
+  </div>
 
   <div class="scene">
     <div class="book-wrap">
@@ -933,22 +1126,98 @@
   pageR.addEventListener('click', flipNext);
   pageL.addEventListener('click', flipPrev);
 
-  // Keyboard
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); flipNext(); }
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); flipPrev(); }
-  });
-
-  // Touch swipe
+  // Touch swipe on book only
   let tx = 0;
-  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-  document.addEventListener('touchend', e => {
+  const bookEl = document.getElementById('book');
+  bookEl.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  bookEl.addEventListener('touchend', e => {
     const dx = tx - e.changedTouches[0].clientX;
     if (Math.abs(dx) > 50) { dx > 0 ? flipNext() : flipPrev(); }
   }, { passive: true });
 
   // ─── INIT ────────────────────────────────────────────────────────────
   render(0);
+
+  // ─── NAV SCROLL ──────────────────────────────────────────────────────
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ─── MOBILE NAV ──────────────────────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('nav-drawer');
+  function closeDrawer() {
+    navDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    const isOpen = navDrawer.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+  navDrawer.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+  // ─── HERO CANVAS DATA STREAM ─────────────────────────────────────────
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const CHARS = '0123456789ABCDEF';
+    const COL_W = 16;
+    let W, H, cols = [];
+    function resize() {
+      W = canvas.width  = canvas.parentElement.offsetWidth;
+      H = canvas.height = canvas.parentElement.offsetHeight;
+      const count = Math.floor(W / COL_W);
+      cols = Array.from({ length: count }, (_, i) => ({
+        x: i * COL_W + COL_W / 2,
+        y: Math.random() * -H,
+        speed: 0.55 + Math.random() * 0.65,
+        charH: 14 + Math.floor(Math.random() * 4),
+        len: 6 + Math.floor(Math.random() * 10),
+        chars: [],
+      }));
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    let raf;
+    function draw() {
+      ctx.fillStyle = 'rgba(3,5,8,0.18)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.font = `700 10px "Space Mono", monospace`;
+      cols.forEach(col => {
+        const totalH = col.len * col.charH;
+        for (let i = 0; i < col.len; i++) {
+          if (!col.chars[i]) col.chars[i] = CHARS[Math.floor(Math.random() * CHARS.length)];
+          const cy = col.y - i * col.charH;
+          if (cy < -col.charH || cy > H + col.charH) continue;
+          const alpha = i === 0 ? 0.7 : Math.max(0, 0.28 - i * 0.025);
+          ctx.fillStyle = `rgba(111,181,204,${alpha})`;
+          if (Math.random() < 0.04) col.chars[i] = CHARS[Math.floor(Math.random() * CHARS.length)];
+          ctx.fillText(col.chars[i], col.x, cy);
+        }
+        col.y += col.speed;
+        if (col.y - totalH > H) {
+          col.y = Math.random() * -H * 0.5;
+          col.chars = [];
+        }
+      });
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) raf = requestAnimationFrame(draw);
+      else cancelAnimationFrame(raf);
+    }, { threshold: 0 });
+    io.observe(canvas.parentElement);
+  })();
   </script>
 
 </body>
