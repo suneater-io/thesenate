@@ -6,69 +6,59 @@
   <title>Grant Hansen — Solution Architect [Draft]</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg:        #04060E;
-      --surface:   #070B18;
-      --surface-2: #0B1120;
-      --border:    rgba(80,150,190,0.10);
-      --border-hi: rgba(80,150,190,0.24);
-      --blue:      #6FB5CC;
-      --blue-hi:   #8FCADE;
-      --blue-dim:  rgba(80,150,190,0.07);
-      --text-1:    #C8DDE8;
-      --text-2:    #6A8EA0;
-      --text-3:    #3D5A70;
+      --bg:       #030508;
+      --page-l:   #070F1C;
+      --page-r:   #091422;
+      --spine:    #010307;
+      --border:   rgba(80,150,190,0.12);
+      --blue:     #6FB5CC;
+      --blue-hi:  #8FCADE;
+      --text-1:   #C8DDE8;
+      --text-2:   #5A7E92;
+      --text-3:   #2E4A5A;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html, body { height: 100%; overflow: hidden; }
     body {
       background: var(--bg);
-      color: var(--text-1);
       font-family: 'Chakra Petch', sans-serif;
+      color: var(--text-1);
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Grain */
+    /* Grain overlay */
     body::after {
       content: '';
       position: fixed; inset: 0;
       z-index: 9999;
       pointer-events: none;
-      opacity: 0.09;
+      opacity: 0.10;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 300px 300px;
     }
 
     /* ─── NAV ─── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 500;
-      padding: 24px 52px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s ease, border-color 0.4s ease;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(4,6,14,0.92);
-      backdrop-filter: blur(20px) saturate(150%);
-      border-bottom-color: var(--border);
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(80,150,190,0.07);
+      z-index: 100;
     }
     .nav-logo {
       font-family: 'Space Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -76,844 +66,889 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; gap: 28px; }
     .nav-link {
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-1);
-      opacity: 0.6;
+      color: var(--text-2);
       text-decoration: none;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s;
     }
-    .nav-link:hover { opacity: 1; }
-    .nav-link.active { opacity: 1; color: var(--blue); }
-    @media (max-width: 768px) {
-      nav { padding: 18px 24px; }
-      .nav-links { display: none; }
-    }
+    .nav-link:hover { color: var(--text-1); }
+    .nav-link.active { color: var(--blue); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
 
-    /* ─── MAGAZINE SPREAD SYSTEM ─── */
-    .spread {
+    /* ─── SCENE — desk the book sits on ─── */
+    .scene {
+      flex: 1;
       display: flex;
-      min-height: 100vh;
-      position: relative;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 32px 20px 24px;
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 100%, rgba(10,25,60,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 50% 45%, rgba(15,35,80,0.10) 0%, transparent 55%);
       overflow: hidden;
     }
 
-    /* Book spine — central shadow between pages */
-    .spread::before {
+    /* ─── BOOK WRAPPER — provides perspective ─── */
+    .book-wrap {
+      perspective: 2800px;
+      perspective-origin: 50% 48%;
+    }
+
+    /* ─── BOOK ─── */
+    .book {
+      position: relative;
+      width: clamp(640px, 74vw, 1040px);
+      height: clamp(420px, 44vw, 660px);
+      transform-style: preserve-3d;
+      transform: rotateX(4deg);
+      box-shadow:
+        0 2px  6px  rgba(0,0,0,0.95),
+        0 12px 40px rgba(0,0,0,0.85),
+        0 30px 90px rgba(0,0,0,0.70),
+        0 50px 160px rgba(5,15,40,0.50);
+    }
+
+    /* Page stack edge — left book edge (pages visible as a stack) */
+    .book::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 2px; bottom: 2px;
+      width: 5px;
+      background: repeating-linear-gradient(
+        to bottom,
+        #0A1828 0px,
+        #060E1A 1px,
+        #0C1C30 2px
+      );
+      transform-origin: right center;
+      transform: rotateY(90deg);
+    }
+
+    /* ─── PAGE PANELS ─── */
+    .page-l, .page-r {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    .page-l {
+      left: 0;
+      width: calc(50% - 5px);
+      background: var(--page-l);
+      box-shadow: inset -12px 0 24px rgba(0,0,0,0.45);
+    }
+    .page-r {
+      right: 0;
+      width: calc(50% - 5px);
+      background: var(--page-r);
+      box-shadow: inset 12px 0 24px rgba(0,0,0,0.45);
+      cursor: e-resize;
+      transition: box-shadow 0.2s ease;
+    }
+    .page-r:hover {
+      box-shadow: inset 12px 0 24px rgba(0,0,0,0.45), inset 0 0 40px rgba(111,181,204,0.03);
+    }
+
+    /* Grain texture on pages */
+    .page-l::after, .page-r::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── SPINE ─── */
+    .book-spine {
+      position: absolute;
+      left: calc(50% - 5px);
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background: linear-gradient(to right,
+        #010204 0%, #040B14 25%, #060E1A 50%, #040B14 75%, #010204 100%
+      );
+      z-index: 10;
+    }
+    .book-spine::after {
       content: '';
       position: absolute;
       left: 50%;
-      top: 0; bottom: 0;
-      width: 80px;
-      transform: translateX(-50%);
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(0,0,0,0.18) 28%,
-        rgba(0,0,0,0.52) 50%,
-        rgba(0,0,0,0.18) 72%,
-        transparent 100%
-      );
-      pointer-events: none;
-      z-index: 20;
+      top: 10%;
+      bottom: 10%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(111,181,204,0.12) 30%, rgba(111,181,204,0.12) 70%, transparent);
     }
 
-    .page-l, .page-r {
-      width: 50%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 100px 72px 72px;
-    }
-    .page-l {
-      background: var(--bg);
-      box-shadow: inset -24px 0 48px -8px rgba(0,0,0,0.55);
-    }
-    .page-r {
-      background: var(--surface);
-      box-shadow: inset 24px 0 48px -8px rgba(0,0,0,0.55);
-    }
-
-    /* ─── TYPOGRAPHY TOKENS ─── */
-    .eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-bottom: 40px;
-    }
-    .eyebrow-blue {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 16px;
-    }
-    .section-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(120px, 16vw, 200px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.85;
-      color: var(--text-1);
-      opacity: 0.04;
-      user-select: none;
-      pointer-events: none;
+    /* ─── FLIP LEAF ─── */
+    .flip-leaf {
       position: absolute;
-      bottom: 56px;
-      right: 56px;
+      top: 0;
+      height: 100%;
+      width: calc(50% - 5px);
+      transform-style: preserve-3d;
+      z-index: 25;
+      display: none;
+      pointer-events: none;
     }
-    .rule {
-      width: 40px;
-      height: 1px;
-      background: var(--border-hi);
-      margin: 28px 0;
-    }
-    .body-text {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 13px;
-      line-height: 1.85;
-      color: var(--text-2);
-    }
-    .body-text + .body-text { margin-top: 16px; }
+    .flip-leaf.active { display: block; }
 
-    /* ─── REVEAL ANIMATION ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.vis { opacity: 1; transform: none; }
-
-    /* ─── SPREAD 0: HERO ─── */
-    .spread--hero { min-height: 100vh; }
-
-    .hero-image-wrap {
+    .flip-front, .flip-back {
       position: absolute;
       inset: 0;
+      backface-visibility: hidden;
       overflow: hidden;
     }
-    .hero-image-wrap img {
+    .flip-front { background: var(--page-r); }
+    .flip-back  { background: var(--page-l); transform: rotateY(180deg); }
+
+    /* Next: leaf on right, rotates around left (spine) edge */
+    .flip-leaf.flip-next {
+      right: 0;
+      transform-origin: left center;
+      animation: doFlipNext 0.72s cubic-bezier(0.68, 0, 0.32, 1) forwards;
+    }
+    /* Prev: leaf on left, rotates around right (spine) edge */
+    .flip-leaf.flip-prev {
+      left: 0;
+      transform-origin: right center;
+      animation: doFlipPrev 0.72s cubic-bezier(0.68, 0, 0.32, 1) forwards;
+    }
+
+    @keyframes doFlipNext {
+      0%   { transform: rotateY(0deg); }
+      100% { transform: rotateY(-180deg); }
+    }
+    @keyframes doFlipPrev {
+      0%   { transform: rotateY(0deg); }
+      100% { transform: rotateY(180deg); }
+    }
+
+    /* ─── PAGE SHADOW (during flip) ─── */
+    .flip-shadow {
+      position: absolute;
+      top: 0; height: 100%;
+      width: calc(50% - 5px);
+      pointer-events: none;
+      z-index: 22;
+      opacity: 0;
+      transition: opacity 0.36s ease;
+    }
+    .flip-shadow.shadow-left  { left: 0;  background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 100%); }
+    .flip-shadow.shadow-right { right: 0; background: linear-gradient(to left,  rgba(0,0,0,0.5) 0%, transparent 100%); }
+    .flip-shadow.visible { opacity: 1; }
+
+    /* Page turn corner hint (bottom-right of right page) */
+    .page-r-corner {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 0 36px 36px;
+      border-color: transparent transparent rgba(111,181,204,0.10) transparent;
+      z-index: 5;
+      pointer-events: none;
+      transition: border-width 0.25s ease;
+    }
+    .page-r:hover .page-r-corner {
+      border-width: 0 0 52px 52px;
+      border-color: transparent transparent rgba(111,181,204,0.18) transparent;
+    }
+
+    /* ─── PAGE CONTENT STYLES ─── */
+    .pc {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(20px, 3vw, 40px) clamp(22px, 3.5vw, 48px);
+      justify-content: space-between;
+    }
+
+    /* Page header */
+    .pg-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(80,150,190,0.10);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .pg-head-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .pg-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+    }
+
+    /* Section eyebrow */
+    .eye {
+      font-family: 'Space Mono', monospace;
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    /* Big display headlines */
+    .dsp {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 0.90;
+      text-transform: uppercase;
+      color: var(--text-1);
+    }
+    .dsp-xl { font-size: clamp(44px, 5.5vw, 72px); }
+    .dsp-lg { font-size: clamp(32px, 4vw, 52px); }
+    .dsp-md { font-size: clamp(20px, 2.5vw, 30px); }
+
+    /* Italic subhead */
+    .sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(13px, 1.5vw, 17px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--blue);
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    .rule { width: 32px; height: 1px; background: rgba(80,150,190,0.28); margin: 16px 0; }
+
+    /* Body text */
+    .body { font-size: clamp(9.5px, 1.1vw, 12px); line-height: 1.8; color: var(--text-2); }
+    .body + .body { margin-top: 10px; }
+
+    /* Practice list */
+    .prac-list { display: flex; flex-direction: column; flex: 1; justify-content: center; gap: 0; }
+    .prac-row {
+      display: flex; align-items: baseline; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(80,150,190,0.09);
+    }
+    .prac-row:first-child { border-top: 1px solid rgba(80,150,190,0.09); }
+    .prac-n { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.18em; color: var(--text-3); width: 20px; flex-shrink: 0; }
+    .prac-area { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); margin-bottom: 3px; }
+    .prac-name { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(16px, 2vw, 22px); font-weight: 700; text-transform: uppercase; color: var(--text-1); line-height: 1; }
+
+    /* Practice descriptions */
+    .desc-list { display: flex; flex-direction: column; flex: 1; justify-content: center; gap: 0; }
+    .desc-item { padding: 12px 0; border-bottom: 1px solid rgba(80,150,190,0.09); }
+    .desc-item:first-child { border-top: 1px solid rgba(80,150,190,0.09); }
+    .hook {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(13px, 1.6vw, 18px);
+      font-weight: 700; font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--text-1);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    /* Timeline */
+    .tl { display: flex; flex-direction: column; flex: 1; justify-content: center; gap: 0; }
+    .tl-row {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 0 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(80,150,190,0.08);
+    }
+    .tl-row:last-child { border-bottom: none; }
+    .tl-yr { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--text-3); text-transform: uppercase; padding-top: 2px; }
+    .tl-role { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(14px, 1.8vw, 20px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text-1); line-height: 1; margin-bottom: 3px; }
+
+    /* Solutions */
+    .sol-stack { display: flex; flex-direction: column; flex: 1; justify-content: center; gap: 14px; }
+    .sol-g-label { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(13px, 1.6vw, 17px); font-weight: 700; text-transform: uppercase; color: var(--text-1); padding-bottom: 6px; border-bottom: 1px solid rgba(80,150,190,0.10); margin-bottom: 7px; }
+    .sol-tags { display: flex; flex-wrap: wrap; gap: 2px; }
+    .sol-t { font-family: 'Chakra Petch', sans-serif; font-size: 8.5px; letter-spacing: 0.03em; color: var(--text-2); background: rgba(80,150,190,0.05); border: 1px solid rgba(80,150,190,0.12); padding: 4px 8px; }
+
+    /* Outcome cards */
+    .out-list { display: flex; flex-direction: column; flex: 1; justify-content: center; gap: 0; }
+    .out-card { padding: 14px 0; border-bottom: 1px solid rgba(80,150,190,0.09); }
+    .out-card:first-child { border-top: 1px solid rgba(80,150,190,0.09); }
+    .out-stat { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; letter-spacing: -0.04em; color: var(--blue); opacity: 0.3; line-height: 0.85; margin-bottom: 8px; }
+    .out-ind { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+    .out-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(14px, 1.8vw, 20px); font-weight: 700; text-transform: uppercase; color: var(--text-1); margin-bottom: 5px; line-height: 1; }
+
+    /* Hero image */
+    .hero-img-wrap {
+      position: absolute; inset: 0;
+      overflow: hidden;
+    }
+    .hero-img-wrap img {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center 30%;
-      display: block;
-      filter: grayscale(55%) brightness(0.58) contrast(1.1);
+      filter: grayscale(60%) brightness(0.55) contrast(1.1);
     }
-    .hero-image-wrap::after {
+    .hero-img-wrap::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
-        linear-gradient(to top, rgba(4,6,14,0.92) 0%, rgba(4,6,14,0.28) 45%, transparent 70%),
-        linear-gradient(to right, rgba(4,6,14,0.25) 0%, transparent 60%);
+        linear-gradient(to top, rgba(7,15,28,0.96) 0%, rgba(7,15,28,0.4) 50%, transparent 75%),
+        linear-gradient(to right, rgba(7,15,28,0.15) 0%, transparent 50%);
     }
+    .hero-content { position: relative; z-index: 2; margin-top: auto; }
 
-    .hero-page-l {
-      position: relative;
-      z-index: 2;
-      justify-content: flex-end;
-      padding-bottom: 80px;
-    }
-    .hero-page-l .eyebrow {
-      position: absolute;
-      top: 100px;
-      left: 72px;
-    }
-
-    .hero-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(72px, 9vw, 130px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.88;
-      text-transform: uppercase;
-      color: var(--text-1);
-    }
-    .hero-name-sub {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(18px, 2vw, 24px);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--text-2);
-      margin-top: 16px;
-      letter-spacing: 0.03em;
-    }
-
-    .hero-page-r {
-      justify-content: center;
-    }
-    .hero-role-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(52px, 6vw, 88px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 0.92;
-      text-transform: uppercase;
-      color: var(--text-1);
-      margin-bottom: 8px;
-    }
-    .hero-role-sub {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(18px, 1.8vw, 22px);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--blue);
-      margin-bottom: 0;
-    }
-    .hero-intro {
-      max-width: 380px;
-    }
-
-    /* ghost logo */
+    /* Ghost logo */
     .ghost-logo {
       position: absolute;
-      inset: 0;
-      z-index: 1;
+      inset: 0; z-index: 1;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 24px;
       pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 64px;
-      padding-top: 60px;
     }
-    .ghost-logo img {
-      width: min(280px, 38vw);
-      opacity: 0.05;
-      mix-blend-mode: screen;
-    }
+    .ghost-logo img { width: min(160px, 30vw); opacity: 0.05; mix-blend-mode: screen; }
 
-    /* ─── SPREAD 1: WHAT I DO ─── */
-    .practice-entries {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 20px;
-    }
-    .practice-entry {
-      display: flex;
-      gap: 24px;
-      align-items: baseline;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-      transition: border-color 0.2s ease;
-    }
-    .practice-entry:first-child { padding-top: 0; }
-    .practice-entry:last-child { border-bottom: none; padding-bottom: 0; }
-    .practice-entry:hover { border-bottom-color: var(--border-hi); }
-    .prac-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--text-3);
-      flex-shrink: 0;
-      width: 28px;
-    }
-    .prac-area {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 6px;
-    }
-    .prac-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(22px, 2.4vw, 30px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      color: var(--text-1);
-      line-height: 1;
-    }
-
-    /* Right — practice descriptions */
-    .practice-desc-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 20px;
-    }
-    .practice-desc-item {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .practice-desc-item:first-child { padding-top: 0; }
-    .practice-desc-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .prac-hook {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2vw, 26px);
-      font-weight: 700;
-      font-style: italic;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      line-height: 1.1;
-      color: var(--text-1);
-      margin-bottom: 14px;
-    }
-    .prac-desc {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 12.5px;
-      line-height: 1.8;
-      color: var(--text-2);
-    }
-
-    /* ─── SPREAD 2: 20+ YEARS ─── */
-    .spread-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(56px, 7vw, 96px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.88;
-      text-transform: uppercase;
-      color: var(--text-1);
-      margin-bottom: 48px;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .tl-item {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 0 20px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .tl-item:first-child { padding-top: 0; }
-    .tl-item:last-child { border-bottom: none; }
-    .tl-year {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      color: var(--text-3);
-      text-transform: uppercase;
-      padding-top: 4px;
-    }
-    .tl-role {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: var(--text-1);
-      margin-bottom: 5px;
-      line-height: 1;
-    }
-    .tl-desc {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 11.5px;
-      line-height: 1.65;
-      color: var(--text-2);
-    }
-
-    /* Right — solutions */
-    .sol-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-    .sol-group { }
-    .sol-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-1);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    .sol-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2px;
-    }
-    .sol-tag {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      color: var(--text-2);
-      background: var(--surface-2, #0B1120);
-      border: 1px solid var(--border);
-      padding: 7px 12px;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-    .sol-tag:hover { border-color: var(--border-hi); color: var(--text-1); }
-
-    /* ─── SPREAD 3: KEY OUTCOMES ─── */
-    .outcomes-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1;
-    }
-    .outcome-card {
-      flex: 1;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .outcome-card:first-child { padding-top: 0; }
-    .outcome-card:last-child { border-bottom: none; }
-    .outcome-stat {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.85;
-      color: var(--blue);
-      opacity: 0.3;
-      margin-bottom: 16px;
-      user-select: none;
-    }
-    .outcome-industry {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 8px;
-    }
-    .outcome-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2.2vw, 26px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      color: var(--text-1);
-      margin-bottom: 10px;
-      line-height: 1;
-    }
-    .outcome-desc {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 12px;
-      line-height: 1.7;
-      color: var(--text-2);
-    }
-
-    /* ─── SPREAD 4: CLOSE / CTA ─── */
-    .spread--close {
-      min-height: 50vh;
-      display: flex;
-      align-items: stretch;
-    }
-    .close-page-l {
-      justify-content: flex-end;
-    }
-    .cta-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(56px, 7vw, 100px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.88;
-      text-transform: uppercase;
-      color: var(--text-1);
-    }
-
-    .close-page-r {
-      justify-content: center;
-      gap: 0;
-    }
-    .cta-sub {
-      font-size: 13px;
-      line-height: 1.75;
-      color: var(--text-2);
-      max-width: 320px;
-      margin-bottom: 40px;
-    }
+    /* CTA */
     .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
+      display: inline-flex; align-items: center; gap: 10px;
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--blue);
-      padding: 16px 36px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--bg); background: var(--blue);
+      padding: 12px 24px;
       text-decoration: none;
-      transition: background 0.2s ease, gap 0.2s ease;
+      transition: background 0.2s ease;
     }
-    .cta-btn:hover { background: var(--blue-hi); gap: 18px; }
-    .cta-arrow { font-size: 14px; }
+    .cta-btn:hover { background: var(--blue-hi); }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 52px;
+    /* ─── CONTROLS ─── */
+    .controls {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      position: relative;
+      gap: 24px;
     }
-    .ft-copy {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--text-3);
+    .ctrl-btn {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(80,150,190,0.18);
+      background: rgba(7,15,28,0.8);
+      color: var(--text-2);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      font-size: 16px;
     }
-    .ft-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .ft-mark {
+    .ctrl-btn:hover { border-color: rgba(80,150,190,0.4); color: var(--text-1); background: rgba(15,30,60,0.9); }
+    .ctrl-btn:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+    .page-indicator {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.2em;
       color: var(--text-3);
+      min-width: 60px;
+      text-align: center;
     }
-    .ft-mark span { color: var(--blue); }
-
-    /* ─── SECTION DIVIDER LINE ─── */
-    .spread-divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
-    }
-
-    /* ─── MOBILE ─── */
-    @media (max-width: 860px) {
-      .spread { flex-direction: column; }
-      .spread::before { display: none; }
-      .page-l, .page-r {
-        width: 100%;
-        box-shadow: none;
-        padding: 64px 28px 48px;
-      }
-      .hero-page-l { min-height: 60vw; }
-      .hero-name { font-size: clamp(56px, 14vw, 96px); }
-      .spread-title { font-size: clamp(44px, 12vw, 72px); }
-      footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
-      .ft-name { position: static; transform: none; }
-    }
+    .page-indicator span { color: var(--blue); }
   </style>
 </head>
 <body>
 
-  <nav id="nav">
+  <nav>
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
-      <a href="/creative/"      class="nav-link">Everything</a>
-      <a href="/professional/"  class="nav-link active">Professional</a>
-      <a href="/projects/"      class="nav-link">Projects</a>
-      <a href="/blog/"          class="nav-link">Thoughts</a>
-      <a href="/contact/"       class="nav-link">Contact</a>
+      <a href="/creative/"     class="nav-link">Everything</a>
+      <a href="/professional/" class="nav-link active">Professional</a>
+      <a href="/projects/"     class="nav-link">Projects</a>
+      <a href="/blog/"         class="nav-link">Thoughts</a>
+      <a href="/contact/"      class="nav-link">Contact</a>
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- SPREAD 0 — HERO                                        -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="spread spread--hero">
+  <div class="scene">
+    <div class="book-wrap">
+      <div class="book" id="book">
 
-    <!-- Left: full-bleed portrait image -->
-    <div class="page-l hero-page-l">
-      <div class="hero-image-wrap">
-        <img src="/images/professional.webp" alt="Grant Hansen" loading="eager" />
-      </div>
-      <p class="eyebrow reveal">thesenate.io / professional</p>
-      <div class="reveal" style="transition-delay:0.1s">
-        <h1 class="hero-name">Grant<br>Hansen</h1>
-        <p class="hero-name-sub">Solution Architect &mdash; Australia</p>
-      </div>
-    </div>
+        <!-- Left page display -->
+        <div class="page-l" id="page-l"></div>
 
-    <!-- Right: role + intro -->
-    <div class="page-r hero-page-r">
-      <div class="ghost-logo">
-        <img src="/brand_assets/senate-logo-white.png" alt="" />
-      </div>
-      <div class="reveal" style="transition-delay:0.2s">
-        <p class="eyebrow-blue">What I do</p>
-        <h2 class="hero-role-title">Solution<br>Architect</h2>
-        <p class="hero-role-sub">The role fits the way I think.</p>
-        <div class="rule"></div>
-        <div class="hero-intro">
-          <p class="body-text">20+ years in IT. Started on the helpdesk. Moved into VoIP, then networks, then architecture. The title caught up eventually.</p>
-          <p class="body-text" style="margin-top:14px">Contact centre. Healthcare comms. Enterprise design. I stay accountable to what I build after it ships.</p>
+        <!-- Spine -->
+        <div class="book-spine"></div>
+
+        <!-- Right page display -->
+        <div class="page-r" id="page-r">
+          <div class="page-r-corner"></div>
         </div>
+
+        <!-- Flip shadow overlays -->
+        <div class="flip-shadow shadow-left"  id="shadow-l"></div>
+        <div class="flip-shadow shadow-right" id="shadow-r"></div>
+
+        <!-- Animated flip leaf -->
+        <div class="flip-leaf" id="flip-leaf">
+          <div class="flip-front" id="flip-front"></div>
+          <div class="flip-back"  id="flip-back"></div>
+        </div>
+
       </div>
     </div>
 
+    <!-- Controls -->
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-prev" aria-label="Previous page" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="page-indicator"><span id="cur-num">01</span> / <span id="tot-num">05</span></div>
+      <button class="ctrl-btn" id="btn-next" aria-label="Next page">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
   </div>
-
-  <div class="spread-divider"></div>
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- SPREAD 1 — WHAT I DO                                   -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="spread">
-
-    <!-- Left: practice list -->
-    <div class="page-l">
-      <p class="eyebrow reveal">01 / What I Do</p>
-      <div class="practice-entries reveal" style="transition-delay:0.1s">
-        <div class="practice-entry">
-          <span class="prac-num">01</span>
-          <div>
-            <div class="prac-area">Contact Centre</div>
-            <div class="prac-name">Webex Contact Center</div>
-          </div>
-        </div>
-        <div class="practice-entry">
-          <span class="prac-num">02</span>
-          <div>
-            <div class="prac-area">Healthcare</div>
-            <div class="prac-name">Integrated Health</div>
-          </div>
-        </div>
-        <div class="practice-entry">
-          <span class="prac-num">03</span>
-          <div>
-            <div class="prac-area">Architecture</div>
-            <div class="prac-name">Solution Architecture</div>
-          </div>
-        </div>
-      </div>
-      <span class="section-num" aria-hidden="true">01</span>
-    </div>
-
-    <!-- Right: practice descriptions -->
-    <div class="page-r">
-      <p class="eyebrow reveal" style="opacity:0">—</p>
-      <div class="practice-desc-list">
-        <div class="practice-desc-item reveal">
-          <p class="prac-hook">Most contact centres are held together with duct tape. I fix that.</p>
-          <p class="prac-desc">AI-driven routing, self-service IVR, agent assist, workflow automation. First whiteboard through go-live. I stay accountable to the design after it ships — not just the parts that were easy to sell.</p>
-        </div>
-        <div class="practice-desc-item reveal" style="transition-delay:0.1s">
-          <p class="prac-hook">Hospitals have a dozen systems that were never meant to talk to each other. I make them talk.</p>
-          <p class="prac-desc">Clinical devices, staff safety, duress, RTLS, nurse call, messaging engines. Most vendors own one piece and walk away. In a hospital that's not good enough.</p>
-        </div>
-        <div class="practice-desc-item reveal" style="transition-delay:0.2s">
-          <p class="prac-hook">I turn what a business actually needs into something that can actually be built.</p>
-          <p class="prac-desc">Discovery, design, sizing, integration mapping, compliance scoping. I run the workshops, write the design, defend it in front of procurement. The proposals that win are the ones where the architect clearly understood the problem.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="spread-divider"></div>
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- SPREAD 2 — 20+ YEARS                                   -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="spread">
-
-    <!-- Left: timeline -->
-    <div class="page-l">
-      <p class="eyebrow reveal">02 / Career</p>
-      <h2 class="spread-title reveal" style="transition-delay:0.1s">20+<br>Years</h2>
-      <div class="timeline reveal" style="transition-delay:0.2s">
-        <div class="tl-item">
-          <span class="tl-year">2006</span>
-          <div>
-            <div class="tl-role">IT Support</div>
-            <p class="tl-desc">Where it started. Break-fix, user support. Learned fast that the job was never really about the equipment.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <span class="tl-year">2012</span>
-          <div>
-            <div class="tl-role">Desktop Support</div>
-            <p class="tl-desc">Enterprise scale at a major bank. Thousands of endpoints. When something broke, it broke for a lot of people at once.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <span class="tl-year">2016</span>
-          <div>
-            <div class="tl-role">VoIP Engineer</div>
-            <p class="tl-desc">PBX-to-VoIP migrations, greenfield deployments, national branch rollouts. Owned the UC solution end to end.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <span class="tl-year">2020</span>
-          <div>
-            <div class="tl-role">Network Engineer</div>
-            <p class="tl-desc">Deeper into infrastructure. Service team lead. Seeing the full picture, not just the comms layer sitting on top.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <span class="tl-year">2023 —</span>
-          <div>
-            <div class="tl-role">Solution Architect</div>
-            <p class="tl-desc">Healthcare AI, integrated health, contact centre. The job now is designing things that don't break. Twenty years of watching what does helps with that.</p>
-          </div>
-        </div>
-      </div>
-      <span class="section-num" aria-hidden="true">02</span>
-    </div>
-
-    <!-- Right: solutions/skills -->
-    <div class="page-r">
-      <p class="eyebrow reveal">Technologies &amp; Solutions</p>
-      <div class="sol-stack reveal" style="transition-delay:0.1s">
-        <div class="sol-group">
-          <div class="sol-label">Contact Centre</div>
-          <div class="sol-tags">
-            <span class="sol-tag">Webex Contact Center</span>
-            <span class="sol-tag">CUCM</span>
-            <span class="sol-tag">UCCX</span>
-            <span class="sol-tag">Cisco Finesse</span>
-            <span class="sol-tag">SIP / VoIP</span>
-            <span class="sol-tag">IVR Design</span>
-            <span class="sol-tag">AI Agent Assist</span>
-          </div>
-        </div>
-        <div class="sol-group">
-          <div class="sol-label">Integrated Health</div>
-          <div class="sol-tags">
-            <span class="sol-tag">Clinical Mobility</span>
-            <span class="sol-tag">Staff Duress</span>
-            <span class="sol-tag">Nurse Call Integration</span>
-            <span class="sol-tag">Clinical Messaging</span>
-            <span class="sol-tag">Message Integration Engines</span>
-          </div>
-        </div>
-        <div class="sol-group">
-          <div class="sol-label">RTLS &amp; Safety</div>
-          <div class="sol-tags">
-            <span class="sol-tag">Real-Time Location</span>
-            <span class="sol-tag">Asset Tracking</span>
-            <span class="sol-tag">Staff Location</span>
-            <span class="sol-tag">Ekahau</span>
-            <span class="sol-tag">AiRISTA</span>
-            <span class="sol-tag">Kontakt IO</span>
-          </div>
-        </div>
-        <div class="sol-group">
-          <div class="sol-label">Network &amp; Security</div>
-          <div class="sol-tags">
-            <span class="sol-tag">Fortinet</span>
-            <span class="sol-tag">Cisco Meraki</span>
-            <span class="sol-tag">Wi-Fi Design</span>
-            <span class="sol-tag">SD-WAN</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="spread-divider"></div>
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- SPREAD 3 — KEY OUTCOMES                                -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="spread">
-
-    <!-- Left: outcomes 1 + 2 -->
-    <div class="page-l">
-      <p class="eyebrow reveal">03 / Key Outcomes</p>
-      <div class="outcomes-grid reveal" style="transition-delay:0.1s">
-        <div class="outcome-card">
-          <div class="outcome-stat">4,000+</div>
-          <div class="outcome-industry">Healthcare / Greenfield</div>
-          <h3 class="outcome-title">Greenfield Hospital Build</h3>
-          <p class="outcome-desc">Full clinical comms stack for a major new hospital. 4,000+ clinical handsets, nurse call, personal duress, mobility — integrated from day one. A greenfield build is the one chance to get the architecture right.</p>
-        </div>
-        <div class="outcome-card">
-          <div class="outcome-stat">1,000+</div>
-          <div class="outcome-industry">Healthcare / Safety</div>
-          <h3 class="outcome-title">Staff Safety at Scale</h3>
-          <p class="outcome-desc">1,000+ frontline staff across a live healthcare network protected by personal duress. Real-time location, alarm routing, coverage from wards to car parks. These are the systems that matter when something goes wrong.</p>
-        </div>
-      </div>
-      <span class="section-num" aria-hidden="true">03</span>
-    </div>
-
-    <!-- Right: outcomes 3 + 4 -->
-    <div class="page-r">
-      <p class="eyebrow reveal" style="opacity:0">—</p>
-      <div class="outcomes-grid reveal" style="transition-delay:0.1s">
-        <div class="outcome-card">
-          <div class="outcome-stat">AI</div>
-          <div class="outcome-industry">Enterprise / Contact Centre</div>
-          <h3 class="outcome-title">Contact Centre AI Overhaul</h3>
-          <p class="outcome-desc">Pulled an enterprise contact centre out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. The work that actually needed a human got one.</p>
-        </div>
-        <div class="outcome-card">
-          <div class="outcome-stat">20yr</div>
-          <div class="outcome-industry">Pre-Sales / Architecture</div>
-          <h3 class="outcome-title">Tenders That Close</h3>
-          <p class="outcome-desc">Started on the helpdesk. Moved into VoIP, then networks, then architecture. Every step was another layer of understanding what the layer below it actually does. That's how you learn to build things that hold.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="spread-divider"></div>
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- SPREAD 4 — CLOSE / CTA                                 -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="spread spread--close">
-
-    <div class="page-l close-page-l">
-      <div class="reveal">
-        <p class="eyebrow-blue">Let's talk</p>
-        <h2 class="cta-headline">Got a<br>project?</h2>
-      </div>
-    </div>
-
-    <div class="page-r close-page-r">
-      <div class="reveal" style="transition-delay:0.15s">
-        <p class="cta-sub">Contact centre, healthcare comms, or something that doesn't fit a box. Get in touch.</p>
-        <a href="/contact/" class="cta-btn">
-          Contact <span class="cta-arrow">&#8594;</span>
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ─── FOOTER ─── -->
-  <footer>
-    <span class="ft-copy">© 2026 thesenate.io</span>
-    <span class="ft-name">Grant Hansen</span>
-    <span class="ft-mark">THE<span>SENATE</span>.IO</span>
-  </footer>
 
   <script>
-    // ── Sticky nav
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 48);
-    }, { passive: true });
+  // ─── SPREAD CONTENT ─────────────────────────────────────────────────
+  const spreads = [
 
-    // ── Scroll reveal
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    // 0 — HERO
+    {
+      left: `
+        <div class="hero-img-wrap">
+          <img src="/images/professional.webp" alt="Grant Hansen" />
+        </div>
+        <div class="pc" style="justify-content:flex-end; padding-bottom: clamp(20px,3vw,36px);">
+          <div class="pg-head">
+            <span class="pg-head-label">thesenate.io / professional</span>
+            <span class="pg-num">01</span>
+          </div>
+          <div class="hero-content">
+            <div class="dsp dsp-xl" style="line-height:0.88">Grant<br>Hansen</div>
+            <div class="sub" style="color:var(--text-2)">Solution Architect &nbsp;&middot;&nbsp; Australia</div>
+          </div>
+        </div>`,
+      right: `
+        <div class="ghost-logo"><img src="/brand_assets/senate-logo-white.png" alt="" /></div>
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">What I do</span>
+            <span class="pg-num">02</span>
+          </div>
+          <div style="display:flex;flex-direction:column;flex:1;justify-content:center;">
+            <div class="eye">Role</div>
+            <div class="dsp dsp-lg">Solution<br>Architect</div>
+            <div class="sub">The role fits the way I think.</div>
+            <div class="rule"></div>
+            <p class="body">20+ years in IT. Started on the helpdesk. Moved into VoIP, then networks, then architecture. The title caught up eventually.</p>
+            <p class="body" style="margin-top:10px">Contact centre. Healthcare comms. Enterprise design. I stay accountable to what I build after it ships — not just the parts that were easy to sell.</p>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid rgba(80,150,190,0.10)">
+            <span style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:0.2em;color:var(--text-3);text-transform:uppercase">thesenate.io / professional</span>
+          </div>
+        </div>`
+    },
+
+    // 1 — WHAT I DO
+    {
+      left: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">01 / What I Do</span>
+            <span class="pg-num">03</span>
+          </div>
+          <div class="eye" style="margin-top:4px">Practice Areas</div>
+          <div class="dsp dsp-md" style="margin-bottom:16px">What I Do</div>
+          <div class="prac-list">
+            <div class="prac-row">
+              <span class="prac-n">01</span>
+              <div>
+                <div class="prac-area">Contact Centre</div>
+                <div class="prac-name">Webex Contact Center</div>
+              </div>
+            </div>
+            <div class="prac-row">
+              <span class="prac-n">02</span>
+              <div>
+                <div class="prac-area">Healthcare</div>
+                <div class="prac-name">Integrated Health</div>
+              </div>
+            </div>
+            <div class="prac-row">
+              <span class="prac-n">03</span>
+              <div>
+                <div class="prac-area">Architecture</div>
+                <div class="prac-name">Solution Architecture</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:auto;padding-top:12px">
+            <span style="font-family:'Space Mono',monospace;font-size:38px;font-weight:800;letter-spacing:-0.04em;color:var(--text-1);opacity:0.04;line-height:1;">01</span>
+          </div>
+        </div>`,
+      right: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">Descriptions</span>
+            <span class="pg-num">04</span>
+          </div>
+          <div class="desc-list">
+            <div class="desc-item">
+              <div class="hook">Most contact centres are held together with duct tape. I fix that.</div>
+              <p class="body">AI-driven routing, self-service IVR, agent assist, workflow automation. First whiteboard through go-live. I stay accountable to the design after it ships.</p>
+            </div>
+            <div class="desc-item">
+              <div class="hook">Hospitals have a dozen systems that were never meant to talk. I make them talk.</div>
+              <p class="body">Clinical devices, staff safety, duress, RTLS, nurse call, messaging engines. Most vendors own one piece and walk away. In a hospital, that's not good enough.</p>
+            </div>
+            <div class="desc-item">
+              <div class="hook">I turn what a business needs into something that can actually be built.</div>
+              <p class="body">Discovery, design, sizing, integration mapping, compliance scoping. The proposals that win are the ones where the architect clearly understood the problem.</p>
+            </div>
+          </div>
+        </div>`
+    },
+
+    // 2 — CAREER
+    {
+      left: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">02 / Career</span>
+            <span class="pg-num">05</span>
+          </div>
+          <div class="eye">Career</div>
+          <div class="dsp dsp-lg" style="margin-bottom:16px">20+<br>Years</div>
+          <div class="tl">
+            <div class="tl-row">
+              <span class="tl-yr">2006</span>
+              <div>
+                <div class="tl-role">IT Support</div>
+                <p class="body">Break-fix, user support. Learned the job was never really about the equipment.</p>
+              </div>
+            </div>
+            <div class="tl-row">
+              <span class="tl-yr">2012</span>
+              <div>
+                <div class="tl-role">Desktop Support</div>
+                <p class="body">Enterprise scale at a major bank. Thousands of endpoints. Breakdowns at scale make you methodical.</p>
+              </div>
+            </div>
+            <div class="tl-row">
+              <span class="tl-yr">2016</span>
+              <div>
+                <div class="tl-role">VoIP Engineer</div>
+                <p class="body">PBX-to-VoIP migrations, greenfield deployments, national rollouts. Owned UC end to end.</p>
+              </div>
+            </div>
+            <div class="tl-row">
+              <span class="tl-yr">2020</span>
+              <div>
+                <div class="tl-role">Network Engineer</div>
+                <p class="body">Deeper into infrastructure. Team lead. Seeing the full picture, not just the comms layer.</p>
+              </div>
+            </div>
+            <div class="tl-row">
+              <span class="tl-yr">2023&thinsp;—</span>
+              <div>
+                <div class="tl-role">Solution Architect</div>
+                <p class="body">Healthcare AI, integrated health, contact centre. Twenty years of watching what breaks helps with that.</p>
+              </div>
+            </div>
+          </div>
+        </div>`,
+      right: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">Technologies</span>
+            <span class="pg-num">06</span>
+          </div>
+          <div class="sol-stack">
+            <div>
+              <div class="sol-g-label">Contact Centre</div>
+              <div class="sol-tags">
+                <span class="sol-t">Webex Contact Center</span>
+                <span class="sol-t">CUCM</span>
+                <span class="sol-t">UCCX</span>
+                <span class="sol-t">Cisco Finesse</span>
+                <span class="sol-t">SIP / VoIP</span>
+                <span class="sol-t">IVR Design</span>
+                <span class="sol-t">AI Agent Assist</span>
+              </div>
+            </div>
+            <div>
+              <div class="sol-g-label">Integrated Health</div>
+              <div class="sol-tags">
+                <span class="sol-t">Clinical Mobility</span>
+                <span class="sol-t">Staff Duress</span>
+                <span class="sol-t">Nurse Call</span>
+                <span class="sol-t">Clinical Messaging</span>
+                <span class="sol-t">Message Engines</span>
+              </div>
+            </div>
+            <div>
+              <div class="sol-g-label">RTLS &amp; Safety</div>
+              <div class="sol-tags">
+                <span class="sol-t">Real-Time Location</span>
+                <span class="sol-t">Asset Tracking</span>
+                <span class="sol-t">Ekahau</span>
+                <span class="sol-t">AiRISTA</span>
+                <span class="sol-t">Kontakt IO</span>
+              </div>
+            </div>
+            <div>
+              <div class="sol-g-label">Network &amp; Security</div>
+              <div class="sol-tags">
+                <span class="sol-t">Fortinet</span>
+                <span class="sol-t">Cisco Meraki</span>
+                <span class="sol-t">Wi-Fi Design</span>
+                <span class="sol-t">SD-WAN</span>
+              </div>
+            </div>
+          </div>
+        </div>`
+    },
+
+    // 3 — KEY OUTCOMES
+    {
+      left: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">03 / Key Outcomes</span>
+            <span class="pg-num">07</span>
+          </div>
+          <div class="eye">Results</div>
+          <div class="dsp dsp-md" style="margin-bottom:16px">Key Outcomes</div>
+          <div class="out-list">
+            <div class="out-card">
+              <div class="out-stat">4,000+</div>
+              <div class="out-ind">Healthcare / Greenfield</div>
+              <div class="out-title">Greenfield Hospital Build</div>
+              <p class="body">Full clinical comms stack for a new hospital. 4,000+ handsets, nurse call, personal duress, mobility — integrated from day one. A greenfield is the one chance to get architecture right.</p>
+            </div>
+            <div class="out-card">
+              <div class="out-stat">1,000+</div>
+              <div class="out-ind">Healthcare / Safety</div>
+              <div class="out-title">Staff Safety at Scale</div>
+              <p class="body">1,000+ frontline staff protected by personal duress. Real-time location, alarm routing, coverage from wards to car parks. These are the systems that matter when something goes wrong.</p>
+            </div>
+          </div>
+        </div>`,
+      right: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">Outcomes cont.</span>
+            <span class="pg-num">08</span>
+          </div>
+          <div class="out-list" style="margin-top:auto">
+            <div class="out-card">
+              <div class="out-stat">AI</div>
+              <div class="out-ind">Enterprise / Contact Centre</div>
+              <div class="out-title">Contact Centre AI Overhaul</div>
+              <p class="body">Pulled an enterprise contact centre out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing repetitive work. The work that needed a human got one.</p>
+            </div>
+            <div class="out-card">
+              <div class="out-stat">20yr</div>
+              <div class="out-ind">Pre-Sales / Architecture</div>
+              <div class="out-title">Tenders That Close</div>
+              <p class="body">Started on the helpdesk. Every step was another layer of understanding what the layer below it actually does. That's how you learn to build things that hold.</p>
+            </div>
+          </div>
+          <div style="margin-top:16px;">
+            <span style="font-family:'Space Mono',monospace;font-size:48px;font-weight:800;letter-spacing:-0.04em;color:var(--text-1);opacity:0.04;line-height:1;">03</span>
+          </div>
+        </div>`
+    },
+
+    // 4 — CLOSE
+    {
+      left: `
+        <div class="pc" style="justify-content:flex-end">
+          <div class="pg-head">
+            <span class="pg-head-label">Get in touch</span>
+            <span class="pg-num">09</span>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="eye">Next step</div>
+            <div class="dsp dsp-xl" style="line-height:0.88;margin-bottom:12px">Got a<br>project?</div>
+            <p class="body" style="max-width:240px">Contact centre, healthcare comms, or something that doesn't fit a box.</p>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid rgba(80,150,190,0.10)">
+            <span style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:0.2em;color:var(--text-3);text-transform:uppercase">thesenate.io / professional</span>
+          </div>
+        </div>`,
+      right: `
+        <div class="pc">
+          <div class="pg-head">
+            <span class="pg-head-label">Contact</span>
+            <span class="pg-num">10</span>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px">
+            <div>
+              <div class="eye">Reach out</div>
+              <p class="body" style="margin-bottom:20px;max-width:260px">Available for contact centre, integrated healthcare, and enterprise architecture engagements.</p>
+              <a href="/contact/" class="cta-btn">Contact &nbsp;&#8594;</a>
+            </div>
+            <div style="border-top:1px solid rgba(80,150,190,0.10);padding-top:20px">
+              <div class="eye" style="margin-bottom:8px">Also</div>
+              <a href="/projects/" class="body" style="display:block;color:var(--blue);text-decoration:none;margin-bottom:4px">Projects &#8594;</a>
+              <a href="/creative/" class="body" style="display:block;color:var(--text-2);text-decoration:none">Everything &#8594;</a>
+            </div>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid rgba(80,150,190,0.10)">
+            <span style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:0.2em;color:var(--text-3);text-transform:uppercase">&copy; 2026 thesenate.io &nbsp;&mdash;&nbsp; Grant Hansen</span>
+          </div>
+        </div>`
+    }
+
+  ];
+
+  // ─── STATE ───────────────────────────────────────────────────────────
+  const TOTAL = spreads.length;
+  let current  = 0;
+  let flipping = false;
+
+  const pageL   = document.getElementById('page-l');
+  const pageR   = document.getElementById('page-r');
+  const leaf    = document.getElementById('flip-leaf');
+  const front   = document.getElementById('flip-front');
+  const back    = document.getElementById('flip-back');
+  const shadowL = document.getElementById('shadow-l');
+  const shadowR = document.getElementById('shadow-r');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const curNum  = document.getElementById('cur-num');
+  const totNum  = document.getElementById('tot-num');
+
+  totNum.textContent = String(TOTAL).padStart(2, '0');
+
+  // ─── RENDER ──────────────────────────────────────────────────────────
+  function render(idx) {
+    pageL.innerHTML = spreads[idx].left;
+    pageR.innerHTML = spreads[idx].right + '<div class="page-r-corner"></div>';
+    curNum.textContent = String(idx + 1).padStart(2, '0');
+    btnPrev.disabled = idx === 0;
+    btnNext.disabled = idx === TOTAL - 1;
+  }
+
+  // ─── FLIP NEXT ───────────────────────────────────────────────────────
+  function flipNext() {
+    if (flipping || current >= TOTAL - 1) return;
+    flipping = true;
+
+    const next = current + 1;
+
+    // Leaf front = copy of current right page
+    front.innerHTML = spreads[current].right;
+    front.style.background = 'var(--page-r)';
+    // Leaf back = next spread's left page
+    back.innerHTML = spreads[next].left;
+    back.style.background = 'var(--page-l)';
+
+    // Position leaf over right half, pivot on left (spine) edge
+    leaf.style.right = '0';
+    leaf.style.left  = '';
+    leaf.style.transformOrigin = 'left center';
+    leaf.classList.remove('flip-prev');
+    leaf.classList.add('active', 'flip-next');
+
+    // Shadow builds on left page then fades
+    shadowL.classList.add('visible');
+    setTimeout(() => { shadowL.classList.remove('visible'); }, 500);
+
+    // At midpoint: update the static right page to next spread's right
+    setTimeout(() => {
+      pageR.innerHTML = spreads[next].right + '<div class="page-r-corner"></div>';
+    }, 360);
+
+    // After full animation: update left, clean up
+    setTimeout(() => {
+      current = next;
+      pageL.innerHTML = spreads[current].left;
+      leaf.classList.remove('active', 'flip-next');
+      curNum.textContent = String(current + 1).padStart(2, '0');
+      btnPrev.disabled = current === 0;
+      btnNext.disabled = current === TOTAL - 1;
+      flipping = false;
+    }, 720);
+  }
+
+  // ─── FLIP PREV ───────────────────────────────────────────────────────
+  function flipPrev() {
+    if (flipping || current <= 0) return;
+    flipping = true;
+
+    const prev = current - 1;
+
+    // Leaf front = copy of current left page
+    front.innerHTML = spreads[current].left;
+    front.style.background = 'var(--page-l)';
+    // Leaf back = prev spread's right page
+    back.innerHTML = spreads[prev].right;
+    back.style.background = 'var(--page-r)';
+
+    // Position leaf over left half, pivot on right (spine) edge
+    leaf.style.left  = '0';
+    leaf.style.right = '';
+    leaf.style.transformOrigin = 'right center';
+    leaf.classList.remove('flip-next');
+    leaf.classList.add('active', 'flip-prev');
+
+    // Shadow on right page
+    shadowR.classList.add('visible');
+    setTimeout(() => { shadowR.classList.remove('visible'); }, 500);
+
+    // At midpoint: update the static left page to prev spread's left
+    setTimeout(() => {
+      pageL.innerHTML = spreads[prev].left;
+    }, 360);
+
+    // After animation: update right, clean up
+    setTimeout(() => {
+      current = prev;
+      pageR.innerHTML = spreads[current].right + '<div class="page-r-corner"></div>';
+      leaf.classList.remove('active', 'flip-prev');
+      curNum.textContent = String(current + 1).padStart(2, '0');
+      btnPrev.disabled = current === 0;
+      btnNext.disabled = current === TOTAL - 1;
+      flipping = false;
+    }, 720);
+  }
+
+  // ─── EVENTS ──────────────────────────────────────────────────────────
+  btnNext.addEventListener('click', flipNext);
+  btnPrev.addEventListener('click', flipPrev);
+
+  // Click right page = next, click left page = prev
+  pageR.addEventListener('click', flipNext);
+  pageL.addEventListener('click', flipPrev);
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); flipNext(); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); flipPrev(); }
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) { dx > 0 ? flipNext() : flipPrev(); }
+  }, { passive: true });
+
+  // ─── INIT ────────────────────────────────────────────────────────────
+  render(0);
   </script>
 
 </body>
