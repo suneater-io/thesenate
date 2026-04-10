@@ -254,7 +254,7 @@
       position: relative;
       overflow: hidden;
       display: flex;
-      align-items: flex-end;
+      align-items: stretch;
     }
     .slide-bg {
       position: absolute;
@@ -284,18 +284,28 @@
       z-index: 1;
     }
 
-    /* ─── SLIDE CONTENT ─── */
+    /* ─── SLIDE CONTENT (scrollable left panel) ─── */
     .slide-content {
       position: relative;
       z-index: 2;
-      padding: 0 80px 96px;
-      max-width: 620px;
+      width: min(580px, 52vw);
+      height: 100%;
+      flex-shrink: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      padding: 110px 64px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(to right, rgba(4,6,14,0.97) 65%, rgba(4,6,14,0.7) 85%, transparent 100%);
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateX(-24px);
       transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s,
                   transform 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s;
     }
-    .slide.active .slide-content { opacity: 1; transform: translateY(0); }
+    .slide-content::-webkit-scrollbar { display: none; }
+    .slide.active .slide-content { opacity: 1; transform: translateX(0); }
     .slide-label {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
@@ -319,7 +329,7 @@
     }
     .slide-headline {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(60px, 8.5vw, 120px);
+      font-size: clamp(52px, 7vw, 100px);
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 0.92;
@@ -329,70 +339,91 @@
     }
     .slide-sub {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2.2vw, 27px);
+      font-size: clamp(18px, 1.8vw, 24px);
       font-weight: 400;
       font-style: italic;
       color: var(--text-2);
       margin-bottom: 24px;
       line-height: 1.3;
     }
-    .slide-rule { width: 48px; height: 1px; background: var(--border-hi); margin-bottom: 24px; }
+    .slide-rule { width: 48px; height: 1px; background: var(--border-hi); margin-bottom: 28px; }
     .slide-body {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: clamp(13px, 1vw, 15px);
-      line-height: 1.8;
+      font-size: 13px;
+      line-height: 1.85;
       color: var(--text-1);
       opacity: 0.75;
-      max-width: 400px;
+    }
+    .slide-body p { margin-bottom: 18px; }
+    .slide-body p:last-child { margin-bottom: 0; }
+    /* scroll-fade — subtle gradient at top to hint at scrollability */
+    .slide-content::before {
+      content: '';
+      position: sticky;
+      top: 0;
+      display: block;
+      height: 32px;
+      margin-bottom: -32px;
+      background: linear-gradient(to bottom, rgba(4,6,14,0.9), transparent);
+      z-index: 1;
+      pointer-events: none;
+      flex-shrink: 0;
     }
 
     /* ─── SLIDE THEMES ─── */
     .slide--architect .slide-bg { filter: brightness(0.72) saturate(0.85); }
     .slide--architect .slide-overlay {
       background:
-        linear-gradient(to top,    rgba(4,6,14,0.88) 0%, rgba(4,6,14,0.45) 38%, transparent 58%),
-        linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 28%),
-        linear-gradient(to right,  rgba(4,6,14,0.38) 0%, transparent 52%);
+        linear-gradient(to bottom, rgba(4,6,14,0.55) 0%, transparent 28%);
     }
 
     .slide--detroit .slide-bg { filter: brightness(0.70) saturate(0.9); }
     .slide--detroit .slide-overlay {
       background:
-        linear-gradient(to top,    rgba(10,6,2,0.88)  0%, rgba(10,6,2,0.45) 38%, transparent 58%),
-        linear-gradient(to bottom, rgba(10,6,2,0.55)  0%, transparent 28%),
-        linear-gradient(to right,  rgba(10,6,2,0.38)  0%, transparent 52%);
+        linear-gradient(to bottom, rgba(10,6,2,0.55)  0%, transparent 28%);
+    }
+    .slide--detroit .slide-content {
+      background: linear-gradient(to right, rgba(10,6,2,0.97) 65%, rgba(10,6,2,0.7) 85%, transparent 100%);
     }
     .slide--detroit .slide-label { color: #C8903A; }
     .slide--detroit .slide-label::before { background: #C8903A; }
 
-    .slide--metal .slide-bg { background: #03040A; }
+    .slide--metal .slide-bg { filter: brightness(0.60) saturate(0.7); }
     .slide--metal .slide-overlay {
       background:
-        linear-gradient(to top,    rgba(3,4,8,0.88)  0%, rgba(3,4,8,0.28) 36%, transparent 56%),
-        linear-gradient(to bottom, rgba(3,4,8,0.55)  0%, transparent 24%),
-        linear-gradient(to right,  rgba(3,4,8,0.28)  0%, transparent 58%);
+        linear-gradient(to bottom, rgba(3,4,8,0.55)  0%, transparent 24%);
+    }
+    .slide--metal .slide-content {
+      background: linear-gradient(to right, rgba(3,4,8,0.97) 65%, rgba(3,4,8,0.7) 85%, transparent 100%);
     }
 
     /* ─── COLLECTION SLIDE ─── */
     .slide--collection {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: stretch;
+      background: var(--bg);
     }
     .collection-left {
       position: relative;
       z-index: 2;
+      width: min(580px, 52vw);
+      height: 100%;
+      flex-shrink: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 0 64px 96px;
+      padding: 110px 64px 80px;
+      background: linear-gradient(to right, rgba(4,6,14,0.99) 80%, rgba(4,6,14,0.7) 100%);
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateX(-24px);
       transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s,
                   transform 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s;
     }
-    .slide--collection.active .collection-left { opacity: 1; transform: translateY(0); }
-    .collection-grid {
+    .collection-left::-webkit-scrollbar { display: none; }
+    .slide--collection.active .collection-left { opacity: 1; transform: translateX(0); }
+    .collection-right {
+      flex: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
@@ -401,7 +432,7 @@
       opacity: 0;
       transition: opacity 0.9s ease 0.3s;
     }
-    .slide--collection.active .collection-grid { opacity: 1; }
+    .slide--collection.active .collection-right { opacity: 1; }
     .collection-grid-img {
       width: 100%; height: 100%;
       object-fit: cover;
@@ -410,6 +441,7 @@
       transition: filter 0.4s ease;
     }
     .collection-grid-img:hover { filter: brightness(1) saturate(1); }
+    .collection-grid-item { overflow: hidden; }
     .collection-grid-item:first-child { grid-row: span 2; }
 
     /* ─── PITCH SLIDE ─── */
@@ -582,11 +614,11 @@
       nav#nav { padding: 20px 24px; }
       .nav-links { display: none; }
       .hero { padding: 0 24px 64px; }
-      .slide-content { padding: 0 32px 80px; }
-      .slide-headline { font-size: clamp(48px, 14vw, 80px); }
+      .slide-content { width: 100%; padding: 90px 28px 72px; }
+      .slide-headline { font-size: clamp(44px, 13vw, 72px); }
       .slide-arrow { display: none; }
-      .slide--collection { grid-template-columns: 1fr; grid-template-rows: 50% 50%; }
-      .collection-left { padding: 32px 32px 40px; }
+      .collection-left { width: 100%; padding: 90px 28px 72px; }
+      .collection-right { display: none; }
       .pitch-inner { padding: 0 32px; }
       .pitch-links { flex-wrap: wrap; justify-content: center; }
       .pitch-link { border-right: 1px solid var(--border); }
@@ -693,14 +725,13 @@
             <h2 class="slide-headline">Solution<br>Architect</h2>
             <p class="slide-sub">The role fits the way I think.</p>
             <div class="slide-rule"></div>
-            <p class="slide-body">
-              20+ years in IT. The title caught up eventually.
-              It started with a 486 in my parents' house —
-              I pulled everything apart to see how it worked. Never stopped.
-              Systems, structure, how things connect — that's not work.
-              That's just how I see everything.
-              Rules are starting points. You learn them until you know which ones to cross.
-            </p>
+            <div class="slide-body">
+              <p>I'm a Solution Architect. I live for my kids, bleed Detroit, play drums, and still get in the pit. I don't change who I am depending on the room.</p>
+              <p>It started with a 486 in my parents' house. I pulled everything apart to see how it worked. Never stopped. 20 years in IT. The title caught up eventually.</p>
+              <p>Systems, structure, how things connect — that's not work. That's just how I see everything. The way I approach a complex enterprise problem is the same way I approach anything I care about: understand it completely, figure out what's actually wrong, then fix the right thing.</p>
+              <p>Rules are starting points. You learn them until you know which ones to cross.</p>
+              <p>Over 50 hours in the tattoo chair. My great-grandparents came from Norway. I've been on stage with bands, in enterprise architecture meetings, and deep in the pit. All the same person.</p>
+            </div>
           </div>
         </div>
 
@@ -714,21 +745,22 @@
             <h2 class="slide-headline">Detroit</h2>
             <p class="slide-sub">Not where I'm from. Where I belong.</p>
             <div class="slide-rule"></div>
-            <p class="slide-body">
-              It started with the Pistons. Everyone liked the Bulls.
-              I wanted the team that made Jordan's life miserable —
-              the team that refused to back down. That was Detroit.
-              The Wings came next. Blue collar to the bone.
-              Hard work rewarded. Knocked down, keeps showing up.
-              That mentality doesn't just describe a city.
-              It describes how I want to operate.
-            </p>
+            <div class="slide-body">
+              <p>It started with the Pistons. As a kid I liked the Bulls but so did everyone else. This was the 90s. Really though, I wanted to root for the team that made Jordan's life miserable. The team that gave it to him. The team that refused to back down. That was Detroit.</p>
+              <p>The deeper I dug into the history, the more I realised I was made for this. The Bad Boys. The bad image. The hard play style. Laimbeer. Isiah. Dumars. I watched the DVDs. I rewatched the games. I learned where it all came from in that late 80s run. That team is my personality on a basketball court.</p>
+              <p>The Ben Wallace era is where I fell completely in love. No superstar contract, no ego, just dominance through sheer will. Rasheed. Mr. Big Shot. RIP. Tayshaun with those insane lengths. That team had something you can't manufacture. Defense first, built on grit, played like it.</p>
+              <p>In 2004 I was in Year 10 and had discovered live music. Basketball had taken a back seat, which is how I missed the championship run. Coming back in 2006 made it hurt knowing exactly what I'd walked away from. There was no easy way back in. No streaming, no League Pass. I paid for a service that would burn the local broadcast feed onto a DVD and post it to me in Australia. I'd watch the game days later on disc. I had hundreds of those DVDs before League Pass existed. That's how much I wanted back in.</p>
+              <p>The Wings came next. A friend of mine, Cameron, a Canucks fan living in Canada at the time, got me into hockey. I figured if I'm going Detroit, I'm going all the way. Once I was in, I was gone. The Yzerman and Lidstrom stories. The championship legacies. The rivalry with Colorado — brutal, physical, earned. The Winged Wheel is one of the most iconic logos in sports.</p>
+              <p>The 2011 to 2014 run locked me in for life. Deep playoff runs. Conference final Game 7s. Chicago. I can't talk about it. Absolutely heartbreaking. But that's the thing. Heartbreak that deep only happens when it means that much.</p>
+              <p>Detroit resonates because of what the city carries. Blue collar to the bone. Hard work is rewarded. They've been knocked down over and over and they keep showing up. That mentality doesn't just describe a city. It describes how I want to operate.</p>
+              <p>I've been die-hard Detroit for 20 years and I haven't experienced a championship as a dedicated fan. Not once, across any sport. When it comes, it will be one of the greatest moments of my life.</p>
+            </div>
           </div>
         </div>
 
         <!-- 03 · METAL -->
         <div class="slide slide--metal" id="slide-2">
-          <div class="slide-bg"></div>
+          <div class="slide-bg" style="background-image: url('/images/meshuggah.webp'); background-position: center center;"></div>
           <div class="slide-overlay"></div>
           <div class="slide-num" aria-hidden="true">03</div>
           <div class="slide-content">
@@ -736,14 +768,17 @@
             <h2 class="slide-headline">Metal</h2>
             <p class="slide-sub">Not a taste. A life support system.</p>
             <div class="slide-rule"></div>
-            <p class="slide-body">
-              Music is not something I do. It's what I am.
-              Meshuggah at 14 changed everything — not just the music,
-              the idea that something could break every rule and be better for it.
-              Like the music was demonstrating the way my brain worked.
-              Thirty years in. Still my medicine. Still my brain.
-              Without it, nothing else around it works. Nothing else exists.
-            </p>
+            <div class="slide-body">
+              <p>Music is not something I do. It's what I am.</p>
+              <p>It started before I even knew what I was looking for. I'd go through mum and dad's CDs, tapes and records. Not really listening. Just looking at the artwork. Something about those covers. Bat out of Hell by Meat Loaf I requested more times than I can count.</p>
+              <p>Real independence came when I got Metallica Garage Inc on CD, a big wooden Metallica poster, and my own boombox. I would have been 9. I put it on and nothing was ever the same. It was so heavy. Like nothing I'd heard before. The thrash metal obsession started right there. Thrash drove me through the genres. The Big Four led me to the classics of death metal. By 12 I was deep into Dying Fetus, Morbid Angel, Cannibal Corpse. I kept going further in.</p>
+              <p>Then at 14 I walked into my lead guitarist's room. He was older than me. He said "check this out" and put on the Meshuggah album Nothing. Instantly my mind was blown. I don't even know how to describe how it felt. It was like the music was demonstrating the way my brain worked. Chaotic, loud, odd, different. Time signatures I'd never heard. Accents in places that shouldn't be accented. It broke every rule I knew about music. There was this metaphorical glass ceiling and Meshuggah just catapulted me through it. Love at first listen. Still my number one. Nothing has come close.</p>
+              <p>I started drums at 12 or 13. A friend's birthday party. He had a kit, nobody there could play it. I basically spent the next few hours working it out. Breaking the way my arms moved from the way my legs moved. By the time my parents arrived I could play For Whom the Bell Tolls. They bought me a kit not long after.</p>
+              <p>A few years later I was on stage with my band. We'd won two or three Battle of the Bands. These were some of the greatest times of my life. We were playing alongside Parkway Drive, I Killed the Prom Queen, The Red Shore. We signed with a label, released two EPs, and were building toward something real. It never came. But we parted ways the right way. One final show. People moshing everywhere. Crowd surfers. Kids jumping from the stage. I'll never forget it.</p>
+              <p>Since I turned 18 I've been seeing bands five to ten times a year. Now in my late 30s I still go. Do I still mosh, crowd surf, get in the pit? Hell yes. My body feels better for it every time.</p>
+              <p>Meshuggah was my first tattoo. There was nothing in my life that had the impact they did. Family pushed back. A few aunts tried to change my mind. My mind was already made up. Meshuggah on my arm. I will always love it.</p>
+              <p>Thirty years in, I explain music to people like medicine. Some people have something they need every day to keep them alive, keep them sane, in control, healthy. That's music for me. Without my music, there is no me. It connects to everything I do and am. I would rather go blind than go deaf.</p>
+            </div>
           </div>
         </div>
 
@@ -754,21 +789,25 @@
             <h2 class="slide-headline">The<br>Collection</h2>
             <p class="slide-sub">Everything gets a monument.</p>
             <div class="slide-rule"></div>
-            <p class="slide-body">
-              When something matters, it takes up space.
-              A display case. A signed jersey. A build that took weeks.
-              This is what total investment looks like when it becomes physical.
-            </p>
+            <div class="slide-body">
+              <p>When something matters, it takes up space. A display case. A signed jersey. A build that took weeks. This is what total investment looks like when it becomes physical.</p>
+              <p>The Detroit collection spans all eras but right now it's all Cade. Signed pieces, memorabilia, basketball cards. Some high-end hockey cards too. The collection is serious and still growing.</p>
+              <p>Lego started young. Pirates. Knights. Racing sets. Built, taken apart, rebuilt. As an adult, with adult money, I came back properly. As a collector.</p>
+              <p>Star Wars comes first. But this goes beyond Lego. Star Wars is a massive part of my life. The books, the movies, the shows, the animated series, the merchandise. All of it. The Lego collection is an extension of that. Ships and vehicles mostly. The design language, the scale, the detail. Built and displayed.</p>
+              <p>The Empire specifically. People call them the bad guys. I'm not sure that's right. Either way, I love the Empire. Always have.</p>
+              <p>Batman started at three years old. A VHS of the 1960s series. That was the hook. As I grew up it became the Michael Keaton films, and Keaton remains my Batman. Always will be. My favourite set is the Keaton Batmobile. It gets front and centre in the Batman display.</p>
+              <p>Building Lego locks you in. For that time you have one task. You're turning coloured blocks into something real. Something that sits in a cabinet and holds its shape. There's nothing else quite like it. The displays take up serious space. I take a lot of pride in them.</p>
+            </div>
           </div>
-          <div class="collection-grid">
+          <div class="collection-right">
             <div class="collection-grid-item" style="grid-row: span 2;">
-              <img class="collection-grid-img" src="/images/lego-cabinet-wide.jpg" alt="Lego display cabinet" />
+              <img class="collection-grid-img" src="/images/lego-cabinet-wide.webp" alt="Lego display cabinet" />
             </div>
             <div class="collection-grid-item">
-              <img class="collection-grid-img" src="/images/detroit-signed-display.jpg" alt="Signed Detroit memorabilia" />
+              <img class="collection-grid-img" src="/images/detroit-signed-display.webp" alt="Signed Detroit memorabilia" />
             </div>
             <div class="collection-grid-item">
-              <img class="collection-grid-img" src="/images/lego-star-wars-ucs.jpg" alt="Lego Star Wars UCS" />
+              <img class="collection-grid-img" src="/images/lego-star-wars-ucs.webp" alt="Lego Star Wars UCS" />
             </div>
           </div>
         </div>
@@ -825,6 +864,8 @@
       transitioning = true;
       inSlides = false;
       body.classList.remove('in-slides');
+      // Reset all scroll panels
+      document.querySelectorAll('.slide-content, .collection-left').forEach(el => { el.scrollTop = 0; });
       setTimeout(() => { transitioning = false; }, 900);
     }
 
@@ -838,6 +879,9 @@
       current = idx;
       slides[current].classList.add('active');
       track.style.transform = `translateX(-${current * 100}vw)`;
+      // Reset scroll position of incoming slide
+      const scrollEl = slides[current].querySelector('.slide-content, .collection-left');
+      if (scrollEl) scrollEl.scrollTop = 0;
       updateUI();
     }
 
@@ -851,16 +895,34 @@
 
     // ── Wheel handler ──
     let wheelLock = false;
-    window.addEventListener('wheel', e => {
-      e.preventDefault();
-      if (wheelLock) return;
 
-      // Normalise across deltaMode: 0=px, 1=line (~40px), 2=page (~800px)
+    function navigate(dir) {
+      if (wheelLock) return;
+      wheelLock = true;
+      setTimeout(() => { wheelLock = false; }, 900);
+      if (dir > 0) goTo(current + 1);
+      else         goTo(current - 1);
+    }
+
+    window.addEventListener('wheel', e => {
       const mult  = e.deltaMode === 1 ? 40 : e.deltaMode === 2 ? 800 : 1;
       const rawX  = e.deltaX  * mult;
       const rawY  = e.deltaY  * mult;
       const delta = Math.abs(rawX) > Math.abs(rawY) ? rawX : rawY;
 
+      // If inside a scrollable content panel, let it scroll — navigate only at boundary
+      const scrollEl = e.target.closest('.slide-content, .collection-left');
+      if (scrollEl && inSlides) {
+        const atTop    = scrollEl.scrollTop <= 1;
+        const atBottom = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 2;
+        if (delta > 10 && atBottom) { e.preventDefault(); navigate(1); }
+        else if (delta < -10 && atTop) { e.preventDefault(); navigate(-1); }
+        // else: let native scroll handle it
+        return;
+      }
+
+      // Outside scrollable — control navigation
+      e.preventDefault();
       if (!inSlides) {
         if (delta > 10) {
           wheelLock = true;
@@ -869,16 +931,8 @@
         }
         return;
       }
-
-      if (delta > 10) {
-        wheelLock = true;
-        setTimeout(() => { wheelLock = false; }, 900);
-        goTo(current + 1);
-      } else if (delta < -10) {
-        wheelLock = true;
-        setTimeout(() => { wheelLock = false; }, 900);
-        goTo(current - 1);
-      }
+      if (delta > 10) navigate(1);
+      else if (delta < -10) navigate(-1);
     }, { passive: false });
 
     // ── Touch / swipe ──
