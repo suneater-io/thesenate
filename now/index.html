@@ -27,15 +27,16 @@
       --bg:        #060810;
       --surface:   #090D18;
       --surface-2: #0C1220;
-      --border:    rgba(168, 206, 221, 0.10);
-      --border-hi: rgba(168, 206, 221, 0.24);
-      --blue:      #A8CEDD;
-      --blue-hi:   #BCD8E8;
-      --blue-dim:  rgba(168, 206, 221, 0.07);
-      --blue-glow: rgba(168, 206, 221, 0.14);
+      --border:    rgba(122, 174, 200, 0.10);
+      --border-hi: rgba(122, 174, 200, 0.24);
+      --blue:      #7AAEC8;
+      --blue-hi:   #9DC6D8;
+      --blue-dim:  rgba(122, 174, 200, 0.07);
+      --blue-glow: rgba(122, 174, 200, 0.14);
       --text-1:    #D8EDF5;
-      --text-2:    #6A8EA0;
+      --text-2:    #4A6878;
       --text-3:    #3D5A70;
+      --surface-3: #101929;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,11 +66,11 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
 
     /* ─── NAV ─── */
@@ -401,7 +402,6 @@
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
-<a href="/blog/" class="nav-link">Thoughts</a>
 <a href="/contact/" class="nav-link">Contact</a>
 </div>
 
@@ -411,7 +411,6 @@
       <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
-<a href="/blog/" class="nav-link">Thoughts</a>
 <a href="/contact/" class="nav-link">Contact</a>
 </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">

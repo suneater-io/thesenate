@@ -37,14 +37,14 @@
       --surface:   #090D18;
       --surface-2: #0C1220;
       --surface-3: #101929;
-      --border:    rgba(107, 154, 184, 0.10);
-      --border-hi: rgba(107, 154, 184, 0.24);
-      --blue:      #6B9AB8;
-      --blue-hi:   #7AAEC8;
-      --blue-dim:  rgba(107, 154, 184, 0.07);
-      --blue-glow: rgba(107, 154, 184, 0.14);
+      --border:    rgba(196, 130, 74, 0.10);
+      --border-hi: rgba(196, 130, 74, 0.24);
+      --blue:      #C4824A;
+      --blue-hi:   #D49060;
+      --blue-dim:  rgba(196, 130, 74, 0.07);
+      --blue-glow: rgba(196, 130, 74, 0.14);
       --text-1:    #D8EDF5;
-      --text-2:    #6A8EA0;
+      --text-2:    #4A6878;
       --text-3:    #3D5A70;
     }
 
@@ -70,7 +70,7 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
+      from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     .a1 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
@@ -275,7 +275,7 @@
       pointer-events: none;
       background:
         linear-gradient(rgba(4,6,14,0.32), rgba(4,6,14,0.32)),
-        radial-gradient(ellipse 60% 80% at 85% 45%, rgba(107,154,184,0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 80% at 85% 45%, rgba(196,130,74,0.05) 0%, transparent 65%),
         linear-gradient(to bottom, rgba(4,6,14,0.40) 0%, transparent 35%),
         linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.25) 32%, transparent 52%);
     }
@@ -286,8 +286,8 @@
       z-index: 1;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(107,154,184,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(107,154,184,0.06) 1px, transparent 1px);
+        linear-gradient(rgba(196,130,74,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,130,74,0.06) 1px, transparent 1px);
       background-size: 48px 48px;
     }
     #hero-canvas {
@@ -736,7 +736,6 @@
     <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link active">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
-<a href="/blog/" class="nav-link">Thoughts</a>
 <a href="/contact/" class="nav-link">Contact</a>
 </div>
 
@@ -746,7 +745,6 @@
       <a href="/creative/" class="nav-link">Everything</a>
 <a href="/professional/" class="nav-link active">Professional</a>
 <a href="/projects/" class="nav-link">Projects</a>
-<a href="/blog/" class="nav-link">Thoughts</a>
 <a href="/contact/" class="nav-link">Contact</a>
 </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
