@@ -2445,29 +2445,24 @@
       const PW = 'senate';
 
       function unlock() {
-        sessionStorage.setItem('senate_everything', '1');
         gate.classList.add('unlocking');
         setTimeout(() => gate.remove(), 500);
         document.body.style.overflow = '';
       }
 
-      if (sessionStorage.getItem('senate_everything') === '1') {
-        gate.remove();
-      } else {
-        document.body.style.overflow = 'hidden';
-        input.focus();
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          if (input.value.trim().toLowerCase() === PW) {
-            unlock();
-          } else {
-            errEl.classList.add('visible');
-            input.value = '';
-            input.focus();
-            setTimeout(() => errEl.classList.remove('visible'), 2000);
-          }
-        });
-      }
+      document.body.style.overflow = 'hidden';
+      input.focus();
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value.trim().toLowerCase() === PW) {
+          unlock();
+        } else {
+          errEl.classList.add('visible');
+          input.value = '';
+          input.focus();
+          setTimeout(() => errEl.classList.remove('visible'), 2000);
+        }
+      });
     })();
 
     // ─── SCROLL REVEAL ───
