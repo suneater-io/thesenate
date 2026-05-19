@@ -33,383 +33,230 @@
       --bg:        #060810;
       --surface:   #090D18;
       --surface-2: #0C1220;
-      --surface-3: #101929;
       --border:    rgba(196, 130, 74, 0.10);
-      --border-hi: rgba(196, 130, 74, 0.24);
+      --border-hi: rgba(196, 130, 74, 0.28);
       --blue:      #C4824A;
       --blue-hi:   #D49060;
-      --blue-dim:  rgba(196, 130, 74, 0.07);
-      --blue-glow: rgba(196, 130, 74, 0.14);
+      --blue-dim:  rgba(196, 130, 74, 0.08);
       --text-1:    #D8EDF5;
       --text-2:    #4A6878;
-      --text-3:    #3D5A70;
+      --text-3:    #2E4858;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text-1);
-      font-family: 'Chakra Petch', sans-serif;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { background: var(--bg); color: var(--text-1); font-family: 'Chakra Petch', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
     body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.11;
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.10;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 300px 300px;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .a1 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-    .a2 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
-    .a3 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
-    .a4 { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
-
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
 
     /* ─── NAV ─── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      padding: 24px 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 20px 52px; display: flex; align-items: center; justify-content: space-between;
       transition: background 0.4s ease, border-color 0.4s ease;
       border-bottom: 1px solid transparent;
     }
-    nav.scrolled {
-      background: rgba(5, 7, 15, 0.88);
-      backdrop-filter: blur(24px) saturate(160%);
-      border-bottom-color: var(--border);
-      padding-top: 16px;
-      padding-bottom: 16px;
-    }
-    .nav-logo {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-1);
-      text-decoration: none;
-    }
+    nav.scrolled { background: rgba(5,7,15,0.92); backdrop-filter: blur(20px); border-bottom-color: var(--border); padding-top: 14px; padding-bottom: 14px; }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-1); text-decoration: none; }
     .nav-logo span { color: var(--blue); }
     .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-link {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      padding-left: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-1);
-      opacity: 0.75;
-      text-decoration: none;
-      transition: opacity 0.2s ease, color 0.2s ease;
-      padding: 10px 0;
-      position: relative;
-    }
+    .nav-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-1); opacity: 0.65; text-decoration: none; transition: opacity 0.2s ease, color 0.2s ease; padding: 8px 0; position: relative; }
     .nav-link:hover { opacity: 1; }
     .nav-link.active { opacity: 1; color: var(--blue); }
-    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
-    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-    .nav-links .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 8px; left: 0;
-      width: 100%; height: 1px;
-      background: var(--blue);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
-      opacity: 0.65;
-    }
-    .nav-links .nav-link:hover::after,
-    .nav-links .nav-link.active::after { transform: scaleX(1); }
+    .nav-links .nav-link::after { content: ''; position: absolute; bottom: 6px; left: 0; width: 100%; height: 1px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.22s cubic-bezier(0.16,1,0.3,1); opacity: 0.65; }
+    .nav-links .nav-link:hover::after, .nav-links .nav-link.active::after { transform: scaleX(1); }
+    .nav-logo:focus-visible, .nav-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
-    .skip-link {
-      position: fixed; top: 16px; left: 16px;
-      padding: 8px 16px;
-      background: var(--blue); color: var(--bg);
-      font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-      z-index: 9999;
-      transform: translateY(calc(-100% - 32px));
-      transition: transform 0.2s ease;
-    }
+    .skip-link { position: fixed; top: 16px; left: 16px; padding: 8px 16px; background: var(--blue); color: var(--bg); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; z-index: 9999; transform: translateY(calc(-100% - 32px)); transition: transform 0.2s ease; }
     .skip-link:focus { transform: translateY(0); }
 
-    .drawer-close {
-      position: absolute; top: 24px; right: 24px;
-      font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--text-2); background: none;
-      border: 1px solid var(--border); padding: 10px 16px; cursor: pointer;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
+    .drawer-close { position: absolute; top: 24px; right: 24px; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-2); background: none; border: 1px solid var(--border); padding: 10px 16px; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; }
     .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
-    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
-    .nav-hamburger {
-      display: none; flex-direction: column; justify-content: center;
-      gap: 5px; width: 44px; height: 44px; padding: 11px 10px;
-      cursor: pointer; background: none; border: none; z-index: 300;
-    }
-    .nav-hamburger span {
-      display: block; width: 22px; height: 1.5px; background: var(--text-1);
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
-    }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 11px 10px; cursor: pointer; background: none; border: none; z-index: 300; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-1); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease; }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    .nav-drawer {
-      position: fixed; inset: 0; background: var(--bg); z-index: 250;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-    }
+    .nav-drawer { position: fixed; inset: 0; background: var(--bg); z-index: 250; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .nav-drawer.open { opacity: 1; pointer-events: all; }
-    .nav-drawer .nav-link { font-size: 22px !important; letter-spacing: 0.12em !important; opacity: 0.8 !important; }
-    .nav-drawer .nav-link:hover,
-    .nav-drawer .nav-link.active { opacity: 1 !important; }
+    .nav-drawer .nav-link { font-size: 20px !important; letter-spacing: 0.12em !important; opacity: 0.8 !important; }
+    .nav-drawer .nav-link:hover, .nav-drawer .nav-link.active { opacity: 1 !important; }
 
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
+    @media (max-width: 600px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 
     /* ─── HERO ─── */
     .hero {
-      height: 100vh;
-      height: 100dvh;
-      min-height: 600px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 52px 72px;
+      min-height: 100vh; min-height: 100dvh;
+      position: relative; display: flex; flex-direction: column;
+      justify-content: center; padding: 120px 52px 80px;
       overflow: hidden;
       background: url('/images/forest-fog.jpg') center center / cover no-repeat;
     }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
-        linear-gradient(rgba(4,6,14,0.32), rgba(4,6,14,0.32)),
-        radial-gradient(ellipse 60% 80% at 85% 45%, rgba(196,130,74,0.05) 0%, transparent 65%),
-        linear-gradient(to bottom, rgba(4,6,14,0.40) 0%, transparent 35%),
-        linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.25) 32%, transparent 52%);
+        linear-gradient(rgba(4,6,14,0.55), rgba(4,6,14,0.55)),
+        radial-gradient(ellipse 60% 80% at 80% 40%, rgba(196,130,74,0.06) 0%, transparent 65%),
+        linear-gradient(to bottom, rgba(4,6,14,0.50) 0%, transparent 40%),
+        linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.20) 40%, transparent 60%);
     }
-    .hero-blueprint {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(196,130,74,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(196,130,74,0.06) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
-    #hero-canvas {
-      will-change: transform; position: absolute; inset: 0;
-      width: 100%; height: 100%; z-index: 2; pointer-events: none;
-    }
-    .hero-content { position: relative; z-index: 3; animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
-    .hero-bar { margin-top: 20px; display: flex; align-items: center; gap: 20px; }
-    .hero-role {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(18px, 2.2vw, 26px);
-      font-weight: 500; font-style: italic;
-      letter-spacing: 0.04em; color: var(--text-2); line-height: 1.4;
-    }
-    .hero-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border-hi), transparent); }
-    .ph-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(80px, 14vw, 180px);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 0.88;
-      color: var(--text-1); text-transform: uppercase; position: relative; z-index: 1;
-    }
+    .hero-blueprint { position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: linear-gradient(rgba(196,130,74,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(196,130,74,0.05) 1px, transparent 1px); background-size: 48px 48px; }
+    #hero-canvas { will-change: transform; position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+    .hero-ghost { position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: flex-end; padding: 10vh 5vw 0 0; }
+    .hero-ghost img { width: min(480px, 55vw); opacity: 0.05; mix-blend-mode: screen; filter: brightness(1.3); user-select: none; }
 
-    /* ─── SECTION HEADER ─── */
-    .section-header {
-      padding: 80px 52px 56px;
-      display: flex; align-items: baseline; gap: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-num {
-      font-family: 'Space Mono', monospace; font-size: 10px;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue);
-    }
-    .section-title {
+    .hero-content { position: relative; z-index: 3; max-width: 900px; }
+    .hero-name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(36px, 5vw, 60px);
-      font-weight: 800; letter-spacing: -0.02em; line-height: 0.92;
-      text-transform: uppercase; color: var(--text-1);
+      font-size: clamp(60px, 10vw, 140px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 0.88; color: var(--text-1);
+      text-transform: uppercase;
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.05s both;
     }
+    .hero-tagline {
+      font-family: 'Space Mono', monospace; font-size: clamp(10px, 1.1vw, 13px);
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-2);
+      margin-top: 20px; margin-bottom: 28px;
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.18s both;
+    }
+    .hero-tagline .sep { color: var(--blue); margin: 0 10px; opacity: 0.7; }
+    .hero-spec {
+      font-family: 'Chakra Petch', sans-serif; font-size: clamp(13px, 1.4vw, 16px);
+      line-height: 1.7; color: var(--text-2); max-width: 580px;
+      margin-bottom: 40px;
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+    }
+    .hero-spec strong { color: var(--text-1); }
+    .hero-ctas {
+      display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 52px;
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+    }
+    .hero-btn {
+      font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; text-decoration: none; padding: 13px 28px;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.2s ease, color 0.2s ease, gap 0.2s ease, transform 0.15s ease;
+    }
+    .hero-btn:active { transform: translateY(1px); }
+    .hero-btn--primary { background: var(--blue); color: var(--bg); }
+    .hero-btn--primary:hover { background: var(--blue-hi); gap: 12px; }
+    .hero-btn--ghost { background: transparent; color: var(--text-1); border: 1px solid var(--border-hi); }
+    .hero-btn--ghost:hover { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); }
 
-    /* ─── PROPOSITION ─── */
-    .prop-section {
-      border-bottom: 1px solid var(--border);
-      padding: 72px 52px;
-      max-width: 820px;
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.5s both;
     }
-    .prop-text {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 15px; line-height: 1.8; color: var(--text-2); margin-bottom: 28px;
+    .badge {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--border); padding: 14px 20px;
+      background: var(--blue-dim); min-width: 100px;
+      transition: border-color 0.2s ease, background 0.2s ease;
     }
-    .prop-text:last-child { margin-bottom: 0; }
-    .prop-text strong { color: var(--text-1); font-weight: 600; }
+    .badge:hover { border-color: var(--border-hi); background: rgba(196,130,74,0.12); }
+    .badge-val { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; letter-spacing: -0.02em; color: var(--blue); line-height: 1; margin-bottom: 4px; }
+    .badge-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-2); }
 
-    /* ─── OUTCOMES ─── */
-    .work-section {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2px; background: var(--border);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    /* ─── SECTION SHARED ─── */
+    .s-wrap { max-width: 1100px; margin: 0 auto; padding: 0 52px; }
+    .s-head {
+      padding: 80px 0 48px; border-top: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 16px;
     }
-    .work-card {
-      background: var(--surface);
-      padding: 48px 44px 52px;
-      display: flex; flex-direction: column; gap: 0;
-      position: relative; overflow: hidden;
-      transition: background 0.25s ease;
-    }
-    .work-card:hover { background: var(--surface-2); }
-    .work-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue); transform: scaleX(0); transform-origin: left;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-    .work-card:hover::after { transform: scaleX(1); }
-    .work-stat {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(56px, 7vw, 88px); font-weight: 800;
-      letter-spacing: -0.04em; line-height: 0.88; color: var(--blue);
-      opacity: 0.28; margin-bottom: 28px;
-      transition: opacity 0.25s ease; user-select: none;
-    }
-    .work-card:hover .work-stat { opacity: 0.55; }
-    .work-industry {
-      font-family: 'Space Mono', monospace; font-size: 9px;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 12px;
-    }
-    .work-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(22px, 2.4vw, 30px); font-weight: 800;
-      text-transform: uppercase; letter-spacing: -0.01em;
-      color: var(--text-1); margin-bottom: 12px;
-    }
-    .work-outcome { font-size: 13px; line-height: 1.6; color: var(--text-2); }
+    .s-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); white-space: nowrap; }
+    .s-slash { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-3); margin: 0 2px; }
+    .s-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(32px, 4vw, 52px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--text-1); line-height: 1; }
 
-    /* ─── STACK + CERTS ─── */
-    .stack-section {
-      display: grid; grid-template-columns: 1fr 300px;
-      border-bottom: 1px solid var(--border);
-    }
-    .stack-tags {
-      padding: 56px 52px; border-right: 1px solid var(--border);
-      display: flex; flex-wrap: wrap; gap: 8px; align-content: start;
-    }
-    .stack-tag {
-      font-family: 'Space Mono', monospace; font-size: 9px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--text-2); padding: 6px 11px; border: 1px solid var(--border);
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-    .stack-tag:hover { color: var(--text-1); border-color: var(--border-hi); }
-    .stack-certs { padding: 40px 32px; }
-    .sc-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
-    .sc-item:last-child { border-bottom: none; }
-    .sc-name {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: -0.01em;
-      color: var(--text-1); display: block; margin-bottom: 4px;
-    }
-    .sc-vendor {
-      font-family: 'Space Mono', monospace; font-size: 8px;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue);
-    }
+    /* ─── 01 FOCUS ─── */
+    .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 80px; background: var(--border); }
+    .focus-card { background: var(--bg); padding: 40px 36px 44px; transition: background 0.25s ease; }
+    .focus-card:hover { background: var(--surface); }
+    .focus-icon { font-size: 22px; color: var(--blue); margin-bottom: 20px; opacity: 0.8; }
+    .focus-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 14px; line-height: 1; }
+    .focus-desc { font-size: 13px; line-height: 1.75; color: var(--text-2); margin-bottom: 20px; }
+    .focus-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .focus-tag { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); padding: 4px 8px; border: 1px solid var(--border); }
+
+    /* ─── 02 PROJECTS ─── */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 80px; background: var(--border); }
+    .proj-card { background: var(--surface); padding: 44px 40px; position: relative; overflow: hidden; transition: background 0.25s ease; }
+    .proj-card:hover { background: var(--surface-2, #0C1220); }
+    .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .proj-card:hover::before { transform: scaleX(1); }
+    .proj-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+    .proj-metric { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 5vw, 64px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.88; color: var(--blue); opacity: 0.25; margin-bottom: 20px; user-select: none; transition: opacity 0.25s ease; }
+    .proj-card:hover .proj-metric { opacity: 0.5; }
+    .proj-area { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+    .proj-name { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 12px; }
+    .proj-desc { font-size: 13px; line-height: 1.65; color: var(--text-2); }
+
+    /* ─── 03 EXPERIENCE ─── */
+    .xp-list { margin-bottom: 80px; }
+    .xp-item { display: grid; grid-template-columns: 180px 1fr; gap: 0 40px; padding: 40px 0; border-bottom: 1px solid var(--border); }
+    .xp-item:first-child { border-top: 1px solid var(--border); }
+    .xp-left { padding-top: 3px; }
+    .xp-dates { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+    .xp-company { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
+    .xp-role { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 12px; line-height: 1; }
+    .xp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .xp-bullets li { font-size: 13px; line-height: 1.65; color: var(--text-2); padding-left: 16px; position: relative; }
+    .xp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--blue); opacity: 0.6; font-size: 11px; top: 3px; }
+
+    /* ─── 04 SKILLS ─── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin-bottom: 80px; }
+    .skills-col {}
+    .skills-group { padding: 28px 0; border-bottom: 1px solid var(--border); }
+    .skills-group:first-child { border-top: 1px solid var(--border); }
+    .skills-group-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-1); margin-bottom: 14px; }
+    .skills-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag { font-family: 'Chakra Petch', sans-serif; font-size: 11px; color: var(--text-2); background: var(--surface); border: 1px solid var(--border); padding: 6px 12px; transition: color 0.2s ease, border-color 0.2s ease; }
+    .skill-tag:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .cert-item { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .cert-item:last-child { border-bottom: none; }
+    .cert-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); }
+    .cert-vendor { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); white-space: nowrap; }
 
     /* ─── CTA ─── */
-    .cta-section {
-      padding: 80px 52px;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 24px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-    .cta-label {
-      font-family: 'Space Mono', monospace; font-size: 9px;
-      letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-3);
-    }
-    .cta-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(40px, 6vw, 72px); font-weight: 800;
-      letter-spacing: -0.02em; line-height: 0.92;
-      text-transform: uppercase; color: var(--text-1);
-    }
-    .cta-sub { font-size: 13px; color: var(--text-2); max-width: 360px; }
-    .cta-link {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'Space Mono', monospace; font-size: 11px;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--bg); background: var(--blue);
-      padding: 14px 32px; text-decoration: none;
-      transition: background 0.2s ease, gap 0.2s ease, transform 0.15s ease;
-      margin-top: 8px;
-    }
-    .cta-link:hover { background: var(--blue-hi); gap: 16px; }
-    .cta-link:active { transform: translateY(1px); }
+    .cta-wrap { border-top: 1px solid var(--border); padding: 80px 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .cta-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-3); }
+    .cta-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -0.02em; line-height: 0.9; text-transform: uppercase; color: var(--text-1); }
+    .cta-sub { font-size: 13px; color: var(--text-2); max-width: 340px; }
 
     /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border); padding: 24px 52px;
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative;
-    }
+    footer { border-top: 1px solid var(--border); padding: 24px 52px; display: flex; align-items: center; justify-content: space-between; position: relative; }
     .ft-copy { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--text-3); }
-    .ft-name {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3);
-      position: absolute; left: 50%; transform: translateX(-50%);
-    }
+    .ft-name { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); position: absolute; left: 50%; transform: translateX(-50%); }
     .ft-mark { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3); }
     .ft-mark span { color: var(--blue); }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
-      nav { padding: 20px 24px; }
-      .hero { padding: 0 24px 56px; }
-      .section-header { padding: 60px 24px 44px; }
-      .prop-section { padding: 48px 24px; }
-      .work-section { grid-template-columns: 1fr; }
-      .work-card { padding: 40px 24px; }
-      .stack-section { grid-template-columns: 1fr; }
-      .stack-tags { padding: 40px 24px; border-right: none; border-bottom: 1px solid var(--border); }
-      .stack-certs { padding: 32px 24px; }
-      .cta-section { padding: 60px 24px; }
-      footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      nav, footer { padding-left: 24px; padding-right: 24px; }
+      .hero { padding: 100px 24px 64px; }
+      .s-wrap { padding: 0 24px; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .xp-item { grid-template-columns: 1fr; gap: 8px; }
+      .xp-left { display: flex; gap: 16px; align-items: baseline; }
+      .skills-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
     @media (max-width: 600px) {
-      .ph-title { font-size: clamp(40px, 10.5vw, 80px); }
+      .hero { padding: 90px 20px 56px; }
+      .s-wrap { padding: 0 20px; }
+      .hero-name { font-size: clamp(48px, 12vw, 80px); }
     }
   </style>
 </head>
@@ -417,7 +264,7 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <div class="nav-drawer" id="nav-drawer">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
     <a href="/professional/" class="nav-link active">Professional</a>
@@ -428,9 +275,10 @@
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
-      <a href="/creative/" class="nav-link">Everything</a>
-      <a href="/professional/" class="nav-link active">Professional</a>
-      <a href="/projects/" class="nav-link">Projects</a>
+      <a href="#focus" class="nav-link">Focus</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#xp" class="nav-link">XP</a>
+      <a href="#skills" class="nav-link">Skills</a>
       <a href="/contact/" class="nav-link">Contact</a>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -438,134 +286,291 @@
     </button>
   </nav>
 
+
   <!-- ─── HERO ─── -->
   <section class="hero" id="main">
     <div class="hero-overlay"></div>
     <div class="hero-blueprint"></div>
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
-      <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
+    <div class="hero-ghost">
+      <img src="/brand_assets/senate-logo-white.png" alt="" />
     </div>
     <div class="hero-content">
-      <h1 class="ph-title">Professional</h1>
-      <div class="hero-bar">
-        <p class="hero-role">Solution Architect</p>
-        <div class="hero-line"></div>
+      <h1 class="hero-name">Grant Hansen.</h1>
+      <p class="hero-tagline">
+        Solution Architect
+        <span class="sep">·</span>
+        AI
+        <span class="sep">·</span>
+        Cisco Webex
+        <span class="sep">·</span>
+        Cisco Wireless
+      </p>
+      <p class="hero-spec">
+        Specialising in <strong>AI-driven contact centre transformation</strong> and <strong>integrated healthcare communications</strong>. Building mission-critical systems where downtime costs lives.
+      </p>
+      <div class="hero-ctas">
+        <a href="/contact/" class="hero-btn hero-btn--primary">Get in Touch <i class="ph ph-arrow-right"></i></a>
+        <a href="#projects" class="hero-btn hero-btn--ghost">My Work</a>
+      </div>
+      <div class="hero-badges">
+        <div class="badge">
+          <span class="badge-val">WCC</span>
+          <span class="badge-label">Cisco Expert</span>
+        </div>
+        <div class="badge">
+          <span class="badge-val">20+</span>
+          <span class="badge-label">Years</span>
+        </div>
+        <div class="badge">
+          <span class="badge-val">4K+</span>
+          <span class="badge-label">Handsets</span>
+        </div>
+        <div class="badge">
+          <span class="badge-val">1K+</span>
+          <span class="badge-label">Staff Duress</span>
+        </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 01 / THE WORK -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-header reveal">
-    <span class="section-num">01</span>
-    <h2 class="section-title">The Work</h2>
-  </div>
-  <div class="prop-section reveal">
-    <p class="prop-text">Most contact centres are held together with duct tape. Most hospital systems run on integrations that were never designed to talk to each other. <strong>I fix both.</strong></p>
-    <p class="prop-text">Twenty years building from the ground up — IT support, desktop, VoIP engineering at one of Australia's largest regional banks, network infrastructure, and now architecture. Every layer is another view of what breaks under pressure and why.</p>
-    <p class="prop-text">The difference isn't knowing the technology. It's owning the whole environment. Most vendors deliver one piece and walk. In healthcare, that's not good enough — when one part breaks, it's a patient problem, not a tech problem.</p>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 02 / OUTCOMES -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Outcomes</h2>
-  </div>
-  <div class="work-section">
-    <div class="work-card reveal">
-      <div class="work-stat" style="font-size: clamp(22px, 3vw, 32px); line-height: 1.1; letter-spacing: -0.01em; opacity: 0.4; margin-bottom: 24px;">New Footscray<br>Hospital</div>
-      <div class="work-industry">Healthcare / Victoria</div>
-      <h3 class="work-title">Hospital Infrastructure</h3>
-      <p class="work-outcome">Contributed to the technology solution for one of Victoria's largest recent hospital builds. Clinical comms stack designed from day one — devices, RTLS, nurse call, duress — integrated, not bolted on.</p>
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- 01 // FOCUS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="s-wrap" id="focus">
+    <div class="s-head reveal">
+      <span class="s-num">01</span><span class="s-slash">//</span>
+      <h2 class="s-title">Focus Areas</h2>
     </div>
-    <div class="work-card reveal" style="transition-delay: 0.12s">
-      <div class="work-stat">4,000+</div>
-      <div class="work-industry">Healthcare / Clinical</div>
-      <h3 class="work-title">Clinical Handset Rollout</h3>
-      <p class="work-outcome">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site environments. Owned end to end.</p>
-    </div>
-    <div class="work-card reveal" style="transition-delay: 0.12s">
-      <div class="work-stat">1,000+</div>
-      <div class="work-industry">Healthcare / Safety</div>
-      <h3 class="work-title">Staff Duress at Scale</h3>
-      <p class="work-outcome">Personal duress designed, deployed, and integrated across live healthcare networks. Olinqua, MobiCall, Duress.com. Real-time location, alarm routing, full-facility coverage — from wards to car parks.</p>
-    </div>
-    <div class="work-card reveal" style="transition-delay: 0.24s">
-      <div class="work-stat">AI</div>
-      <div class="work-industry">Enterprise / Contact Centre</div>
-      <h3 class="work-title">Contact Centre Overhaul</h3>
-      <p class="work-outcome">Pulled enterprise contact centres out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. Work that needed a human got one.</p>
-    </div>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 03 / STACK + CERTS -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-header reveal">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Stack</h2>
-  </div>
-  <div class="stack-section reveal">
-    <div class="stack-tags">
-      <span class="stack-tag">Webex Contact Center</span>
-      <span class="stack-tag">CUCM</span>
-      <span class="stack-tag">UCCX</span>
-      <span class="stack-tag">Cisco Finesse</span>
-      <span class="stack-tag">SIP / VoIP</span>
-      <span class="stack-tag">IVR Design</span>
-      <span class="stack-tag">AI Agent Assist</span>
-      <span class="stack-tag">Clinical Mobility</span>
-      <span class="stack-tag">Staff Duress</span>
-      <span class="stack-tag">Nurse Call Integration</span>
-      <span class="stack-tag">Clinical Messaging</span>
-      <span class="stack-tag">Message Integration Engines</span>
-      <span class="stack-tag">Real-Time Location</span>
-      <span class="stack-tag">Asset Tracking</span>
-      <span class="stack-tag">Ekahau</span>
-      <span class="stack-tag">AiRISTA</span>
-      <span class="stack-tag">Kontakt IO</span>
-      <span class="stack-tag">Olinqua</span>
-      <span class="stack-tag">MobiCall</span>
-      <span class="stack-tag">Fortinet</span>
-      <span class="stack-tag">Cisco Meraki</span>
-      <span class="stack-tag">Wi-Fi Design</span>
-      <span class="stack-tag">SD-WAN</span>
-    </div>
-    <div class="stack-certs">
-      <div class="sc-item">
-        <span class="sc-name">Webex Contact Center Expert</span>
-        <span class="sc-vendor">Cisco</span>
+    <div class="focus-grid reveal">
+      <div class="focus-card">
+        <div class="focus-icon"><i class="ph ph-headset"></i></div>
+        <h3 class="focus-name">AI Contact Centre</h3>
+        <p class="focus-desc">Transforming enterprise contact centres with AI routing, self-service IVR, and agent assist. I pull organisations out of manual queue management and into intelligent automation — Webex Contact Center end to end.</p>
+        <div class="focus-tags">
+          <span class="focus-tag">Webex CC</span>
+          <span class="focus-tag">IVR Design</span>
+          <span class="focus-tag">AI Routing</span>
+          <span class="focus-tag">Agent Assist</span>
+          <span class="focus-tag">CUCM</span>
+          <span class="focus-tag">UCCX</span>
+        </div>
       </div>
-      <div class="sc-item">
-        <span class="sc-name">Collaboration Core</span>
-        <span class="sc-vendor">Cisco</span>
+      <div class="focus-card">
+        <div class="focus-icon"><i class="ph ph-hospital"></i></div>
+        <h3 class="focus-name">Healthcare Comms</h3>
+        <p class="focus-desc">Integrated clinical communications for hospitals and health alliances — clinical mobility, nurse call, staff duress, real-time location. Systems designed to work together from day one, not bolted together after the fact.</p>
+        <div class="focus-tags">
+          <span class="focus-tag">Clinical Mobility</span>
+          <span class="focus-tag">Staff Duress</span>
+          <span class="focus-tag">Nurse Call</span>
+          <span class="focus-tag">RTLS</span>
+          <span class="focus-tag">Olinqua</span>
+          <span class="focus-tag">MobiCall</span>
+        </div>
       </div>
-      <div class="sc-item">
-        <span class="sc-name">CCNA</span>
-        <span class="sc-vendor">Cisco</span>
-      </div>
-      <div class="sc-item">
-        <span class="sc-name">Google AI Professional</span>
-        <span class="sc-vendor">Google</span>
+      <div class="focus-card">
+        <div class="focus-icon"><i class="ph ph-wifi-high"></i></div>
+        <h3 class="focus-name">Cisco Wireless &amp; Spaces</h3>
+        <p class="focus-desc">High-density Wi-Fi design and Cisco Spaces integration for enterprise and healthcare environments. Predictive survey, post-deployment validation, RTLS asset tracking. Networks that support the systems that run on them.</p>
+        <div class="focus-tags">
+          <span class="focus-tag">Cisco Spaces</span>
+          <span class="focus-tag">Ekahau</span>
+          <span class="focus-tag">Wi-Fi Design</span>
+          <span class="focus-tag">AiRISTA</span>
+          <span class="focus-tag">Cisco Meraki</span>
+          <span class="focus-tag">SD-WAN</span>
+        </div>
       </div>
     </div>
   </div>
 
 
-  <!-- ─── CTA ─── -->
-  <div class="cta-section reveal">
-    <span class="cta-label">Let's talk</span>
-    <h2 class="cta-title">Got a project?</h2>
-    <p class="cta-sub">Contact centre, healthcare comms, or something that doesn't fit a box. Get in touch.</p>
-    <a href="/contact/" class="cta-link">Contact <i class="ph ph-arrow-right"></i></a>
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- 02 // PROJECTS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="s-wrap" id="projects">
+    <div class="s-head reveal">
+      <span class="s-num">02</span><span class="s-slash">//</span>
+      <h2 class="s-title">Projects</h2>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <p class="proj-num">PROJECT_01</p>
+        <div class="proj-metric" style="font-size: clamp(18px,2.5vw,28px); line-height:1.2; letter-spacing:-0.01em; opacity:0.35;">New Footscray<br>Hospital</div>
+        <p class="proj-area">Healthcare · Victoria</p>
+        <h3 class="proj-name">Hospital Infrastructure</h3>
+        <p class="proj-desc">One of Victoria's largest recent hospital builds. Clinical comms stack designed from day one — devices, RTLS, nurse call, duress — integrated, not bolted on. Full lifecycle from spec to deployment.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-num">PROJECT_02</p>
+        <div class="proj-metric">4,000+</div>
+        <p class="proj-area">Healthcare · Clinical</p>
+        <h3 class="proj-name">Clinical Handset Rollout</h3>
+        <p class="proj-desc">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site environments. Owned end to end.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-num">PROJECT_03</p>
+        <div class="proj-metric">1,000+</div>
+        <p class="proj-area">Healthcare · Safety</p>
+        <h3 class="proj-name">Staff Duress at Scale</h3>
+        <p class="proj-desc">Personal duress designed, deployed, and integrated across live healthcare networks. Olinqua, MobiCall, Duress.com. Real-time location, alarm routing, full-facility coverage — wards to car parks.</p>
+      </div>
+      <div class="proj-card">
+        <p class="proj-num">PROJECT_04</p>
+        <div class="proj-metric">AI</div>
+        <p class="proj-area">Enterprise · Contact Centre</p>
+        <h3 class="proj-name">Contact Centre Overhaul</h3>
+        <p class="proj-desc">Pulled enterprise contact centres out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. Work that needed a human got one.</p>
+      </div>
+    </div>
   </div>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- 03 // EXPERIENCE -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="s-wrap" id="xp">
+    <div class="s-head reveal">
+      <span class="s-num">03</span><span class="s-slash">//</span>
+      <h2 class="s-title">Experience</h2>
+    </div>
+    <div class="xp-list reveal">
+
+      <div class="xp-item">
+        <div class="xp-left">
+          <div class="xp-dates">2020 — Present</div>
+          <div class="xp-company">ArchiTech</div>
+        </div>
+        <div>
+          <h3 class="xp-role">Solution Architect</h3>
+          <ul class="xp-bullets">
+            <li>Architecture, design, and delivery of Cisco Webex Contact Center solutions for enterprise clients.</li>
+            <li>End-to-end clinical communications for major Victorian health networks — handsets, duress, RTLS, nurse call.</li>
+            <li>Cisco Spaces and high-density wireless deployments across healthcare and enterprise environments.</li>
+            <li>Owned full project lifecycle: pre-sales, solution design, BOM, deployment, handover.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-left">
+          <div class="xp-dates">[ Update dates ]</div>
+          <div class="xp-company">[ Company ]</div>
+        </div>
+        <div>
+          <h3 class="xp-role">Senior VoIP &amp; Network Engineer</h3>
+          <ul class="xp-bullets">
+            <li>VoIP engineering at one of Australia's largest regional banks.</li>
+            <li>Enterprise network infrastructure design and operations.</li>
+            <li>Cisco collaboration and unified communications deployment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-left">
+          <div class="xp-dates">[ Update dates ]</div>
+          <div class="xp-company">[ Company ]</div>
+        </div>
+        <div>
+          <h3 class="xp-role">Network &amp; Systems Engineer</h3>
+          <ul class="xp-bullets">
+            <li>Desktop, systems, and network support across enterprise environments.</li>
+            <li>Built foundational skills across the full infrastructure stack.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- 04 // SKILLS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="s-wrap" id="skills">
+    <div class="s-head reveal">
+      <span class="s-num">04</span><span class="s-slash">//</span>
+      <h2 class="s-title">Skills</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skills-col">
+        <div class="skills-group">
+          <div class="skills-group-name">Contact Centre &amp; AI</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Webex Contact Center</span>
+            <span class="skill-tag">CUCM</span>
+            <span class="skill-tag">UCCX</span>
+            <span class="skill-tag">Cisco Finesse</span>
+            <span class="skill-tag">SIP / VoIP</span>
+            <span class="skill-tag">IVR Design</span>
+            <span class="skill-tag">AI Agent Assist</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skills-group-name">Healthcare Communications</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Clinical Mobility</span>
+            <span class="skill-tag">Staff Duress</span>
+            <span class="skill-tag">Nurse Call Integration</span>
+            <span class="skill-tag">Clinical Messaging</span>
+            <span class="skill-tag">Message Integration Engines</span>
+            <span class="skill-tag">Olinqua</span>
+            <span class="skill-tag">MobiCall</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skills-group-name">Wireless &amp; Location</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Real-Time Location</span>
+            <span class="skill-tag">Asset Tracking</span>
+            <span class="skill-tag">Ekahau</span>
+            <span class="skill-tag">AiRISTA</span>
+            <span class="skill-tag">Kontakt IO</span>
+            <span class="skill-tag">Cisco Spaces</span>
+            <span class="skill-tag">Wi-Fi Design</span>
+            <span class="skill-tag">Cisco Meraki</span>
+            <span class="skill-tag">SD-WAN</span>
+            <span class="skill-tag">Fortinet</span>
+          </div>
+        </div>
+      </div>
+      <div class="skills-col">
+        <div class="skills-group">
+          <div class="skills-group-name">Certifications</div>
+          <div>
+            <div class="cert-item">
+              <span class="cert-name">Webex Contact Center Expert</span>
+              <span class="cert-vendor">Cisco</span>
+            </div>
+            <div class="cert-item">
+              <span class="cert-name">Collaboration Core</span>
+              <span class="cert-vendor">Cisco</span>
+            </div>
+            <div class="cert-item">
+              <span class="cert-name">CCNA</span>
+              <span class="cert-vendor">Cisco</span>
+            </div>
+            <div class="cert-item">
+              <span class="cert-name">Google AI Professional</span>
+              <span class="cert-vendor">Google</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CTA ─── -->
+    <div class="cta-wrap reveal">
+      <span class="cta-label">Let's talk</span>
+      <h2 class="cta-title">Got a project?</h2>
+      <p class="cta-sub">Contact centre, healthcare comms, or something that doesn't fit a box.</p>
+      <a href="/contact/" class="hero-btn hero-btn--primary" style="margin-top: 8px;">Get in Touch <i class="ph ph-arrow-right"></i></a>
+    </div>
+  </div>
+
 
   <footer>
     <span class="ft-copy">&copy; 2026 thesenate.io</span>
@@ -577,7 +582,7 @@
     // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 48);
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
     // ─── MOBILE NAV ───
@@ -587,24 +592,18 @@
     navDrawer.setAttribute('aria-modal', 'true');
     navDrawer.setAttribute('aria-label', 'Navigation');
 
-    function getFocusable() {
-      return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])'));
-    }
+    function getFocusable() { return Array.from(navDrawer.querySelectorAll('a[href], button:not([disabled])')); }
     function trapFocus(e) {
-      const focusable = getFocusable();
-      if (!focusable.length) return;
-      const first = focusable[0], last = focusable[focusable.length - 1];
+      const f = getFocusable(); if (!f.length) return;
       if (e.key === 'Tab') {
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length-1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length-1]) { e.preventDefault(); f[0].focus(); }
       }
     }
     function closeDrawer() {
-      navDrawer.classList.remove('open');
-      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open'); hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-      navDrawer.removeEventListener('keydown', trapFocus);
+      document.body.style.overflow = ''; navDrawer.removeEventListener('keydown', trapFocus);
       hamburger.focus();
     }
     hamburger.addEventListener('click', () => {
@@ -612,21 +611,12 @@
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
       document.body.style.overflow = isOpen ? 'hidden' : '';
-      if (isOpen) {
-        const focusable = getFocusable();
-        if (focusable.length) focusable[0].focus();
-        navDrawer.addEventListener('keydown', trapFocus);
-      } else {
-        navDrawer.removeEventListener('keydown', trapFocus);
-      }
+      if (isOpen) { const f = getFocusable(); if (f.length) f[0].focus(); navDrawer.addEventListener('keydown', trapFocus); }
+      else { navDrawer.removeEventListener('keydown', trapFocus); }
     });
-    navDrawer.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeDrawer);
-    });
+    navDrawer.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeDrawer));
     document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeDrawer();
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
     // ─── HERO DATA STREAM ───
     (function () {
@@ -636,41 +626,28 @@
       const ctx = canvas.getContext('2d');
       const CHARS = '0123456789ABCDEF';
       const COL_W = 16;
-      let W, H, cols = [];
+      let W, H, cols = [], rafId;
 
       function resize() {
         W = canvas.width  = canvas.parentElement.offsetWidth;
         H = canvas.height = canvas.parentElement.offsetHeight;
         const count = Math.floor(W / COL_W);
         cols = Array.from({ length: count }, (_, i) => ({
-          x: i * COL_W + COL_W / 2,
-          y: Math.random() * -H,
+          x: i * COL_W + COL_W / 2, y: Math.random() * -H,
           speed: 0.55 + Math.random() * 0.65,
           charH: 14 + Math.floor(Math.random() * 4),
           len: 6 + Math.floor(Math.random() * 10),
-          chars: [],
-          tick: 0,
-          tickRate: 4 + Math.floor(Math.random() * 6),
+          chars: [], tick: 0, tickRate: 4 + Math.floor(Math.random() * 6),
         }));
-        cols.forEach(c => {
-          c.chars = Array.from({ length: c.len }, () => CHARS[Math.floor(Math.random() * CHARS.length)]);
-        });
+        cols.forEach(c => { c.chars = Array.from({ length: c.len }, () => CHARS[Math.floor(Math.random() * CHARS.length)]); });
       }
 
       function tick() {
         ctx.clearRect(0, 0, W, H);
         for (const c of cols) {
-          c.y += c.speed;
-          c.tick++;
-          if (c.tick >= c.tickRate) {
-            c.tick = 0;
-            const idx = Math.floor(Math.random() * c.chars.length);
-            c.chars[idx] = CHARS[Math.floor(Math.random() * CHARS.length)];
-          }
-          if (c.y - c.len * c.charH > H) {
-            c.y = Math.random() * -H * 0.5;
-            c.speed = 0.18 + Math.random() * 0.22;
-          }
+          c.y += c.speed; c.tick++;
+          if (c.tick >= c.tickRate) { c.tick = 0; c.chars[Math.floor(Math.random() * c.chars.length)] = CHARS[Math.floor(Math.random() * CHARS.length)]; }
+          if (c.y - c.len * c.charH > H) { c.y = Math.random() * -H * 0.5; c.speed = 0.18 + Math.random() * 0.22; }
           for (let i = 0; i < c.chars.length; i++) {
             const cy = c.y - i * c.charH;
             if (cy < -c.charH || cy > H + c.charH) continue;
@@ -685,22 +662,13 @@
       }
 
       window.addEventListener('resize', resize, { passive: true });
-      resize();
-      let rafId;
-      tick();
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) cancelAnimationFrame(rafId);
-        else tick();
-      });
+      resize(); tick();
+      document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(rafId); else tick(); });
     })();
 
     // ─── SCROLL REVEAL ───
     const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('vis');
-        revealObs.unobserve(entry.target);
-      });
+      entries.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('vis'); revealObs.unobserve(e.target); });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   </script>
