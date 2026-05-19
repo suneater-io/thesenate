@@ -41,7 +41,7 @@
       --blue-glow: rgba(80, 150, 190, 0.14);
       --text-1:    #D8EDF5;
       --text-2:    #4A6878;
-      --text-3:    #2E4858;
+      --text-3:    #3D5A70;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,13 +49,13 @@
     body { background: var(--bg); color: var(--text-1); font-family: 'Chakra Petch', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
     body::after {
-      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.10;
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.11;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 300px 300px;
     }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
 
     /* ─── NAV ─── */
@@ -306,7 +306,7 @@
     .focus-card:hover { background: var(--surface); }
     .focus-icon { font-size: 22px; color: var(--blue); margin-bottom: 20px; opacity: 0.8; }
     .focus-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 14px; line-height: 1; }
-    .focus-desc { font-size: 13px; line-height: 1.75; color: var(--text-2); margin-bottom: 20px; }
+    .focus-desc { font-size: 15px; line-height: 1.8; color: var(--text-2); margin-bottom: 20px; }
     .focus-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .focus-tag { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); padding: 4px 8px; border: 1px solid var(--border); }
 
@@ -321,7 +321,7 @@
     .proj-card:hover .proj-metric { opacity: 0.5; }
     .proj-area { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
     .proj-name { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 12px; }
-    .proj-desc { font-size: 13px; line-height: 1.65; color: var(--text-2); }
+    .proj-desc { font-size: 15px; line-height: 1.8; color: var(--text-2); }
 
     /* ─── 03 EXPERIENCE ─── */
     .xp-list { margin-bottom: 80px; }
@@ -332,7 +332,7 @@
     .xp-company { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
     .xp-role { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 12px; line-height: 1; }
     .xp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .xp-bullets li { font-size: 13px; line-height: 1.65; color: var(--text-2); padding-left: 16px; position: relative; }
+    .xp-bullets li { font-size: 15px; line-height: 1.8; color: var(--text-2); padding-left: 16px; position: relative; }
     .xp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--blue); opacity: 0.6; font-size: 11px; top: 3px; }
 
     /* ─── 04 SKILLS ─── */
@@ -353,7 +353,7 @@
     .cta-wrap { border-top: 1px solid var(--border); padding: 80px 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
     .cta-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-3); }
     .cta-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -0.02em; line-height: 0.9; text-transform: uppercase; color: var(--text-1); }
-    .cta-sub { font-size: 13px; color: var(--text-2); max-width: 340px; }
+    .cta-sub { font-size: 15px; color: var(--text-2); max-width: 340px; }
 
     /* ─── FOOTER ─── */
     footer { border-top: 1px solid var(--border); padding: 24px 52px; display: flex; align-items: center; justify-content: space-between; position: relative; }
