@@ -653,6 +653,73 @@
       flex-shrink: 0;
     }
 
+    /* ─── 01: PROPOSITION ─── */
+    .prop-section {
+      border-bottom: 1px solid var(--border);
+      padding: 72px 52px;
+      max-width: 820px;
+    }
+    .prop-text {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-2);
+      margin-bottom: 28px;
+    }
+    .prop-text:last-child { margin-bottom: 0; }
+    .prop-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ─── 03: STACK + CERTS ─── */
+    .stack-section {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      border-bottom: 1px solid var(--border);
+    }
+    .stack-tags {
+      padding: 56px 52px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-content: start;
+    }
+    .stack-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .stack-tag:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .stack-certs {
+      padding: 40px 32px;
+    }
+    .sc-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sc-item:last-child { border-bottom: none; }
+    .sc-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .sc-vendor {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
     /* ─── CONTACT CTA ─── */
     .cta-section {
       padding: 80px 52px;
@@ -752,6 +819,10 @@
       .work-section { padding: 0; grid-template-columns: 1fr; }
       .work-card { padding: 40px 24px; }
       .cert-item { padding: 28px 24px; flex-wrap: wrap; gap: 8px; }
+      .prop-section { padding: 48px 24px; }
+      .stack-section { grid-template-columns: 1fr; }
+      .stack-tags { padding: 40px 24px; border-right: none; border-bottom: 1px solid var(--border); }
+      .stack-certs { padding: 32px 24px; }
       .cta-section { padding: 60px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
@@ -808,209 +879,110 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 01 / WHAT I DO -->
+  <!-- 01 / PROPOSITION -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="section-num-header reveal">
     <span class="section-num">01</span>
-    <h2 class="section-title">What I Do</h2>
+    <h2 class="section-title">The Work</h2>
   </div>
-  <div class="practice-list">
-    <div class="practice-item reveal">
-      <div class="practice-left">
-        <div class="practice-num">01</div>
-        <div class="practice-area">Contact Centre</div>
-        <div class="practice-name">Webex Contact Center</div>
-      </div>
-      <div>
-        <p class="practice-hook">Most contact centres are held together with duct tape. I fix that.</p>
-        <p class="practice-desc">AI-driven routing, self-service IVR, agent assist, workflow automation. First whiteboard through go-live. I stay accountable to the design after it ships — not just the parts that were easy to sell.</p>
-      </div>
-    </div>
-    <div class="practice-item reveal" style="transition-delay: 0.12s">
-      <div class="practice-left">
-        <div class="practice-num">02</div>
-        <div class="practice-area">Healthcare</div>
-        <div class="practice-name">Integrated Health</div>
-      </div>
-      <div>
-        <p class="practice-hook">Hospitals have a dozen systems that were never meant to talk to each other. I make them talk.</p>
-        <p class="practice-desc">Clinical devices, staff safety, duress, RTLS, nurse call, messaging engines. Most vendors own one piece and walk away. In a hospital that's not good enough — when one part breaks, it's not a tech problem, it's a patient problem.</p>
-      </div>
-    </div>
-    <div class="practice-item reveal" style="transition-delay: 0.24s">
-      <div class="practice-left">
-        <div class="practice-num">03</div>
-        <div class="practice-area">Architecture</div>
-        <div class="practice-name">Solution Architecture</div>
-      </div>
-      <div>
-        <p class="practice-hook">I turn what a business actually needs into something that can actually be built.</p>
-        <p class="practice-desc">Discovery, design, sizing, integration mapping, compliance scoping. I run the workshops, write the design, defend it in front of procurement. The proposals that win aren't the prettiest ones — they're the ones where the architect clearly understood the problem.</p>
-      </div>
-    </div>
+  <div class="prop-section reveal">
+    <p class="prop-text">Most contact centres are held together with duct tape. Most hospital systems run on integrations that were never designed to talk to each other. <strong>I fix both.</strong></p>
+    <p class="prop-text">Twenty years building from the ground up — IT support, desktop, VoIP engineering at one of Australia's largest regional banks, network infrastructure, and now architecture. Every layer is another view of what breaks under pressure and why.</p>
+    <p class="prop-text">The difference isn't knowing the technology. It's owning the whole environment. Most vendors deliver one piece and walk. In healthcare, that's not good enough — when one part breaks, it's a patient problem, not a tech problem.</p>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 02 / 20+ YEARS -->
+  <!-- 02 / OUTCOMES -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="section-num-header reveal">
     <span class="section-num">02</span>
-    <h2 class="section-title">20+ Years</h2>
-  </div>
-  <div class="depth-section reveal">
-
-    <!-- Timeline -->
-    <div class="timeline">
-      <div class="timeline-item">
-        <span class="timeline-years">2006</span>
-        <div>
-          <div class="timeline-role">IT Support</div>
-          <p class="timeline-desc">Where it started. Break-fix, user support, keeping things running. Learned fast that the job was never really about the equipment.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-years">2012</span>
-        <div>
-          <div class="timeline-role">Desktop Support</div>
-          <p class="timeline-desc">Enterprise scale at a major bank. Thousands of endpoints, nationwide. When something broke, it broke for a lot of people at once. That'll make you methodical.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-years">2016</span>
-        <div>
-          <div class="timeline-role">VoIP Engineer</div>
-          <p class="timeline-desc">Moved into UC. PBX-to-VoIP migrations, greenfield deployments, national branch rollouts. Owned the UC solution end to end on every engagement.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-years">2020</span>
-        <div>
-          <div class="timeline-role">Network Engineer</div>
-          <p class="timeline-desc">Deeper into infrastructure. Service team lead. Started seeing the full network picture — not just the comms layer sitting on top of it.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-years">2023 —</span>
-        <div>
-          <div class="timeline-role">Solution Architect</div>
-          <p class="timeline-desc">Healthcare AI, integrated health, contact centre. The job now is designing things that don't break. Twenty years of watching what does helps with that.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Solutions -->
-    <div class="solutions-col">
-      <div class="sol-group">
-        <div class="sol-group-label">Contact Centre</div>
-        <div class="sol-items">
-          <span class="sol-item">Webex Contact Center</span>
-          <span class="sol-item">CUCM</span>
-          <span class="sol-item">UCCX</span>
-          <span class="sol-item">Cisco Finesse</span>
-          <span class="sol-item">SIP / VoIP</span>
-          <span class="sol-item">IVR Design</span>
-          <span class="sol-item">AI Agent Assist</span>
-        </div>
-      </div>
-      <div class="sol-group">
-        <div class="sol-group-label">Integrated Health</div>
-        <div class="sol-items">
-          <span class="sol-item">Clinical Mobility</span>
-          <span class="sol-item">Staff Duress</span>
-          <span class="sol-item">Nurse Call Integration</span>
-          <span class="sol-item">Clinical Messaging</span>
-          <span class="sol-item">Message Integration Engines</span>
-        </div>
-      </div>
-      <div class="sol-group">
-        <div class="sol-group-label">RTLS & Safety</div>
-        <div class="sol-items">
-          <span class="sol-item">Real-Time Location</span>
-          <span class="sol-item">Asset Tracking</span>
-          <span class="sol-item">Staff Location</span>
-          <span class="sol-item">Ekahau</span>
-          <span class="sol-item">AiRISTA</span>
-          <span class="sol-item">Kontakt IO</span>
-        </div>
-      </div>
-      <div class="sol-group">
-        <div class="sol-group-label">Network & Security</div>
-        <div class="sol-items">
-          <span class="sol-item">Fortinet</span>
-          <span class="sol-item">Cisco Meraki</span>
-          <span class="sol-item">Wi-Fi Design</span>
-          <span class="sol-item">SD-WAN</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 03 / WORK -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-num-header reveal">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Key Outcomes</h2>
+    <h2 class="section-title">Outcomes</h2>
   </div>
   <div class="work-section">
     <div class="work-card reveal">
+      <div class="work-stat" style="font-size: clamp(22px, 3vw, 32px); line-height: 1.1; letter-spacing: -0.01em; opacity: 0.4; margin-bottom: 24px;">New Footscray<br>Hospital</div>
+      <div class="work-content">
+        <div class="work-industry">Healthcare / Victoria</div>
+        <h3 class="work-title">Hospital Infrastructure</h3>
+        <p class="work-outcome">Contributed to the technology solution for one of Victoria's largest recent hospital builds. Clinical comms stack designed from day one — devices, RTLS, nurse call, duress — integrated, not bolted on.</p>
+      </div>
+    </div>
+    <div class="work-card reveal" style="transition-delay: 0.12s">
       <div class="work-stat">4,000+</div>
       <div class="work-content">
-        <div class="work-industry">Healthcare / Greenfield</div>
-        <h3 class="work-title">Greenfield Hospital Build</h3>
-        <p class="work-outcome">Full clinical comms stack for a major new hospital. 4,000+ clinical handsets, nurse call, personal duress, mobility — integrated from day one. A greenfield build is the one chance to get the architecture right. Took it.</p>
+        <div class="work-industry">Healthcare / Clinical</div>
+        <h3 class="work-title">Clinical Handset Rollout</h3>
+        <p class="work-outcome">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site environments. Owned end to end.</p>
       </div>
     </div>
     <div class="work-card reveal" style="transition-delay: 0.12s">
       <div class="work-stat">1,000+</div>
       <div class="work-content">
         <div class="work-industry">Healthcare / Safety</div>
-        <h3 class="work-title">Staff Safety at Scale</h3>
-        <p class="work-outcome">1,000+ frontline staff across a live healthcare network protected by personal duress. Real-time location, alarm routing, coverage from wards to car parks. These are the systems that matter when something goes wrong.</p>
-      </div>
-    </div>
-    <div class="work-card reveal" style="transition-delay: 0.12s">
-      <div class="work-stat">AI</div>
-      <div class="work-content">
-        <div class="work-industry">Enterprise / Contact Centre</div>
-        <h3 class="work-title">Contact Centre AI Overhaul</h3>
-        <p class="work-outcome">Pulled an enterprise contact centre out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive stuff. Handling time dropped. The work that actually needed a human got one.</p>
+        <h3 class="work-title">Staff Duress at Scale</h3>
+        <p class="work-outcome">Personal duress designed, deployed, and integrated across live healthcare networks. Olinqua, MobiCall, Duress.com. Real-time location, alarm routing, full-facility coverage — from wards to car parks.</p>
       </div>
     </div>
     <div class="work-card reveal" style="transition-delay: 0.24s">
-      <div class="work-stat">20yr</div>
+      <div class="work-stat">AI</div>
       <div class="work-content">
-        <div class="work-industry">Pre-Sales / Architecture</div>
-        <h3 class="work-title">Tenders That Close</h3>
-        <p class="work-outcome">Started on the helpdesk. Moved into VoIP, then networks, then architecture. Every step was another layer of understanding what the layer below it actually does. That's not a career progression — it's how you learn to build things that hold.</p>
+        <div class="work-industry">Enterprise / Contact Centre</div>
+        <h3 class="work-title">Contact Centre Overhaul</h3>
+        <p class="work-outcome">Pulled enterprise contact centres out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. Work that needed a human got one.</p>
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 04 / CERTIFICATIONS -->
+  <!-- 03 / STACK + CERTS -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="section-num-header reveal">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Certifications</h2>
+    <span class="section-num">03</span>
+    <h2 class="section-title">Stack</h2>
   </div>
-  <div class="cert-list">
-    <div class="cert-item reveal">
-      <span class="cert-name">Cisco Webex Contact Center Expert</span>
-      <span class="cert-vendor">Cisco</span>
+  <div class="stack-section reveal">
+    <div class="stack-tags">
+      <span class="stack-tag">Webex Contact Center</span>
+      <span class="stack-tag">CUCM</span>
+      <span class="stack-tag">UCCX</span>
+      <span class="stack-tag">Cisco Finesse</span>
+      <span class="stack-tag">SIP / VoIP</span>
+      <span class="stack-tag">IVR Design</span>
+      <span class="stack-tag">AI Agent Assist</span>
+      <span class="stack-tag">Clinical Mobility</span>
+      <span class="stack-tag">Staff Duress</span>
+      <span class="stack-tag">Nurse Call Integration</span>
+      <span class="stack-tag">Clinical Messaging</span>
+      <span class="stack-tag">Message Integration Engines</span>
+      <span class="stack-tag">Real-Time Location</span>
+      <span class="stack-tag">Asset Tracking</span>
+      <span class="stack-tag">Ekahau</span>
+      <span class="stack-tag">AiRISTA</span>
+      <span class="stack-tag">Kontakt IO</span>
+      <span class="stack-tag">Olinqua</span>
+      <span class="stack-tag">MobiCall</span>
+      <span class="stack-tag">Fortinet</span>
+      <span class="stack-tag">Cisco Meraki</span>
+      <span class="stack-tag">Wi-Fi Design</span>
+      <span class="stack-tag">SD-WAN</span>
     </div>
-    <div class="cert-item reveal" style="transition-delay: 0.06s">
-      <span class="cert-name">Cisco Collaboration Core</span>
-      <span class="cert-vendor">Cisco</span>
-    </div>
-    <div class="cert-item reveal" style="transition-delay: 0.12s">
-      <span class="cert-name">CCNA</span>
-      <span class="cert-vendor">Cisco</span>
-    </div>
-    <div class="cert-item reveal" style="transition-delay: 0.18s">
-      <span class="cert-name">Google AI Professional Certificate</span>
-      <span class="cert-vendor">Google</span>
+    <div class="stack-certs">
+      <div class="sc-item">
+        <span class="sc-name">Webex Contact Center Expert</span>
+        <span class="sc-vendor">Cisco</span>
+      </div>
+      <div class="sc-item">
+        <span class="sc-name">Collaboration Core</span>
+        <span class="sc-vendor">Cisco</span>
+      </div>
+      <div class="sc-item">
+        <span class="sc-name">CCNA</span>
+        <span class="sc-vendor">Cisco</span>
+      </div>
+      <div class="sc-item">
+        <span class="sc-name">Google AI Professional</span>
+        <span class="sc-vendor">Google</span>
+      </div>
     </div>
   </div>
 
