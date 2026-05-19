@@ -1265,23 +1265,15 @@
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: var(--bg);
+      background: rgba(6, 8, 16, 0.72);
+      backdrop-filter: blur(28px) saturate(70%);
+      -webkit-backdrop-filter: blur(28px) saturate(70%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 40px 24px;
       overflow: hidden;
-    }
-    /* grain — same as body::after but inside the gate */
-    .gate::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.11;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 300px 300px;
     }
     /* ambient glow */
     .gate::after {
@@ -1346,12 +1338,12 @@
       margin-bottom: 24px;
     }
     .gate-sub {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       color: var(--text-2);
       text-align: center;
-      line-height: 1.7;
-      max-width: 280px;
       margin-bottom: 52px;
     }
     .gate-form {
@@ -1433,7 +1425,7 @@
     <div class="gate-inner">
       <div class="gate-rule"><span class="gate-rule-label">Private</span></div>
       <h1 class="gate-heading">Everything.</h1>
-      <p class="gate-sub">The personal half. Not for everyone.<br>Ask Grant for the password.</p>
+      <p class="gate-sub">Ask.</p>
       <form class="gate-form" id="gate-form" autocomplete="off">
         <div class="gate-input-wrap">
           <input class="gate-input" id="gate-input" type="password" placeholder="Password" aria-label="Password" />
