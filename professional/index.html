@@ -7,14 +7,11 @@
   <meta name="description" content="Solution Architect. Webex Contact Center, integrated healthcare, enterprise comms." />
   <link rel="canonical" href="https://thesenate.io/professional/" />
 
-  <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://thesenate.io/professional/" />
   <meta property="og:title"       content="Grant Hansen — Solution Architect" />
   <meta property="og:description" content="Solution Architect. Webex Contact Center, integrated healthcare, enterprise comms." />
   <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Grant Hansen — Solution Architect" />
   <meta name="twitter:description" content="Solution Architect. Webex Contact Center, integrated healthcare, enterprise comms." />
@@ -110,11 +107,7 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-link {
       font-family: 'Space Mono', monospace;
       font-size: 11px;
@@ -126,16 +119,12 @@
       text-decoration: none;
       transition: opacity 0.2s ease, color 0.2s ease;
       padding: 10px 0;
+      position: relative;
     }
     .nav-link:hover { opacity: 1; }
     .nav-link.active { opacity: 1; color: var(--blue); }
     .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
     .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-
-    /* Nav underline micro-interaction */
-    .nav-links .nav-link {
-      position: relative;
-    }
     .nav-links .nav-link::after {
       content: '';
       position: absolute;
@@ -150,93 +139,49 @@
     .nav-links .nav-link:hover::after,
     .nav-links .nav-link.active::after { transform: scaleX(1); }
 
-    /* ─── SKIP LINK ─── */
     .skip-link {
-      position: fixed;
-      top: 16px;
-      left: 16px;
+      position: fixed; top: 16px; left: 16px;
       padding: 8px 16px;
-      background: var(--blue);
-      color: var(--bg);
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
+      background: var(--blue); color: var(--bg);
+      font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
       z-index: 9999;
       transform: translateY(calc(-100% - 32px));
       transition: transform 0.2s ease;
     }
     .skip-link:focus { transform: translateY(0); }
 
-    
-    /* ─── DRAWER CLOSE ─── */
     .drawer-close {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      background: none;
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      cursor: pointer;
+      position: absolute; top: 24px; right: 24px;
+      font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-2); background: none;
+      border: 1px solid var(--border); padding: 10px 16px; cursor: pointer;
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
     .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
-    /* ─── HAMBURGER ─── */
     .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      padding: 11px 10px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      z-index: 300;
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; width: 44px; height: 44px; padding: 11px 10px;
+      cursor: pointer; background: none; border: none; z-index: 300;
     }
     .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--text-1);
+      display: block; width: 22px; height: 1.5px; background: var(--text-1);
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
     }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* ─── MOBILE DRAWER ─── */
     .nav-drawer {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 250;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
+      position: fixed; inset: 0; background: var(--bg); z-index: 250;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
     .nav-drawer.open { opacity: 1; pointer-events: all; }
-    .nav-drawer .nav-link {
-      font-size: 22px !important;
-      letter-spacing: 0.12em !important;
-      opacity: 0.8 !important;
-    }
+    .nav-drawer .nav-link { font-size: 22px !important; letter-spacing: 0.12em !important; opacity: 0.8 !important; }
     .nav-drawer .nav-link:hover,
     .nav-drawer .nav-link.active { opacity: 1 !important; }
 
@@ -245,7 +190,6 @@
       .nav-hamburger { display: flex; }
     }
 
-    /* ─── REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -257,7 +201,6 @@
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
-
       height: 100dvh;
       min-height: 600px;
       position: relative;
@@ -269,391 +212,58 @@
       background: url('/images/forest-fog.jpg') center center / cover no-repeat;
     }
     .hero-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
         linear-gradient(rgba(4,6,14,0.32), rgba(4,6,14,0.32)),
         radial-gradient(ellipse 60% 80% at 85% 45%, rgba(196,130,74,0.05) 0%, transparent 65%),
         linear-gradient(to bottom, rgba(4,6,14,0.40) 0%, transparent 35%),
         linear-gradient(to top, var(--bg) 0%, rgba(4,6,14,0.25) 32%, transparent 52%);
     }
-    /* Blueprint grid overlay */
     .hero-blueprint {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background-image:
         linear-gradient(rgba(196,130,74,0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(196,130,74,0.06) 1px, transparent 1px);
       background-size: 48px 48px;
     }
     #hero-canvas {
-      will-change: transform;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
+      will-change: transform; position: absolute; inset: 0;
+      width: 100%; height: 100%; z-index: 2; pointer-events: none;
     }
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      animation: fadeUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-    }
-    .hero-bar {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+    .hero-content { position: relative; z-index: 3; animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+    .hero-bar { margin-top: 20px; display: flex; align-items: center; gap: 20px; }
     .hero-role {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(18px, 2.2vw, 26px);
-      font-weight: 500;
-      font-style: italic;
-      letter-spacing: 0.04em;
-      text-transform: none;
-      color: var(--text-2);
-      line-height: 1.4;
+      font-weight: 500; font-style: italic;
+      letter-spacing: 0.04em; color: var(--text-2); line-height: 1.4;
     }
-    .hero-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--border-hi), transparent);
-    }
-    .ph-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 20px;
-      position: relative; z-index: 1;
-    }
+    .hero-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border-hi), transparent); }
     .ph-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(80px, 14vw, 180px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.88;
-      color: var(--text-1);
-      text-transform: uppercase;
-      position: relative; z-index: 1;
-    }
-    .ph-role {
-      margin-top: 28px;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      position: relative; z-index: 1;
-    }
-    .ph-line {
-      margin-top: 40px;
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--text-2);
-      max-width: 560px;
-      position: relative; z-index: 1;
+      font-weight: 800; letter-spacing: -0.03em; line-height: 0.88;
+      color: var(--text-1); text-transform: uppercase; position: relative; z-index: 1;
     }
 
     /* ─── SECTION HEADER ─── */
-    .section-num-header {
+    .section-header {
       padding: 80px 52px 56px;
-      display: flex;
-      align-items: baseline;
-      gap: 24px;
+      display: flex; align-items: baseline; gap: 24px;
       border-bottom: 1px solid var(--border);
     }
     .section-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue);
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue);
     }
     .section-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(36px, 5vw, 60px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 0.92;
-      text-transform: uppercase;
-      color: var(--text-1);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 0.92;
+      text-transform: uppercase; color: var(--text-1);
     }
 
-    /* ─── 01: PRACTICE AREAS ─── */
-    .practice-list {
-      border-bottom: 1px solid var(--border);
-    }
-    .practice-item {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      padding: 72px 52px;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-      transition: background 0.25s ease;
-    }
-    .practice-item:last-child { border-bottom: none; }
-    .practice-item:hover { background: var(--surface); }
-    .practice-left {
-      padding-right: 48px;
-      position: sticky;
-      top: 100px;
-    }
-    .practice-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 72px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.88;
-      color: var(--surface-3);
-      margin-bottom: 20px;
-      transition: color 0.25s ease;
-    }
-    .practice-item:hover .practice-num { color: var(--border-hi); }
-    .practice-area {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 10px;
-    }
-    .practice-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 26px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      line-height: 1;
-      color: var(--text-1);
-    }
-    .practice-hook {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(26px, 3vw, 36px);
-      font-weight: 700;
-      font-style: italic;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      line-height: 1.08;
-      color: var(--text-1);
-      margin-bottom: 24px;
-      max-width: 580px;
-    }
-    .practice-desc {
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--text-2);
-      max-width: 580px;
-    }
-
-    /* ─── 02: 20+ YEARS ─── */
-    .depth-section {
-      padding: 64px 52px;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 80px;
-      align-items: start;
-    }
-
-    /* Left — timeline */
-    .timeline { display: flex; flex-direction: column; }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 0 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .timeline-item:first-child { padding-top: 0; }
-    .timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .timeline-years {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      color: var(--text-3);
-      text-transform: uppercase;
-      padding-top: 4px;
-      white-space: nowrap;
-    }
-    .timeline-role {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: var(--text-1);
-      margin-bottom: 6px;
-      line-height: 1;
-    }
-    .timeline-desc {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 12px;
-      line-height: 1.65;
-      color: var(--text-2);
-    }
-
-    /* Right — solutions */
-    .solutions-col {
-      border-left: 1px solid var(--border);
-      padding-left: 80px;
-    }
-    .sol-group {
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .sol-group:first-child { padding-top: 0; }
-    .sol-group:last-child { border-bottom: none; padding-bottom: 0; }
-    .sol-group-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-1);
-      margin-bottom: 14px;
-    }
-    .sol-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2px;
-    }
-    .sol-item {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      color: var(--text-2);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-    }
-    .sol-item:hover { border-color: var(--border-hi); color: var(--text-1); background: var(--surface-2); }
-
-    /* ─── 03: WORK ─── */
-    .work-section {
-      padding: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--border);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0;
-    }
-    .work-card {
-      background: var(--surface);
-      padding: 48px 44px 52px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.25s ease;
-    }
-    .work-card:hover { background: var(--surface-2); }
-    .work-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--blue);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-    .work-card:hover::after { transform: scaleX(1); }
-    .work-stat {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(56px, 7vw, 88px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.88;
-      color: var(--blue);
-      opacity: 0.28;
-      margin-bottom: 28px;
-      transition: opacity 0.25s ease;
-      user-select: none;
-    }
-    .work-card:hover .work-stat { opacity: 0.55; }
-    .work-num { display: none; }
-    .work-content { flex: 1; }
-    .work-industry {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 12px;
-    }
-    .work-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(22px, 2.4vw, 30px);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      color: var(--text-1);
-      margin-bottom: 12px;
-    }
-    .work-outcome {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--text-2);
-    }
-    .work-year {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      color: var(--text-3);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    /* ─── 04: CERTIFICATIONS ─── */
-    .cert-list {
-      border-bottom: 1px solid var(--border);
-    }
-    .cert-item {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 36px 52px;
-      border-bottom: 1px solid var(--border);
-      transition: background 0.22s ease;
-      cursor: default;
-    }
-    .cert-item:last-child { border-bottom: none; }
-    .cert-item:hover { background: var(--surface); }
-    .cert-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2.2vw, 28px);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
-      color: var(--text-1);
-      transition: color 0.22s ease;
-    }
-    .cert-item:hover .cert-name { color: var(--blue-hi, var(--blue)); }
-    .cert-vendor {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ─── 01: PROPOSITION ─── */
+    /* ─── PROPOSITION ─── */
     .prop-section {
       border-bottom: 1px solid var(--border);
       padding: 72px 52px;
@@ -661,109 +271,107 @@
     }
     .prop-text {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-2);
-      margin-bottom: 28px;
+      font-size: 15px; line-height: 1.8; color: var(--text-2); margin-bottom: 28px;
     }
     .prop-text:last-child { margin-bottom: 0; }
     .prop-text strong { color: var(--text-1); font-weight: 600; }
 
-    /* ─── 03: STACK + CERTS ─── */
+    /* ─── OUTCOMES ─── */
+    .work-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .work-card {
+      background: var(--surface);
+      padding: 48px 44px 52px;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative; overflow: hidden;
+      transition: background 0.25s ease;
+    }
+    .work-card:hover { background: var(--surface-2); }
+    .work-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--blue); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .work-card:hover::after { transform: scaleX(1); }
+    .work-stat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(56px, 7vw, 88px); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 0.88; color: var(--blue);
+      opacity: 0.28; margin-bottom: 28px;
+      transition: opacity 0.25s ease; user-select: none;
+    }
+    .work-card:hover .work-stat { opacity: 0.55; }
+    .work-industry {
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .work-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(22px, 2.4vw, 30px); font-weight: 800;
+      text-transform: uppercase; letter-spacing: -0.01em;
+      color: var(--text-1); margin-bottom: 12px;
+    }
+    .work-outcome { font-size: 13px; line-height: 1.6; color: var(--text-2); }
+
+    /* ─── STACK + CERTS ─── */
     .stack-section {
-      display: grid;
-      grid-template-columns: 1fr 300px;
+      display: grid; grid-template-columns: 1fr 300px;
       border-bottom: 1px solid var(--border);
     }
     .stack-tags {
-      padding: 56px 52px;
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-content: start;
+      padding: 56px 52px; border-right: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 8px; align-content: start;
     }
     .stack-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      padding: 6px 11px;
-      border: 1px solid var(--border);
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-2); padding: 6px 11px; border: 1px solid var(--border);
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .stack-tag:hover { color: var(--text-1); border-color: var(--border-hi); }
-    .stack-certs {
-      padding: 40px 32px;
-    }
-    .sc-item {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .stack-certs { padding: 40px 32px; }
+    .sc-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
     .sc-item:last-child { border-bottom: none; }
     .sc-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      color: var(--text-1);
-      display: block;
-      margin-bottom: 4px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: -0.01em;
+      color: var(--text-1); display: block; margin-bottom: 4px;
     }
     .sc-vendor {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue);
+      font-family: 'Space Mono', monospace; font-size: 8px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue);
     }
 
-    /* ─── CONTACT CTA ─── */
+    /* ─── CTA ─── */
     .cta-section {
       padding: 80px 52px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 24px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 24px;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
     }
     .cta-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--text-3);
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-3);
     }
     .cta-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 0.92;
-      text-transform: uppercase;
-      color: var(--text-1);
+      font-size: clamp(40px, 6vw, 72px); font-weight: 800;
+      letter-spacing: -0.02em; line-height: 0.92;
+      text-transform: uppercase; color: var(--text-1);
     }
-    .cta-sub {
-      font-size: 13px;
-      color: var(--text-2);
-      max-width: 360px;
-    }
+    .cta-sub { font-size: 13px; color: var(--text-2); max-width: 360px; }
     .cta-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--blue);
-      padding: 14px 32px;
-      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--bg); background: var(--blue);
+      padding: 14px 32px; text-decoration: none;
       transition: background 0.2s ease, gap 0.2s ease, transform 0.15s ease;
       margin-top: 8px;
     }
@@ -772,54 +380,27 @@
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      border-top: 1px solid var(--border); padding: 24px 52px;
+      display: flex; align-items: center; justify-content: space-between;
       position: relative;
     }
-    .ft-copy {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--text-3);
-    }
+    .ft-copy { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--text-3); }
     .ft-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3);
+      position: absolute; left: 50%; transform: translateX(-50%);
     }
-    .ft-mark {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-3);
-    }
+    .ft-mark { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3); }
     .ft-mark span { color: var(--blue); }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
-      .section-num-header { padding: 60px 24px 44px; }
-      .practice-item { grid-template-columns: 1fr; padding: 48px 24px; }
-      .practice-left { padding-right: 0; margin-bottom: 28px; position: static; }
-      .practice-num { font-size: 52px; }
-      .depth-section { padding: 48px 24px; grid-template-columns: 1fr; gap: 48px; }
-      .solutions-col { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 48px; }
-      .work-section { padding: 0; grid-template-columns: 1fr; }
-      .work-card { padding: 40px 24px; }
-      .cert-item { padding: 28px 24px; flex-wrap: wrap; gap: 8px; }
+      .section-header { padding: 60px 24px 44px; }
       .prop-section { padding: 48px 24px; }
+      .work-section { grid-template-columns: 1fr; }
+      .work-card { padding: 40px 24px; }
       .stack-section { grid-template-columns: 1fr; }
       .stack-tags { padding: 40px 24px; border-right: none; border-bottom: 1px solid var(--border); }
       .stack-certs { padding: 32px 24px; }
@@ -827,10 +408,7 @@
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
-
     @media (max-width: 600px) {
-      .work-num { font-size: 40px; }
-      .what-card { padding: 36px 24px; }
       .ph-title { font-size: clamp(40px, 10.5vw, 80px); }
     }
   </style>
@@ -842,19 +420,19 @@
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link">Everything</a>
-<a href="/professional/" class="nav-link active">Professional</a>
-<a href="/projects/" class="nav-link">Projects</a>
-<a href="/contact/" class="nav-link">Contact</a>
-</div>
+    <a href="/professional/" class="nav-link active">Professional</a>
+    <a href="/projects/" class="nav-link">Projects</a>
+    <a href="/contact/" class="nav-link">Contact</a>
+  </div>
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
       <a href="/creative/" class="nav-link">Everything</a>
-<a href="/professional/" class="nav-link active">Professional</a>
-<a href="/projects/" class="nav-link">Projects</a>
-<a href="/contact/" class="nav-link">Contact</a>
-</div>
+      <a href="/professional/" class="nav-link active">Professional</a>
+      <a href="/projects/" class="nav-link">Projects</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -865,7 +443,6 @@
     <div class="hero-overlay"></div>
     <div class="hero-blueprint"></div>
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
       <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
     </div>
@@ -878,10 +455,11 @@
     </div>
   </section>
 
+
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 01 / PROPOSITION -->
+  <!-- 01 / THE WORK -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-num-header reveal">
+  <div class="section-header reveal">
     <span class="section-num">01</span>
     <h2 class="section-title">The Work</h2>
   </div>
@@ -891,52 +469,46 @@
     <p class="prop-text">The difference isn't knowing the technology. It's owning the whole environment. Most vendors deliver one piece and walk. In healthcare, that's not good enough — when one part breaks, it's a patient problem, not a tech problem.</p>
   </div>
 
+
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- 02 / OUTCOMES -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-num-header reveal">
+  <div class="section-header reveal">
     <span class="section-num">02</span>
     <h2 class="section-title">Outcomes</h2>
   </div>
   <div class="work-section">
     <div class="work-card reveal">
       <div class="work-stat" style="font-size: clamp(22px, 3vw, 32px); line-height: 1.1; letter-spacing: -0.01em; opacity: 0.4; margin-bottom: 24px;">New Footscray<br>Hospital</div>
-      <div class="work-content">
-        <div class="work-industry">Healthcare / Victoria</div>
-        <h3 class="work-title">Hospital Infrastructure</h3>
-        <p class="work-outcome">Contributed to the technology solution for one of Victoria's largest recent hospital builds. Clinical comms stack designed from day one — devices, RTLS, nurse call, duress — integrated, not bolted on.</p>
-      </div>
+      <div class="work-industry">Healthcare / Victoria</div>
+      <h3 class="work-title">Hospital Infrastructure</h3>
+      <p class="work-outcome">Contributed to the technology solution for one of Victoria's largest recent hospital builds. Clinical comms stack designed from day one — devices, RTLS, nurse call, duress — integrated, not bolted on.</p>
     </div>
     <div class="work-card reveal" style="transition-delay: 0.12s">
       <div class="work-stat">4,000+</div>
-      <div class="work-content">
-        <div class="work-industry">Healthcare / Clinical</div>
-        <h3 class="work-title">Clinical Handset Rollout</h3>
-        <p class="work-outcome">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site environments. Owned end to end.</p>
-      </div>
+      <div class="work-industry">Healthcare / Clinical</div>
+      <h3 class="work-title">Clinical Handset Rollout</h3>
+      <p class="work-outcome">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site environments. Owned end to end.</p>
     </div>
     <div class="work-card reveal" style="transition-delay: 0.12s">
       <div class="work-stat">1,000+</div>
-      <div class="work-content">
-        <div class="work-industry">Healthcare / Safety</div>
-        <h3 class="work-title">Staff Duress at Scale</h3>
-        <p class="work-outcome">Personal duress designed, deployed, and integrated across live healthcare networks. Olinqua, MobiCall, Duress.com. Real-time location, alarm routing, full-facility coverage — from wards to car parks.</p>
-      </div>
+      <div class="work-industry">Healthcare / Safety</div>
+      <h3 class="work-title">Staff Duress at Scale</h3>
+      <p class="work-outcome">Personal duress designed, deployed, and integrated across live healthcare networks. Olinqua, MobiCall, Duress.com. Real-time location, alarm routing, full-facility coverage — from wards to car parks.</p>
     </div>
     <div class="work-card reveal" style="transition-delay: 0.24s">
       <div class="work-stat">AI</div>
-      <div class="work-content">
-        <div class="work-industry">Enterprise / Contact Centre</div>
-        <h3 class="work-title">Contact Centre Overhaul</h3>
-        <p class="work-outcome">Pulled enterprise contact centres out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. Work that needed a human got one.</p>
-      </div>
+      <div class="work-industry">Enterprise / Contact Centre</div>
+      <h3 class="work-title">Contact Centre Overhaul</h3>
+      <p class="work-outcome">Pulled enterprise contact centres out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. Work that needed a human got one.</p>
     </div>
   </div>
+
 
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- 03 / STACK + CERTS -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-num-header reveal">
+  <div class="section-header reveal">
     <span class="section-num">03</span>
     <h2 class="section-title">Stack</h2>
   </div>
@@ -986,19 +558,17 @@
     </div>
   </div>
 
+
   <!-- ─── CTA ─── -->
   <div class="cta-section reveal">
     <span class="cta-label">Let's talk</span>
     <h2 class="cta-title">Got a project?</h2>
     <p class="cta-sub">Contact centre, healthcare comms, or something that doesn't fit a box. Get in touch.</p>
-    <a href="/contact/" class="cta-link">
-      Contact <i class="ph ph-arrow-right"></i>
-    </a>
+    <a href="/contact/" class="cta-link">Contact <i class="ph ph-arrow-right"></i></a>
   </div>
 
-  <!-- ─── FOOTER ─── -->
   <footer>
-    <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-copy">&copy; 2026 thesenate.io</span>
     <span class="ft-name">Grant Hansen</span>
     <span class="ft-mark">THE<span>SENATE</span>.IO</span>
   </footer>
@@ -1029,7 +599,6 @@
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     }
-
     function closeDrawer() {
       navDrawer.classList.remove('open');
       hamburger.classList.remove('open');
@@ -1095,7 +664,6 @@
           c.tick++;
           if (c.tick >= c.tickRate) {
             c.tick = 0;
-            // randomise one char in the column
             const idx = Math.floor(Math.random() * c.chars.length);
             c.chars[idx] = CHARS[Math.floor(Math.random() * CHARS.length)];
           }
@@ -1106,7 +674,6 @@
           for (let i = 0; i < c.chars.length; i++) {
             const cy = c.y - i * c.charH;
             if (cy < -c.charH || cy > H + c.charH) continue;
-            // head char brighter
             const alpha = i === 0 ? 0.18 : (0.07 - i * 0.005);
             if (alpha <= 0) continue;
             ctx.font = `${c.charH - 2}px "Space Mono", monospace`;
@@ -1136,7 +703,6 @@
       });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
   </script>
 </body>
 </html>
