@@ -617,6 +617,42 @@
       white-space: nowrap;
     }
 
+    /* ─── 04: CERTIFICATIONS ─── */
+    .cert-list {
+      border-bottom: 1px solid var(--border);
+    }
+    .cert-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 36px 52px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.22s ease;
+      cursor: default;
+    }
+    .cert-item:last-child { border-bottom: none; }
+    .cert-item:hover { background: var(--surface); }
+    .cert-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      transition: color 0.22s ease;
+    }
+    .cert-item:hover .cert-name { color: var(--blue-hi, var(--blue)); }
+    .cert-vendor {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     /* ─── CONTACT CTA ─── */
     .cta-section {
       padding: 80px 52px;
@@ -715,6 +751,7 @@
       .solutions-col { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 48px; }
       .work-section { padding: 0; grid-template-columns: 1fr; }
       .work-card { padding: 40px 24px; }
+      .cert-item { padding: 28px 24px; flex-wrap: wrap; gap: 8px; }
       .cta-section { padding: 60px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
@@ -948,6 +985,32 @@
         <h3 class="work-title">Tenders That Close</h3>
         <p class="work-outcome">Started on the helpdesk. Moved into VoIP, then networks, then architecture. Every step was another layer of understanding what the layer below it actually does. That's not a career progression — it's how you learn to build things that hold.</p>
       </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 04 / CERTIFICATIONS -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-num-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+  <div class="cert-list">
+    <div class="cert-item reveal">
+      <span class="cert-name">Cisco Webex Contact Center Expert</span>
+      <span class="cert-vendor">Cisco</span>
+    </div>
+    <div class="cert-item reveal" style="transition-delay: 0.06s">
+      <span class="cert-name">Cisco Collaboration Core</span>
+      <span class="cert-vendor">Cisco</span>
+    </div>
+    <div class="cert-item reveal" style="transition-delay: 0.12s">
+      <span class="cert-name">CCNA</span>
+      <span class="cert-vendor">Cisco</span>
+    </div>
+    <div class="cert-item reveal" style="transition-delay: 0.18s">
+      <span class="cert-name">Google AI Professional Certificate</span>
+      <span class="cert-vendor">Google</span>
     </div>
   </div>
 

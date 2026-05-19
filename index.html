@@ -257,8 +257,18 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-1);
-      margin-bottom: 48px;
+      margin-bottom: 10px;
     }
+    .hero-spec {
+      position: relative; z-index: 2;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 44px;
+    }
+    .hero-spec .sep { color: var(--blue); margin: 0 8px; opacity: 0.6; }
     /* ─── HERO IDENTITY FRAGMENTS ─── */
     .hero-identity {
       position: relative; z-index: 2;
@@ -697,6 +707,7 @@
 
     <p class="hero-role a4" data-text="Everything. At full volume.">Everything. At full volume.</p>
     <p class="hero-name a4">Grant Hansen &nbsp;&middot;&nbsp; Solution Architect</p>
+    <p class="hero-spec a4">AI<span class="sep">|</span>Cisco Webex<span class="sep">|</span>Cisco Wireless<span class="sep">|</span>Cisco Spaces</p>
 
     <div class="hero-identity a6" id="hero-identity" aria-live="polite" aria-label="Identity">
       <div class="hero-identity-inner" id="hero-id-inner">
