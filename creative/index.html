@@ -4,20 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Everything — The Senate</title>
-  <meta name="description" content="Music. Vintage clothing. Counter-Strike. Lego. Detroit sports. Technology. Everything else that makes me who I am." />
+  <meta name="description" content="Metal. Detroit. Father. Counter-Strike. Everything that makes me who I am." />
   <link rel="canonical" href="https://thesenate.io/creative/" />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://thesenate.io/creative/" />
   <meta property="og:title"       content="Everything — The Senate" />
-  <meta property="og:description" content="Music. Vintage clothing. Counter-Strike. Lego. Detroit sports. Technology. Everything else that makes me who I am." />
+  <meta property="og:description" content="Metal. Detroit. Father. Counter-Strike. Everything that makes me who I am." />
   <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Everything — The Senate" />
-  <meta name="twitter:description" content="Music. Vintage clothing. Counter-Strike. Lego. Detroit sports. Technology. Everything else that makes me who I am." />
+  <meta name="twitter:description" content="Metal. Detroit. Father. Counter-Strike. Everything that makes me who I am." />
   <meta name="twitter:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
   <link rel="icon" type="image/png" href="/brand_assets/senate-logo-white.png" />
@@ -168,7 +168,6 @@
     }
     .skip-link:focus { transform: translateY(0); }
 
-    
     /* ─── DRAWER CLOSE ─── */
     .drawer-close {
       position: absolute;
@@ -258,7 +257,6 @@
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
-
       height: 100dvh;
       min-height: 600px;
       position: relative;
@@ -401,795 +399,78 @@
 
     /* ─── PAGE INTRO ─── */
     .page-intro {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 52px 64px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 64px;
-      align-items: start;
+      max-width: 820px;
+      padding: 80px 52px 72px;
+      border-bottom: 1px solid var(--border);
     }
-    .page-intro-photo {
-      width: 220px;
-      position: relative;
-    }
-    .page-intro-photo img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 3/4;
-      filter: grayscale(20%) contrast(1.05);
-    }
-    .page-intro-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, rgba(6,8,16,0.55) 100%);
-      pointer-events: none;
-    }
-    .page-intro-left {}
-    .page-intro-text {
+    .page-intro-fragment {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(28px, 3.5vw, 42px);
+      font-size: clamp(28px, 3.8vw, 48px);
       font-weight: 700;
-      letter-spacing: 0.02em;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
+      line-height: 1.1;
       color: var(--text-1);
-      line-height: 1.15;
-      margin-bottom: 32px;
+      margin-bottom: 8px;
+    }
+    .page-intro-fragment span {
+      color: var(--text-3);
     }
     .page-intro-divider {
       width: 32px;
       height: 1px;
       background: var(--border-hi);
-      margin-bottom: 32px;
+      margin: 40px 0;
     }
     .page-intro-body {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 13px;
-      line-height: 1.75;
+      font-size: 14px;
+      line-height: 1.8;
       color: var(--text-2);
-      margin-bottom: 16px;
     }
-    .page-intro-body:last-of-type { margin-bottom: 0; }
-    @media (max-width: 960px) {
-      .page-intro { padding: 56px 24px 48px; grid-template-columns: 1fr; gap: 40px; }
-      .page-intro-photo { width: 160px; }
-    }
-    @media (max-width: 600px) { .page-intro { padding: 48px 20px 40px; } }
 
-    /* ─── 01 / MUSIC ─── */
-    .music-section {
+    /* ─── TEXT SECTION ─── */
+    .text-section {
+      max-width: 820px;
       padding: 0 52px 80px;
     }
-    .music-img-primary {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.3) brightness(0.75);
-      transition: filter 0.4s ease;
-    }
-    .music-img-primary:hover { filter: saturate(0.5) brightness(0.9); }
-
-    /* ─── Band Grid ─── */
-    .bands-grid-wrap {
-      margin-top: 64px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-    .bands-grid-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-bottom: 24px;
-    }
-    .bands-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 2px;
-    }
-    .band-cell {
-      position: relative;
-      aspect-ratio: 4/3;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      cursor: default;
-    }
-    .band-logo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0) brightness(0.5);
-      transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-    .band-cell:hover .band-logo-img {
-      filter: saturate(0) brightness(0.12);
-      transform: scale(1.04);
-    }
-
-    /* Overlay */
-    .band-overlay {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-    .band-cell:hover .band-overlay {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .band-overlay-album {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.22;
-      filter: saturate(0.4);
-      position: absolute;
-      inset: 0;
-    }
-    .band-overlay-content {
-      position: relative;
-      z-index: 2;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      height: 100%;
-      background: linear-gradient(to top, rgba(6,8,16,0.96) 40%, rgba(6,8,16,0.5) 70%, transparent 100%);
-    }
-    .band-overlay-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .text-section .sec-body strong {
       color: var(--text-1);
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-    .band-overlay-album-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 8px;
-    }
-    .band-overlay-text {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 10px;
-      line-height: 1.6;
-      color: var(--text-2);
+      font-weight: 600;
     }
 
-    /* ─── Magazine Layout System ─── */
-    .mag-section-inner { max-width: 1200px; margin: 0 auto; }
-    .mag-opener {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      margin-bottom: 56px;
-    }
-    .mag-img-wrap { overflow: hidden; position: relative; }
-    .mag-img {
-      width: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.2) brightness(0.65);
-      transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .mag-img-wrap:hover .mag-img { filter: saturate(0.4) brightness(0.8); }
-    .mag-img--hero  { aspect-ratio: 4/3; }
-    .mag-img--wide  { aspect-ratio: 16/9; }
-    .mag-img--tall  { aspect-ratio: 3/4; }
-    .mag-img--sq    { aspect-ratio: 1; }
-    .mag-caption {
-      display: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-top: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    .mag-body { margin-bottom: 48px; }
-    .mag-img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-bottom: 48px;
-    }
-    .mag-img-strip { margin-bottom: 48px; }
-    .mag-img-strip .mag-img { aspect-ratio: 21/9; }
-
-    /* ─── Band Track Player ─── */
-    .band-track {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      padding: 20px 24px;
-      margin-bottom: 48px;
-    }
-    .band-track-meta {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .band-track-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-3);
-    }
-    .band-track-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-1);
-    }
-    .band-track-controls {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .band-track-play {
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--border-hi);
-      background: transparent;
-      color: var(--text-1);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-    .band-track-play:hover { background: var(--blue-dim); border-color: var(--blue); }
-    .band-track-play i { font-size: 16px; }
-    .band-track-progress-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .band-track-bar {
-      width: 100%;
-      height: 2px;
-      background: var(--surface-2);
-      position: relative;
-      cursor: pointer;
-    }
-    .band-track-bar-fill {
-      height: 100%;
-      background: var(--blue);
-      width: 0%;
-      transition: width 0.1s linear;
-      pointer-events: none;
-    }
-    .band-track-time {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.1em;
-      color: var(--text-3);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .band-track-vol {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-    .band-track-vol-btn {
-      background: none;
-      border: none;
-      color: var(--text-2);
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-      transition: color 0.2s ease;
-    }
-    .band-track-vol-btn:hover { color: var(--text-1); }
-    .band-track-vol-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 72px;
-      height: 2px;
-      background: var(--surface-2);
-      outline: none;
-      cursor: pointer;
-      border-radius: 0;
-    }
-    .band-track-vol-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 10px;
-      height: 10px;
-      background: var(--text-1);
-      cursor: pointer;
-      border-radius: 0;
-    }
-    .band-track-vol-slider::-moz-range-thumb {
-      width: 10px;
-      height: 10px;
-      background: var(--text-1);
-      cursor: pointer;
-      border: none;
-      border-radius: 0;
-    }
-    .band-track-vol-slider::-webkit-slider-runnable-track {
-      background: linear-gradient(to right, var(--blue) var(--vol-pct, 80%), var(--surface-2) var(--vol-pct, 80%));
-      height: 2px;
-    }
-    .band-track-vol-slider::-moz-range-track {
-      background: var(--surface-2);
-      height: 2px;
-    }
-    .band-track-vol-slider::-moz-range-progress {
-      background: var(--blue);
-      height: 2px;
-    }
-
-    /* Spotify / listening link */
-    .music-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      border: 1px solid var(--border);
-      padding: 12px 20px;
-      text-decoration: none;
-      margin-top: 28px;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
-    }
-    .music-link:hover { border-color: var(--border-hi); color: var(--text-1); transform: translateY(-1px); }
-
-    /* ─── 02 / VINTAGE ─── */
-    .vintage-section {
-      background: var(--surface);
+    /* ─── BAND LIST ─── */
+    .band-list {
+      margin-top: 32px;
+      padding-top: 32px;
       border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 0 52px 80px;
-    }
-    .vintage-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: end;
-      margin-bottom: 48px;
-    }
-    .vintage-header-right {
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
-      gap: 16px;
-      padding-bottom: 4px;
-    }
-    .vintage-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      text-decoration: none;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
-    }
-    .vintage-link:hover { border-color: var(--border-hi); color: var(--text-1); transform: translateY(-2px); }
-    .vintage-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-    .vintage-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      position: relative;
-      transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .vintage-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
-    .vintage-card-img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.25) brightness(0.65);
-      transition: filter 0.4s ease;
-    }
-    .vintage-card:hover .vintage-card-img { filter: saturate(0.4) brightness(0.8); }
-    .vintage-card-info {
-      padding: 16px 20px 20px;
-      border-top: 1px solid var(--border);
-    }
-    .vintage-card-era {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      color: var(--blue);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .vintage-card-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: var(--text-1);
-    }
-    .vintage-card-desc {
-      font-size: 11px;
-      color: var(--text-2);
-      margin-top: 4px;
-      line-height: 1.5;
-    }
-
-    /* ─── 03 / COUNTER-STRIKE ─── */
-    .cs-section {
-      padding: 0 52px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cs-img-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-    .cs-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.2) brightness(0.7);
-      transition: filter 0.4s ease;
-    }
-    .cs-img-wrap:hover .cs-img { filter: saturate(0.4) brightness(0.85); }
-    .cs-img-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(40,110,160,0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .cs-role-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      margin-top: 28px;
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--blue);
-    }
-    .cs-role-badge i { font-size: 14px; }
-
-    /* ─── 04 / DETROIT SPORTS ─── */
-    .detroit-section {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 0 52px 80px;
-    }
-    .detroit-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: end;
-      margin-bottom: 48px;
-    }
-    .detroit-year {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(64px, 8vw, 96px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: var(--surface-3);
-      text-align: right;
-      align-self: flex-end;
-      padding-bottom: 4px;
-    }
-    .detroit-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-    .detroit-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      position: relative;
-      transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .detroit-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
-    .detroit-card-img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.2) brightness(0.65);
-      transition: filter 0.4s ease;
-    }
-    .detroit-card:hover .detroit-card-img { filter: saturate(0.45) brightness(0.8); }
-    .detroit-card-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 10px 14px;
-      background: linear-gradient(to top, rgba(5,7,15,0.92), transparent);
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-2);
-    }
-
-    /* ─── 05 / LEGO ─── */
-    .lego-section {
-      padding: 0 52px 80px;
-    }
-    .lego-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-    .lego-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      position: relative;
-      transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .lego-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
-    .lego-card img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.25) brightness(0.65);
-      transition: filter 0.4s ease;
-    }
-    .lego-card:hover img { filter: saturate(0.45) brightness(0.8); }
-    .lego-card-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 10px 12px;
-      background: linear-gradient(to top, rgba(5,7,15,0.92), transparent);
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-2);
-    }
-    .lego-themes {
-      display: flex;
-      gap: 8px;
-      margin-top: 28px;
-    }
-    .lego-theme {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--blue);
-      border: 1px solid rgba(80,150,190,0.30);
-      background: var(--blue-dim);
-      padding: 8px 14px;
-    }
-
-    /* ─── 07 / HORROR ─── */
-    .horror-section {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 0 52px 80px;
-    }
-    .horror-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .horror-img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.15) brightness(0.75);
-      transition: filter 0.5s ease;
-    }
-    .horror-img:hover { filter: saturate(0.3) brightness(0.9); }
-    .horror-films {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 28px;
+      align-items: center;
     }
-    .horror-tag {
+    .band-list-label {
       font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
+      font-size: 8px;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--blue);
-      border: 1px solid var(--border);
-      padding: 5px 10px;
-      background: var(--blue-dim);
+      color: var(--text-3);
+      margin-right: 8px;
     }
-    .horror-tag--hero {
-      color: var(--text-1);
-      border-color: var(--border-hi);
-      background: var(--surface-2);
-    }
-    @media (max-width: 960px) {
-      .horror-section { padding: 0 24px 64px; }
-      .horror-inner { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    /* ─── 06 / TECHNOLOGY ─── */
-    .tech-section {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 0 52px 80px;
-    }
-    .tech-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .tech-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.2) brightness(0.7);
-      transition: filter 0.4s ease;
-    }
-    .tech-img:hover { filter: saturate(0.4) brightness(0.85); }
-    .tech-timeline {
-      margin-top: 32px;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .tech-moment {
-      display: flex;
-      gap: 16px;
-      align-items: baseline;
-    }
-    .tech-moment-year {
+    .band-tag {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--blue);
-      white-space: nowrap;
-      flex-shrink: 0;
-      width: 44px;
-    }
-    .tech-moment-text {
-      font-size: 12px;
       color: var(--text-2);
-      line-height: 1.5;
-    }
-
-    /* ─── SIDEBAR SECTION NAV ─── */
-    .section-nav {
-      position: fixed;
-      right: 20px;
-      left: auto;
-      top: auto;
-      bottom: 40px;
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: flex-start;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .section-nav.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .section-nav-item {
-      display: flex;
-      align-items: center;
-      flex-direction: row-reverse;
-      gap: 10px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .section-nav-dot {
-      width: 4px;
-      height: 4px;
-      background: var(--text-3);
-      flex-shrink: 0;
-      transition: background 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .section-nav-item.active .section-nav-dot {
-      background: var(--blue);
-      transform: scale(1.6);
-    }
-    .section-nav-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 7px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      opacity: 0;
-      transform: translateX(6px);
-      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    .section-nav-item:hover .section-nav-label { opacity: 1; transform: translateX(0); color: var(--text-2); }
-    .section-nav-item.active .section-nav-label { opacity: 1; transform: translateX(0); color: var(--blue); }
-    @media (max-width: 1100px) { .section-nav { display: none; } }
-
-    /* ─── SECTION WATERMARK ─── */
-    .sec-divider { position: relative; }
-    .sec-divider > *:not(.sec-divider-wm) { position: relative; z-index: 1; }
-    .sec-divider-wm {
-      position: absolute;
-      right: 40px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(120px, 18vw, 240px);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--text-1);
-      opacity: 0.055;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
     }
 
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 24px 52px;
+      padding: 20px 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1227,36 +508,14 @@
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
       .sec-divider { padding: 48px 24px 40px; }
-      .bands-grid { grid-template-columns: repeat(3, 1fr); }
-      .cs-section { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
-      .music-section,
-      .lego-section,
-      .vintage-section,
-      .detroit-section,
-      .tech-section { padding: 0 24px 60px; }
-      .mag-opener { grid-template-columns: 1fr; gap: 40px; }
-      .mag-img-pair { grid-template-columns: 1fr; }
-      .vintage-header,
-      .tech-inner { grid-template-columns: 1fr; gap: 32px; }
-      .vintage-grid,
-      .detroit-grid { grid-template-columns: 1fr 1fr; }
-      .vintage-header-right { justify-content: flex-start; }
+      .page-intro { padding: 56px 24px 56px; }
+      .text-section { padding: 0 24px 60px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
-
     @media (max-width: 600px) {
-      .bands-grid { grid-template-columns: repeat(2, 1fr); }
-      .vintage-grid,
-      .detroit-grid { grid-template-columns: 1fr; }
-      .lego-grid { grid-template-columns: 1fr 1fr; }
-      .music-section,
-      .cs-section,
-      .lego-section { padding: 0 20px 48px; }
-
-      .vintage-section,
-      .detroit-section,
-      .tech-section { padding: 0 20px 48px; }
+      .page-intro { padding: 48px 20px 48px; }
+      .text-section { padding: 0 20px 48px; }
       .sec-divider { padding: 40px 20px 32px; }
     }
 
@@ -1358,24 +617,21 @@
       border-bottom: 1px solid var(--border-hi);
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding-bottom: 12px;
-      margin-bottom: 28px;
-      transition: border-color 0.2s ease;
+      margin-bottom: 24px;
     }
-    .gate-input-wrap:focus-within { border-color: var(--blue); }
     .gate-input {
+      flex: 1;
       background: transparent;
       border: none;
       outline: none;
       font-family: 'Space Mono', monospace;
       font-size: 12px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      letter-spacing: 0.18em;
       color: var(--text-1);
-      width: 100%;
+      padding: 10px 0;
+      caret-color: var(--blue);
     }
-    .gate-input::placeholder { color: var(--text-3); }
+    .gate-input::placeholder { color: var(--text-3); letter-spacing: 0.1em; }
     .gate-btn {
       background: transparent;
       border: 1px solid var(--border-hi);
@@ -1438,42 +694,28 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Sidebar section nav -->
-  <nav class="section-nav" aria-label="Section navigation">
-    <a href="#s1" class="section-nav-item" data-target="s1"><div class="section-nav-dot"></div><span class="section-nav-label">Music</span></a>
-    <a href="#s2" class="section-nav-item" data-target="s2"><div class="section-nav-dot"></div><span class="section-nav-label">Detroit</span></a>
-    <a href="#s3" class="section-nav-item" data-target="s3"><div class="section-nav-dot"></div><span class="section-nav-label">CS</span></a>
-    <a href="#s4" class="section-nav-item" data-target="s4"><div class="section-nav-dot"></div><span class="section-nav-label">Lego</span></a>
-    <a href="#s5" class="section-nav-item" data-target="s5"><div class="section-nav-dot"></div><span class="section-nav-label">Vintage</span></a>
-    <a href="#s6" class="section-nav-item" data-target="s6"><div class="section-nav-dot"></div><span class="section-nav-label">Horror</span></a>
-    <a href="#s7" class="section-nav-item" data-target="s7"><div class="section-nav-dot"></div><span class="section-nav-label">Tech</span></a>
-  </nav>
-
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/creative/" class="nav-link active">Everything</a>
-
-<a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link">Projects</a>
-<a href="/contact/" class="nav-link">Contact</a>
-</div>
+    <a href="/professional/" class="nav-link">Professional</a>
+    <a href="/projects/" class="nav-link">Projects</a>
+    <a href="/contact/" class="nav-link">Contact</a>
+  </div>
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
       <a href="/creative/" class="nav-link active">Everything</a>
-
-<a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link">Projects</a>
-<a href="/contact/" class="nav-link">Contact</a>
-</div>
+      <a href="/professional/" class="nav-link">Professional</a>
+      <a href="/projects/" class="nav-link">Projects</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <!-- ─── HERO ─── -->
-  <!-- SVG displacement filter — animated in JS -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <filter id="hero-displace" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
@@ -1489,14 +731,13 @@
     </div>
     <div class="hero-overlay"></div>
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
       <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
     </div>
     <div class="hero-content">
       <h1 class="ph-title">Everything</h1>
       <div class="hero-bar">
-        <p class="hero-role">Music &nbsp;&middot;&nbsp; Detroit &nbsp;&middot;&nbsp; CS &nbsp;&middot;&nbsp; Star Wars &nbsp;&middot;&nbsp; Vintage &nbsp;&middot;&nbsp; Horror &nbsp;&middot;&nbsp; Tech</p>
+        <p class="hero-role">Metal &nbsp;&middot;&nbsp; Detroit &nbsp;&middot;&nbsp; Father &nbsp;&middot;&nbsp; Counter-Strike</p>
         <div class="hero-line"></div>
       </div>
     </div>
@@ -1504,803 +745,105 @@
 
 
   <!-- ─── PAGE INTRO ─── -->
-  <div class="page-intro">
-    <div class="page-intro-left reveal">
-      <p class="page-intro-text">Solution Architect.<br>Father. Drummer.<br>Music obsessive.<br>Detroit die-hard.<br>IGL. Collector.</p>
-    </div>
-    <div class="page-intro-photo reveal" style="transition-delay: 0.08s;">
-      <img src="../images/me2.jpg" alt="Grant with his kids" loading="lazy" />
-    </div>
-    <div class="reveal" style="transition-delay: 0.12s;">
-      <div class="page-intro-divider"></div>
-      <p class="page-intro-body">I'm a Solution Architect. I live for my kids, bleed Detroit, play drums, and still get in the pit. I don't change who I am depending on the room.</p>
-      <p class="page-intro-body">It started with a 486 in my parents' house. I pulled everything apart to see how it worked. Never stopped. Meshuggah at 14 changed everything. Not just the music. The idea that something could break every rule and be better for it. Rules are starting points. You learn them until you know which ones to cross.</p>
-      <p class="page-intro-body">Over 50 hours in the tattoo chair. My great-grandparents came from Norway. I've been on stage with bands, in enterprise architecture meetings, and deep in the pit. All the same person.</p>
-    </div>
+  <div class="page-intro reveal">
+    <p class="page-intro-fragment">Solution Architect.</p>
+    <p class="page-intro-fragment">Drummer.</p>
+    <p class="page-intro-fragment">Father.</p>
+    <p class="page-intro-fragment">Detroit <span>die-hard.</span></p>
+    <p class="page-intro-fragment">Australian.</p>
+    <div class="page-intro-divider"></div>
+    <p class="page-intro-body">These aren't different versions of the same person. They're the same thing at different volumes.</p>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 01 / MUSIC -->
+  <!-- 01 / METAL -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="s1" class="sec-divider reveal">
     <span class="sec-divider-num">01</span>
     <div class="sec-divider-line"></div>
-    <span class="sec-divider-label">Music</span>
-    <span class="sec-divider-wm" aria-hidden="true">01</span>
+    <span class="sec-divider-label">Metal</span>
   </div>
 
-  <div class="music-section">
-    <div class="mag-section-inner">
-
-      <!-- Opener: title + intro left / live show hero right -->
-      <div class="mag-opener reveal">
-        <div>
-          <div class="sec-label">Sound</div>
-          <h2 class="sec-title">The<br>Heartbeat</h2>
-          <p class="sec-body">Music is not something I do. It's what I am.</p>
-          <p class="sec-body">It started before I even knew what I was looking for. I'd go through mum and dad's CDs, tapes and records. Not really listening. Just looking at the artwork. Something about those covers. Bat out of Hell by Meat Loaf I requested more times than I can count.</p>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: live show — wide stage shot or crowd from stage -->
-          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/070A16/1E3040?text=[ live+show ]" alt="Live show" loading="lazy" />
-          <div class="mag-caption">Shoot: live show — wide stage or crowd from stage</div>
-        </div>
-      </div>
-
-      <!-- Body: Metallica + thrash -->
-      <div class="mag-body reveal">
-        <p class="sec-body">Real independence came when I got Metallica Garage Inc on CD, a big wooden Metallica poster, and my own boombox. I would have been 9. I put it on and nothing was ever the same. It was so heavy. Like nothing I'd heard before. The thrash metal obsession started right there. Thrash drove me through the genres. The Big Four led me to the classics of death metal. By 12 I was deep into Dying Fetus, Morbid Angel, Cannibal Corpse. I kept going further in.</p>
-      </div>
-
-      <!-- Full-width atmosphere break: pit/crowd -->
-      <div class="mag-img-strip reveal">
-        <!-- Shoot: crowd or pit shot — wide, atmospheric, from inside the show -->
-        <img class="mag-img mag-img--wide" src="https://placehold.co/1400x600/070A16/1E3040?text=[ pit+crowd+atmosphere ]" alt="Metal show crowd" loading="lazy" />
-        <div class="mag-caption">Shoot: crowd or pit — wide, atmospheric, from inside</div>
-      </div>
-
-      <!-- Body: Meshuggah -->
-      <div class="mag-body reveal">
-        <p class="sec-body">Then at 14 I walked into my lead guitarist's room. He was older than me. Working, driving, living. I was still at school. He said "check this out" and put on the Meshuggah album Nothing.</p>
-        <p class="sec-body">Instantly my mind was blown. I don't even know how to describe how it felt listening to them for the first time. It was like the music was demonstrating the way my brain worked. Chaotic, loud, odd, different. Time signatures I'd never heard. Accents in places that shouldn't be accented. It broke every rule I knew about music. There was this metaphorical glass ceiling and Meshuggah just catapulted me through it. Love at first listen. Still my number one. Nothing has come close.</p>
-      </div>
-
-      <!-- Image pair: Meshuggah tattoo | childhood era item -->
-      <div class="mag-img-pair reveal">
-        <div class="mag-img-wrap">
-          <!-- Shoot: Meshuggah tattoo on your arm — close up -->
-          <img class="mag-img mag-img--hero" src="/images/music-tattoo.webp" alt="Meshuggah tattoo" loading="lazy" />
-          <div class="mag-caption">Shoot: Meshuggah tattoo — close up</div>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: old Metallica CD / wooden poster / boombox or childhood metal memorabilia -->
-          <img class="mag-img mag-img--hero" src="/images/music-memorabilia.webp" alt="Garage Inc or old metal item" loading="lazy" />
-          <div class="mag-caption">Shoot: Garage Inc CD, wooden Metallica poster, or old metal item</div>
-        </div>
-      </div>
-
-      <!-- Body: drums -->
-      <div class="mag-body reveal">
-        <p class="sec-body">I started drums at 12 or 13. A friend's birthday party. He had a kit, nobody there could play it. I basically spent the next few hours working it out. Breaking the way my arms moved from the way my legs moved. By the time my parents arrived I could play For Whom the Bell Tolls. They bought me a kit not long after.</p>
-        <p class="sec-body">Playing drums is hard to explain. It's hard work. Mentally and physically. Growing up on thrash it was all about that thrash beat and double kick rolls. Convincing mum and dad to buy me double kick pedals was probably my first sales pitch. I played them One by Metallica. Explained exactly why I couldn't do it without the pedals. How they worked. Why I needed them. They bought them.</p>
-      </div>
-
-
-      <!-- Body: band years + final show -->
-      <div class="mag-body reveal">
-        <p class="sec-body">A few years later I was on stage with my band. We'd won two or three Battle of the Bands. I could drive. These were some of the greatest times of my life. I met lifelong friends. Experienced more than I could have expected. We were playing alongside Parkway Drive, I Killed the Prom Queen, The Red Shore, and other up and coming Australian bands. We signed with a label, released two EPs, and were building toward something real. It never came. Our singer joined another band and toured the world. We tried to keep going but it wasn't the same. We parted ways the right way though. One final show. People moshing everywhere. Crowd surfers. Kids jumping from the stage into piles of people. I'll never forget it.</p>
-      </div>
-
-      <!-- Band track player -->
-      <div class="band-track reveal">
-        <div class="band-track-meta">
-          <span class="band-track-label">From the archive</span>
-          <span class="band-track-name">On the Shores of Hell</span>
-        </div>
-        <div class="band-track-controls">
-          <button class="band-track-play" id="trackPlay" aria-label="Play">
-            <i class="ph ph-play" id="trackPlayIcon"></i>
-          </button>
-          <div class="band-track-progress-wrap">
-            <div class="band-track-bar" id="trackBar">
-              <div class="band-track-bar-fill" id="trackFill"></div>
-            </div>
-            <div class="band-track-time">
-              <span id="trackCurrent">0:00</span>
-              <span id="trackDuration">--:--</span>
-            </div>
-          </div>
-          <div class="band-track-vol">
-            <button class="band-track-vol-btn" id="trackVolBtn" aria-label="Mute">
-              <i class="ph ph-speaker-high" id="trackVolIcon"></i>
-            </button>
-            <input class="band-track-vol-slider" id="trackVolSlider" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" style="--vol-pct: 80%" />
-          </div>
-        </div>
-        <audio id="bandTrack" src="/audio/on-the-shores-of-hell.m4a" preload="metadata"></audio>
-      </div>
-
-      <!-- Body: live shows + elder metalhead -->
-      <div class="mag-body reveal">
-        <p class="sec-body">Since I turned 18 I've been seeing bands five to ten times a year. Just days after my 18th birthday I saw Cryptopsy in Melbourne. Flo Mournier was a huge influence to me at the time. Our band manager Storm basically crowd surfed to the front to make sure she caught his drum stick when he threw it. She brought it back to me. I still have it.</p>
-        <p class="sec-body">Now in my late 30s I still go. Five to ten a year. Do I still mosh, crowd surf, get in the pit? Hell yes. What's worse for my body than standing still for three or four hours? I get right in the guts and experience it the way it should be experienced. My body feels better for it every time. I guess I am one of those elder metalheads now.</p>
-        <p class="sec-body">Meshuggah was my first tattoo. There was nothing in my life that had the impact they did. I knew immediately I wanted them on me. Family pushed back. A few aunts tried to change my mind. My mind was already made up. Meshuggah on my arm. I will always love it.</p>
-        <p class="sec-body">Thirty years in, I explain music to people like medicine. Some people have something they need every day to keep them alive, keep them sane, in control, healthy. That's music for me. Without my music, there is no me. It connects to everything I do and am. Complex, fast, heavy. Sometimes it's sad. Sometimes angry. Sometimes it lifts you off the ground. But it's always something. I would rather go blind than go deaf.</p>
-      </div>
-
-      <!-- Spotify link -->
-      <a href="#" class="music-link reveal">
-        <i class="ph ph-spotify-logo"></i>
-        Listening habits
-        <i class="ph ph-arrow-right"></i>
-      </a>
-
-    </div>
-
-    <!-- ── Band Grid ── -->
-    <div class="bands-grid-wrap reveal">
-      <div class="bands-grid-label">Bands that shaped my life</div>
-      <div class="bands-grid">
-
-        <!-- Meshuggah -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/meshuggah-photo.webp" alt="Meshuggah" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/destroy-erase-improve.webp" alt="Destroy Erase Improve album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Meshuggah</div>
-              <div class="band-overlay-album-title">Destroy Erase Improve · 1995</div>
-              <div class="band-overlay-text">Changed everything at 14. Still my number one. Controlled chaos, syncopated and relentless. First tattoo.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- The Black Dahlia Murder -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/the-black-dahlia-murder-photo.webp" alt="The Black Dahlia Murder" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/nocturnal.webp" alt="Nocturnal album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">The Black Dahlia Murder</div>
-              <div class="band-overlay-album-title">Nocturnal · 2007</div>
-              <div class="band-overlay-text">Michigan's finest. Melodic death metal at full velocity. Every record lands differently.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dying Fetus -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/dying-fetus-photo.webp" alt="Dying Fetus" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/destroy-the-opposition.webp" alt="Destroy the Opposition album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Dying Fetus</div>
-              <div class="band-overlay-album-title">Destroy the Opposition · 2000</div>
-              <div class="band-overlay-text">By 12, I was here. Brutal tech-death from Maryland. Breakdowns that hit like a wall.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cattle Decapitation -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/cattle-decapitation-photo.webp" alt="Cattle Decapitation" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/death-atlas.webp" alt="Death Atlas album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Cattle Decapitation</div>
-              <div class="band-overlay-album-title">Death Atlas · 2019</div>
-              <div class="band-overlay-text">Travis Ryan's vocals shouldn't be possible. One of the most extreme records ever made.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Between the Buried and Me -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/btbam-photo.webp" alt="Between the Buried and Me" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/parallax-ii.webp" alt="The Parallax II album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Between the Buried and Me</div>
-              <div class="band-overlay-album-title">The Parallax II: Future Sequence · 2012</div>
-              <div class="band-overlay-text">The most ambitious thing prog metal ever produced. No rules, no ceiling. Colors is a masterwork.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Devin Townsend -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/devin-townsend-photo.webp" alt="Devin Townsend" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/ziltoid.webp" alt="Ziltoid album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Devin Townsend</div>
-              <div class="band-overlay-album-title">Ziltoid the Omniscient · 2007</div>
-              <div class="band-overlay-text">One man, infinite range. From brutal to orchestral to absurd. No one else operates like this.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pantera -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/pantera-photo.webp" alt="Pantera" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/vulgar-display-of-power.webp" alt="Vulgar Display of Power album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Pantera</div>
-              <div class="band-overlay-album-title">Vulgar Display of Power · 1992</div>
-              <div class="band-overlay-text">The gateway. The aggression. The groove. Before Pantera, then after. Two different eras.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slayer -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/slayer-photo.webp" alt="Slayer" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/reign-in-blood.webp" alt="Reign in Blood album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Slayer</div>
-              <div class="band-overlay-album-title">Reign in Blood · 1986</div>
-              <div class="band-overlay-text">28 minutes. No fat. The most violent, precise album thrash metal ever made.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Behemoth -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/behemoth-photo.webp" alt="Behemoth" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/evangelion.webp" alt="Evangelion album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Behemoth</div>
-              <div class="band-overlay-album-title">Evangelion · 2009</div>
-              <div class="band-overlay-text">Nergal at full command. Blackened death metal as ritual. The Satanist is a monument.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Periphery -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/periphery-photo.webp" alt="Periphery" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/periphery-ii.webp" alt="Periphery II album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Periphery</div>
-              <div class="band-overlay-album-title">II: This Time It's Personal · 2012</div>
-              <div class="band-overlay-text">Djent at its most complete. Spencer Sotelo's range over Misha's architecture. II is the one.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Nile -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/nile-photo.webp" alt="Nile" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/annihilation-of-the-wicked.webp" alt="Annihilation of the Wicked album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Nile</div>
-              <div class="band-overlay-album-title">Annihilation of the Wicked · 2005</div>
-              <div class="band-overlay-text">Egyptian mythology as death metal. Dense, brutal, relentless. Karl Sanders writes riffs like ancient curses.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Decapitated -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/decapitated-photo.webp" alt="Decapitated" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/nihility.webp" alt="Nihility album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Decapitated</div>
-              <div class="band-overlay-album-title">Nihility · 2002</div>
-              <div class="band-overlay-text">Vogg was 19. The riffing is surgical. Nihility has no fat, no mercy, no ceiling.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Necrophagist -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/necrophagist-photo.webp" alt="Necrophagist" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/epitaph.webp" alt="Epitaph album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Necrophagist</div>
-              <div class="band-overlay-album-title">Epitaph · 2004</div>
-              <div class="band-overlay-text">One man, seven years, two albums. The most technically demanding death metal record ever made.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Opeth -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/opeth-photo.webp" alt="Opeth" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/blackwater-park.webp" alt="Blackwater Park album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Opeth</div>
-              <div class="band-overlay-album-title">Blackwater Park · 2001</div>
-              <div class="band-overlay-text">Heavy and delicate in the same breath. Blackwater Park raised the ceiling on what metal could be.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Amon Amarth -->
-        <div class="band-cell">
-          <img class="band-logo-img" src="../images/bands-webp/amon-amarth-photo.webp" alt="Amon Amarth" loading="lazy" />
-          <div class="band-overlay">
-            <img class="band-overlay-album" src="../images/bands-webp/fate-of-norns.webp" alt="Fate of Norns album art" loading="lazy" />
-            <div class="band-overlay-content">
-              <div class="band-overlay-name">Amon Amarth</div>
-              <div class="band-overlay-album-title">Fate of Norns · 2004</div>
-              <div class="band-overlay-text">Viking death metal with melodic hooks that don't quit. Johan Hegg sounds like the end of the world.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+  <div class="text-section reveal">
+    <div class="sec-label">Meshuggah</div>
+    <h2 class="sec-title">Not a preference.<br>An operating system.</h2>
+    <p class="sec-body">I was 14. My lead guitarist — older, working, living — said "check this out" and put on Meshuggah's <em>Nothing</em>. I didn't have words for it. Still don't. Time signatures that shouldn't work. Accents in places that shouldn't be accented. Polyrhythmic architecture that broke every rule I knew about music — and was better for breaking them.</p>
+    <p class="sec-body">That's the same brain that does solution design. The same instinct that hears a contact centre problem and starts mapping the architecture underneath it. <strong>Complexity isn't the obstacle. Complexity is where the interesting work lives.</strong></p>
+    <p class="sec-body">I've played drums my whole life. Played stages. Still play. Not a career — a practice. The same discipline that makes me learn a Meshuggah riff until the polyrhythm locks in is the same discipline I bring to work. No shortcuts to precision.</p>
+    <p class="sec-body">Metal shaped my values. Earned, not given. Heavy is not the same as loud. Precision isn't the enemy of intensity — it's what makes intensity land.</p>
+    <div class="band-list">
+      <span class="band-list-label">Current rotation</span>
+      <span class="band-tag">Meshuggah</span>
+      <span class="band-tag">Opeth</span>
+      <span class="band-tag">Between the Buried and Me</span>
+      <span class="band-tag">Cattle Decapitation</span>
+      <span class="band-tag">Behemoth</span>
+      <span class="band-tag">Nile</span>
+      <span class="band-tag">Death</span>
     </div>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 02 / DETROIT SPORTS -->
+  <!-- 02 / DETROIT -->
   <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="detroit-section">
-    <div id="s2" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
-      <span class="sec-divider-num">02</span>
-      <div class="sec-divider-line"></div>
-      <span class="sec-divider-label">Detroit Sports</span>
-      <span class="sec-divider-wm" aria-hidden="true">02</span>
-    </div>
-    <div class="mag-section-inner">
+  <div id="s2" class="sec-divider reveal">
+    <span class="sec-divider-num">02</span>
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Detroit</span>
+  </div>
 
-      <!-- Opener: title + intro left / hero game photo right -->
-      <div class="mag-opener reveal">
-        <div>
-          <div class="sec-label">Collection Since 2007</div>
-          <h2 class="sec-title">Pistons.<br>Red Wings.<br>Detroit.</h2>
-          <p class="sec-body">Cards, jerseys, memorabilia. Not as an investment. As devotion.</p>
-          <p class="sec-body">It started with the Pistons. As a kid I liked the Bulls but so did everyone else. This was the 90s. Really though, I wanted to root for the team that made Jordan's life miserable. The team that gave it to him. The team that refused to back down. That was Detroit.</p>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: Pistons game — Little Caesars Arena, game action or crowd -->
-          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ pistons+game ]" alt="Pistons game" loading="lazy" />
-          <div class="mag-caption">Shoot: Pistons at Little Caesars Arena</div>
-        </div>
-      </div>
-
-      <!-- Body: Bad Boys through DVD service -->
-      <div class="mag-body reveal">
-        <p class="sec-body">The deeper I dug into the history, the more I realised I was made for this. The Bad Boys. The bad image. The hard play style. Laimbeer. Isiah. Dumars. I watched the DVDs. I rewatched the games. I learned where it all came from in that late 80s run. That team is my personality on a basketball court.</p>
-        <p class="sec-body">The Ben Wallace era is where I fell completely in love. No superstar contract, no ego, just dominance through sheer will. Rasheed. Mr. Big Shot. RIP. Tayshaun with those insane lengths. That team had something you can't manufacture. Defense first, built on grit, played like it.</p>
-        <p class="sec-body">In 2004 I was in Year 10 and had discovered live music. Basketball had taken a back seat, which is how I missed the championship run. Coming back in 2006 made it hurt knowing exactly what I'd walked away from. And there was no easy way back in. No streaming, no League Pass. I paid for a service that would burn the local broadcast feed onto a DVD and post it to me in Australia. I'd watch the game days later on disc. I had hundreds of those DVDs before League Pass existed. That's how much I wanted back in.</p>
-      </div>
-
-      <!-- Image pair: Pistons memorabilia | Wings jersey -->
-      <div class="mag-img-pair reveal">
-        <div class="mag-img-wrap">
-          <!-- Shoot: Bad Boys / Ben Wallace era memorabilia or jersey flat lay -->
-          <img class="mag-img mag-img--hero" src="/images/detroit-memorabilia.webp" alt="Pistons memorabilia" loading="lazy" />
-          <div class="mag-caption">Shoot: Bad Boys or Ben Wallace era — jersey or memorabilia</div>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: Red Wings Winged Wheel jersey or item -->
-          <img class="mag-img mag-img--hero" src="/images/detroit-wings-jersey.webp" alt="Red Wings jersey" loading="lazy" />
-          <div class="mag-caption">Shoot: Red Wings — Winged Wheel jersey or item</div>
-        </div>
-      </div>
-
-      <!-- Body: Wings -->
-      <div class="mag-body reveal">
-        <p class="sec-body">The Wings came next. A friend of mine, Cameron, a Canucks fan living in Canada at the time, got me into hockey. I figured if I'm going Detroit, I'm going all the way. Enter the Wings.</p>
-        <p class="sec-body">Once I was in, I was gone. The Yzerman and Lidstrom stories. The championship legacies. The rivalry with Colorado, brutal, physical, earned. Howe. Yzerman. Federov. Delvecchio. Shanahan. Chelios. Probert. Konstantinov. Draper. Now Larkin.</p>
-        <p class="sec-body">The Winged Wheel is one of the most iconic logos in sports. Pulling that jersey on in public is one of the most recognizable ways of saying I love Detroit. Simple as that. It makes me proud every time.</p>
-        <p class="sec-body">The 2011 to 2014 run locked me in for life. Deep playoff runs. Conference final Game 7s. Chicago. I can't talk about it. Absolutely heartbreaking. But that’s the thing. Heartbreak that deep only happens when it means that much.</p>
-      </div>
-
-      <!-- Body: Collection + championship wait -->
-      <div class="mag-body reveal">
-        <p class="sec-body">The collection spans all eras but right now it's all Cade. Signed pieces, memorabilia, basketball cards. Some high-end hockey cards too. The collection is serious and still growing.</p>
-        <p class="sec-body">Detroit resonates because of what the city carries. Blue collar to the bone. Hard work is rewarded. They've been knocked down over and over and they keep showing up. That mentality doesn't just describe a city. It describes how I want to operate.</p>
-        <p class="sec-body">I've been die-hard Detroit for 20 years and I haven't experienced a championship as a dedicated fan. Not once, across any sport. I want the Pistons or the Wings to be the first. Getting married. Having kids. Pistons championship. I have no idea what it will feel like. I imagine tears of joy. Tears of confusion. Probably a lot of confusion. So many fans watch their teams win chip after chip like it's nothing. For me it will be everything. When it comes, it will be one of the greatest moments of my life.</p>
-        <p class="sec-body">As I write this the Pistons are 53-20 and sitting top of the Eastern Conference. That sentence alone is something I never imagined writing. We are ahead of schedule. Most of my life has been losing. It's the winning that's hard to get used to. I'm keeping the lid on. Staying calm. Enjoying the ride.</p>
-      </div>
-
-      <!-- Collection grid -->
-      <div class="detroit-grid reveal">
-        <!-- Shoot: Cade Cunningham signed jersey or item -->
-        <div class="detroit-card">
-          <img class="detroit-card-img" src="/images/detroit-cade-jersey.webp" alt="Cade Cunningham jersey" loading="lazy" />
-          <div class="detroit-card-label">Shoot: Cade Cunningham — signed jersey or item</div>
-        </div>
-        <!-- Shoot: basketball card collection flat lay -->
-        <div class="detroit-card">
-          <img class="detroit-card-img" src="/images/detroit-card-collection.webp" alt="Card collection" loading="lazy" />
-          <div class="detroit-card-label">Shoot: card collection flat lay</div>
-        </div>
-        <!-- Shoot: signed memorabilia display -->
-        <div class="detroit-card">
-          <img class="detroit-card-img" src="/images/detroit-signed-display.webp" alt="Signed memorabilia" loading="lazy" />
-          <div class="detroit-card-label">Shoot: signed memorabilia display</div>
-        </div>
-      </div>
-
-    </div>
+  <div class="text-section reveal">
+    <div class="sec-label">Red Wings · Pistons</div>
+    <h2 class="sec-title">Australian.<br>Bleeds Detroit.</h2>
+    <p class="sec-body">I didn't grow up in Detroit. I'm Australian. And somewhere along the way I chose Detroit — or Detroit chose me. The Red Wings and the Pistons. That's it. That's the obsession.</p>
+    <p class="sec-body">There's something interesting in the question of why. Most people inherit their teams. Their dad watched a certain team, so they watch that team. I didn't have that. I found these teams on my own and decided they were mine. <strong>Identity you choose is different from identity you inherit.</strong> It costs more. It means more.</p>
+    <p class="sec-body">Detroit is a city that built things and got hit hard and kept going. That resonates. The Wings in the '90s were the best team in hockey and nobody outside of Michigan seemed to care. The Pistons in 2004 beat the most stacked roster in NBA history on pure system. That's the kind of thing I pay attention to.</p>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 03 / COUNTER-STRIKE -->
+  <!-- 03 / FATHER -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="s3" class="sec-divider reveal">
     <span class="sec-divider-num">03</span>
     <div class="sec-divider-line"></div>
-    <span class="sec-divider-label">Gaming</span>
-    <span class="sec-divider-wm" aria-hidden="true">03</span>
+    <span class="sec-divider-label">Father</span>
   </div>
 
-  <div class="cs-section">
-    <div class="reveal">
-      <div class="sec-label">Counter-Strike</div>
-      <h2 class="sec-title">IGL.<br>Since 13.</h2>
-      <p class="sec-body">I've played this game since I was 13. I haven't stopped.</p>
-      <p class="sec-body">Not the shooting. Everything else. The reads. The strats. The way you can study five rounds and know exactly what's coming on round six.</p>
-      <p class="sec-body">I play IGL. I call the plays, write the setups, read the map, read the enemy, and make the call in real time. When my team doesn't know what to do, they look at me. That's where I belong.</p>
-      <p class="sec-body">Professional Counter-Strike is the sport I follow. The technical depth of this game is bottomless. I've never found the bottom.</p>
-      <div class="cs-role-badge">
-        <i class="ph ph-crosshair"></i>
-        In-Game Leader
-      </div>
-    </div>
-    <div class="reveal" style="transition-delay: 0.12s">
-      <div class="cs-img-wrap">
-        <!-- Replace with gaming setup or in-game screenshot -->
-        <img class="cs-img" src="https://placehold.co/800x500/070A16/1E3040?text=[ gaming+setup ]" alt="Counter-Strike setup" loading="lazy" />
-      </div>
-    </div>
+  <div class="text-section reveal">
+    <div class="sec-label">The weight</div>
+    <h2 class="sec-title">The wildness<br>and the ground.</h2>
+    <p class="sec-body">Everything above — dark, heavy, intense, precise. And then: dad.</p>
+    <p class="sec-body">My kids are my best friends. Full stop. The greatest thing I'll ever do is be their father — not in a greeting-card way, in a this-is-genuinely-true way. I've been on stage, in enterprise architecture meetings, in the pit. None of it compares.</p>
+    <p class="sec-body">People want to make this a contradiction. It isn't. <strong>The same intensity that drives everything else is what I bring to being a parent.</strong> The wildness and the groundedness aren't opposites. They're the same thing — one just has smaller shoes.</p>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 04 / LEGO -->
+  <!-- 04 / COUNTER-STRIKE -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="s4" class="sec-divider reveal">
     <span class="sec-divider-num">04</span>
     <div class="sec-divider-line"></div>
-    <span class="sec-divider-label">Lego</span>
-    <span class="sec-divider-wm" aria-hidden="true">04</span>
+    <span class="sec-divider-label">Counter-Strike</span>
   </div>
 
-  <div class="lego-section">
-    <div class="mag-section-inner">
-
-      <!-- Opener: title + intro left / display cabinet hero right -->
-      <div class="mag-opener reveal">
-        <div>
-          <div class="sec-label">Collector & Builder</div>
-          <h2 class="sec-title">Star Wars.<br>Batman.<br>Built.</h2>
-          <p class="sec-body">Collector and builder. The sets live in display cabinets. Everything is built with intent.</p>
-          <p class="sec-body">It started young. Pirates. Knights. Racing sets. Built, taken apart, rebuilt. Lego was just part of growing up. As an adult, with adult money, I came back properly. As a collector.</p>
-          <p class="sec-body">Star Wars comes first. But this goes beyond Lego. Star Wars is a massive part of my life. The books, the movies, the shows, the animated series, the merchandise. All of it. The Lego collection is an extension of that. Ships and vehicles mostly. The design language, the scale, the detail. Built and displayed.</p>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: full display cabinet — wide shot showing both Star Wars and Batman sections -->
-          <img class="mag-img mag-img--hero" src="/images/lego-cabinet-wide.webp" alt="Lego display cabinet" loading="lazy" />
-          <div class="mag-caption">Shoot: full display cabinet — wide shot</div>
-        </div>
-      </div>
-
-      <!-- Body: Empire + Batman -->
-      <div class="mag-body reveal">
-        <p class="sec-body">The Empire specifically. People call them the bad guys. I'm not sure that's right. Are the rebels terrorists? Worth sitting with. Either way, I love the Empire. Always have.</p>
-        <p class="sec-body">Batman started at three years old. A VHS of the 1960s series. That was the hook. As I grew up it became the Michael Keaton films, and Keaton remains my Batman. Always will be. The Dark Knight trilogy was something different entirely. I remember sitting in the cinema at the end of The Dark Knight Rises and crying. People around me asking why. I couldn't fully explain it then. Batman was invincible to me as a kid. That scene, flying out over the water with the bomb, giving everything. Felt like something dying. Not just a character. A part of my childhood closing out. It hit that hard.</p>
-      </div>
-
-      <!-- Image pair: Star Wars UCS set | Keaton Batmobile -->
-      <div class="mag-img-pair reveal">
-        <div class="mag-img-wrap">
-          <!-- Shoot: favourite Star Wars UCS ship — close up or 3/4 angle -->
-          <img class="mag-img mag-img--hero" src="/images/lego-star-wars-ucs.webp" alt="Star Wars UCS set" loading="lazy" />
-          <div class="mag-caption">Shoot: Star Wars UCS ship — close up or 3/4 angle</div>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: Keaton Batmobile — front and centre in the Batman display -->
-          <img class="mag-img mag-img--hero" src="/images/lego-batmobile.webp" alt="Keaton Batmobile Lego set" loading="lazy" />
-          <div class="mag-caption">Shoot: Keaton Batmobile — front and centre</div>
-        </div>
-      </div>
-
-      <!-- Body: building + display -->
-      <div class="mag-body reveal">
-        <p class="sec-body">My favourite set is the Keaton Batmobile. It gets front and centre in the Batman display.</p>
-        <p class="sec-body">Building Lego locks you in. For that time you have one task. Sure, you're following instructions. But you're the one doing it. Turning coloured blocks into something real. Something that sits in a cabinet and holds its shape. There's nothing else quite like it.</p>
-        <p class="sec-body">The displays take up serious space. I take a lot of pride in them.</p>
-        <div class="lego-themes">
-          <span class="lego-theme">Star Wars</span>
-          <span class="lego-theme">Batman</span>
-        </div>
-      </div>
-
-      <!-- Build grid -->
-      <div class="lego-grid reveal">
-        <!-- Shoot: Star Wars display section — overview -->
-        <div class="lego-card">
-          <img src="/images/lego-sw-display.webp" alt="Star Wars display" loading="lazy" />
-          <div class="lego-card-label">Shoot: Star Wars display section</div>
-        </div>
-        <!-- Shoot: Batman display section — overview -->
-        <div class="lego-card">
-          <img src="/images/lego-batman-display.webp" alt="Batman display" loading="lazy" />
-          <div class="lego-card-label">Shoot: Batman display section</div>
-        </div>
-      </div>
-
-    </div>
+  <div class="text-section reveal">
+    <div class="sec-label">Strategy</div>
+    <h2 class="sec-title">Read the map.<br>Resource the problem.</h2>
+    <p class="sec-body">Counter-Strike is a strategy problem that happens to involve shooting. You're reading the map, reading the economy, reading what the other team thinks you're going to do, and then doing something else. It's the same architecture brain — identify the constraint, find what nobody else is looking at, solve backward from the outcome. I've played IGL. Calling strategy mid-round under pressure is not that different from calling architecture in a room full of stakeholders who all want something different.</p>
   </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 05 / VINTAGE -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="vintage-section">
-    <div id="s5" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
-      <span class="sec-divider-num">05</span>
-      <div class="sec-divider-line"></div>
-      <span class="sec-divider-label">Vintage</span>
-      <span class="sec-divider-wm" aria-hidden="true">05</span>
-    </div>
-    <div class="mag-section-inner">
-
-      <!-- Opener: title left, hero image right -->
-      <div class="mag-opener reveal">
-        <div>
-          <div class="sec-label">Archive</div>
-          <h2 class="sec-title">Collector<br>first.</h2>
-          <p class="sec-body">The collection started with Detroit. Jerseys, jackets, hats. All personal. What I wanted to wear, what I wanted to own. Then I figured out there was a market. A jacket I'd paid next to nothing for was worth real money to the right person. That was the start of <a href="https://www.instagram.com/maxis_sports_vintage/" target="_blank" rel="noopener noreferrer" style="color: var(--blue); text-decoration: none;">maxis_sports_vintage</a>.</p>
-          <p class="sec-body">The sell side funds the addiction.</p>
-          <div class="vintage-header-right" style="justify-content: flex-start; margin-top: 32px;">
-            <a href="https://www.instagram.com/maxis_sports_vintage/" class="vintage-link" target="_blank" rel="noopener noreferrer">
-              <i class="ph ph-instagram-logo"></i>
-              Instagram
-            </a>
-            <a href="https://www.depop.com/maxis_sports_vintage/" class="vintage-link" target="_blank" rel="noopener noreferrer">
-              <i class="ph ph-storefront"></i>
-              Depop
-            </a>
-          </div>
-        </div>
-        <div class="mag-img-wrap">
-          <!-- Shoot: GIII Carl Banks Pistons 3x Champions jacket flat lay or worn -->
-          <img class="mag-img mag-img--hero" src="https://placehold.co/800x600/0A0E1C/1E3040?text=[ pistons+jacket ]" alt="GIII Carl Banks Pistons 3x Champions jacket" loading="lazy" />
-          <div class="mag-caption">GIII Carl Banks Pistons 3x Champions Jacket — eBay find, 2008</div>
-        </div>
-      </div>
-
-      <!-- Body: The hunt -->
-      <div class="mag-body reveal">
-        <p class="sec-body">The focus is 90s and 00s. That's where the best stuff is. Bigger graphics, heavier fabrication, branding that meant something. That stuff was built to last and most of it has.</p>
-        <p class="sec-body">I source everywhere. eBay. Depop. Instagram. Local thrift. When I visit family in the States we thrift as a group. Holidays turn into buying trips. Some of the best finds come from those days. You walk in not knowing what's on the rack.</p>
-        <p class="sec-body">The chase is fun. It's also hard. Finding something with real value, at a price below that value, to sell at value. Three things have to line up at once. Most of the time they don't.</p>
-      </div>
-
-
-      <!-- Body: The piece + the rule -->
-      <div class="mag-body reveal">
-        <p class="sec-body">My favorite piece is probably the GIII Carl Banks Pistons 3x Champions jacket. Found it on eBay around 2008. Shipped it from the States. Been in rotation ever since.</p>
-        <p class="sec-body">For keeping, one question: will I wear this over something I already own? Yes means it comes home. Any doubt and it goes in the sell pile. For selling: would I want to buy this if I was a fan of that team? If I wouldn't pay for it myself, it's not getting listed.</p>
-      </div>
-
-      <!-- Piece grid -->
-      <div class="vintage-grid reveal">
-        <div class="vintage-card">
-          <!-- Shoot: GIII Pistons jacket close-up or worn -->
-          <img class="vintage-card-img" src="https://placehold.co/600x800/0A0E1C/1E3040?text=[ pistons+jacket ]" alt="Pistons 3x Champions jacket" loading="lazy" />
-          <div class="vintage-card-info">
-            <div class="vintage-card-era">Detroit Pistons</div>
-            <div class="vintage-card-name">GIII Carl Banks 3x Champions</div>
-            <div class="vintage-card-desc">The one that started it all. eBay, 2008.</div>
-          </div>
-        </div>
-        <div class="vintage-card">
-          <!-- Shoot: another key keeper piece -->
-          <img class="vintage-card-img" src="https://placehold.co/600x800/070A16/1E3040?text=[ piece+02 ]" alt="Vintage piece 02" loading="lazy" />
-          <div class="vintage-card-info">
-            <div class="vintage-card-era">Add era</div>
-            <div class="vintage-card-name">Add piece name</div>
-            <div class="vintage-card-desc">Add description</div>
-          </div>
-        </div>
-        <div class="vintage-card">
-          <!-- Shoot: third keeper piece -->
-          <img class="vintage-card-img" src="https://placehold.co/600x800/0A0E1C/1E3040?text=[ piece+03 ]" alt="Vintage piece 03" loading="lazy" />
-          <div class="vintage-card-info">
-            <div class="vintage-card-era">Add era</div>
-            <div class="vintage-card-name">Add piece name</div>
-            <div class="vintage-card-desc">Add description</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 06 / HORROR -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="horror-section">
-    <div id="s6" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
-      <span class="sec-divider-num">06</span>
-      <div class="sec-divider-line"></div>
-      <span class="sec-divider-label">Horror</span>
-      <span class="sec-divider-wm" aria-hidden="true">06</span>
-    </div>
-    <div class="horror-inner">
-      <div class="reveal">
-        <div class="sec-label">Obsession</div>
-        <h2 class="sec-title">Can't<br>Jump Scare.</h2>
-        <p class="sec-body">I grew up on Halloween, Nightmare on Elm Street and Friday the 13th. That's the baseline. It never left.</p>
-        <p class="sec-body">Somewhere along the way the fear response stopped working. No jump scares. No flinching. Most people would take that as a reason to stop watching. For me it turned into something deeper. An obsession with the craft, the atmosphere, the darkness underneath it all. Now I watch everything. Psychological, slashers, gore, torture. The more uncomfortable the better.</p>
-        <p class="sec-body">Michael Myers is the definitive one. Not because of the kills. Because of the calm. He doesn't run. He doesn't rage. He just moves. That stillness amongst the chaos. You never knew if he was human or not. That question is the whole film. Myers, Freddy and Jason are on my left leg sleeve. They earned it.</p>
-        <p class="sec-body">Terrifier 3 is the best horror film in years. It feels like classic slasher but modern. Uncomfortable the whole way through. Art the Clown shouldn't be loveable. He is. That contradiction is what makes him work.</p>
-        <p class="sec-body">The scene that has never left me: the ending of The Devil's Rejects. The Firefly family driving toward a police roadblock. Free Bird playing. They know exactly what's coming. They drive anyway. Something about that hits different every time.</p>
-        <p class="sec-body">If you want one most people haven't seen: Bring Her Back. Psychological. Heavy. It stuck with me.</p>
-        <p class="sec-body">Horror is taboo. Uncomfortable. Dark, sad, unsettling. Not what most people want. That's why I love it.</p>
-        <div class="horror-films">
-          <span class="horror-tag horror-tag--hero">Halloween</span>
-          <span class="horror-tag horror-tag--hero">Terrifier</span>
-          <span class="horror-tag">A Nightmare on Elm Street</span>
-          <span class="horror-tag">Friday the 13th</span>
-          <span class="horror-tag">The Devil's Rejects</span>
-          <span class="horror-tag">Bring Her Back</span>
-          <span class="horror-tag">Psychological</span>
-          <span class="horror-tag">Gore</span>
-          <span class="horror-tag">Torture Horror</span>
-        </div>
-      </div>
-      <div class="reveal" style="transition-delay: 0.12s;">
-        <img class="horror-img" src="https://placehold.co/600x900/060810/1E3040?text=[ horror ]" alt="Horror" loading="lazy" />
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- 07 / TECHNOLOGY -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="tech-section">
-    <div id="s7" class="sec-divider reveal" style="padding-left: 0; padding-right: 0;">
-      <span class="sec-divider-num">07</span>
-      <div class="sec-divider-line"></div>
-      <span class="sec-divider-label">Technology</span>
-      <span class="sec-divider-wm" aria-hidden="true">07</span>
-    </div>
-    <div class="tech-inner">
-      <div class="reveal">
-        <div class="sec-label">Personal Passion</div>
-        <h2 class="sec-title">Where the<br>Job Ends.</h2>
-        <p class="sec-body">It's hard to say where the obsession ends and the work begins.</p>
-        <p class="sec-body">I've always built my own gaming PCs. Always chased the latest hardware. AI has made the passion louder. The more possible it becomes, the harder it pulls.</p>
-        <p class="sec-body">Gaming started this. My parents' 486. PC games that required you to understand the machine just to run them. My first support role confirmed what I already suspected. I never really left.</p>
-        <div class="tech-timeline">
-          <div class="tech-moment">
-            <span class="tech-moment-year">Early</span>
-            <span class="tech-moment-text">Parents' 486. PC games. The beginning.</span>
-          </div>
-          <div class="tech-moment">
-            <span class="tech-moment-year">Then</span>
-            <span class="tech-moment-text">First PC support role. First build. The obsession confirmed.</span>
-          </div>
-          <div class="tech-moment">
-            <span class="tech-moment-year">Now</span>
-            <span class="tech-moment-text">AI, architecture, contact centre. Still pulling at things until I understand them.</span>
-          </div>
-        </div>
-      </div>
-      <div class="reveal" style="transition-delay: 0.12s">
-        <!-- Replace with gaming PC / tech setup photo -->
-        <img class="tech-img" src="https://placehold.co/800x500/0A0E1C/1E3040?text=[ pc+setup ]" alt="Gaming PC setup" loading="lazy" />
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ─── FOOTER ─── -->
   <footer>
-    <span class="ft-copy">© 2026 thesenate.io — All rights reserved</span>
+    <span class="ft-copy">&copy; 2025</span>
     <span class="ft-name">Grant Hansen</span>
-    <span class="ft-mark">THE<span>SENATE</span>.IO</span>
+    <a href="/" class="ft-mark">The<span>Senate</span>.io</a>
   </footer>
 
   <script>
-    // ─── BAND TRACK PLAYER ───
-    (function() {
-      const audio = document.getElementById('bandTrack');
-      const playBtn = document.getElementById('trackPlay');
-      const playIcon = document.getElementById('trackPlayIcon');
-      const fill = document.getElementById('trackFill');
-      const bar = document.getElementById('trackBar');
-      const current = document.getElementById('trackCurrent');
-      const duration = document.getElementById('trackDuration');
-      if (!audio) return;
-
-      function fmt(s) {
-        const m = Math.floor(s / 60), sec = Math.floor(s % 60);
-        return m + ':' + (sec < 10 ? '0' : '') + sec;
-      }
-
-      audio.addEventListener('loadedmetadata', () => {
-        duration.textContent = fmt(audio.duration);
-      });
-
-      audio.addEventListener('timeupdate', () => {
-        if (!audio.duration) return;
-        const pct = (audio.currentTime / audio.duration) * 100;
-        fill.style.width = pct + '%';
-        current.textContent = fmt(audio.currentTime);
-      });
-
-      audio.addEventListener('ended', () => {
-        playIcon.className = 'ph ph-play';
-        fill.style.width = '0%';
-        current.textContent = '0:00';
-      });
-
-      playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-          playIcon.className = 'ph ph-pause';
-        } else {
-          audio.pause();
-          playIcon.className = 'ph ph-play';
-        }
-      });
-
-      bar.addEventListener('click', (e) => {
-        const rect = bar.getBoundingClientRect();
-        const pct = (e.clientX - rect.left) / rect.width;
-        audio.currentTime = pct * audio.duration;
-      });
-
-      const volBtn = document.getElementById('trackVolBtn');
-      const volIcon = document.getElementById('trackVolIcon');
-      const volSlider = document.getElementById('trackVolSlider');
-      let lastVol = 0.8;
-      audio.volume = 0.8;
-
-      function updateVolIcon(v) {
-        if (v === 0) volIcon.className = 'ph ph-speaker-slash';
-        else if (v < 0.4) volIcon.className = 'ph ph-speaker-low';
-        else volIcon.className = 'ph ph-speaker-high';
-      }
-
-      volSlider.addEventListener('input', () => {
-        const v = parseFloat(volSlider.value);
-        audio.volume = v;
-        audio.muted = v === 0;
-        volSlider.style.setProperty('--vol-pct', (v * 100) + '%');
-        updateVolIcon(v);
-        if (v > 0) lastVol = v;
-      });
-
-      volBtn.addEventListener('click', () => {
-        if (audio.muted || audio.volume === 0) {
-          audio.muted = false;
-          audio.volume = lastVol;
-          volSlider.value = lastVol;
-          volSlider.style.setProperty('--vol-pct', (lastVol * 100) + '%');
-          updateVolIcon(lastVol);
-        } else {
-          lastVol = audio.volume;
-          audio.muted = true;
-          volSlider.value = 0;
-          volSlider.style.setProperty('--vol-pct', '0%');
-          updateVolIcon(0);
-        }
-      });
-    })();
-
     // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -2466,36 +1009,6 @@
       });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-    // ─── SIDEBAR NAV ACTIVE STATE + HERO HIDE ───
-    (function () {
-      const nav = document.querySelector('.section-nav');
-      const navItems = document.querySelectorAll('.section-nav-item');
-      if (!nav || !navItems.length) return;
-
-      // Show/hide based on hero visibility
-      const hero = document.querySelector('.hero');
-      if (hero) {
-        const heroObs = new IntersectionObserver((entries) => {
-          nav.classList.toggle('visible', !entries[0].isIntersecting);
-        }, { threshold: 0.1 });
-        heroObs.observe(hero);
-      }
-
-      // Active dot tracking
-      const sectionIds = ['s1','s2','s3','s4','s5','s6','s7'];
-      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-      const sectionObs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navItems.forEach(item => {
-              item.classList.toggle('active', item.dataset.target === entry.target.id);
-            });
-          }
-        });
-      }, { rootMargin: '-30% 0px -60% 0px' });
-      sections.forEach(s => sectionObs.observe(s));
-    })();
   </script>
 
 </body>
