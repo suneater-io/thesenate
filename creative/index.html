@@ -1270,83 +1270,157 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0;
       padding: 40px 24px;
+      overflow: hidden;
     }
-    .gate-label {
+    /* grain — same as body::after but inside the gate */
+    .gate::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.11;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+    /* ambient glow */
+    .gate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 52%, rgba(111,181,204,0.055) 0%, transparent 70%);
+    }
+    .gate-logo {
+      position: absolute;
+      top: 28px;
+      left: 52px;
       font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.3em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      text-decoration: none;
+      z-index: 1;
+    }
+    .gate-logo span { color: var(--blue); }
+    .gate-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .gate-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .gate-rule::before,
+    .gate-rule::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--border-hi);
+    }
+    .gate-rule-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--blue);
-      margin-bottom: 32px;
     }
     .gate-heading {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(40px, 8vw, 72px);
+      font-size: clamp(64px, 13vw, 120px);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 0.9;
+      line-height: 0.88;
       text-transform: uppercase;
       color: var(--text-1);
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
     .gate-sub {
       font-family: 'Chakra Petch', sans-serif;
       font-size: 12px;
       color: var(--text-2);
       text-align: center;
-      line-height: 1.6;
-      max-width: 320px;
-      margin-bottom: 48px;
+      line-height: 1.7;
+      max-width: 280px;
+      margin-bottom: 52px;
     }
     .gate-form {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 0;
-      border: 1px solid var(--border-hi);
+      width: 260px;
     }
+    .gate-input-wrap {
+      width: 100%;
+      border-bottom: 1px solid var(--border-hi);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 28px;
+      transition: border-color 0.2s ease;
+    }
+    .gate-input-wrap:focus-within { border-color: var(--blue); }
     .gate-input {
       background: transparent;
       border: none;
       outline: none;
-      padding: 14px 20px;
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.18em;
+      font-size: 12px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-1);
-      width: 200px;
+      width: 100%;
     }
     .gate-input::placeholder { color: var(--text-3); }
     .gate-btn {
-      background: var(--blue);
-      border: none;
-      padding: 14px 20px;
+      background: transparent;
+      border: 1px solid var(--border-hi);
+      padding: 12px 32px;
       font-family: 'Space Mono', monospace;
       font-size: 9px;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--bg);
+      color: var(--text-1);
       cursor: pointer;
-      font-weight: 700;
-      transition: background 0.2s ease;
+      width: 100%;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .gate-btn:hover { background: var(--blue-hi); }
+    .gate-btn:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--bg);
+    }
+    .gate-btn:active { transform: translateY(1px); }
     .gate-error {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #c0524a;
-      margin-top: 16px;
+      color: #a04040;
+      margin-top: 20px;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
     .gate-error.visible { opacity: 1; }
     .gate.unlocking {
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease;
       pointer-events: none;
     }
   </style>
@@ -1355,14 +1429,19 @@
 
   <!-- ─── PASSWORD GATE ─── -->
   <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Access required">
-    <p class="gate-label">thesenate.io — restricted</p>
-    <h1 class="gate-heading">Everything.</h1>
-    <p class="gate-sub">This is the personal half. Not for everyone.<br>If you have the password, you know why you're here.</p>
-    <form class="gate-form" id="gate-form" autocomplete="off">
-      <input class="gate-input" id="gate-input" type="password" placeholder="Password" aria-label="Password" />
-      <button class="gate-btn" type="submit">Enter</button>
-    </form>
-    <p class="gate-error" id="gate-error" aria-live="polite">Wrong password.</p>
+    <a href="/" class="gate-logo">The<span>Senate</span>.io</a>
+    <div class="gate-inner">
+      <div class="gate-rule"><span class="gate-rule-label">Private</span></div>
+      <h1 class="gate-heading">Everything.</h1>
+      <p class="gate-sub">The personal half. Not for everyone.<br>Ask Grant for the password.</p>
+      <form class="gate-form" id="gate-form" autocomplete="off">
+        <div class="gate-input-wrap">
+          <input class="gate-input" id="gate-input" type="password" placeholder="Password" aria-label="Password" />
+        </div>
+        <button class="gate-btn" type="submit">Enter <i class="ph ph-arrow-right"></i></button>
+      </form>
+      <p class="gate-error" id="gate-error" aria-live="polite">Wrong password.</p>
+    </div>
   </div>
 
   <a href="#main" class="skip-link">Skip to content</a>
