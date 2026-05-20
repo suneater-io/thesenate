@@ -339,6 +339,40 @@
       background: var(--border);
       border: 1px solid var(--border);
     }
+    .project-thumb {
+      width: calc(100% + 72px);
+      margin: -40px -36px 32px;
+      aspect-ratio: 16 / 7;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.7) brightness(0.85);
+      transition: filter 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .project-card:hover .project-thumb img {
+      filter: saturate(0.9) brightness(1);
+      transform: scale(1.03);
+    }
+    .project-thumb-placeholder {
+      width: 100%; height: 100%;
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-thumb-placeholder span {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
     .project-card {
       background: var(--bg);
       padding: 40px 36px;
@@ -553,6 +587,9 @@
     <div class="projects-grid">
 
       <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>Image coming</span></div>
+        </div>
         <p class="project-insight">The insight</p>
         <p class="project-insight-text">Clinical staff were spending hours on administrative work that had nothing to do with patient care. The systems existed. The question was whether you could connect them — and hand those hours back.</p>
         <div class="project-header">
@@ -569,6 +606,9 @@
       </div>
 
       <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>Image coming</span></div>
+        </div>
         <p class="project-insight">The insight</p>
         <p class="project-insight-text">Every CX platform promises ROI. Nobody had built a tool that calculated it against real healthcare workflow numbers — actual call volumes, actual staff hours, actual break-even points.</p>
         <div class="project-header">
@@ -581,39 +621,6 @@
           <span class="stack-tag">React</span>
           <span class="stack-tag">Tailwind</span>
           <span class="stack-tag">Webex CC</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <p class="project-insight">The insight</p>
-        <p class="project-insight-text">I had a vintage collection, a phone, and a process taking forty minutes per listing. The tools that existed were either too generic or too slow. I built the one I wanted.</p>
-        <div class="project-header">
-          <span class="project-tag">Tool</span>
-        </div>
-        <div class="project-title">SenatePop</div>
-        <p class="project-desc">A Windows desktop tool for listing vintage sportswear on Depop. Drag-and-drop photo import, AI-generated descriptions via Claude, template system, and bulk publish to the Depop Partner API.</p>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">FastAPI</span>
-          <span class="stack-tag">React</span>
-          <span class="stack-tag">Claude AI</span>
-          <span class="stack-tag">SQLite</span>
-          <span class="stack-tag">Cloudinary</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <p class="project-insight">The insight</p>
-        <p class="project-insight-text">The Senate is a brand with real depth. A website is one thing. A native app that fits in your pocket is a different kind of presence entirely.</p>
-        <div class="project-header">
-          <span class="project-tag">App</span>
-        </div>
-        <div class="project-title">Senate Mobile</div>
-        <p class="project-desc">A mobile app built for The Senate brand. Designed for iOS and Android, built with React Native and Expo.</p>
-        <div class="project-stack">
-          <span class="stack-tag">React Native</span>
-          <span class="stack-tag">Expo</span>
-          <span class="stack-tag">TypeScript</span>
         </div>
       </div>
 
