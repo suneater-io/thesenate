@@ -263,10 +263,13 @@
       display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap;
     }
     .hero-spec {
-      font-family: 'Chakra Petch', sans-serif; font-size: 15px;
-      line-height: 1.8; color: var(--text-2); max-width: 560px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic; font-weight: 500;
+      font-size: clamp(22px, 2.8vw, 38px);
+      line-height: 1.25; color: var(--text-1);
+      max-width: 620px; letter-spacing: 0.01em;
     }
-    .hero-spec strong { color: var(--text-1); }
+    .hero-spec strong { color: var(--blue); font-style: normal; font-weight: 700; }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; padding-top: 4px; }
     .hero-btn {
       font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em;
@@ -317,8 +320,8 @@
     .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
     .proj-card:hover::before { transform: scaleX(1); }
     .proj-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
-    .proj-metric { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 5vw, 64px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.88; color: var(--blue); opacity: 0.25; margin-bottom: 20px; user-select: none; transition: opacity 0.25s ease; }
-    .proj-card:hover .proj-metric { opacity: 0.5; }
+    .proj-metric { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 5vw, 64px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.88; color: var(--blue); opacity: 0.35; margin-bottom: 20px; user-select: none; transition: opacity 0.25s ease; }
+    .proj-card:hover .proj-metric { opacity: 0.65; }
     .proj-area { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
     .proj-name { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 12px; }
     .proj-desc { font-size: 15px; line-height: 1.8; color: var(--text-2); }
@@ -369,34 +372,36 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--blue);
-      opacity: 0.65;
-      padding-top: 8px;
+      opacity: 0.85;
+      padding-top: 10px;
     }
 
     /* ─── THE BRIEF ─── */
-    .brief-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .brief-section { padding: 96px 0; border-bottom: 1px solid var(--border); }
     .brief-lead {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(26px, 3.2vw, 48px);
-      font-weight: 600; font-style: italic;
-      letter-spacing: 0.01em; color: var(--text-1);
-      line-height: 1.15; max-width: 820px; margin-bottom: 48px;
+      font-size: clamp(40px, 6vw, 88px);
+      font-weight: 700; font-style: italic;
+      letter-spacing: -0.01em; color: var(--text-1);
+      line-height: 1.05; max-width: 900px; margin-bottom: 64px;
     }
-    .brief-beliefs { display: flex; flex-direction: column; gap: 18px; border-left: 2px solid var(--blue); padding-left: 28px; }
+    .brief-beliefs { display: flex; flex-direction: column; gap: 28px; border-left: 3px solid var(--blue); padding-left: 32px; }
     .brief-belief {
       font-family: 'Space Mono', monospace;
-      font-size: 10px; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--text-2); line-height: 1.7;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-1); line-height: 1.9;
+      opacity: 0.75;
     }
+    .brief-belief:hover { opacity: 1; transition: opacity 0.2s ease; }
 
     /* ─── FOCUS POV ─── */
     .focus-pov {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(17px, 1.8vw, 22px);
-      font-weight: 500; font-style: italic;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 600; font-style: italic;
       letter-spacing: 0.01em; color: var(--text-1);
-      line-height: 1.25; margin-bottom: 22px;
-      padding-bottom: 18px; border-bottom: 1px solid var(--border);
+      line-height: 1.2; margin-bottom: 24px;
+      padding-bottom: 20px; border-bottom: 1px solid var(--border);
     }
 
     /* ─── PROJECT INSIGHT ─── */
@@ -412,24 +417,25 @@
     }
 
     /* ─── AI PRACTICE ─── */
-    .ai-practice-body { margin-bottom: 80px; }
+    .ai-practice-section { background: var(--surface); }
+    .ai-practice-body { margin-bottom: 0; padding-bottom: 80px; }
     .ai-practice-lead {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2.6vw, 36px);
-      font-weight: 600; font-style: italic;
-      letter-spacing: 0.01em; color: var(--text-1);
-      line-height: 1.2; border-left: 3px solid var(--blue);
-      padding: 12px 0 12px 28px;
-      margin-bottom: 40px; max-width: 760px;
+      font-size: clamp(28px, 4.5vw, 64px);
+      font-weight: 700; font-style: italic;
+      letter-spacing: -0.01em; color: var(--text-1);
+      line-height: 1.1; border-left: 4px solid var(--blue);
+      padding: 16px 0 16px 36px;
+      margin-bottom: 52px; max-width: 900px;
     }
     .ai-practice-copy {
       max-width: 720px; display: flex;
-      flex-direction: column; gap: 18px; margin-bottom: 52px;
+      flex-direction: column; gap: 18px; margin-bottom: 56px;
     }
     .ai-practice-copy p { font-size: 15px; line-height: 1.8; color: var(--text-2); }
     .ai-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
-    .ai-principle { background: var(--surface); padding: 32px 28px; transition: background 0.25s ease; }
-    .ai-principle:hover { background: var(--surface-2, #0C1220); }
+    .ai-principle { background: var(--surface-2, #0C1220); padding: 32px 28px; transition: background 0.25s ease; }
+    .ai-principle:hover { background: var(--bg); }
     .ap-label {
       font-family: 'Space Mono', monospace;
       font-size: 9px; letter-spacing: 0.24em;
@@ -677,6 +683,7 @@
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- 03 // AI PRACTICE -->
   <!-- ═══════════════════════════════════════════════════ -->
+  <div class="ai-practice-section">
   <div class="s-wrap" id="ai-practice">
     <div class="s-head reveal">
       <span class="s-num">03</span><span class="s-slash">//</span>
@@ -707,6 +714,8 @@
     </div>
   </div>
 
+
+  </div><!-- /ai-practice-section -->
 
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- 04 // EXPERIENCE -->
