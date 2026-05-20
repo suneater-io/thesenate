@@ -57,7 +57,6 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
@@ -136,11 +135,11 @@
     .nav-link.active { opacity: 1; color: var(--blue); }
     .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
     .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
     /* ─── SKIP LINK ─── */
     .skip-link {
       position: fixed;
-      top: 16px;
-      left: 16px;
+      top: 16px; left: 16px;
       padding: 8px 16px;
       background: var(--blue);
       color: var(--bg);
@@ -156,12 +155,10 @@
     }
     .skip-link:focus { transform: translateY(0); }
 
-    
     /* ─── DRAWER CLOSE ─── */
     .drawer-close {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      top: 24px; right: 24px;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 700;
@@ -183,8 +180,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       padding: 11px 10px;
       cursor: pointer;
       background: none;
@@ -193,8 +189,7 @@
     }
     .nav-hamburger span {
       display: block;
-      width: 22px;
-      height: 1.5px;
+      width: 22px; height: 1.5px;
       background: var(--text-1);
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
     }
@@ -235,7 +230,6 @@
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
-
       height: 100dvh;
       min-height: 600px;
       position: relative;
@@ -250,8 +244,7 @@
       will-change: transform;
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       z-index: 2;
       pointer-events: none;
     }
@@ -283,7 +276,6 @@
       font-weight: 500;
       font-style: italic;
       letter-spacing: 0.04em;
-      text-transform: none;
       color: var(--text-2);
       line-height: 1.4;
     }
@@ -302,7 +294,40 @@
       text-transform: uppercase;
     }
 
-    /* ─── PROJECT GRID ─── */
+    /* ─── BRIEF SECTION ─── */
+    .brief-section {
+      padding: 96px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brief-lead {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(40px, 6vw, 88px);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+      line-height: 1.05;
+      max-width: 900px;
+      margin-bottom: 64px;
+    }
+    .brief-beliefs {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      border-left: 3px solid var(--blue);
+      padding-left: 32px;
+    }
+    .brief-belief {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      line-height: 1.9;
+      opacity: 0.75;
+    }
+
+    /* ─── PROJECTS SECTION ─── */
     .projects-section {
       flex: 1;
       padding: 80px 52px;
@@ -317,12 +342,12 @@
     .project-card {
       background: var(--bg);
       padding: 40px 36px;
-      text-decoration: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 0;
       position: relative;
       transition: background 0.2s ease;
+      cursor: default;
     }
     .project-card::after {
       content: '';
@@ -335,8 +360,31 @@
     .project-card:hover { background: var(--surface); }
     .project-card:hover::after { opacity: 1; }
     .project-card:hover .project-title { color: var(--text-1); }
-    .project-card:hover .project-arrow { opacity: 1; transform: translate(3px, -3px); color: var(--blue); }
-    .project-card:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+
+    .project-insight {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      opacity: 0.7;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .project-insight-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-2);
+      line-height: 1.4;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
 
     .project-header {
       display: flex;
@@ -345,12 +393,13 @@
       gap: 16px;
       position: relative;
       z-index: 1;
+      margin-bottom: 12px;
+      margin-top: 4px;
     }
     .project-tag {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       letter-spacing: 0.22em;
-      padding-left: 0.22em;
       text-transform: uppercase;
       color: var(--blue);
       background: var(--blue-dim);
@@ -358,16 +407,9 @@
       padding: 4px 10px;
       border-radius: 2px;
     }
-    .project-arrow {
-      font-size: 20px;
-      color: var(--text-3);
-      opacity: 0.5;
-      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
-      flex-shrink: 0;
-    }
     .project-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(24px, 3vw, 32px);
+      font-size: clamp(24px, 3vw, 34px);
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
@@ -376,13 +418,15 @@
       line-height: 1.1;
       position: relative;
       z-index: 1;
+      margin-bottom: 12px;
     }
     .project-desc {
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.8;
       color: var(--text-3);
       position: relative;
       z-index: 1;
+      margin-bottom: 20px;
     }
     .project-stack {
       display: flex;
@@ -442,6 +486,7 @@
     @media (max-width: 960px) {
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
+      .brief-section { padding: 72px 24px; }
       .projects-section { padding: 48px 24px 64px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
@@ -459,19 +504,19 @@
   <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link active">Projects</a>
-<a href="/creative/" class="nav-link">Everything Else</a>
-<a href="/contact/" class="nav-link">Contact Me</a>
-</div>
+    <a href="/projects/" class="nav-link active">Projects</a>
+    <a href="/creative/" class="nav-link">Everything Else</a>
+    <a href="/contact/" class="nav-link">Contact Me</a>
+  </div>
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
       <a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link active">Projects</a>
-<a href="/creative/" class="nav-link">Everything Else</a>
-<a href="/contact/" class="nav-link">Contact Me</a>
-</div>
+      <a href="/projects/" class="nav-link active">Projects</a>
+      <a href="/creative/" class="nav-link">Everything Else</a>
+      <a href="/contact/" class="nav-link">Contact Me</a>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -481,7 +526,6 @@
   <section class="hero" id="main">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-overlay"></div>
-    <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
       <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
     </div>
@@ -494,44 +538,57 @@
     </div>
   </section>
 
+  <!-- ─── THE BRIEF ─── -->
+  <section class="brief-section reveal">
+    <p class="brief-lead">I build things when I can't find them.</p>
+    <div class="brief-beliefs">
+      <p class="brief-belief">The best tools are the ones you build because nobody else has.</p>
+      <p class="brief-belief">A working demo changes a conversation faster than a slide deck. Every time.</p>
+      <p class="brief-belief">If it saves hours, proves a concept, or makes something possible that wasn't — it belongs here.</p>
+    </div>
+  </section>
+
   <!-- ─── PROJECTS ─── -->
   <div class="projects-section reveal">
     <div class="projects-grid">
 
-      <a href="/projects/wxccworkflowdemo/about/" class="project-card">
+      <div class="project-card">
+        <p class="project-insight">The insight</p>
+        <p class="project-insight-text">Contact centre managers were making decisions based on reports that were already 24 hours old. Every system had the data. Nobody had wired it into something you could act on right now.</p>
         <div class="project-header">
           <span class="project-tag">Demo</span>
-          <i class="ph ph-arrow-up-right project-arrow"></i>
         </div>
         <div class="project-title">Webex CC Workflow Dashboard</div>
-        <p class="project-desc">A live contact center workflow demo built on Webex Contact Center. Visualises call routing, agent states, and queue activity in real time.</p>
+        <p class="project-desc">A live contact centre workflow demo built on Webex Contact Center. Visualises call routing, agent states, and queue activity in real time.</p>
         <div class="project-stack">
           <span class="stack-tag">React</span>
           <span class="stack-tag">Vite</span>
           <span class="stack-tag">Webex CC</span>
           <span class="stack-tag">Tailwind</span>
         </div>
-      </a>
+      </div>
 
-      <a href="/projects/wxccroi/about/" class="project-card">
+      <div class="project-card">
+        <p class="project-insight">The insight</p>
+        <p class="project-insight-text">Every CX platform promises ROI. Nobody had built a tool that calculated it against real healthcare workflow numbers — actual call volumes, actual staff hours, actual break-even points.</p>
         <div class="project-header">
           <span class="project-tag">Tool</span>
-          <i class="ph ph-arrow-up-right project-arrow"></i>
         </div>
         <div class="project-title">Webex CC ROI Calculator</div>
-        <p class="project-desc">Quantifies the financial and operational impact of automating healthcare workflows with Webex Contact Center. Calculates break-even, net annual gain, and ROI across configurable workflows.</p>
+        <p class="project-desc">Quantifies the financial and operational impact of automating healthcare workflows. Calculates break-even, net annual gain, and ROI across configurable workflow scenarios.</p>
         <div class="project-stack">
           <span class="stack-tag">Next.js</span>
           <span class="stack-tag">React</span>
           <span class="stack-tag">Tailwind</span>
           <span class="stack-tag">Webex CC</span>
         </div>
-      </a>
+      </div>
 
-      <a href="/projects/senatepop/" class="project-card">
+      <div class="project-card">
+        <p class="project-insight">The insight</p>
+        <p class="project-insight-text">I had a vintage collection, a phone, and a process taking forty minutes per listing. The tools that existed were either too generic or too slow. I built the one I wanted.</p>
         <div class="project-header">
           <span class="project-tag">Tool</span>
-          <i class="ph ph-arrow-up-right project-arrow"></i>
         </div>
         <div class="project-title">SenatePop</div>
         <p class="project-desc">A Windows desktop tool for listing vintage sportswear on Depop. Drag-and-drop photo import, AI-generated descriptions via Claude, template system, and bulk publish to the Depop Partner API.</p>
@@ -543,12 +600,13 @@
           <span class="stack-tag">SQLite</span>
           <span class="stack-tag">Cloudinary</span>
         </div>
-      </a>
+      </div>
 
-      <a href="/projects/senate-mobile/" class="project-card">
+      <div class="project-card">
+        <p class="project-insight">The insight</p>
+        <p class="project-insight-text">The Senate is a brand with real depth. A website is one thing. A native app that fits in your pocket is a different kind of presence entirely.</p>
         <div class="project-header">
           <span class="project-tag">App</span>
-          <i class="ph ph-arrow-up-right project-arrow"></i>
         </div>
         <div class="project-title">Senate Mobile</div>
         <p class="project-desc">A mobile app built for The Senate brand. Designed for iOS and Android, built with React Native and Expo.</p>
@@ -557,7 +615,7 @@
           <span class="stack-tag">Expo</span>
           <span class="stack-tag">TypeScript</span>
         </div>
-      </a>
+      </div>
 
     </div>
   </div>
@@ -624,7 +682,7 @@
       if (e.key === 'Escape') closeDrawer();
     });
 
-    // ─── HERO SNOW ───
+    // ─── HERO CANVAS ───
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const canvas = document.getElementById('hero-canvas');
@@ -652,7 +710,6 @@
         };
       }
 
-      // ── Crane warning lights ──
       const craneLights = [
         { xr: 0.18, yr: 0.10 },
         { xr: 0.32, yr: 0.07 },
@@ -688,7 +745,6 @@
           ctx.fill();
         }
 
-        // ── Draw crane lights on top of snow ──
         for (const light of craneLights) {
           light.countdown--;
           if (light.countdown <= 0) {
@@ -699,7 +755,6 @@
           }
           if (!light.on) continue;
           const x = light.xr * W, y = light.yr * H;
-          // Outer glow
           const grd = ctx.createRadialGradient(x, y, 0, x, y, 9);
           grd.addColorStop(0, 'rgba(90,160,210,0.50)');
           grd.addColorStop(1, 'rgba(90,160,210,0)');
@@ -707,7 +762,6 @@
           ctx.arc(x, y, 9, 0, Math.PI * 2);
           ctx.fillStyle = grd;
           ctx.fill();
-          // Core dot
           ctx.beginPath();
           ctx.arc(x, y, 2.2, 0, Math.PI * 2);
           ctx.fillStyle = 'rgba(130,190,230,0.90)';
