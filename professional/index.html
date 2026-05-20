@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grant Hansen — Solution Architect</title>
-  <meta name="description" content="Solution Architect. Webex Contact Center, integrated healthcare, enterprise comms." />
+  <meta name="description" content="Solution Architect. Architecture for complex organisations. AI practice lead. Contact centre, healthcare, Cisco infrastructure." />
   <link rel="canonical" href="https://thesenate.io/professional/" />
 
   <meta property="og:type"        content="website" />
@@ -362,6 +362,110 @@
     .ft-mark { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3); }
     .ft-mark span { color: var(--blue); }
 
+    /* ─── ACTIVE SIGNAL ─── */
+    .active-signal {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      opacity: 0.65;
+      padding-top: 8px;
+    }
+
+    /* ─── THE BRIEF ─── */
+    .brief-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .brief-lead {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(26px, 3.2vw, 48px);
+      font-weight: 600; font-style: italic;
+      letter-spacing: 0.01em; color: var(--text-1);
+      line-height: 1.15; max-width: 820px; margin-bottom: 48px;
+    }
+    .brief-beliefs { display: flex; flex-direction: column; gap: 18px; border-left: 2px solid var(--blue); padding-left: 28px; }
+    .brief-belief {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--text-2); line-height: 1.7;
+    }
+
+    /* ─── FOCUS POV ─── */
+    .focus-pov {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(17px, 1.8vw, 22px);
+      font-weight: 500; font-style: italic;
+      letter-spacing: 0.01em; color: var(--text-1);
+      line-height: 1.25; margin-bottom: 22px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── PROJECT INSIGHT ─── */
+    .proj-insight-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 6px; margin-top: 8px;
+    }
+    .proj-insight-text {
+      font-size: 13px; line-height: 1.7; color: var(--text-2);
+      font-style: italic; margin-bottom: 4px;
+    }
+
+    /* ─── AI PRACTICE ─── */
+    .ai-practice-body { margin-bottom: 80px; }
+    .ai-practice-lead {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(20px, 2.6vw, 36px);
+      font-weight: 600; font-style: italic;
+      letter-spacing: 0.01em; color: var(--text-1);
+      line-height: 1.2; border-left: 3px solid var(--blue);
+      padding: 12px 0 12px 28px;
+      margin-bottom: 40px; max-width: 760px;
+    }
+    .ai-practice-copy {
+      max-width: 720px; display: flex;
+      flex-direction: column; gap: 18px; margin-bottom: 52px;
+    }
+    .ai-practice-copy p { font-size: 15px; line-height: 1.8; color: var(--text-2); }
+    .ai-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+    .ai-principle { background: var(--surface); padding: 32px 28px; transition: background 0.25s ease; }
+    .ai-principle:hover { background: var(--surface-2, #0C1220); }
+    .ap-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 12px;
+    }
+    .ap-desc { font-size: 14px; line-height: 1.75; color: var(--text-2); }
+
+    /* ─── TESTIMONIALS SLOT ─── */
+    .testimonials-slot {
+      border: 1px dashed rgba(80,150,190,0.20);
+      background: var(--surface);
+      padding: 36px 40px;
+      margin-bottom: 80px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .testimonials-slot-mark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 64px; font-style: italic;
+      color: var(--border-hi); line-height: 1;
+      flex-shrink: 0; user-select: none;
+    }
+    .testimonials-slot p {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--text-3); line-height: 2;
+    }
+
+    /* ─── CURRENTLY EXPLORING ─── */
+    .exploring-group { padding: 28px 0; border-bottom: 1px solid var(--border); }
+    .exploring-item {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 12px; line-height: 1.8; color: var(--text-3);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .exploring-item::before { content: '→'; color: var(--blue); opacity: 0.5; font-size: 11px; }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
       nav, footer { padding-left: 24px; padding-right: 24px; }
@@ -369,11 +473,14 @@
       .hero-intro { padding: 48px 24px 56px; }
       .hero-intro-top { flex-direction: column; }
       .s-wrap { padding: 0 24px; }
+      .brief-section { padding: 56px 0; }
       .focus-grid { grid-template-columns: 1fr; }
       .proj-grid { grid-template-columns: 1fr; }
       .xp-item { grid-template-columns: 1fr; gap: 8px; }
       .xp-left { display: flex; gap: 16px; align-items: baseline; }
       .skills-grid { grid-template-columns: 1fr; }
+      .ai-principles { grid-template-columns: 1fr; }
+      .testimonials-slot { flex-direction: column; gap: 12px; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
@@ -382,6 +489,7 @@
       .hero-intro { padding: 40px 20px 48px; }
       .s-wrap { padding: 0 20px; }
       .ph-title { font-size: clamp(60px, 13vw, 100px); }
+      .brief-section { padding: 40px 0; }
     }
   </style>
 </head>
@@ -432,11 +540,11 @@
   <div class="hero-intro reveal">
     <div class="hero-intro-top">
       <p class="hero-spec">
-        Specialising in <strong>AI-driven contact centre transformation</strong> and <strong>integrated healthcare communications</strong>. Building mission-critical systems where downtime costs lives.
+        I design architecture for complex organisations. Not the diagram version. The actual system — and what it has to produce.
       </p>
       <div class="hero-ctas">
         <a href="/contact/" class="hero-btn hero-btn--primary">Get in Touch <i class="ph ph-arrow-right"></i></a>
-        <a href="#projects" class="hero-btn hero-btn--ghost">My Work</a>
+        <a href="#work" class="hero-btn hero-btn--ghost">The Work</a>
       </div>
     </div>
     <div class="hero-badges">
@@ -445,11 +553,25 @@
       <div class="badge"><span class="badge-val">4K+</span><span class="badge-label">Handsets</span></div>
       <div class="badge"><span class="badge-val">1K+</span><span class="badge-label">Staff Duress</span></div>
     </div>
+    <p class="active-signal">Building AI systems that make people better at being people. // 2025–26</p>
+  </div>
+
+
+  <!-- ─── THE BRIEF ─── -->
+  <div class="brief-section reveal">
+    <div class="s-wrap">
+      <p class="brief-lead">Most organisations have the technology. Almost none have someone who knows how to wire it together.</p>
+      <div class="brief-beliefs">
+        <p class="brief-belief">The hardest part isn't the integration. It's knowing what to connect.</p>
+        <p class="brief-belief">AI in the contact centre means rebuilding how people work. Most implementations skip that part.</p>
+        <p class="brief-belief">A hospital's communications network is a clinical system. Most vendors have never thought about that.</p>
+      </div>
+    </div>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════ -->
-  <!-- 01 // FOCUS -->
+  <!-- 01 // FOCUS AREAS -->
   <!-- ═══════════════════════════════════════════════════ -->
   <div class="s-wrap" id="focus">
     <div class="s-head reveal">
@@ -458,9 +580,10 @@
     </div>
     <div class="focus-grid reveal">
       <div class="focus-card">
+        <p class="focus-pov">Routing isn't the problem. Understanding intent is.</p>
         <div class="focus-icon"><i class="ph ph-headset"></i></div>
         <h3 class="focus-name">AI Contact Centre</h3>
-        <p class="focus-desc">Transforming enterprise contact centres with AI routing, self-service IVR, and agent assist. I pull organisations out of manual queue management and into intelligent automation — Webex Contact Center end to end.</p>
+        <p class="focus-desc">Enterprise contact centres redesigned around AI routing, self-service IVR, and agent assist. The goal isn't automation for its own sake — it's getting the right work to the right person, and keeping humans out of the loop when they shouldn't be in it.</p>
         <div class="focus-tags">
           <span class="focus-tag">Webex CC</span>
           <span class="focus-tag">IVR Design</span>
@@ -471,9 +594,10 @@
         </div>
       </div>
       <div class="focus-card">
+        <p class="focus-pov">The gap between a nurse and the right information costs lives.</p>
         <div class="focus-icon"><i class="ph ph-hospital"></i></div>
         <h3 class="focus-name">Healthcare Comms</h3>
-        <p class="focus-desc">Integrated clinical communications for hospitals and health alliances — clinical mobility, nurse call, staff duress, real-time location. Systems designed to work together from day one, not bolted together after the fact.</p>
+        <p class="focus-desc">Clinical communications for hospitals and health alliances — mobility, nurse call, staff duress, real-time location. Built to work together from the spec, not integrated after the fact. The architecture matters more than the individual components.</p>
         <div class="focus-tags">
           <span class="focus-tag">Clinical Mobility</span>
           <span class="focus-tag">Staff Duress</span>
@@ -484,9 +608,10 @@
         </div>
       </div>
       <div class="focus-card">
+        <p class="focus-pov">You can't build smart buildings on dumb networks.</p>
         <div class="focus-icon"><i class="ph ph-wifi-high"></i></div>
         <h3 class="focus-name">Cisco Wireless &amp; Spaces</h3>
-        <p class="focus-desc">High-density Wi-Fi design and Cisco Spaces integration for enterprise and healthcare environments. Predictive survey, post-deployment validation, RTLS asset tracking. Networks that support the systems that run on them.</p>
+        <p class="focus-desc">High-density Wi-Fi design and Cisco Spaces integration for enterprise and healthcare. Predictive survey, post-deployment validation, RTLS asset tracking. The network is infrastructure for everything above it — design it that way.</p>
         <div class="focus-tags">
           <span class="focus-tag">Cisco Spaces</span>
           <span class="focus-tag">Ekahau</span>
@@ -501,12 +626,12 @@
 
 
   <!-- ═══════════════════════════════════════════════════ -->
-  <!-- 02 // PROJECTS -->
+  <!-- 02 // IDEAS MADE REAL -->
   <!-- ═══════════════════════════════════════════════════ -->
-  <div class="s-wrap" id="projects">
+  <div class="s-wrap" id="work">
     <div class="s-head reveal">
       <span class="s-num">02</span><span class="s-slash">//</span>
-      <h2 class="s-title">Projects</h2>
+      <h2 class="s-title">Ideas Made Real</h2>
     </div>
     <div class="proj-grid reveal">
       <div class="proj-card">
@@ -514,20 +639,26 @@
         <div class="proj-metric">H/C</div>
         <p class="proj-area">Healthcare · Victoria</p>
         <h3 class="proj-name">Hospital Infrastructure</h3>
-        <p class="proj-desc">Major Victorian hospital build. Clinical comms stack designed from day one — devices, RTLS, nurse call, duress — integrated, not bolted on. Full lifecycle from spec to deployment.</p>
+        <p class="proj-insight-label">The Insight</p>
+        <p class="proj-insight-text">The systems all existed. Nobody had specified them to work together from day one.</p>
+        <p class="proj-desc">Major Victorian hospital build. Clinical comms stack designed as a single integrated architecture — devices, RTLS, nurse call, duress. Full lifecycle from spec to deployment.</p>
       </div>
       <div class="proj-card">
         <p class="proj-num">PROJECT_02</p>
         <div class="proj-metric">4,000+</div>
         <p class="proj-area">Healthcare · Clinical</p>
         <h3 class="proj-name">Clinical Handset Rollout</h3>
-        <p class="proj-desc">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site environments. Owned end to end.</p>
+        <p class="proj-insight-label">The Insight</p>
+        <p class="proj-insight-text">Most clinical handset rollouts treat the device as the project. The integration is an afterthought.</p>
+        <p class="proj-desc">Greenfield and legacy replacement across multiple health alliances. Spectralink and Cisco clinical-grade hardware. Complex multi-site. Owned end to end.</p>
       </div>
       <div class="proj-card">
         <p class="proj-num">PROJECT_03</p>
         <div class="proj-metric">1,000+</div>
         <p class="proj-area">Healthcare · Safety</p>
         <h3 class="proj-name">Staff Duress at Scale</h3>
+        <p class="proj-insight-label">The Insight</p>
+        <p class="proj-insight-text">Duress systems get spec'd for compliance. Compliance doesn't tell you whether the alarm reached someone who could act on it.</p>
         <p class="proj-desc">Personal duress designed, deployed, and integrated across live healthcare networks. Olinqua, MobiCall, Duress.com. Real-time location, alarm routing, full-facility coverage — wards to car parks.</p>
       </div>
       <div class="proj-card">
@@ -535,22 +666,57 @@
         <div class="proj-metric">AI</div>
         <p class="proj-area">Enterprise · Contact Centre</p>
         <h3 class="proj-name">Contact Centre Overhaul</h3>
-        <p class="proj-desc">Pulled enterprise contact centres out of manual queue hell. AI routing, self-service IVR, agent assist. Agents stopped doing the repetitive work. Handling time dropped. Work that needed a human got one.</p>
+        <p class="proj-insight-label">The Insight</p>
+        <p class="proj-insight-text">The queue wasn't the problem. The work being routed into it was.</p>
+        <p class="proj-desc">AI routing, self-service IVR, agent assist. Agents stopped doing repetitive work. Handling time dropped. Work that needed a human got one.</p>
       </div>
     </div>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════ -->
-  <!-- 03 // EXPERIENCE -->
+  <!-- 03 // AI PRACTICE -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="s-wrap" id="ai-practice">
+    <div class="s-head reveal">
+      <span class="s-num">03</span><span class="s-slash">//</span>
+      <h2 class="s-title">AI Practice</h2>
+    </div>
+    <div class="ai-practice-body reveal">
+      <blockquote class="ai-practice-lead">
+        I've never built an AI system to cut headcount. I've built them so the people left have harder, more interesting problems to solve.
+      </blockquote>
+      <div class="ai-practice-copy">
+        <p>Most AI projects get deployed and then handed to whoever wrote the original workflows. The technology changes. The process around it doesn't. That's where it falls apart. Every system I build is designed around what the human needs to do differently — not just what the AI can now handle.</p>
+        <p>AI Practice Lead, in practice, means I talk to the people using the system before I spec anything. A contact centre team knows things about why calls fail that no vendor has ever asked them. A clinical team can tell you exactly where the information gap is costing them time. I start there.</p>
+      </div>
+      <div class="ai-principles">
+        <div class="ai-principle">
+          <div class="ap-label">Amplify</div>
+          <p class="ap-desc">Get the right information to the right person before they have to ask for it.</p>
+        </div>
+        <div class="ai-principle">
+          <div class="ap-label">Automate</div>
+          <p class="ap-desc">The calls that don't need a human in the loop — handle them. Free up the ones who do.</p>
+        </div>
+        <div class="ai-principle">
+          <div class="ap-label">Augment</div>
+          <p class="ap-desc">The agent with AI assist handles things that used to need a supervisor. Same person, higher ceiling.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- 04 // EXPERIENCE -->
   <!-- ═══════════════════════════════════════════════════ -->
   <div class="s-wrap" id="xp">
     <div class="s-head reveal">
-      <span class="s-num">03</span><span class="s-slash">//</span>
+      <span class="s-num">04</span><span class="s-slash">//</span>
       <h2 class="s-title">Experience</h2>
     </div>
     <div class="xp-list reveal">
-
       <div class="xp-item">
         <div class="xp-left">
           <div class="xp-dates">2020 — Present</div>
@@ -559,59 +725,39 @@
         <div>
           <h3 class="xp-role">Solution Architect</h3>
           <ul class="xp-bullets">
-            <li>Architecture, design, and delivery of Cisco Webex Contact Center solutions for enterprise clients.</li>
+            <li>ArchiTech is where I've done most of the work described on this page.</li>
+            <li>Architecture, design, and delivery of Cisco Webex Contact Center for enterprise clients.</li>
             <li>End-to-end clinical communications for major Victorian health networks — handsets, duress, RTLS, nurse call.</li>
-            <li>Cisco Spaces and high-density wireless deployments across healthcare and enterprise environments.</li>
+            <li>Cisco Spaces and high-density wireless across healthcare and enterprise environments.</li>
             <li>Owned full project lifecycle: pre-sales, solution design, BOM, deployment, handover.</li>
           </ul>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="xp-item">
-        <div class="xp-left">
-          <div class="xp-dates">[ Update dates ]</div>
-          <div class="xp-company">[ Company ]</div>
-        </div>
-        <div>
-          <h3 class="xp-role">Senior VoIP &amp; Network Engineer</h3>
-          <ul class="xp-bullets">
-            <li>VoIP engineering at one of Australia's largest regional banks.</li>
-            <li>Enterprise network infrastructure design and operations.</li>
-            <li>Cisco collaboration and unified communications deployment.</li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="xp-item">
-        <div class="xp-left">
-          <div class="xp-dates">[ Update dates ]</div>
-          <div class="xp-company">[ Company ]</div>
-        </div>
-        <div>
-          <h3 class="xp-role">Network &amp; Systems Engineer</h3>
-          <ul class="xp-bullets">
-            <li>Desktop, systems, and network support across enterprise environments.</li>
-            <li>Built foundational skills across the full infrastructure stack.</li>
-          </ul>
-        </div>
-      </div>
-
+  <!-- ─── TESTIMONIALS SLOT ─── -->
+  <div class="s-wrap">
+    <div class="testimonials-slot reveal">
+      <span class="testimonials-slot-mark">"</span>
+      <p>References available.<br>Ask.</p>
     </div>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════ -->
-  <!-- 04 // SKILLS -->
+  <!-- 05 // SKILLS -->
   <!-- ═══════════════════════════════════════════════════ -->
   <div class="s-wrap" id="skills">
     <div class="s-head reveal">
-      <span class="s-num">04</span><span class="s-slash">//</span>
+      <span class="s-num">05</span><span class="s-slash">//</span>
       <h2 class="s-title">Skills</h2>
     </div>
     <div class="skills-grid reveal">
       <div class="skills-col">
         <div class="skills-group">
-          <div class="skills-group-name">Contact Centre &amp; AI</div>
+          <div class="skills-group-name">I Work With</div>
           <div class="skills-tags">
             <span class="skill-tag">Webex Contact Center</span>
             <span class="skill-tag">CUCM</span>
@@ -654,8 +800,8 @@
         <div class="skills-group">
           <div class="skills-group-name">Certifications</div>
           <div>
-            <div class="cert-item">
-              <span class="cert-name">Webex Contact Center Expert</span>
+            <div class="cert-item" style="padding: 20px 0; border-bottom: 1px solid var(--border);">
+              <span class="cert-name" style="font-size: 20px; color: var(--blue);">Webex Contact Center Expert</span>
               <span class="cert-vendor">Cisco</span>
             </div>
             <div class="cert-item">
@@ -672,14 +818,22 @@
             </div>
           </div>
         </div>
+        <div class="exploring-group">
+          <div class="skills-group-name" style="margin-bottom: 14px;">Currently Exploring</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="exploring-item">Webex AI Agent</div>
+            <div class="exploring-item">Agentic Workflow Design</div>
+            <div class="exploring-item">Cisco Spaces AI Analytics</div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- ─── CTA ─── -->
     <div class="cta-wrap reveal">
-      <span class="cta-label">Let's talk</span>
-      <h2 class="cta-title">Got a project?</h2>
-      <p class="cta-sub">Contact centre, healthcare comms, or something that doesn't fit a box.</p>
+      <span class="cta-label">The brief</span>
+      <h2 class="cta-title">Hard problem.<br>Let's work.</h2>
+      <p class="cta-sub">Complex system. Unclear where to start. That's usually how it begins.</p>
       <a href="/contact/" class="hero-btn hero-btn--primary" style="margin-top: 8px;">Get in Touch <i class="ph ph-arrow-right"></i></a>
     </div>
   </div>
