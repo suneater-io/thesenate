@@ -1,11 +1,11 @@
 # SENATE — Brand Guidelines
-*Last updated: 2026-03-20*
+*Last updated: 2026-05-20*
 
 ---
 
 ## 1. Brand Identity
 
-**The Senate** is the personal brand of Grant Hansen — Solution Architect, drummer, collector, Detroit. It is not a single-discipline portfolio. It is the conglomerate: every interest, discipline, and obsession, all at full volume.
+**The Senate** is the personal brand of Grant Hansen — Solution Architect, drummer, father, Detroit obsessive. It is not a single-discipline portfolio. It is the conglomerate: every interest, discipline, and obsession, all at full volume.
 
 The brand operates across two registers simultaneously:
 
@@ -15,9 +15,6 @@ The brand operates across two registers simultaneously:
 These are not in conflict. The tension between them *is* the brand.
 
 **Core tagline:** *Everything. At full volume.*
-
-**Identity fragments** (supporting tagline — all four must appear together):
-> Architect · Drummer · Collector · Detroit
 
 ---
 
@@ -67,7 +64,7 @@ The site uses a layered dark-mode palette built on near-black deep navy, not pur
 | `--border-hi` | `rgba(120,175,210,0.24)` | Active/hover borders |
 | `--text-1` | `#D8EDF5` | Primary text |
 | `--text-2` | `#4A6878` | Secondary/muted text |
-| `--text-3` | `#243545` | Disabled/ghost text |
+| `--text-3` | `#3D5A70` | Disabled/ghost text |
 
 ### Page Accent Colors
 
@@ -77,7 +74,7 @@ Each page has a distinct accent held in the `--blue` token (named for its defaul
 |---|---|---|---|
 | Landing | Steel Blue | `#7AAEC8` | Neutral anchor, ties all pages together |
 | Creative | Cold Steel | `#6FB5CC` | Icy, industrial, the music |
-| Professional | Amber Copper | `#C4824A` | Warmth of craft, technical precision |
+| Professional | Cold Steel | `#6FB5CC` | Matches Creative — both personal and professional share the same teal |
 | Contact | Slate | `#8AAEBB` | Open, receptive, calm |
 | Blog | Slate Blue | `#7090A8` | Considered, measured, editorial |
 | Projects | Burnt Orange | `#C86A28` | Drive, construction, output |
@@ -85,7 +82,7 @@ Each page has a distinct accent held in the `--blue` token (named for its defaul
 **Rules:**
 - Never substitute default Tailwind palette colors (indigo-500, blue-600, etc.)
 - Red (`#CC0000–#FF0000`) is reserved for the band logo accent variant only — it does not appear in web UI
-- All gradients move within the cool/dark range unless using the Professional amber accent
+- All gradients move within the cool/dark range
 - Never use white or light backgrounds in any context
 
 ### Glow & Atmospheric Treatment
@@ -118,10 +115,11 @@ Three typefaces. Each has a fixed role. Do not substitute.
 - Used for: body copy, card text, button labels, general UI
 - Style: regular 400–600, mixed case for body; all-caps for labels
 - Tracking: `0.14–0.18em` on labels; normal on body
-- Line height: `1.6–1.75` on paragraph text
+- Line height: `1.8` on paragraph text
+- Base size: `15px`
 
 ### Space Mono — Labels / Nav
-- Used for: navigation, eyebrow labels, identity fragments, stat numbers, technical data
+- Used for: navigation, eyebrow labels, stat numbers, technical data
 - Style: regular 400 or bold 700, always all-caps
 - Tracking: `0.18–0.30em`
 - Size: `9–11px` for UI labels; larger only for hero-scale data
@@ -164,8 +162,13 @@ All nav links use the opacity-transition approach (not color-transition):
 .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 ```
 
+### Nav Order
+
+Site-wide nav links appear in this order: **Professional → Projects → Everything → Contact Me**
+
 **Layout principles:**
-- Full-width hero sections, centered content
+- Full-width hero sections, content at bottom-left of hero
+- Hero: `height: 100vh/100dvh`, `justify-content: flex-end`, `padding: 0 52px 72px`
 - Cards and grids break to single column at `960px`
 - Nav collapses (hide links, show hamburger) at `600px`
 - Content max-width: `1200px` centered
@@ -233,11 +236,31 @@ Each sub-page under The Senate has its own accent colour and hero treatment, but
 | Page | URL | Accent | Hero Treatment |
 |---|---|---|---|
 | Landing | `/` | Steel Blue `#7AAEC8` | Full-bleed forest photo, floating logo |
-| Creative | `/creative/` | Cold Steel `#6FB5CC` | Chain-link fence at night (Unsplash) |
-| Professional | `/professional/` | Amber Copper `#C4824A` | Blueprint grid overlay |
+| Creative (Everything) | `/creative/` | Cold Steel `#6FB5CC` | Chain-link fence at night; password-gated |
+| Professional | `/professional/` | Cold Steel `#6FB5CC` | Hex data stream canvas overlay |
 | Contact | `/contact/` | Slate `#8AAEBB` | Dark ambient, constellation drift |
 | Blog | `/blog/` | Slate Blue `#7090A8` | Storm rain with lightning |
 | Projects | `/projects/` | Burnt Orange `#C86A28` | Crane warning lights + rain |
+
+### Creative (Everything) Page Structure
+
+Password-gated (`senate`). Once unlocked, four text-only sections — no photos, no sidebar nav:
+
+1. **01 // Metal / Meshuggah** — not a music preference, an operating system. Polyrhythmic complexity, the same brain that does solution design. Drumming lives here.
+2. **02 // Detroit** — Australian guy who bleeds Detroit. Red Wings + Pistons. Identity you choose vs identity you inherit.
+3. **03 // Counter-Strike** — the strategic mind. IGL thinking, reading the map, resourcing the problem.
+4. **04 // Father** — the wildness and the groundedness are the same thing.
+
+### Professional Page Structure
+
+Structured like a consulting brief, not a resume. Sections:
+
+1. **Hero** — full-height, "Professional" title + "Solution Architect" role bar, hex data stream canvas
+2. **Intro** — spec statement + CTA buttons + 4 stat badges (WCC Expert / 20+ Years / 4K+ Handsets / 1K+ Duress)
+3. **01 // Focus Areas** — 3-column grid: AI Contact Centre, Healthcare Integration, Wireless Infrastructure
+4. **02 // Projects** — 4 named outcome cards with metric, area, project name, description
+5. **03 // Experience** — timeline list: ArchiTech + prior roles
+6. **04 // Skills** — 2-column: technology categories (left) + certifications (right)
 
 ---
 
