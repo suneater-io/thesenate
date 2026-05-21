@@ -7,14 +7,12 @@
   <meta name="description" content="The inbox is open. Use it." />
   <link rel="canonical" href="https://thesenate.io/contact/" />
 
-  <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://thesenate.io/contact/" />
   <meta property="og:title"       content="Contact — Grant Hansen" />
   <meta property="og:description" content="The inbox is open. Use it." />
   <meta property="og:image"       content="https://thesenate.io/brand_assets/senate-logo-white.png" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Contact — Grant Hansen" />
   <meta name="twitter:description" content="The inbox is open. Use it." />
@@ -55,7 +53,6 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
@@ -76,10 +73,6 @@
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .a1 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-    .a2 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
-    .a3 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
-    .a4 { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
 
     .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
@@ -113,14 +106,11 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-link {
       font-family: 'Space Mono', monospace;
       font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.22em;
       padding-left: 0.22em;
       text-transform: uppercase;
@@ -129,17 +119,9 @@
       text-decoration: none;
       transition: opacity 0.2s ease, color 0.2s ease;
       padding: 10px 0;
-    }
-    .nav-link:hover { opacity: 1; }
-    .nav-link.active { opacity: 1; color: var(--blue); }
-    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
-    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-
-    /* Nav underline micro-interaction */
-    .nav-links .nav-link {
       position: relative;
     }
-    .nav-links .nav-link::after {
+    .nav-link::after {
       content: '';
       position: absolute;
       bottom: 8px; left: 0;
@@ -150,14 +132,16 @@
       transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
       opacity: 0.65;
     }
-    .nav-links .nav-link:hover::after,
-    .nav-links .nav-link.active::after { transform: scaleX(1); }
+    .nav-link:hover { opacity: 1; }
+    .nav-link:hover::after,
+    .nav-link.active::after { transform: scaleX(1); }
+    .nav-link.active { opacity: 1; color: var(--blue); }
+    .nav-link:focus-visible { opacity: 1; outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
-    /* ─── SKIP LINK ─── */
     .skip-link {
       position: fixed;
-      top: 16px;
-      left: 16px;
+      top: 16px; left: 16px;
       padding: 8px 16px;
       background: var(--blue);
       color: var(--bg);
@@ -173,12 +157,9 @@
     }
     .skip-link:focus { transform: translateY(0); }
 
-    
-    /* ─── DRAWER CLOSE ─── */
     .drawer-close {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      top: 24px; right: 24px;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 700;
@@ -192,16 +173,13 @@
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .drawer-close:hover { color: var(--text-1); border-color: var(--border-hi); }
-    .drawer-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
-    /* ─── HAMBURGER ─── */
     .nav-hamburger {
       display: none;
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       padding: 11px 10px;
       cursor: pointer;
       background: none;
@@ -210,8 +188,7 @@
     }
     .nav-hamburger span {
       display: block;
-      width: 22px;
-      height: 1.5px;
+      width: 22px; height: 1.5px;
       background: var(--text-1);
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
     }
@@ -219,7 +196,6 @@
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* ─── MOBILE DRAWER ─── */
     .nav-drawer {
       position: fixed;
       inset: 0;
@@ -235,32 +211,16 @@
       transition: opacity 0.3s ease;
     }
     .nav-drawer.open { opacity: 1; pointer-events: all; }
-    .nav-drawer .nav-link {
-      font-size: 22px !important;
-      letter-spacing: 0.12em !important;
-      opacity: 0.8 !important;
-    }
-    .nav-drawer .nav-link:hover,
-    .nav-drawer .nav-link.active { opacity: 1 !important; }
+    .nav-drawer .nav-link { font-size: 22px !important; letter-spacing: 0.12em !important; }
 
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
     }
 
-    /* ─── REDUCED MOTION ─── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
     /* ─── HERO ─── */
     .hero {
       height: 100vh;
-
       height: 100dvh;
       min-height: 600px;
       position: relative;
@@ -272,11 +232,9 @@
       background: url('/images/openwindow.webp') center center / cover no-repeat;
     }
     #hero-canvas {
-      will-change: transform;
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       z-index: 2;
       pointer-events: none;
     }
@@ -293,7 +251,7 @@
     }
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       animation: fadeUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
     }
     .hero-bar {
@@ -308,7 +266,6 @@
       font-weight: 500;
       font-style: italic;
       letter-spacing: 0.04em;
-      text-transform: none;
       color: var(--text-2);
       line-height: 1.4;
     }
@@ -316,15 +273,6 @@
       flex: 1;
       height: 1px;
       background: linear-gradient(to right, var(--border-hi), transparent);
-    }
-    .ph-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      padding-left: 0.3em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 20px;
     }
     .ph-title {
       font-family: 'Barlow Condensed', sans-serif;
@@ -334,177 +282,106 @@
       line-height: 0.92;
       color: var(--text-1);
       text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .ph-line {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--text-2);
-      max-width: 440px;
     }
 
-    /* ─── SOCIAL GRID ─── */
-    .social-section {
+    /* ─── CONTACT ROWS ─── */
+    .contact-section {
       flex: 1;
-      padding: 80px 52px 80px;
+      padding: 0 52px 80px;
     }
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+    .contact-rows {
+      border-top: 1px solid var(--border);
     }
-    .social-card {
+    .contact-row {
       display: flex;
       align-items: center;
-      gap: 20px;
-      padding: 32px 28px;
-      background: var(--bg);
+      justify-content: space-between;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
       text-decoration: none;
       position: relative;
-      transition: background 0.2s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+      transition: padding-left 0.3s cubic-bezier(0.16,1,0.3,1);
     }
-    /* Email is the primary contact — give it full width and more breathing room */
-    .social-card--primary {
-      grid-column: 1 / -1;
-      padding: 48px 40px;
-      background: var(--surface);
-    }
-    .social-card::after {
+    .contact-row::before {
       content: '';
       position: absolute;
       inset: 0;
       background: var(--blue-dim);
-      opacity: 0;
-      transition: opacity 0.2s ease;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
     }
-    .social-card:hover { background: var(--surface); transform: translateY(-2px); }
-    .social-card--primary:hover { background: var(--surface-2); transform: translateY(-2px); }
-    .social-card:hover::after { opacity: 1; }
-    .social-card:active { transform: translateY(0) scale(0.99); }
-    .social-card:hover .social-icon { color: var(--blue); }
-    .social-card:hover .social-name { color: var(--text-1); }
-    .social-card:hover .social-handle { color: var(--text-2); }
-    .social-card:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+    .contact-row:hover { padding-left: 20px; }
+    .contact-row:hover::before { transform: scaleX(1); }
+    .contact-row:hover .cr-label { color: var(--blue); }
+    .contact-row:hover .cr-handle { color: var(--text-1); }
+    .contact-row:hover .cr-arrow { opacity: 1; transform: translateX(0); color: var(--blue); }
+    .contact-row:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+    .contact-row:active { opacity: 0.8; }
 
-    .social-card--primary .social-name { font-size: 22px; color: var(--text-1); }
-    .social-card--primary .social-handle { font-size: 11px; color: var(--text-2); letter-spacing: 0.08em; }
-    .social-card--primary .social-icon { font-size: 36px; color: var(--blue); }
-
-    .social-icon {
-      font-size: 28px;
-      color: var(--text-3);
-      transition: color 0.2s ease;
-      flex-shrink: 0;
+    .cr-left {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
       position: relative;
       z-index: 1;
     }
-    .social-text {
-      position: relative;
-      z-index: 1;
-    }
-    .social-name {
+    .cr-label {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
       color: var(--text-2);
-      transition: color 0.2s ease;
-      display: block;
-      margin-bottom: 2px;
+      transition: color 0.25s ease;
+      line-height: 1;
     }
-    .social-handle {
+    .cr-type {
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--text-3);
-      transition: color 0.2s ease;
-      display: block;
+      padding-bottom: 4px;
     }
-    .social-arrow {
-      margin-left: auto;
-      font-size: 18px;
+    .cr-handle {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(10px, 1.2vw, 13px);
+      letter-spacing: 0.12em;
       color: var(--text-3);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      transition: color 0.25s ease;
       position: relative;
       z-index: 1;
     }
-    .social-card:hover .social-arrow {
-      opacity: 1;
-      transform: translateX(0);
-      color: var(--blue);
+    .cr-arrow {
+      font-size: 24px;
+      color: var(--text-3);
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1), color 0.25s ease;
+      position: relative;
+      z-index: 1;
+      margin-left: 16px;
     }
 
-    /* ─── CONTEXT SECTION ─── */
+    /* ─── CONTEXT ─── */
     .context-section {
       padding: 0 52px 100px;
-      display: flex;
-      flex-direction: column;
-      gap: 56px;
     }
     .context-intro {
-      max-width: 680px;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 2.5vw, 24px);
+      font-size: clamp(20px, 2.5vw, 28px);
       font-weight: 400;
+      font-style: italic;
       line-height: 1.55;
       color: var(--text-2);
       letter-spacing: 0.02em;
+      max-width: 720px;
+      border-left: 3px solid var(--border-hi);
+      padding-left: 28px;
     }
-    .context-intro .hi { color: var(--text-1); }
-    .context-divider-wrap {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .context-line-l { width: 40px; height: 1px; background: var(--border-hi); flex-shrink: 0; }
-    .context-line-r { flex: 1; height: 1px; background: linear-gradient(to right, var(--border-hi), transparent); }
-    .context-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.24em;
-      color: var(--blue);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .context-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-    }
-    .context-item { display: flex; flex-direction: column; gap: 12px; }
-    .context-item-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      color: var(--text-3);
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .context-item-label::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--blue);
-      opacity: 0.5;
-      flex-shrink: 0;
-    }
-    .context-item-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      color: var(--text-2);
-      line-height: 1.45;
-    }
+    .context-intro span { color: var(--text-1); font-style: normal; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -542,18 +419,17 @@
     }
     .ft-mark span { color: var(--blue); }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
       nav { padding: 20px 24px; }
       .hero { padding: 0 24px 56px; }
-      .social-section { padding: 48px 24px 64px; }
-      .context-section { padding: 0 24px 80px; gap: 40px; }
-      .context-grid { grid-template-columns: 1fr; gap: 32px; }
+      .contact-section { padding: 0 24px 64px; }
+      .context-section { padding: 0 24px 80px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
       .ft-name { position: static; transform: none; }
     }
     @media (max-width: 600px) {
-      .social-grid { grid-template-columns: 1fr; }
+      .cr-label { font-size: clamp(32px, 10vw, 56px); }
+      .cr-handle { display: none; }
     }
   </style>
 </head>
@@ -561,22 +437,22 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <div class="nav-drawer" id="nav-drawer">
     <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕&nbsp;&nbsp;Close</button>
     <a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link">Projects</a>
-<a href="/creative/" class="nav-link">Everything Else</a>
-<a href="/contact/" class="nav-link active">Contact Me</a>
-</div>
+    <a href="/projects/" class="nav-link">Projects</a>
+    <a href="/creative/" class="nav-link">Everything Else</a>
+    <a href="/contact/" class="nav-link active">Contact Me</a>
+  </div>
 
   <nav id="nav">
     <a href="/" class="nav-logo">The<span>Senate</span>.io</a>
     <div class="nav-links">
       <a href="/professional/" class="nav-link">Professional</a>
-<a href="/projects/" class="nav-link">Projects</a>
-<a href="/creative/" class="nav-link">Everything Else</a>
-<a href="/contact/" class="nav-link active">Contact Me</a>
-</div>
+      <a href="/projects/" class="nav-link">Projects</a>
+      <a href="/creative/" class="nav-link">Everything Else</a>
+      <a href="/contact/" class="nav-link active">Contact Me</a>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -586,7 +462,6 @@
   <section class="hero" id="main">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-overlay"></div>
-    <!-- ghost logo -->
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
       <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
     </div>
@@ -599,65 +474,37 @@
     </div>
   </section>
 
-  <!-- ─── SOCIALS ─── -->
-  <div class="social-section">
-    <div class="social-grid">
+  <!-- ─── CONTACT ROWS ─── -->
+  <div class="contact-section reveal">
+    <div class="contact-rows">
 
-      <a href="mailto:hurricanegrant@gmail.com" class="social-card social-card--primary reveal">
-        <i class="ph ph-envelope social-icon" aria-hidden="true"></i>
-        <div class="social-text">
-          <span class="social-name">Email</span>
-          <span class="social-handle">hurricanegrant@gmail.com</span>
+      <a href="mailto:hurricanegrant@gmail.com" class="contact-row">
+        <div class="cr-left">
+          <span class="cr-label">Email</span>
+          <span class="cr-type">Direct</span>
         </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
+        <span class="cr-handle">hurricanegrant@gmail.com</span>
+        <i class="ph ph-arrow-right cr-arrow" aria-hidden="true"></i>
       </a>
 
-      <a href="https://www.linkedin.com/in/grant-hansen-suneater" class="social-card reveal" style="transition-delay: 0.12s" target="_blank" rel="noopener noreferrer">
-        <i class="ph ph-linkedin-logo social-icon" aria-hidden="true"></i>
-        <div class="social-text">
-          <span class="social-name">LinkedIn</span>
-          <span class="social-handle">grant-hansen-suneater</span>
+      <a href="https://www.linkedin.com/in/grant-hansen-suneater" class="contact-row" target="_blank" rel="noopener noreferrer">
+        <div class="cr-left">
+          <span class="cr-label">LinkedIn</span>
+          <span class="cr-type">Professional</span>
         </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
+        <span class="cr-handle">grant-hansen-suneater</span>
+        <i class="ph ph-arrow-right cr-arrow" aria-hidden="true"></i>
       </a>
-
-      <a href="https://www.instagram.com/maxis_sports_vintage/" class="social-card reveal" style="transition-delay: 0.20s" target="_blank" rel="noopener noreferrer">
-        <i class="ph ph-instagram-logo social-icon" aria-hidden="true"></i>
-        <div class="social-text">
-          <span class="social-name">Instagram</span>
-          <span class="social-handle">@maxis_sports_vintage</span>
-        </div>
-        <i class="ph ph-arrow-right social-arrow"></i>
-      </a>
-
 
     </div>
   </div>
 
   <!-- ─── CONTEXT ─── -->
-  <section class="context-section">
-    <p class="context-intro reveal">
-      If it's about <span class="hi">work</span> — architecture, contact centre, AI integration — use LinkedIn. If it's about <span class="hi">everything else</span> — music, Counter-Strike, vintage gear, Detroit sports — use email. Both inboxes are open.
+  <section class="context-section reveal" style="transition-delay: 0.1s;">
+    <p class="context-intro">
+      Work stuff — architecture, contact centre, AI integration — use <span>LinkedIn</span>.<br>
+      Everything else — music, Counter-Strike, Detroit, vintage gear — use <span>email</span>.
     </p>
-    <div class="context-divider-wrap reveal" style="transition-delay: 0.1s;">
-      <div class="context-line-l"></div>
-      <span class="context-label">What's Worth Your Time</span>
-      <div class="context-line-r"></div>
-    </div>
-    <div class="context-grid reveal" style="transition-delay: 0.2s;">
-      <div class="context-item">
-        <span class="context-item-label">Professional</span>
-        <p class="context-item-text">Enterprise architecture, contact centre deployments, and automation that actually ships.</p>
-      </div>
-      <div class="context-item">
-        <span class="context-item-label">Culture</span>
-        <p class="context-item-text">Counter-Strike strats, 90s sportswear, Detroit sports, anything music.</p>
-      </div>
-      <div class="context-item">
-        <span class="context-item-label">Everything Else</span>
-        <p class="context-item-text">Open to interpretation. If it's interesting, the inbox will respond.</p>
-      </div>
-    </div>
   </section>
 
   <!-- ─── FOOTER ─── -->
@@ -668,7 +515,6 @@
   </footer>
 
   <script>
-    // ─── STICKY NAV ───
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 48);
@@ -693,7 +539,6 @@
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     }
-
     function closeDrawer() {
       navDrawer.classList.remove('open');
       hamburger.classList.remove('open');
@@ -715,13 +560,9 @@
         navDrawer.removeEventListener('keydown', trapFocus);
       }
     });
-    navDrawer.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeDrawer);
-    });
+    navDrawer.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', closeDrawer));
     document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeDrawer();
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
     // ─── HERO CONSTELLATION ───
     (function () {
@@ -735,33 +576,25 @@
 
       function mkDot() {
         return {
-          x: Math.random() * W,
-          y: Math.random() * H,
+          x: Math.random() * W, y: Math.random() * H,
           vx: (Math.random() - 0.5) * 0.18,
           vy: (Math.random() - 0.5) * 0.18,
           r: 1 + Math.random() * 1.2,
           o: 0.25 + Math.random() * 0.35,
         };
       }
-
       function resize() {
         W = canvas.width  = canvas.parentElement.offsetWidth;
         H = canvas.height = canvas.parentElement.offsetHeight;
         dots = Array.from({ length: COUNT }, mkDot);
       }
-
       function tick() {
         ctx.clearRect(0, 0, W, H);
-
-        // move dots
         for (const d of dots) {
-          d.x += d.vx;
-          d.y += d.vy;
+          d.x += d.vx; d.y += d.vy;
           if (d.x < 0 || d.x > W) d.vx *= -1;
           if (d.y < 0 || d.y > H) d.vy *= -1;
         }
-
-        // draw connections (dots + mouse)
         const all = [...dots, mouse];
         for (let i = 0; i < dots.length; i++) {
           for (let j = i + 1; j < all.length; j++) {
@@ -769,36 +602,28 @@
             const dy = dots[i].y - all[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist > CONNECT_DIST) continue;
-            const alpha = (1 - dist / CONNECT_DIST) * 0.12;
             ctx.beginPath();
             ctx.moveTo(dots[i].x, dots[i].y);
             ctx.lineTo(all[j].x, all[j].y);
-            ctx.strokeStyle = `rgba(138,174,187,${alpha})`;
+            ctx.strokeStyle = `rgba(138,174,187,${(1 - dist / CONNECT_DIST) * 0.12})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
-
-        // draw dots
         for (const d of dots) {
           ctx.beginPath();
           ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(138,174,187,${d.o})`;
           ctx.fill();
         }
-
         rafId = requestAnimationFrame(tick);
       }
-
-      canvas.parentElement.addEventListener('mousemove', (e) => {
+      canvas.parentElement.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
       }, { passive: true });
-      canvas.parentElement.addEventListener('mouseleave', () => {
-        mouse.x = -9999; mouse.y = -9999;
-      }, { passive: true });
-
+      canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; }, { passive: true });
       window.addEventListener('resize', resize, { passive: true });
       resize();
       let rafId;
