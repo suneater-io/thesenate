@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="theme-color" content="#060810">
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.2/src/index.js"
           integrity="sha384-J7cw2fbG1T4C5MirTVUxsZGaMfw2m0XsCgOQEqUvB1OF9VIsHWuZF1GmyVRzs7eu"
           crossorigin="anonymous" defer></script>
@@ -41,8 +41,8 @@
       --blue-dim:  rgba(138, 174, 187, 0.07);
       --blue-glow: rgba(138, 174, 187, 0.14);
       --text-1:    #D8EDF5;
-      --text-2:    #4A6878;
-      --text-3:    #3D5A70;
+      --text-2:    #6A94A8;
+      --text-3:    #547A8C;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,7 +75,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
 
     /* ─── NAV ─── */
@@ -213,6 +213,7 @@
     }
     .nav-drawer.open { opacity: 1; pointer-events: all; }
     .nav-drawer .nav-link { font-size: 22px !important; letter-spacing: 0.12em !important; font-weight: 700 !important; }
+    .nav-drawer .nav-link.active { color: var(--blue) !important; }
 
     @media (max-width: 600px) {
       .nav-links { display: none; }
@@ -357,8 +358,7 @@
       color: var(--text-2);
       letter-spacing: 0.02em;
       max-width: 720px;
-      border-left: 3px solid var(--border-hi);
-      padding-left: 28px;
+      padding-left: 0;
     }
     .context-intro span { color: var(--text-1); font-style: normal; }
 
@@ -444,7 +444,7 @@
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-overlay"></div>
     <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh;">
-      <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
+      <img src="/brand_assets/senate-logo-white.png" alt="" style="width: min(672px, 84vw); height: auto; opacity: 0.06; mix-blend-mode: screen; filter: brightness(1.2); user-select: none;" />
     </div>
     <div class="hero-content">
       <h1 class="ph-title">Contact</h1>
@@ -470,6 +470,15 @@
           <span class="cr-type">Professional</span>
         </div>
         <span class="cr-handle">grant-hansen-suneater</span>
+        <i class="ph ph-arrow-right cr-arrow" aria-hidden="true"></i>
+      </a>
+
+      <a href="https://github.com/grant-hansen" class="contact-row" target="_blank" rel="noopener noreferrer">
+        <div class="cr-left">
+          <span class="cr-label">GitHub</span>
+          <span class="cr-type">Code</span>
+        </div>
+        <span class="cr-handle">grant-hansen</span>
         <i class="ph ph-arrow-right cr-arrow" aria-hidden="true"></i>
       </a>
 
@@ -624,7 +633,7 @@
         entry.target.classList.add('vis');
         revealObs.unobserve(entry.target);
       });
-    }, { threshold: 0.06 });
+    }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   </script>
 </body>
