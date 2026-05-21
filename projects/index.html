@@ -301,13 +301,13 @@
     }
     .brief-lead {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(40px, 6vw, 88px);
+      font-size: clamp(40px, 7.5vw, 120px);
       font-weight: 700;
       font-style: italic;
       letter-spacing: -0.01em;
       color: var(--text-1);
       line-height: 1.05;
-      max-width: 900px;
+      max-width: 100%;
       margin-bottom: 64px;
     }
     .brief-beliefs {
@@ -480,6 +480,72 @@
       padding: 3px 8px;
     }
 
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(4, 6, 14, 0.92);
+      backdrop-filter: blur(12px) saturate(140%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--border-hi);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .lightbox.open img {
+      transform: scale(1);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .lightbox-close:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .project-card[data-image] { cursor: pointer; }
+    .project-card[data-image] .project-thumb::after {
+      content: 'View';
+      position: absolute;
+      bottom: 12px; right: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-1);
+      background: rgba(4,6,14,0.72);
+      border: 1px solid var(--border-hi);
+      padding: 5px 10px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 2;
+    }
+    .project-card[data-image]:hover .project-thumb::after { opacity: 1; }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -566,7 +632,7 @@
     <div class="hero-content">
       <h1 class="ph-title">Projects</h1>
       <div class="hero-bar">
-        <span class="hero-role">Demos &nbsp;·&nbsp; Tools &nbsp;·&nbsp; Experiments</span>
+        <span class="hero-role">Solutions &nbsp;·&nbsp; Achievements &nbsp;·&nbsp; Demos &nbsp;·&nbsp; Tools &nbsp;·&nbsp; Experiments</span>
         <div class="hero-line"></div>
       </div>
     </div>
@@ -584,7 +650,7 @@
   <div class="projects-section reveal">
     <div class="projects-grid">
 
-      <div class="project-card">
+      <div class="project-card" data-image="/images/digital-patient-experience.jpg">
         <div class="project-thumb">
           <img src="/images/digital-patient-experience.jpg" alt="Digital Patient Experience Solution" />
         </div>
@@ -623,6 +689,12 @@
       </div>
 
     </div>
+  </div>
+
+  <!-- ─── LIGHTBOX ─── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lightbox-close" id="lightbox-close">✕&nbsp;&nbsp;Close</button>
+    <img id="lightbox-img" src="" alt="" />
   </div>
 
   <!-- ─── FOOTER ─── -->
@@ -799,6 +871,32 @@
       });
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // ─── LIGHTBOX ───
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    function openLightbox(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.project-card[data-image]').forEach(card => {
+      card.addEventListener('click', () => {
+        openLightbox(card.dataset.image, card.querySelector('.project-title')?.textContent);
+      });
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
   </script>
 </body>
 </html>
