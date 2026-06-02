@@ -528,11 +528,11 @@
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .lightbox-close:hover { color: var(--text-1); border-color: var(--border-hi); }
-    .project-card:not([data-image]) { cursor: default; }
-    .project-card:not([data-image]):hover::after { opacity: 0; }
-    .project-card:not([data-image]):hover { background: var(--bg); transform: none; }
-    .project-card[data-image] { cursor: pointer; }
-    .project-card[data-image] .project-thumb::after {
+    .project-card:not([data-images]) { cursor: default; }
+    .project-card:not([data-images]):hover::after { opacity: 0; }
+    .project-card:not([data-images]):hover { background: var(--bg); transform: none; }
+    .project-card[data-images] { cursor: pointer; }
+    .project-card[data-images] .project-thumb::after {
       content: 'View';
       position: absolute;
       bottom: 12px; right: 12px;
@@ -548,7 +548,76 @@
       transition: opacity 0.2s ease;
       z-index: 2;
     }
-    .project-card[data-image]:hover .project-thumb::after { opacity: 1; }
+    .project-card[data-images]:hover .project-thumb::after { opacity: 1; }
+
+    /* ─── LIGHTBOX NAV ─── */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--text-2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+      z-index: 2;
+      line-height: 1;
+      user-select: none;
+    }
+    .lightbox-nav:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .lightbox-nav:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    .lightbox-nav.hidden { opacity: 0; pointer-events: none; }
+    #lightbox-prev { left: 24px; }
+    #lightbox-next { right: 24px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px; left: 50%; transform: translateX(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+    .lightbox-counter.hidden { display: none; }
+
+    /* ─── ARTICLE LINK ─── */
+    .project-article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      margin-top: 16px;
+      align-self: flex-start;
+      position: relative;
+      z-index: 2;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .project-article-link:hover { color: var(--text-1); border-color: var(--border-hi); }
+    .project-article-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    /* ─── DEPRECATED TAG ─── */
+    .tag-deprecated {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
 
     /* ─── FOOTER ─── */
     footer {
@@ -654,7 +723,7 @@
   <div class="projects-section reveal">
     <div class="projects-grid">
 
-      <div class="project-card" data-image="/images/digital-patient-experience-full.jpg">
+      <div class="project-card" data-images='["/images/digital-patient-experience.jpg"]'>
         <div class="project-thumb">
           <img src="/images/digital-patient-experience.jpg" alt="Digital Patient Experience Solution" loading="lazy" decoding="async" />
         </div>
@@ -673,7 +742,7 @@
         </div>
       </div>
 
-      <a class="project-card" href="https://news-blogs.cisco.com/apjc/2026/05/19/digital-front-door-transforming-patient-journey-through-innovation/" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="project-card" data-images='["/images/digital-patient-experience-full.jpg"]'>
         <div class="project-thumb">
           <img src="/images/digital-front-door.jpg" alt="Digital Front Door" loading="lazy" decoding="async" />
         </div>
@@ -690,18 +759,43 @@
           <span class="stack-tag">Healthcare</span>
           <span class="stack-tag">Cisco CDA</span>
         </div>
-      </a>
+        <a class="project-article-link" href="https://news-blogs.cisco.com/apjc/2026/05/19/digital-front-door-transforming-patient-journey-through-innovation/" target="_blank" rel="noopener">Read article ↗</a>
+      </div>
 
-      <div class="project-card" data-image="/images/senate-sip.png">
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>Screenshots incoming</span></div>
+        </div>
+        <p class="project-insight">The insight</p>
+        <p class="project-insight-text">Senate Sip tracked one number. The more I ran, the more I realised hydration was just one variable. Macros, protein timing, carb loading before a long run — that's the system. Needed a tool that treated it like one.</p>
+        <div class="project-header">
+          <span class="project-tag">Android App</span>
+        </div>
+        <div class="project-title">Senate Fuel v1</div>
+        <p class="project-desc">Offline-first athletic recovery console built for competitive running. Connects directly to Garmin telemetry via Health Connect — HRV, sleep architecture, resting heart rate — and uses those inputs to drive everything. Recovery index drops below 65%: hydration multipliers and protein targets adjust automatically. A local calendar scanner reads tomorrow's long run and activates carb-loading protocols today, scaling calories +15% and flipping carb split to 65%. Food scanning via on-device Gemini Nano NPU parses plates without network latency; one-tap staple chips handle the daily constants. Muscle protein synthesis windows split the day into four phases with timed alarms to protect overnight MPS. Same industrial design language as Senate Sip. Zero wellness theater.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Kotlin</span>
+          <span class="stack-tag">Jetpack Compose</span>
+          <span class="stack-tag">Android</span>
+          <span class="stack-tag">Health Connect</span>
+          <span class="stack-tag">Gemini Nano NPU</span>
+          <span class="stack-tag">Garmin</span>
+          <span class="stack-tag">ReminderManager</span>
+          <span class="stack-tag">Coroutines</span>
+        </div>
+      </div>
+
+      <div class="project-card" data-images='["/images/senate-sip.png"]'>
         <div class="project-thumb">
           <img src="/images/senate-sip.png" alt="Senate Sip Android App" loading="lazy" decoding="async" />
         </div>
         <p class="project-insight">The insight</p>
-        <p class="project-insight-text">Hydration tracking was either pastel wellness theater or corporate dark-mode softness. Neither is acceptable. A utility this fundamental deserves industrial weight — system-state monitoring with no aesthetic compromise.</p>
+        <p class="project-insight-text">Every hydration tracker I tried was built to feel reassuring. Soft colors. Gentle nudges. Wrong target. I just needed the number — hit my intake or not. Built the one that treated it like a system metric instead of a lifestyle moment.</p>
         <div class="project-header">
           <span class="project-tag">Android App</span>
+          <span class="tag-deprecated">Deprecated</span>
         </div>
-        <div class="project-title">Senate Sip</div>
+        <div class="project-title">Senate Sip (deprecated)</div>
         <p class="project-desc">Premium native Android hydration utility. A fluid physics canvas visualises water state in real time, responsive to physical device movement via spring-damped overshoot physics and rising specular air bubbles with technical beaker tick marks. Background AlarmManager engine rotates 10 terse system alerts through active hours. Direct notification actions log intake and queue the next cycle without launching the UI. Adaptive icon built on Android's native system — Senate logo centred in safe-mask coordinates against a glowing 3D water bubble.</p>
         <div class="project-stack">
           <span class="stack-tag">Kotlin 1.9</span>
@@ -714,17 +808,16 @@
         </div>
       </div>
 
-      <div class="project-card" style="align-items: center; justify-content: center; min-height: 320px;">
-        <p style="font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 3vw, 44px); font-weight: 700; font-style: italic; color: var(--text-3); letter-spacing: 0.02em;">More coming soon.</p>
-      </div>
-
     </div>
   </div>
 
   <!-- ─── LIGHTBOX ─── -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
     <button class="lightbox-close" id="lightbox-close">✕&nbsp;&nbsp;Close</button>
+    <button class="lightbox-nav hidden" id="lightbox-prev" aria-label="Previous image">‹</button>
     <img id="lightbox-img" src="" alt="" />
+    <button class="lightbox-nav hidden" id="lightbox-next" aria-label="Next image">›</button>
+    <div class="lightbox-counter hidden" id="lightbox-counter"></div>
   </div>
 
   <!-- ─── FOOTER ─── -->
@@ -907,33 +1000,76 @@
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
     // ─── LIGHTBOX ───
-    const lightbox = document.getElementById('lightbox');
+    const lightbox    = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxClose   = document.getElementById('lightbox-close');
+    const lightboxPrev    = document.getElementById('lightbox-prev');
+    const lightboxNext    = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
 
-    function openLightbox(src, alt) {
-      lightboxImg.src = src;
+    let _images = [];
+    let _index  = 0;
+
+    function showImage(idx) {
+      _index = (idx + _images.length) % _images.length;
+      lightboxImg.style.opacity = '0';
+      lightboxImg.style.transform = 'scale(0.96)';
+      setTimeout(() => {
+        lightboxImg.src = _images[_index];
+        lightboxImg.style.opacity = '';
+        lightboxImg.style.transform = '';
+      }, 120);
+      if (_images.length > 1) {
+        lightboxCounter.textContent = `${_index + 1} / ${_images.length}`;
+        lightboxCounter.classList.remove('hidden');
+        lightboxPrev.classList.remove('hidden');
+        lightboxNext.classList.remove('hidden');
+      } else {
+        lightboxCounter.classList.add('hidden');
+        lightboxPrev.classList.add('hidden');
+        lightboxNext.classList.add('hidden');
+      }
+    }
+
+    function openLightbox(images, alt) {
+      _images = Array.isArray(images) ? images : [images];
+      lightboxImg.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
       lightboxImg.alt = alt || '';
+      showImage(0);
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lightboxClose.focus();
     }
+
     function closeLightbox() {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      _images = [];
     }
 
-    document.querySelectorAll('.project-card[data-image]').forEach(card => {
-      card.addEventListener('click', () => {
-        openLightbox(card.dataset.image, card.querySelector('.project-title')?.textContent);
+    document.querySelectorAll('.project-card[data-images]').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.project-article-link')) return;
+        const images = JSON.parse(card.dataset.images);
+        openLightbox(images, card.querySelector('.project-title')?.textContent);
       });
     });
+
+    lightboxPrev.addEventListener('click', e => { e.stopPropagation(); showImage(_index - 1); });
+    lightboxNext.addEventListener('click', e => { e.stopPropagation(); showImage(_index + 1); });
+
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-    lightbox.addEventListener('keydown', function(e) {
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')      { closeLightbox(); }
+      else if (e.key === 'ArrowLeft')  { showImage(_index - 1); }
+      else if (e.key === 'ArrowRight') { showImage(_index + 1); }
+    });
+
+    lightbox.addEventListener('keydown', e => {
       if (e.key === 'Tab') { e.preventDefault(); lightboxClose.focus(); }
-      if (e.key === 'Escape') { lightbox.classList.remove('active'); closeLightbox(); }
     });
   </script>
 </body>
