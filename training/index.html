@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Strength Program — Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #060810;
+    --surface: #090D18;
+    --surface-2: #0C1220;
+    --border: rgba(120,175,210,0.10);
+    --border-hi: rgba(120,175,210,0.24);
+    --text-1: #D8EDF5;
+    --text-2: #4A6878;
+    --text-3: #243545;
+    --blue: 190 100% 55%;
+    --blue-solid: #29C4E8;
+    --blue-dim: rgba(41,196,232,0.07);
+    --blue-glow: rgba(41,196,232,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: 'Chakra Petch', sans-serif;
+    min-height: 100vh;
+    padding: clamp(24px, 6vw, 64px) clamp(16px, 5vw, 48px) clamp(64px, 10vw, 120px);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(41,196,232,0.05), transparent 55%),
+      radial-gradient(circle at 90% 20%, rgba(41,196,232,0.03), transparent 50%);
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  header {
+    margin-bottom: clamp(36px, 8vw, 64px);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+  }
+
+  .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-solid);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    font-size: clamp(32px, 7vw, 52px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 10px;
+  }
+
+  .exercise {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exercise:first-of-type { padding-top: 0; }
+
+  .exercise-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px 24px;
+  }
+
+  .thumb-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 2px;
+  }
+
+  .thumb-strip::-webkit-scrollbar { height: 4px; }
+  .thumb-strip::-webkit-scrollbar-thumb { background: var(--border-hi); }
+
+  .thumb-wrap {
+    position: relative;
+    flex: 0 0 clamp(110px, 32vw, 160px);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    scroll-snap-align: start;
+    display: none;
+  }
+
+  .thumb-wrap.loaded { display: block; }
+
+  .thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.9) contrast(1.05);
+  }
+
+  .thumb-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(6,8,16,0.7), transparent 60%),
+      rgba(41,196,232,0.08);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .thumb-step {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 1;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--text-1);
+    background: rgba(6,8,16,0.7);
+    border: 1px solid var(--border-hi);
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+
+  .exercise.done .name { color: var(--text-2); }
+  .exercise.done .name::after { content: ""; }
+
+  .name {
+    font-size: clamp(16px, 2.2vw, 19px);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--blue-solid);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .boxes {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .box {
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--border-hi);
+    background: var(--surface);
+    cursor: pointer;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    padding: 0;
+    position: relative;
+  }
+
+  .box:hover { border-color: var(--blue-solid); }
+
+  .box:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--blue-solid);
+  }
+
+  .box:active { transform: scale(0.92); }
+
+  .box.checked {
+    background: var(--blue-dim);
+    border-color: var(--blue-solid);
+    box-shadow: 0 0 0 1px var(--blue-glow) inset, 0 2px 12px -4px var(--blue-glow);
+  }
+
+  .box.checked::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--blue-solid);
+    clip-path: polygon(20% 52%, 38% 70%, 82% 24%, 92% 34%, 38% 90%, 10% 62%);
+    transform: scale(0.9);
+  }
+
+  footer {
+    margin-top: clamp(40px, 8vw, 64px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text-2);
+    letter-spacing: 0.04em;
+  }
+
+  .progress strong { color: var(--blue-solid); }
+
+  .reset {
+    background: transparent;
+    border: 1px solid var(--border-hi);
+    color: var(--text-2);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), color 0.15s, border-color 0.15s;
+  }
+
+  .reset:hover { color: var(--text-1); border-color: var(--blue-solid); }
+  .reset:active { transform: scale(0.96); }
+  .reset:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--blue-solid); }
+
+  @media (max-width: 480px) {
+    .exercise { grid-template-columns: 1fr; }
+    .boxes { justify-content: flex-start; margin-top: 4px; }
+    .box { width: 44px; height: 44px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="label">The Senate / Private</span>
+      <h1>Strength Program</h1>
+      <p class="sub">Tap a box per completed set. ES = each side.</p>
+    </header>
+
+    <main id="list"></main>
+
+    <footer>
+      <p class="progress"><strong id="done-count">0</strong> / <span id="total-count">0</span> sets logged</p>
+      <button class="reset" id="reset-btn" type="button">Reset</button>
+    </footer>
+  </div>
+
+<script>
+  const exercises = [
+    { name: "Single leg elevated bridge", meta: "3×10-12 ES", imgBase: "single-leg-elevated-bridge", steps: 2 },
+    { name: "Split stance / Bulgarian split squat", meta: "3×10-12 ES", imgBase: "bulgarian-split-squat", steps: 3 },
+    { name: "Single leg calf raise off step", meta: "3×15-20 ES", imgBase: "single-leg-calf-raise", steps: 2 },
+    { name: "Aeroplanes with roller on inside knee to wall", meta: "3×10-12 ES", imgBase: "aeroplanes-roller-wall", steps: 7 },
+    { name: "Banded hip flexion/abduction extension in standing (around the world)", meta: "3×10-12 ES", imgBase: "banded-around-the-world", steps: 4 },
+    { name: "Plank / side planks", meta: "30-45sec", sets: 1, imgBase: "plank-side-plank", steps: 2 },
+  ];
+
+  const stepLetters = "abcdefghijklmnopqrstuvwxyz";
+
+  const list = document.getElementById('list');
+  const doneCountEl = document.getElementById('done-count');
+  const totalCountEl = document.getElementById('total-count');
+
+  let totalBoxes = 0;
+
+  exercises.forEach((ex, i) => {
+    const setCount = ex.sets || 3;
+    totalBoxes += setCount;
+
+    const row = document.createElement('div');
+    row.className = 'exercise';
+
+    const head = document.createElement('div');
+    head.className = 'exercise-head';
+
+    const nameCol = document.createElement('div');
+    nameCol.innerHTML = `<span class="name">${ex.name}</span><span class="meta">${ex.meta}</span>`;
+
+    const boxes = document.createElement('div');
+    boxes.className = 'boxes';
+
+    for (let s = 0; s < setCount; s++) {
+      const box = document.createElement('button');
+      box.className = 'box';
+      box.type = 'button';
+      box.setAttribute('aria-label', `${ex.name} — set ${s + 1}`);
+      box.setAttribute('aria-pressed', 'false');
+      box.addEventListener('click', () => {
+        box.classList.toggle('checked');
+        const checked = box.classList.contains('checked');
+        box.setAttribute('aria-pressed', String(checked));
+        updateProgress();
+        updateRowState(row, boxes);
+      });
+      boxes.appendChild(box);
+    }
+
+    head.appendChild(nameCol);
+    head.appendChild(boxes);
+    row.appendChild(head);
+
+    if (ex.imgBase) {
+      const strip = document.createElement('div');
+      strip.className = 'thumb-strip';
+
+      for (let s = 0; s < ex.steps; s++) {
+        const letter = stepLetters[s];
+        const thumbWrap = document.createElement('div');
+        thumbWrap.className = 'thumb-wrap';
+
+        const stepBadge = document.createElement('span');
+        stepBadge.className = 'thumb-step';
+        stepBadge.textContent = letter;
+
+        const thumb = document.createElement('img');
+        thumb.className = 'thumb';
+        thumb.alt = `${ex.name} — step ${letter}`;
+        thumb.src = `images/${ex.imgBase}-${letter}.jpg`;
+        thumb.addEventListener('load', () => thumbWrap.classList.add('loaded'));
+        thumb.addEventListener('error', () => thumbWrap.remove());
+
+        thumbWrap.appendChild(stepBadge);
+        thumbWrap.appendChild(thumb);
+        strip.appendChild(thumbWrap);
+      }
+
+      row.appendChild(strip);
+    }
+
+    list.appendChild(row);
+  });
+
+  totalCountEl.textContent = totalBoxes;
+
+  function updateProgress() {
+    const checked = document.querySelectorAll('.box.checked').length;
+    doneCountEl.textContent = checked;
+  }
+
+  function updateRowState(row, boxes) {
+    const all = boxes.querySelectorAll('.box').length;
+    const checked = boxes.querySelectorAll('.box.checked').length;
+    row.classList.toggle('done', checked === all);
+  }
+
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    document.querySelectorAll('.box.checked').forEach(b => {
+      b.classList.remove('checked');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    document.querySelectorAll('.exercise.done').forEach(r => r.classList.remove('done'));
+    updateProgress();
+  });
+</script>
+</body>
+</html>
