@@ -117,7 +117,16 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    cursor: zoom-in;
     filter: saturate(0.9) contrast(1.05);
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .thumb:hover { transform: scale(1.04); }
+
+  .thumb:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--blue-solid);
   }
 
   .thumb-wrap::after {
@@ -154,6 +163,7 @@
   .exercise.done .name::after { content: ""; }
 
   .name {
+    display: block;
     font-size: clamp(16px, 2.2vw, 19px);
     font-weight: 500;
     line-height: 1.35;
@@ -161,10 +171,15 @@
 
   .meta {
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.03em;
     color: var(--blue-solid);
-    display: block;
-    margin-top: 4px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border-hi);
+    display: inline-block;
+    padding: 4px 10px;
+    margin-top: 8px;
   }
 
   .boxes {
@@ -248,6 +263,47 @@
     .boxes { justify-content: flex-start; margin-top: 4px; }
     .box { width: 44px; height: 44px; }
   }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(6,8,16,0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 5vw, 48px);
+    z-index: 10;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--border-hi);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: clamp(16px, 4vw, 32px);
+    right: clamp(16px, 4vw, 32px);
+    background: transparent;
+    border: 1px solid var(--border-hi);
+    color: var(--text-1);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .lightbox-close:hover { border-color: var(--blue-solid); color: var(--blue-solid); }
+  .lightbox-close:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--blue-solid); }
 </style>
 </head>
 <body>
@@ -255,7 +311,7 @@
     <header>
       <span class="label">The Senate / Private</span>
       <h1>Strength Program</h1>
-      <p class="sub">Tap a box per completed set. ES = each side.</p>
+      <p class="sub">Tap a box per completed set. Tap an image to expand.</p>
     </header>
 
     <main id="list"></main>
@@ -266,13 +322,18 @@
     </footer>
   </div>
 
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
 <script>
   const exercises = [
-    { name: "Single leg elevated bridge", meta: "3×10-12 ES", imgBase: "single-leg-elevated-bridge", steps: 2 },
-    { name: "Split stance / Bulgarian split squat", meta: "3×10-12 ES", imgBase: "bulgarian-split-squat", steps: 3 },
-    { name: "Single leg calf raise off step", meta: "3×15-20 ES", imgBase: "single-leg-calf-raise", steps: 2 },
-    { name: "Aeroplanes with roller on inside knee to wall", meta: "3×10-12 ES", imgBase: "aeroplanes-roller-wall", steps: 7 },
-    { name: "Banded hip flexion/abduction extension in standing (around the world)", meta: "3×10-12 ES", imgBase: "banded-around-the-world", steps: 4 },
+    { name: "Single leg elevated bridge", meta: "3×10-12 Each Side", imgBase: "single-leg-elevated-bridge", steps: 2 },
+    { name: "Split stance / Bulgarian split squat", meta: "3×10-12 Each Side", imgBase: "bulgarian-split-squat", steps: 3 },
+    { name: "Single leg calf raise off step", meta: "3×15-20 Each Side", imgBase: "single-leg-calf-raise", steps: 2 },
+    { name: "Aeroplanes with roller on inside knee to wall", meta: "3×10-12 Each Side", imgBase: "aeroplanes-roller-wall", steps: 7 },
+    { name: "Banded hip flexion/abduction extension in standing (around the world)", meta: "3×10-12 Each Side", imgBase: "banded-around-the-world", steps: 4 },
     { name: "Plank / side planks", meta: "30-45sec", sets: 1, imgBase: "plank-side-plank", steps: 2 },
   ];
 
@@ -337,8 +398,16 @@
         thumb.className = 'thumb';
         thumb.alt = `${ex.name} — step ${letter}`;
         thumb.src = `images/${ex.imgBase}-${letter}.jpg`;
+        thumb.tabIndex = 0;
         thumb.addEventListener('load', () => thumbWrap.classList.add('loaded'));
         thumb.addEventListener('error', () => thumbWrap.remove());
+        thumb.addEventListener('click', () => openLightbox(thumb.src, thumb.alt));
+        thumb.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(thumb.src, thumb.alt);
+          }
+        });
 
         thumbWrap.appendChild(stepBadge);
         thumbWrap.appendChild(thumb);
@@ -371,6 +440,28 @@
     });
     document.querySelectorAll('.exercise.done').forEach(r => r.classList.remove('done'));
     updateProgress();
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
 </script>
 </body>
