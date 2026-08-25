@@ -648,6 +648,24 @@
     return (day && day[`${programId}|${exIndex}`]) || 0;
   }
 
+  function hash(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619);
+    return h >>> 0;
+  }
+
+  // Fisher-Yates over an LCG seeded by program + date.
+  function dailyOrder(program) {
+    const items = program.exercises.map((ex, i) => ({ ex, i }));
+    let seed = hash(program.id + today());
+    for (let n = items.length - 1; n > 0; n--) {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      const j = seed % (n + 1);
+      const tmp = items[n]; items[n] = items[j]; items[j] = tmp;
+    }
+    return items;
+  }
+
   let totalBoxes = 0;
   let activeProgram = programs[0];
 
@@ -656,7 +674,9 @@
     list.innerHTML = '';
     totalBoxes = 0;
 
-    program.exercises.forEach((ex, exIndex) => {
+    dailyOrder(program).forEach((item, slot) => {
+      const ex = item.ex;
+      const exIndex = item.i;
       const setCount = ex.sets || 3;
       totalBoxes += setCount;
 
@@ -666,7 +686,7 @@
       const index = document.createElement('div');
       index.className = 'ex-index';
       index.setAttribute('aria-hidden', 'true');
-      index.textContent = String(exIndex + 1).padStart(2, '0');
+      index.textContent = String(slot + 1).padStart(2, '0');
 
       const body = document.createElement('div');
       body.className = 'ex-body';
