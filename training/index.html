@@ -282,8 +282,13 @@
   }
 
   .thumb-wrap.solo {
-    flex: 0 0 clamp(220px, 60vw, 320px);
-    aspect-ratio: 3 / 2;
+    flex: 0 0 clamp(240px, 68vw, 380px);
+    aspect-ratio: auto;
+  }
+
+  .thumb-wrap.solo .thumb {
+    height: auto;
+    object-fit: contain;
   }
 
   .log {
@@ -362,9 +367,17 @@
   .reset:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--blue-solid); }
 
   @media (max-width: 480px) {
-    .exercise { grid-template-columns: 1fr; }
+    .exercise-head { grid-template-columns: 1fr; }
     .boxes { justify-content: flex-start; margin-top: 4px; }
     .box { width: 44px; height: 44px; }
+    .tab { padding: 14px 14px; }
+    .history-list li { flex-direction: column; gap: 2px; }
+    .history-sets { text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thumb, .box, .tab, .reset { transition: none; }
+    .thumb:hover { transform: none; }
   }
 
   .lightbox {
@@ -419,7 +432,7 @@
 
     <div class="tabs" id="tabs" role="tablist"></div>
 
-    <main id="list"></main>
+    <main id="list" role="tabpanel" tabindex="0"></main>
 
     <footer>
       <p class="progress"><strong id="done-count">0</strong> / <span id="total-count">0</span> sets logged</p>
@@ -629,15 +642,29 @@
     tab.className = 'tab';
     tab.type = 'button';
     tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', 'list');
     tab.textContent = program.label;
     tab.setAttribute('aria-selected', String(i === 0));
-    tab.addEventListener('click', () => {
-      tabsEl.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', 'false'));
-      tab.setAttribute('aria-selected', 'true');
-      render(program);
+    tab.tabIndex = i === 0 ? 0 : -1;
+    tab.addEventListener('click', () => selectTab(i));
+    tab.addEventListener('keydown', (e) => {
+      const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!step) return;
+      e.preventDefault();
+      const next = (i + step + programs.length) % programs.length;
+      selectTab(next);
+      tabsEl.querySelectorAll('.tab')[next].focus();
     });
     tabsEl.appendChild(tab);
   });
+
+  function selectTab(index) {
+    tabsEl.querySelectorAll('.tab').forEach((t, n) => {
+      t.setAttribute('aria-selected', String(n === index));
+      t.tabIndex = n === index ? 0 : -1;
+    });
+    render(programs[index]);
+  }
 
   function updateProgress() {
     doneCountEl.textContent = document.querySelectorAll('.box.checked').length;
