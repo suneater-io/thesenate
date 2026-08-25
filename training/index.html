@@ -22,6 +22,7 @@
     --blue-glow: rgba(41,196,232,0.14);
     --text-read: #7E9FAE;
 
+    --stroke: rgba(120,175,210,0.30);
     --gutter: clamp(46px, 9vw, 68px);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -39,7 +40,19 @@
       radial-gradient(circle at 90% 20%, rgba(41,196,232,0.03), transparent 50%);
   }
 
-  .wrap { max-width: 760px; margin: 0 auto; }
+  /* Film grain over everything. Keep it at the threshold of noticing. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; position: relative; }
 
   /* ---------- masthead ---------- */
 
@@ -61,10 +74,18 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
     font-style: italic;
-    font-size: clamp(38px, 9vw, 64px);
-    letter-spacing: -0.025em;
-    line-height: 0.92;
+    font-size: clamp(52px, 15vw, 124px);
+    letter-spacing: -0.04em;
+    line-height: 0.82;
     text-transform: uppercase;
+    margin-left: -0.03em;
+  }
+
+  h1 .hollow {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--stroke);
+    text-stroke: 1.5px var(--stroke);
   }
 
   .sub {
@@ -76,58 +97,82 @@
     max-width: 44ch;
   }
 
-  .countdown {
-    margin-top: clamp(22px, 4vw, 30px);
-    display: flex;
-    flex-direction: column;
-  }
+  .countdown { margin-top: clamp(26px, 5vw, 40px); }
 
-  .cd-row {
+  /* Nearest race is the reason the rest of the page exists. Treat it that way. */
+  .cd-hero {
     display: grid;
-    grid-template-columns: var(--gutter) 1fr;
-    align-items: baseline;
-    padding: 9px 0;
-    border-top: 1px solid var(--border);
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    gap: clamp(14px, 3vw, 26px);
+    padding-bottom: clamp(14px, 3vw, 20px);
+    border-bottom: 1px solid var(--border-hi);
   }
 
-  .cd-row:last-child { border-bottom: 1px solid var(--border); }
-
-  .cd-days {
+  .cd-hero-num {
     font-family: 'Barlow Condensed', sans-serif;
     font-style: italic;
     font-weight: 800;
-    font-size: clamp(24px, 5vw, 34px);
-    line-height: 0.85;
-    letter-spacing: -0.03em;
-    color: var(--text-3);
+    font-size: clamp(78px, 21vw, 168px);
+    line-height: 0.74;
+    letter-spacing: -0.055em;
+    color: var(--blue-solid);
     font-variant-numeric: tabular-nums;
+    margin-left: -0.04em;
+    text-shadow: 0 0 46px rgba(41,196,232,0.20);
   }
 
-  .cd-row.next .cd-days { color: var(--blue-solid); }
+  .cd-hero-side { padding-bottom: clamp(6px, 1.5vw, 12px); min-width: 0; }
 
-  .cd-meta {
+  .cd-kicker {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--blue-solid);
+    margin-bottom: 8px;
+  }
+
+  .cd-hero-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(19px, 3.2vw, 27px);
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .cd-hero-when {
+    display: block;
+    margin-top: 7px;
     font-family: 'Space Mono', monospace;
     font-size: 11px;
-    line-height: 1.5;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-2);
   }
 
-  .cd-row.next .cd-meta { color: var(--text-read); }
-
-  .cd-name { display: block; }
-
-  .cd-when { color: var(--text-2); }
-
-  .cd-unit {
+  .cd-then {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 11px 0 0;
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.16em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-2);
-    display: block;
-    margin-top: 4px;
   }
+
+  .cd-then b {
+    color: var(--text-read);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cd-then .cd-then-date { color: var(--text-2); margin-left: auto; }
 
   /* ---------- sticky rail: program switch + live progress ---------- */
 
@@ -189,19 +234,22 @@
   .gauge-count strong { color: var(--blue-solid); font-weight: 700; }
 
   .gauge-track {
-    width: clamp(56px, 16vw, 120px);
-    height: 3px;
-    background: var(--text-3);
-    overflow: hidden;
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
   }
 
-  .gauge-fill {
-    height: 100%;
+  .seg {
+    width: 3px;
+    height: 11px;
+    background: var(--text-3);
+    transition: background-color 0.2s var(--ease), height 0.2s var(--ease);
+  }
+
+  .seg.on {
     background: var(--blue-solid);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.35s var(--ease);
-    box-shadow: 0 0 8px var(--blue-glow);
+    height: 15px;
+    box-shadow: 0 0 7px var(--blue-glow);
   }
 
   /* ---------- exercise rows ---------- */
@@ -218,18 +266,24 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-style: italic;
     font-weight: 800;
-    font-size: clamp(26px, 5.5vw, 40px);
-    line-height: 0.85;
-    letter-spacing: -0.03em;
-    color: var(--text-3);
+    font-size: clamp(34px, 7vw, 54px);
+    line-height: 0.78;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1.25px var(--stroke);
+    text-stroke: 1.25px var(--stroke);
     font-variant-numeric: tabular-nums;
     user-select: none;
-    transition: color 0.2s;
+    transition: color 0.25s var(--ease), -webkit-text-stroke-color 0.25s;
   }
 
-  .ex.done .ex-index { color: var(--blue-solid); }
+  .ex.done .ex-index {
+    color: var(--blue-solid);
+    -webkit-text-stroke-color: transparent;
+  }
   .ex.done .ex-name { color: var(--text-2); }
-  .ex.done .thumb-strip { opacity: 0.45; }
+  .ex.done .thumb-strip { opacity: 0.4; }
+  .ex.done .meta { color: var(--text-2); background: transparent; }
 
   .ex-body { min-width: 0; }
 
@@ -562,6 +616,10 @@
   /* ---------- narrow ---------- */
 
   @media (max-width: 560px) {
+    .gauge { min-width: 0; flex-shrink: 1; }
+    .gauge-track { overflow: hidden; max-width: 34vw; }
+    .cd-then { flex-wrap: wrap; row-gap: 4px; }
+    .cd-then .cd-then-date { margin-left: 0; flex-basis: 100%; }
     .ex-top { flex-direction: column; }
     .boxes { margin-top: 12px; }
     .cues li { font-size: 16px; }
@@ -580,7 +638,7 @@
   <div class="wrap">
     <header>
       <span class="label">The Senate / Private</span>
-      <h1>Strength Program</h1>
+      <h1>Strength<span class="hollow">Program</span></h1>
       <p class="sub">One box per completed set. Progress saves to this device and logs by date.</p>
       <div class="countdown" id="countdown"></div>
     </header>
@@ -589,7 +647,7 @@
       <div class="tabs" id="tabs" role="tablist" aria-label="Program"></div>
       <div class="gauge">
         <span class="gauge-count" aria-live="polite"><strong id="done-count">0</strong>/<span id="total-count">0</span></span>
-        <div class="gauge-track"><div class="gauge-fill" id="gauge-fill"></div></div>
+        <div class="gauge-track" id="gauge-track" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -674,7 +732,7 @@
   const list = document.getElementById('list');
   const doneCountEl = document.getElementById('done-count');
   const totalCountEl = document.getElementById('total-count');
-  const gaugeFill = document.getElementById('gauge-fill');
+  const gaugeTrack = document.getElementById('gauge-track');
   const historyEl = document.getElementById('history');
 
   // Log shape: { "YYYY-MM-DD": { "<programId>|<exerciseIndex>": <setsCompleted> } }
@@ -873,7 +931,14 @@
   function updateProgress() {
     const checked = document.querySelectorAll('.box.checked').length;
     doneCountEl.textContent = checked;
-    gaugeFill.style.transform = `scaleX(${totalBoxes ? checked / totalBoxes : 0})`;
+
+    // One tick per set in the program, so the readout counts the real thing.
+    if (gaugeTrack.children.length !== totalBoxes) {
+      gaugeTrack.innerHTML = '<span class="seg"></span>'.repeat(totalBoxes);
+    }
+    Array.prototype.forEach.call(gaugeTrack.children, (seg, i) => {
+      seg.classList.toggle('on', i < checked);
+    });
   }
 
   function updateRowState(row, boxes) {
@@ -977,16 +1042,24 @@
 
     if (!upcoming.length) { countdownEl.innerHTML = ''; return; }
 
-    countdownEl.innerHTML = upcoming.map((e, i) => {
-      const stamp = `${DOW[e.when.getDay()]} ${e.when.getDate()} ${MONTHS[e.when.getMonth()]} ${e.when.getFullYear()}`;
-      const count = e.days === 0
-        ? '<span class="cd-days">Today</span>'
-        : `<span class="cd-days">${e.days}</span><span class="cd-unit">${e.days === 1 ? 'Day' : 'Days'}</span>`;
-      return `<div class="cd-row${i === 0 ? ' next' : ''}">
-        <div>${count}</div>
-        <p class="cd-meta"><span class="cd-name">${e.name}</span><span class="cd-when">${stamp}</span></p>
-      </div>`;
-    }).join('');
+    const stamp = e => `${DOW[e.when.getDay()]} ${e.when.getDate()} ${MONTHS[e.when.getMonth()]} ${e.when.getFullYear()}`;
+    const hero = upcoming[0];
+    const then = upcoming[1];
+
+    let html = `<div class="cd-hero">
+      <span class="cd-hero-num">${hero.days === 0 ? '00' : hero.days}</span>
+      <div class="cd-hero-side">
+        <span class="cd-kicker">${hero.days === 0 ? 'Race day' : hero.days === 1 ? 'One day out' : 'Days out'}</span>
+        <h2 class="cd-hero-name">${hero.name}</h2>
+        <span class="cd-hero-when">${stamp(hero)}</span>
+      </div>
+    </div>`;
+
+    if (then) {
+      html += `<p class="cd-then">Then <b>${then.days}</b> ${then.days === 1 ? 'day' : 'days'} \u2014 ${then.name}<span class="cd-then-date">${stamp(then)}</span></p>`;
+    }
+
+    countdownEl.innerHTML = html;
   }
 
   render(programs[0]);
