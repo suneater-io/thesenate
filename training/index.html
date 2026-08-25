@@ -76,6 +76,59 @@
     max-width: 44ch;
   }
 
+  .countdown {
+    margin-top: clamp(22px, 4vw, 30px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cd-row {
+    display: grid;
+    grid-template-columns: var(--gutter) 1fr;
+    align-items: baseline;
+    padding: 9px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .cd-row:last-child { border-bottom: 1px solid var(--border); }
+
+  .cd-days {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(24px, 5vw, 34px);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cd-row.next .cd-days { color: var(--blue-solid); }
+
+  .cd-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  .cd-row.next .cd-meta { color: var(--text-read); }
+
+  .cd-name { display: block; }
+
+  .cd-when { color: var(--text-2); }
+
+  .cd-unit {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: var(--text-2);
+    display: block;
+    margin-top: 4px;
+  }
+
   /* ---------- sticky rail: program switch + live progress ---------- */
 
   .rail {
@@ -529,6 +582,7 @@
       <span class="label">The Senate / Private</span>
       <h1>Strength Program</h1>
       <p class="sub">One box per completed set. Progress saves to this device and logs by date.</p>
+      <div class="countdown" id="countdown"></div>
     </header>
 
     <div class="rail">
@@ -606,10 +660,16 @@
     },
   ];
 
+  const events = [
+    { date: '2026-10-11', name: 'Nike Melbourne Half Marathon' },
+    { date: '2026-11-29', name: 'Run for the Young Marathon' },
+  ];
+
   const stepLetters = "abcdefghijklmnopqrstuvwxyz";
   const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const LOG_KEY = 'senate-training-log';
 
+  const countdownEl = document.getElementById('countdown');
   const tabsEl = document.getElementById('tabs');
   const list = document.getElementById('list');
   const doneCountEl = document.getElementById('done-count');
@@ -900,8 +960,40 @@
     if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
 
+  function renderCountdown() {
+    const now = new Date();
+    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const upcoming = events
+      .map(e => {
+        const parts = e.date.split('-').map(Number);
+        const when = new Date(parts[0], parts[1] - 1, parts[2]);
+        return { name: e.name, when, days: Math.round((when - midnight) / 86400000) };
+      })
+      .filter(e => e.days >= 0)
+      .sort((a, b) => a.days - b.days)
+      .slice(0, 2);
+
+    if (!upcoming.length) { countdownEl.innerHTML = ''; return; }
+
+    countdownEl.innerHTML = upcoming.map((e, i) => {
+      const stamp = `${DOW[e.when.getDay()]} ${e.when.getDate()} ${MONTHS[e.when.getMonth()]} ${e.when.getFullYear()}`;
+      const count = e.days === 0
+        ? '<span class="cd-days">Today</span>'
+        : `<span class="cd-days">${e.days}</span><span class="cd-unit">${e.days === 1 ? 'Day' : 'Days'}</span>`;
+      return `<div class="cd-row${i === 0 ? ' next' : ''}">
+        <div>${count}</div>
+        <p class="cd-meta"><span class="cd-name">${e.name}</span><span class="cd-when">${stamp}</span></p>
+      </div>`;
+    }).join('');
+  }
+
   render(programs[0]);
   renderHistory();
+  renderCountdown();
+  // Page stays open for a whole session; re-check so the count rolls at midnight.
+  setInterval(renderCountdown, 60000);
 </script>
 </body>
 </html>
