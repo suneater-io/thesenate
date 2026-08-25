@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="robots" content="noindex, nofollow" />
 <title>Strength Program — Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +34,10 @@
     color: var(--text-1);
     font-family: 'Chakra Petch', sans-serif;
     min-height: 100dvh;
-    padding: 0 clamp(16px, 5vw, 48px) clamp(64px, 10vw, 120px);
+    padding-top: 0;
+    padding-right: max(clamp(16px, 5vw, 48px), env(safe-area-inset-right));
+    padding-bottom: calc(clamp(64px, 10vw, 120px) + env(safe-area-inset-bottom));
+    padding-left: max(clamp(16px, 5vw, 48px), env(safe-area-inset-left));
     background-image:
       radial-gradient(circle at 15% 0%, rgba(41,196,232,0.05), transparent 55%),
       radial-gradient(circle at 90% 20%, rgba(41,196,232,0.03), transparent 50%);
@@ -74,7 +77,7 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
     font-style: italic;
-    font-size: clamp(52px, 15vw, 124px);
+    font-size: min(clamp(52px, 15vw, 124px), 26vh);
     letter-spacing: -0.04em;
     line-height: 0.82;
     text-transform: uppercase;
@@ -113,7 +116,7 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-style: italic;
     font-weight: 800;
-    font-size: clamp(78px, 21vw, 168px);
+    font-size: min(clamp(78px, 21vw, 168px), 32vh);
     line-height: 0.74;
     letter-spacing: -0.055em;
     color: var(--blue-solid);
@@ -174,6 +177,8 @@
 
   .cd-then .cd-then-date { color: var(--text-2); margin-left: auto; }
 
+  .cd-then .cd-then-lead { white-space: nowrap; }
+
   /* ---------- sticky rail: program switch + live progress ---------- */
 
   .rail {
@@ -203,7 +208,9 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 14px 16px;
+    min-height: 44px;
     cursor: pointer;
+    touch-action: manipulation;
     transition: color 0.15s, border-color 0.15s;
   }
 
@@ -329,6 +336,7 @@
   .box {
     width: 44px;
     height: 44px;
+    touch-action: manipulation;
     border: 1px solid var(--border-hi);
     background: var(--surface);
     cursor: pointer;
@@ -370,6 +378,7 @@
   }
 
   .cues summary {
+    min-height: 44px;
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.16em;
@@ -562,7 +571,8 @@
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 11px 16px;
+    padding: 11px 18px;
+    min-height: 44px;
     cursor: pointer;
     transition: color 0.15s, border-color 0.15s, transform 0.15s var(--ease);
   }
@@ -605,8 +615,10 @@
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 10px 15px;
+    padding: 10px 16px;
+    min-height: 44px;
     cursor: pointer;
+    touch-action: manipulation;
     transition: border-color 0.15s, color 0.15s;
   }
 
@@ -626,6 +638,15 @@
     .log { grid-template-columns: 1fr; gap: 12px; }
     .history-list li { grid-template-columns: 4ch 1fr; }
     .history-sets { grid-column: 2; text-align: left; color: var(--text-2); }
+  }
+
+  /* Landscape phone: trade display scale for getting to the work. */
+  @media (max-height: 480px) {
+    header { padding-top: 18px; padding-bottom: 12px; }
+    h1 { font-size: min(clamp(52px, 15vw, 124px), 17vh); }
+    .countdown { margin-top: 16px; }
+    .cd-hero-num { font-size: min(clamp(78px, 21vw, 168px), 22vh); }
+    .cd-hero { padding-bottom: 10px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1007,11 +1028,13 @@
     lightboxImg.src = src;
     lightboxImg.alt = alt;
     lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
     document.getElementById('lightbox-close').focus();
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
+    document.body.style.overflow = '';
     lightboxImg.src = '';
     if (lightboxOpener) lightboxOpener.focus();
     lightboxOpener = null;
@@ -1056,7 +1079,7 @@
     </div>`;
 
     if (then) {
-      html += `<p class="cd-then">Then <b>${then.days}</b> ${then.days === 1 ? 'day' : 'days'} \u2014 ${then.name}<span class="cd-then-date">${stamp(then)}</span></p>`;
+      html += `<p class="cd-then"><span class="cd-then-lead">Then <b>${then.days}</b> ${then.days === 1 ? 'day' : 'days'} \u2014</span> ${then.name}<span class="cd-then-date">${stamp(then)}</span></p>`;
     }
 
     countdownEl.innerHTML = html;
