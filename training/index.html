@@ -21,6 +21,7 @@
     --blue-solid: #29C4E8;
     --blue-dim: rgba(41,196,232,0.07);
     --blue-glow: rgba(41,196,232,0.14);
+    --text-read: #7E9FAE;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -67,7 +68,7 @@
   .sub {
     font-family: 'Space Mono', monospace;
     font-size: 12px;
-    color: var(--text-2);
+    color: var(--text-read);
     margin-top: 10px;
   }
 
@@ -219,8 +220,8 @@
   }
 
   .box {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
     border: 1.5px solid var(--border-hi);
     background: var(--surface);
     cursor: pointer;
@@ -265,9 +266,9 @@
   .cues li {
     position: relative;
     padding-left: 18px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.7;
-    color: var(--text-2);
+    color: var(--text-read);
   }
 
   .cues li::before {
@@ -330,7 +331,7 @@
   }
 
   .history-day { color: var(--text-1); letter-spacing: 0.04em; }
-  .history-sets { color: var(--text-2); text-align: right; }
+  .history-sets { color: var(--text-read); text-align: right; }
 
   footer {
     margin-top: clamp(40px, 8vw, 64px);
@@ -369,8 +370,8 @@
   @media (max-width: 480px) {
     .exercise-head { grid-template-columns: 1fr; }
     .boxes { justify-content: flex-start; margin-top: 4px; }
-    .box { width: 44px; height: 44px; }
     .tab { padding: 14px 14px; }
+    .cues li { font-size: 16px; }
     .history-list li { flex-direction: column; gap: 2px; }
     .history-sets { text-align: left; }
   }
@@ -435,7 +436,7 @@
     <main id="list" role="tabpanel" tabindex="0"></main>
 
     <footer>
-      <p class="progress"><strong id="done-count">0</strong> / <span id="total-count">0</span> sets logged</p>
+      <p class="progress" aria-live="polite"><strong id="done-count">0</strong> / <span id="total-count">0</span> sets logged</p>
       <button class="reset" id="reset-btn" type="button">Reset</button>
     </footer>
 
@@ -706,6 +707,8 @@
   }
 
   document.getElementById('reset-btn').addEventListener('click', () => {
+    const logged = document.querySelectorAll('.box.checked').length;
+    if (logged && !confirm(`Clear ${logged} logged ${logged === 1 ? 'set' : 'sets'} for ${activeProgram.label} today?`)) return;
     document.querySelectorAll('.box.checked').forEach(b => {
       b.classList.remove('checked');
       b.setAttribute('aria-pressed', 'false');
@@ -727,15 +730,21 @@
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
 
+  let lightboxOpener = null;
+
   function openLightbox(src, alt) {
+    lightboxOpener = document.activeElement;
     lightboxImg.src = src;
     lightboxImg.alt = alt;
     lightbox.classList.add('open');
+    document.getElementById('lightbox-close').focus();
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     lightboxImg.src = '';
+    if (lightboxOpener) lightboxOpener.focus();
+    lightboxOpener = null;
   }
 
   lightbox.addEventListener('click', (e) => {
